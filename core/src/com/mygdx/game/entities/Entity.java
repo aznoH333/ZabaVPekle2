@@ -1,4 +1,6 @@
-package com.mygdx.game;
+package com.mygdx.game.entities;
+
+import com.mygdx.game.SpriteManager;
 
 import java.util.ArrayList;
 
@@ -10,10 +12,12 @@ public class Entity {
     public float x;
     public float y;
     private final ArrayList<EntityComponent> components = new ArrayList<>();
+    public float speed;
+
 
 
     public Entity() {
-
+        resetStats();
     }
 
 
@@ -25,6 +29,9 @@ public class Entity {
 
         spriteManager.drawSprite(this.sprite, x, y);
     }
+
+
+
 
     public Entity setX(float x) {
         this.x = x;
@@ -43,6 +50,27 @@ public class Entity {
 
     public Entity addComponent(EntityComponent component) {
         this.components.add(component);
+
+        resetStats();
+        for (EntityComponent c : components) {
+            c.recalculateStats(this);
+        }
+
         return this;
+    }
+
+    private void resetStats() {
+        this.speed = 1f;
+    }
+
+
+    public void walk(float x, float y) {
+        this.x += x * speed;
+        this.y += y * speed;
+    }
+
+    public void goInDirection(float rotationRad, float speedMultiplier) {
+        this.x += (float) (Math.cos(rotationRad) * speedMultiplier * speed);
+        this.y += (float) (Math.sin(rotationRad) * speedMultiplier * speed);
     }
 }

@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.entities;
 
 public class EntityComponent {
 
@@ -10,5 +10,7 @@ public class EntityComponent {
 
 
     public void onUpdate(Entity owner) {}
+
+    public void recalculateStats(Entity owner) {}
 
 }

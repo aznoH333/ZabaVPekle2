@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -124,6 +126,14 @@ public class SpriteManager {
         camera.position.x = x;
         camera.position.y = y;
         camera.update();
+    }
+
+    public Vector2 getMousePosition() {
+        return new Vector2(
+                camera.position.x + Gdx.input.getX() - (Gdx.graphics.getWidth() / 2f),
+                camera.position.y + Gdx.input.getY() - (Gdx.graphics.getHeight() / 2f)
+        );
+
     }
 
 }
