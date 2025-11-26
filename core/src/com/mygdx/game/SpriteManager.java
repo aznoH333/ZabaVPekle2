@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,24 +20,77 @@ public class SpriteManager {
 
 
     private final HashMap<String, Texture> spriteMap = new HashMap<>();
+    private final SpriteBatch batch = new SpriteBatch();
+
+    private SpriteManager() {}
 
 
-    private SpriteManager() {
-        loadSprites();
-    }
 
 
-    private void loadSprites() {
 
-    }
-
-
-    private void loadSprite(String path, String name) {
+    public void loadSprite(String path, String name) {
         this.spriteMap.put(name, new Texture(path));
     }
 
-    public void drawSprite(String spriteName, float x, float y, boolean flipHorizontally, boolean flipVertically, float rotationRad, float r, float g, float b) {
 
+    public void drawSprite(String spriteName, float x, float y) {
+        this.drawSprite(
+                spriteName,
+                x,
+                y,
+                1f,
+                1f,
+                false,
+                false,
+                0f,
+                1f,
+                1f,
+                1f,
+                1f
+        );
+    }
+
+
+    public void drawSprite(String spriteName, float x, float y, float width, float height, boolean flipHorizontally, boolean flipVertically, float rotationRad, float r, float g, float b, float a) {
+        Texture sprite = spriteMap.getOrDefault(spriteName, null);
+
+        if (sprite == null) {
+            System.out.println("Requested sprite with name " + spriteName + " but it was not found");
+            System.exit(-1); // c ah crash
+        }
+
+        batch.setColor(r, g, b, a);
+        batch.draw(
+                sprite,
+                x,
+                y,
+                sprite.getWidth() / 2.0f,
+                sprite.getHeight() / 2.0f,
+                (float) sprite.getWidth(),
+                (float) sprite.getHeight(),
+                width,
+                height,
+                rotationRad,
+                0,
+                0,
+                sprite.getWidth(),
+                sprite.getHeight(),
+                flipHorizontally,
+                flipVertically
+        );
+    }
+
+    public void renderBegin() {
+        batch.begin();
+        ScreenUtils.clear(0.1f, 0.1f, 0.0f, 1);
+
+    }
+
+    public void render() {
+        // TODO : this
+
+
+        batch.end();
     }
 
     public void dispose() {

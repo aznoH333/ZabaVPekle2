@@ -1,31 +1,37 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class FrogGame extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+
+
+	SpriteManager spriteManager;
+
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		spriteManager = SpriteManager.getInstance();
+		spriteManager.loadSprite("player_1.png", "test");
+
+		// Example of setting fullscreen in LibGDX
+		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayModes()[0]);
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		spriteManager.renderBegin();
+
+		spriteManager.drawSprite("test", 20f, 20f);
+
+		spriteManager.render();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+		spriteManager.dispose();
 	}
 }
