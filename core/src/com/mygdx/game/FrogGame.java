@@ -10,35 +10,27 @@ public class FrogGame extends ApplicationAdapter {
 
 
 	SpriteManager spriteManager;
-
+	Entity player;
 	
 	@Override
 	public void create () {
 		spriteManager = SpriteManager.getInstance();
 		spriteManager.loadSprite("player_1.png", "test");
+		spriteManager.loadSprite("badlogic.jpg", "penis");
 
 
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayModes()[0]);
-
+		player = new Entity()
+				.setSprite("test")
+				.addComponent(new PlayerSoulComponent());
 	}
-	float a = 0f;
 
 	@Override
 	public void render () {
 		spriteManager.renderBegin();
 
-		spriteManager.drawSprite("test", 20f, 20f);
-
-		for (float t = 0f; t < 600f; t+=4) {
-			spriteManager.drawSprite("test", t, t);
-			spriteManager.drawSprite("test", -t, t);
-			spriteManager.drawSprite("test", t, -t);
-			spriteManager.drawSprite("test", -t, -t);
-
-
-		}
-		spriteManager.setCameraPosition(a, 0);
-		a += 0.1f;
+		player.update();
+		spriteManager.drawSprite("penis", 0f, 0f);
 
 		spriteManager.render();
 	}
