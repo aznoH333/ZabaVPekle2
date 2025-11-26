@@ -17,15 +17,28 @@ public class FrogGame extends ApplicationAdapter {
 		spriteManager = SpriteManager.getInstance();
 		spriteManager.loadSprite("player_1.png", "test");
 
-		// Example of setting fullscreen in LibGDX
+
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayModes()[0]);
+
 	}
+	float a = 0f;
 
 	@Override
 	public void render () {
 		spriteManager.renderBegin();
 
 		spriteManager.drawSprite("test", 20f, 20f);
+
+		for (float t = 0f; t < 600f; t+=4) {
+			spriteManager.drawSprite("test", t, t);
+			spriteManager.drawSprite("test", -t, t);
+			spriteManager.drawSprite("test", t, -t);
+			spriteManager.drawSprite("test", -t, -t);
+
+
+		}
+		spriteManager.setCameraPosition(a, 0);
+		a += 0.1f;
 
 		spriteManager.render();
 	}
@@ -34,4 +47,10 @@ public class FrogGame extends ApplicationAdapter {
 	public void dispose () {
 		spriteManager.dispose();
 	}
+
+	@Override
+	public void resize(int width, int height) {
+		spriteManager.resizedWindow(width, height);
+	}
+
 }

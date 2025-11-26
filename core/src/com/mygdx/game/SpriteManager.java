@@ -1,8 +1,13 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +27,12 @@ public class SpriteManager {
     private final HashMap<String, Texture> spriteMap = new HashMap<>();
     private final SpriteBatch batch = new SpriteBatch();
 
-    private SpriteManager() {}
+    private final Camera camera = new OrthographicCamera();
+    private final Viewport viewPort = new FitViewport(960f, 640f, camera);
+
+    private SpriteManager() {
+        viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
 
 
 
@@ -81,8 +91,14 @@ public class SpriteManager {
     }
 
     public void renderBegin() {
+
+        ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
+
+        viewPort.apply();
+        batch.setProjectionMatrix(camera.combined);
+
         batch.begin();
-        ScreenUtils.clear(0.1f, 0.1f, 0.0f, 1);
+
 
     }
 
@@ -98,6 +114,16 @@ public class SpriteManager {
             entry.getValue().dispose();
         }
         spriteMap.clear();
+    }
+
+    public void resizedWindow(int width, int height) {
+        viewPort.update(width, height);
+    }
+
+    public void setCameraPosition(float x, float y) {
+        camera.position.x = x;
+        camera.position.y = y;
+        camera.update();
     }
 
 }
