@@ -13,15 +13,21 @@ public class FrogGame extends ApplicationAdapter {
 
 	SpriteManager spriteManager;
 	EntityManager entityManager;
+	WorldManager worldManager;
 
-	Entity player;
 
-	
 	@Override
 	public void create () {
 		spriteManager = SpriteManager.getInstance();
 		spriteManager.loadSprite("player_1.png", "test");
 		spriteManager.loadSprite("badlogic.jpg", "penis");
+		spriteManager.loadSprite("brick_wall.png", "wall");
+		spriteManager.loadSprite("floor_tile.png", "floor");
+		spriteManager.loadSprite("Enemy_1.png", "enemy");
+		spriteManager.loadSprite("bullet.png", "bullet");
+
+
+
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayModes()[0]);
 
 
@@ -33,27 +39,27 @@ public class FrogGame extends ApplicationAdapter {
 				.setTeam(EntityTeam.FROG)
 				.addComponent(new PlayerSoulComponent()));
 
-		entityManager.addEntity(new Entity()
-				.setSprite("penis")
-				.setX(32f)
-				.setY(32f));
 
 
 		entityManager.addEntity(new Entity()
-				.setSprite("test")
+				.setSprite("enemy")
 				.setTeam(EntityTeam.DEMON)
 				.setHealth(20f)
-				.setX(640f)
+				.setX(320f)
 				.setY(20f)
 				.addComponent(new DemonSoulComponent()));
 
 
+		worldManager = WorldManager.getInstance();
 
 	}
 
 	@Override
 	public void render () {
 		spriteManager.renderBegin();
+
+		worldManager.draw();
+
 		entityManager.update();
 
 		spriteManager.render();

@@ -44,7 +44,7 @@ public class PlayerSoulComponent extends EntityComponent {
             Vector2 mousePos = spriteManager.getMousePosition();
             entityManager
                     .addEntity(new Entity()
-                            .setSprite("test")
+                            .setSprite("bullet")
                             .setX(owner.x)
                             .setY(owner.y)
                             .setDamage(5f)

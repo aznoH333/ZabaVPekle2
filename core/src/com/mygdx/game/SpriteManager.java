@@ -61,6 +61,23 @@ public class SpriteManager {
         );
     }
 
+    public void drawSprite(String spriteName, float x, float y, float r, float g, float b) {
+        this.drawSprite(
+                spriteName,
+                x,
+                y,
+                1f,
+                1f,
+                false,
+                false,
+                0f,
+                r,
+                g,
+                b,
+                1f
+        );
+    }
+
 
     public void drawSprite(String spriteName, float x, float y, float width, float height, boolean flipHorizontally, boolean flipVertically, float rotationRad, float r, float g, float b, float a) {
         Texture sprite = spriteMap.getOrDefault(spriteName, null);

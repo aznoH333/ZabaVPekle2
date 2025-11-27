@@ -1,12 +1,14 @@
 package com.mygdx.game.entities;
 
 import com.mygdx.game.SpriteManager;
+import com.mygdx.game.WorldManager;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity {
     private static SpriteManager spriteManager = SpriteManager.getInstance();
+    private static WorldManager worldManager = WorldManager.getInstance();
 
 
     public String sprite;
@@ -24,6 +26,9 @@ public class Entity {
     public EntityTeam team = EntityTeam.NONE;
     public boolean wantsToLive = true;
 
+    public float xVelocity = 0f;
+    public float yVelocity = 0f;
+
 
     public Entity() {
         resetStats();
@@ -36,8 +41,22 @@ public class Entity {
             component.onUpdate(this);
         }
 
+        // move
+        if (worldManager.isSpaceEmpty(x + xVelocity, y, width, height)) {
+            x += xVelocity;
+        }
+
+        if (worldManager.isSpaceEmpty(x, y + yVelocity, width, height)) {
+            y += yVelocity;
+        }
+
+        xVelocity = 0;
+        yVelocity = 0;
+
+        // draw
         spriteManager.drawSprite(this.sprite, x, y);
 
+        // invincibility
         if (this.invincibilityTimer > 0) {
             this.invincibilityTimer--;
         }
@@ -67,13 +86,13 @@ public class Entity {
 
 
     public void walk(float x, float y) {
-        this.x += x * speed;
-        this.y += y * speed;
+        xVelocity += x * speed;
+        yVelocity += y * speed;
     }
 
     public void goInDirection(float rotationRad, float speedMultiplier) {
-        this.x += (float) (Math.cos(rotationRad) * speedMultiplier * speed);
-        this.y += (float) (Math.sin(rotationRad) * speedMultiplier * speed);
+        xVelocity += (float) (Math.cos(rotationRad) * speedMultiplier * speed);
+        yVelocity += (float) (Math.sin(rotationRad) * speedMultiplier * speed);
     }
 
     public boolean hasComponent(String name) {
