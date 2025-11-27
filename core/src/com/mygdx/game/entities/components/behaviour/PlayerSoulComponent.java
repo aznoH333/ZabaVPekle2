@@ -8,6 +8,7 @@ import com.mygdx.game.SpriteManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
+import com.mygdx.game.entities.EntityTeam;
 
 public class PlayerSoulComponent extends EntityComponent {
     private static final SpriteManager spriteManager = SpriteManager.getInstance();
@@ -46,6 +47,8 @@ public class PlayerSoulComponent extends EntityComponent {
                             .setSprite("test")
                             .setX(owner.x)
                             .setY(owner.y)
+                            .setDamage(5f)
+                            .setTeam(EntityTeam.FROG)
                             .addComponent(new BulletComponent(NumberUtils.directionToward(
                                     owner.x,
                                     owner.y,

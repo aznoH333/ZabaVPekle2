@@ -29,6 +29,8 @@ public class EntityManager {
     }
 
     public void update() {
+
+
         for (Entity e : entities) {
             e.update();
 
@@ -38,6 +40,8 @@ public class EntityManager {
                 }
             }
         }
+
+        entities.removeIf((it)->!it.wantsToLive);
 
         entities.addAll(waitingRoom);
         waitingRoom.clear();

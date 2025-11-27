@@ -16,7 +16,13 @@ public class Entity {
     public float height = 32f;
     private final ArrayList<EntityComponent> components = new ArrayList<>();
     public float speed;
-
+    public float health = 1f;
+    public float maxHealth = 1f;
+    public float damage = 0f;
+    public int invincibilityTimer = 0;
+    public int invincibilityTimerMax = 30;
+    public EntityTeam team = EntityTeam.NONE;
+    public boolean wantsToLive = true;
 
 
     public Entity() {
@@ -31,6 +37,10 @@ public class Entity {
         }
 
         spriteManager.drawSprite(this.sprite, x, y);
+
+        if (this.invincibilityTimer > 0) {
+            this.invincibilityTimer--;
+        }
     }
 
 
@@ -38,46 +48,18 @@ public class Entity {
         for (EntityComponent component : this.components) {
             component.onCollide(this, other);
         }
-    }
+        // take damage
+        if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.damage != 0f) {
+            System.out.println("dostavam cocku " + this.health);
+            this.health -= other.damage;
+            this.invincibilityTimer = this.invincibilityTimerMax;
 
-
-
-
-    public Entity setX(float x) {
-        this.x = x;
-        return this;
-    }
-
-    public Entity setY(float y) {
-        this.y = y;
-        return this;
-    }
-
-    public Entity setSprite(String sprite) {
-        this.sprite = sprite;
-        return this;
-    }
-
-    public Entity setWidth(float width) {
-        this.width = width;
-        return this;
-    }
-
-    public Entity setHeight(float height) {
-        this.height = height;
-        return this;
-    }
-
-    public Entity addComponent(EntityComponent component) {
-        this.components.add(component);
-
-        resetStats();
-        for (EntityComponent c : components) {
-            c.recalculateStats(this);
+            if (this.health <= 0f) {
+                this.commitSudoku();
+            }
         }
-
-        return this;
     }
+
 
     private void resetStats() {
         this.speed = 1f;
@@ -105,9 +87,69 @@ public class Entity {
         float otherWidth = other.width / 2.0f;
         float otherHeight = other.height / 2.0f;
 
-        return x - width > other.x + otherWidth &&
-               x + width < other.x - otherWidth &&
-               y - height > other.y + otherHeight &&
-               y + height < other.y - otherHeight;
+        return x - width < other.x + otherWidth &&
+               x + width > other.x - otherWidth &&
+               y - height < other.y + otherHeight &&
+               y + height > other.y - otherHeight;
+    }
+
+
+
+    // setters
+    public Entity setX(float x) {
+        this.x = x;
+        return this;
+    }
+
+    public Entity setY(float y) {
+        this.y = y;
+        return this;
+    }
+
+    public Entity setSprite(String sprite) {
+        this.sprite = sprite;
+        return this;
+    }
+
+    public Entity setWidth(float width) {
+        this.width = width;
+        return this;
+    }
+
+    public Entity setHeight(float height) {
+        this.height = height;
+        return this;
+    }
+
+    public Entity setHealth(float maxHealth) {
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
+        return this;
+    }
+
+    public Entity setDamage(float damage) {
+        this.damage = damage;
+        return this;
+    }
+
+    public Entity setTeam(EntityTeam team) {
+        this.team = team;
+        return this;
+    }
+
+
+    public Entity addComponent(EntityComponent component) {
+        this.components.add(component);
+
+        resetStats();
+        for (EntityComponent c : components) {
+            c.recalculateStats(this);
+        }
+
+        return this;
+    }
+
+    public void commitSudoku() {
+        this.wantsToLive = false;
     }
 }
