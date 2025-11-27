@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityManager;
+import com.mygdx.game.entities.components.behaviour.DemonSoulComponent;
 import com.mygdx.game.entities.components.behaviour.PlayerSoulComponent;
 
 public class FrogGame extends ApplicationAdapter {
@@ -34,6 +35,13 @@ public class FrogGame extends ApplicationAdapter {
 				.setSprite("penis")
 				.setX(32f)
 				.setY(32f));
+
+
+		entityManager.addEntity(new Entity()
+				.setSprite("test")
+				.setX(640f)
+				.setY(20f)
+				.addComponent(new DemonSoulComponent()));
 
 
 

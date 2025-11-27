@@ -131,7 +131,7 @@ public class SpriteManager {
     public Vector2 getMousePosition() {
         return new Vector2(
                 camera.position.x + Gdx.input.getX() - (Gdx.graphics.getWidth() / 2f),
-                camera.position.y + Gdx.input.getY() - (Gdx.graphics.getHeight() / 2f)
+                camera.position.y - Gdx.input.getY() + (Gdx.graphics.getHeight() / 2f)
         );
 
     }

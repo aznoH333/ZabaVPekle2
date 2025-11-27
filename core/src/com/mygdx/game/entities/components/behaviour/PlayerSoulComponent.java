@@ -13,6 +13,9 @@ public class PlayerSoulComponent extends EntityComponent {
     private static final SpriteManager spriteManager = SpriteManager.getInstance();
     private static final EntityManager entityManager = EntityManager.getInstance();
 
+    public PlayerSoulComponent() {
+        super.name = "soul";
+    }
 
     @Override
     public void onUpdate(Entity owner) {

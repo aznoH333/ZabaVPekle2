@@ -7,6 +7,7 @@ public class BulletComponent extends EntityComponent {
 
     private final float direction;
     public BulletComponent(float direction) {
+
         this.direction = direction;
     }
 

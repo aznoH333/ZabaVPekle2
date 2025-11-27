@@ -1,6 +1,6 @@
 package com.mygdx.game.entities;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
+import com.mygdx.game.NumberUtils;
 
 import java.util.ArrayList;
 
@@ -31,9 +31,33 @@ public class EntityManager {
     public void update() {
         for (Entity e : entities) {
             e.update();
+
+            for (Entity other : entities) {
+                if (other != e && e.collidesWithEntity(other)) {
+                    e.onCollide(other);
+                }
+            }
         }
 
         entities.addAll(waitingRoom);
         waitingRoom.clear();
+    }
+
+    public Entity findClosestEntityWithComponent(Entity caller, String componentName) {
+        Entity closestEntity = null;
+        float closestDistance = 0;
+
+        for (Entity e : entities) {
+            if (e != caller && e.hasComponent(componentName)) {
+                float distance = NumberUtils.pythagoras(caller.x, caller.y, e.x, e.y);
+
+                if (closestEntity == null || distance < closestDistance) {
+                    closestEntity = e;
+                    closestDistance = distance;
+                }
+            }
+        }
+
+        return closestEntity;
     }
 }

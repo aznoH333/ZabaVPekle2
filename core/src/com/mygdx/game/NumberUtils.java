@@ -17,6 +17,10 @@ public class NumberUtils {
     }
 
     public static float directionToward(float startX, float startY, float endX, float endY) {
-        return (float) Math.atan2(endX - startX, endY - startY) - HALF_PI;
+        return (float) Math.atan2(endY - startY, endX - startX);
+    }
+
+    public static float pythagoras(float x, float y, float x2, float y2) {
+        return (float) Math.sqrt(Math.pow(x2 - x, 2) + Math.pow(y2 - y, 2));
     }
 }
