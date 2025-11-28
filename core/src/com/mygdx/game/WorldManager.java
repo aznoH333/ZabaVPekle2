@@ -18,10 +18,9 @@ public class WorldManager {
         for (int x = -30; x < 30; x++) {
             for (int y = -30; y < 30; y++) {
                 if (Math.abs(x) < 20 && Math.abs(y) < 20) {
-                    spriteManager.drawSprite("floor", x * 32f, y * 32f, 0.7f, 0.2f, 0.2f);
+                    spriteManager.drawSprite("floor", x * 32f - 16f, y * 32f - 16f, 0.7f, 0.2f, 0.2f);
                 }else {
-                    spriteManager.drawSprite("wall", x * 32f, y * 32f, 0.7f, 0.2f, 0.2f);
-
+                    spriteManager.drawSprite("wall", x * 32f - 16f, y * 32f - 16f, 0.7f, 0.2f, 0.2f);
                 }
             }
         }
@@ -33,8 +32,8 @@ public class WorldManager {
         float heightValue = height / 2f;
 
         return x - widthValue > -20 * 32f &&
-               x + widthValue < 20 * 32f &&
+               x + widthValue < 19 * 32f &&
                y - heightValue > -20 * 32f &&
-               y + heightValue < 20 * 32f;
+               y + heightValue < 19 * 32f;
     }
 }

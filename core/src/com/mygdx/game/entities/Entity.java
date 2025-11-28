@@ -14,8 +14,8 @@ public class Entity {
     public String sprite;
     public float x;
     public float y;
-    public float width = 32f;
-    public float height = 32f;
+    public float width = 16f;
+    public float height = 16f;
     private final ArrayList<EntityComponent> components = new ArrayList<>();
     public float speed;
     public float health = 1f;

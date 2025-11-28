@@ -28,11 +28,12 @@ public class SpriteManager {
     private final HashMap<String, Texture> spriteMap = new HashMap<>();
     private final SpriteBatch batch = new SpriteBatch();
 
-    private final Camera camera = new OrthographicCamera();
+    private final OrthographicCamera camera = new OrthographicCamera();
     private final Viewport viewPort = new FitViewport(960f, 640f, camera);
 
     private SpriteManager() {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        // camera.zoom = 0.3f;
     }
 
 
@@ -87,13 +88,16 @@ public class SpriteManager {
             System.exit(-1); // c ah crash
         }
 
+        float w = sprite.getWidth() / 2.0f;
+        float h = sprite.getHeight() / 2.0f;
+
         batch.setColor(r, g, b, a);
         batch.draw(
                 sprite,
-                x,
-                y,
-                sprite.getWidth() / 2.0f,
-                sprite.getHeight() / 2.0f,
+                x - w,
+                y - h,
+                w,
+                h,
                 (float) sprite.getWidth(),
                 (float) sprite.getHeight(),
                 width,
