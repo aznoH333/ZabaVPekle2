@@ -14,7 +14,11 @@ public class EntityComponent {
 
     public void onCollide(Entity owner, Entity other) {}
 
+    public void onWorldCollide(Entity owner) {}
+
     public void recalculateStats(Entity owner) {}
+
+
 
 
 }

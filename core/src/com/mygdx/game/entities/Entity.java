@@ -25,9 +25,20 @@ public class Entity {
     public int invincibilityTimerMax = 30;
     public EntityTeam team = EntityTeam.NONE;
     public boolean wantsToLive = true;
-
     public float xVelocity = 0f;
     public float yVelocity = 0f;
+
+
+    // appearance
+    public float spriteRotation = 0f;
+    public float r = 1f;
+    public float g = 1f;
+    public float b = 1f;
+    public float a = 1f;
+    public float scaleX = 1f;
+    public float scaleY = 1f;
+    public boolean flipX = false;
+    public boolean flipY = false;
 
 
     public Entity() {
@@ -42,19 +53,33 @@ public class Entity {
         }
 
         // move
+        boolean collidedWithWorld = false;
         if (worldManager.isSpaceEmpty(x + xVelocity, y, width, height)) {
             x += xVelocity;
+        }else {
+            collidedWithWorld = true;
         }
 
         if (worldManager.isSpaceEmpty(x, y + yVelocity, width, height)) {
             y += yVelocity;
+        }else {
+            collidedWithWorld = true;
         }
 
         xVelocity = 0;
         yVelocity = 0;
 
+        // world collision
+        if (collidedWithWorld) {
+            for (EntityComponent c : components) {
+                c.onWorldCollide(this);
+            }
+        }
+
+
+
         // draw
-        spriteManager.drawSprite(this.sprite, x, y);
+        spriteManager.drawSprite(this.sprite, x, y, scaleX, scaleY, flipX, flipY, spriteRotation, r, g, b, a);
 
         // invincibility
         if (this.invincibilityTimer > 0) {

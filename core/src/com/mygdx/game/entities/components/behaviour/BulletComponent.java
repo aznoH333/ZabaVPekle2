@@ -15,5 +15,11 @@ public class BulletComponent extends EntityComponent {
     public void onUpdate(Entity owner) {
 
         owner.goInDirection(direction, 6f);
+        owner.spriteRotation = direction;
+    }
+
+    @Override
+    public void onWorldCollide(Entity owner) {
+        owner.commitSudoku();
     }
 }

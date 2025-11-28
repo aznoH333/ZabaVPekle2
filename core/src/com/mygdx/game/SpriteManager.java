@@ -33,7 +33,7 @@ public class SpriteManager {
 
     private SpriteManager() {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        // camera.zoom = 0.3f;
+        camera.zoom = 0.7f;
     }
 
 
@@ -90,6 +90,7 @@ public class SpriteManager {
 
         float w = sprite.getWidth() / 2.0f;
         float h = sprite.getHeight() / 2.0f;
+        float rotation = (float) Math.toDegrees(rotationRad);
 
         batch.setColor(r, g, b, a);
         batch.draw(
@@ -102,7 +103,7 @@ public class SpriteManager {
                 (float) sprite.getHeight(),
                 width,
                 height,
-                rotationRad,
+                rotation,
                 0,
                 0,
                 sprite.getWidth(),
