@@ -28,4 +28,10 @@ public class DemonSoulComponent extends EntityComponent {
             owner.goInDirection(direction, 1f);
         }
     }
+
+    @Override
+    public void recalculateStats(Entity owner) {
+        owner.speed = 1.3f;
+        owner.flipWithMoveDirection = true;
+    }
 }

@@ -60,5 +60,6 @@ public class PlayerSoulComponent extends EntityComponent {
     @Override
     public void recalculateStats(Entity owner) {
         owner.speed = 3.5f;
+        owner.flipWithMoveDirection =  true;
     }
 }

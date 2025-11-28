@@ -39,6 +39,7 @@ public class Entity {
     public float scaleY = 1f;
     public boolean flipX = false;
     public boolean flipY = false;
+    public boolean flipWithMoveDirection = false;
 
 
     public Entity() {
@@ -94,7 +95,6 @@ public class Entity {
         }
         // take damage
         if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.damage != 0f) {
-            System.out.println("dostavam cocku " + this.health);
             this.health -= other.damage;
             this.invincibilityTimer = this.invincibilityTimerMax;
 
@@ -106,18 +106,37 @@ public class Entity {
 
 
     private void resetStats() {
-        this.speed = 1f;
+        setHealth(1f);
+        damage = 0f;
+        speed = 1f;
+        flipWithMoveDirection = false;
     }
 
 
     public void walk(float x, float y) {
         xVelocity += x * speed;
         yVelocity += y * speed;
+
+        if (flipWithMoveDirection) {
+            if (xVelocity < -0.5f) {
+                flipX = true;
+            }else if (xVelocity > 0.5f) {
+                flipX = false;
+            }
+        }
     }
 
     public void goInDirection(float rotationRad, float speedMultiplier) {
         xVelocity += (float) (Math.cos(rotationRad) * speedMultiplier * speed);
         yVelocity += (float) (Math.sin(rotationRad) * speedMultiplier * speed);
+
+        if (flipWithMoveDirection) {
+            if (xVelocity < -0.5f) {
+                flipX = true;
+            }else if (xVelocity > 0.5f) {
+                flipX = false;
+            }
+        }
     }
 
     public boolean hasComponent(String name) {
@@ -155,15 +174,7 @@ public class Entity {
         return this;
     }
 
-    public Entity setWidth(float width) {
-        this.width = width;
-        return this;
-    }
 
-    public Entity setHeight(float height) {
-        this.height = height;
-        return this;
-    }
 
     public Entity setHealth(float maxHealth) {
         this.maxHealth = maxHealth;
