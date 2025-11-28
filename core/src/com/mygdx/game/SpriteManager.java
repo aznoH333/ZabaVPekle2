@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,10 +39,23 @@ public class SpriteManager {
     }
 
 
+    public void loadSpritesInDirectory(String path) {
+
+        FileHandle handle = Gdx.files.internal(path);
+        if (!handle.exists()) {
+            System.out.println("lol");
+            System.exit(1);
+        }
+        System.out.println(handle.isDirectory());
+        for (FileHandle f : handle.list()) {
+            loadSprite(f.path(), f.nameWithoutExtension());
+        }
+    }
 
 
 
     public void loadSprite(String path, String name) {
+        System.out.println("loading sprite " + name + " with path " + path);
         this.spriteMap.put(name, new Texture(path));
     }
 

@@ -25,7 +25,7 @@ public class FrogGame extends ApplicationAdapter {
 		spriteManager.loadSprite("floor_tile.png", "floor");
 		spriteManager.loadSprite("Enemy_1.png", "enemy");
 		spriteManager.loadSprite("bullet.png", "bullet");
-
+		spriteManager.loadSpritesInDirectory("assets/sprites");
 
 
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayModes()[0]);
@@ -35,7 +35,7 @@ public class FrogGame extends ApplicationAdapter {
 		entityManager = EntityManager.getInstance();
 
 		entityManager.addEntity(new Entity()
-				.setSprite("test")
+				.setSprite("player_1")
 				.setTeam(EntityTeam.FROG)
 				.addComponent(new PlayerSoulComponent()));
 
