@@ -7,8 +7,10 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.DemonSoul;
+import com.mygdx.game.entities.components.behaviour.Spawner;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
+import com.mygdx.game.entities.components.visual.particles.FadeParticle;
 
 public class WorldManager {
 
@@ -85,17 +87,27 @@ public class WorldManager {
         }while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, player.x, player.y) < 128f);
 
         System.out.println("spawning enemy at " + x + ", " + y);
-        entityManager.addEntity(new Entity()
-                .setSprite("enemy_1")
-                .setTeam(EntityTeam.DEMON)
-                .setHealth(20f)
-                .setX(x)
-                .setY(y)
-                .addComponent(new DemonSoul())
-                .addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
-                .addComponent(new GameEntityBleed())
-                .setDrawingLayer(DrawingLayer.ENEMIES)
+
+        entityManager.addEntity(
+                new Entity()
+                        .setX(x)
+                        .setY(y)
+                        .setDrawingLayer(DrawingLayer.BLOOD)
+                        .setSprite("enemy_spawner_0001")
+                        .addComponent(new FadeParticle(120, true, 0.2f))
+                        .addComponent(new Spawner(new Entity()
+                                .setSprite("enemy_1")
+                                .setTeam(EntityTeam.DEMON)
+                                .setHealth(20f)
+                                .setX(x)
+                                .setY(y)
+                                .addComponent(new DemonSoul())
+                                .addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
+                                .addComponent(new GameEntityBleed())
+                                .setDrawingLayer(DrawingLayer.ENEMIES)))
         );
+
+
     }
 
     public boolean isSpaceEmpty(float x, float y, float width, float height) {

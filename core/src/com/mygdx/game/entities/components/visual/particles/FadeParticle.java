@@ -7,9 +7,13 @@ public class FadeParticle extends EntityComponent {
 
     private int lifeTime;
     private final int lowPercent;
-    public FadeParticle(int lifeTime) {
+    private final int highPercent;
+    private final boolean fadeIn;
+    public FadeParticle(int lifeTime, boolean fadeIn, float fadePercentage) {
         this.lifeTime = lifeTime;
-        this.lowPercent = (int) (lifeTime * 0.3f);
+        this.lowPercent = (int) (lifeTime * fadePercentage);
+        this.fadeIn = fadeIn;
+        this.highPercent = lifeTime - lowPercent;
     }
 
 
@@ -17,8 +21,9 @@ public class FadeParticle extends EntityComponent {
     public void onUpdate(Entity owner) {
         this.lifeTime--;
 
-
-        if (lifeTime < lowPercent) {
+        if (fadeIn && lifeTime > highPercent) {
+            owner.a = 1 - ((float) ((lifeTime - highPercent)) / lowPercent);
+        } else if (lifeTime < lowPercent) {
             owner.a = (float) lifeTime / lowPercent;
         }
 

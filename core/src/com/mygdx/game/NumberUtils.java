@@ -40,4 +40,14 @@ public class NumberUtils {
     public static boolean randomChance(float chance) {
         return randomFloat(0, 1) < chance;
     }
+
+    public String padNumberWithZeros(int number) {
+        StringBuilder output = new StringBuilder(number);
+
+        while (output.length() < 4) {
+            output.insert(0, '0');
+        }
+        return output.toString();
+
+    }
 }
