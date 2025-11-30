@@ -32,6 +32,10 @@ public class DemonSoulComponent extends EntityComponent {
     @Override
     public void recalculateStats(Entity owner) {
         owner.speed = 1.3f;
+        owner.setHealth(6f);
+        owner.damage = 1f;
+        owner.knockBackMultiplier = 8f;
         owner.flipWithMoveDirection = true;
+        owner.canBeDamaged = true;
     }
 }

@@ -30,10 +30,14 @@ public class EntityManager {
 
     public void update() {
 
-
+        // update loop
         for (Entity e : entities) {
             e.update();
 
+
+        }
+        // collide loop
+        for (Entity e : entities) {
             for (Entity other : entities) {
                 if (other != e && e.collidesWithEntity(other)) {
                     e.onCollide(other);

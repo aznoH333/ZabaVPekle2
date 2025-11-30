@@ -1,5 +1,6 @@
 package com.mygdx.game.entities;
 
+import com.mygdx.game.NumberUtils;
 import com.mygdx.game.SpriteManager;
 import com.mygdx.game.WorldManager;
 
@@ -17,10 +18,7 @@ public class Entity {
     public float width = 16f;
     public float height = 16f;
     private final ArrayList<EntityComponent> components = new ArrayList<>();
-    public float speed;
-    public float health = 1f;
-    public float maxHealth = 1f;
-    public float damage = 0f;
+
     public int invincibilityTimer = 0;
     public int invincibilityTimerMax = 30;
     public EntityTeam team = EntityTeam.NONE;
@@ -30,6 +28,16 @@ public class Entity {
     public float lastFrameXVelocity = 0f;
     public float lastFrameYVelocity = 0f;
 
+
+    // combat
+    public float knockBackMultiplier = 0f;
+    public float speed;
+    public float health = 1f;
+    public float maxHealth = 1f;
+    public float damage = 0f;
+    public float knockBackDirection = 0f;
+    public float knockBackSpeed = 0f;
+    public boolean canBeDamaged = false;
 
     // appearance
     public float spriteRotation = 0f;
@@ -55,6 +63,14 @@ public class Entity {
             component.onUpdate(this);
         }
 
+
+        // knock back movement
+        if (shouldApplyKnockBack()) {
+            xVelocity = (float) (Math.cos(knockBackDirection) * knockBackSpeed);
+            yVelocity = (float) (Math.sin(knockBackDirection) * knockBackSpeed);
+            knockBackSpeed *= 0.9f;
+        }
+
         // move
         boolean collidedWithWorld = false;
         if (worldManager.isSpaceEmpty(x + xVelocity, y, width, height)) {
@@ -73,6 +89,7 @@ public class Entity {
             lastFrameYVelocity = 0f;
         }
 
+
         xVelocity = 0;
         yVelocity = 0;
 
@@ -82,7 +99,6 @@ public class Entity {
                 c.onWorldCollide(this);
             }
         }
-
 
 
         // draw
@@ -100,12 +116,18 @@ public class Entity {
             component.onCollide(this, other);
         }
         // take damage
-        if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.damage != 0f) {
+        if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.damage != 0f && canBeDamaged) {
             this.health -= other.damage;
             this.invincibilityTimer = this.invincibilityTimerMax;
 
             if (this.health <= 0f) {
                 this.commitSudoku();
+            }
+
+            // knock back
+            if (other.knockBackMultiplier > 0f) {
+                knockBackDirection = NumberUtils.directionToward(other.x, other.y, x, y);
+                knockBackSpeed = other.knockBackMultiplier;
             }
         }
     }
@@ -116,10 +138,15 @@ public class Entity {
         damage = 0f;
         speed = 1f;
         flipWithMoveDirection = false;
+        knockBackMultiplier = 1f;
     }
 
 
     public void walk(float x, float y) {
+        if (shouldApplyKnockBack()) {
+            return;
+        }
+
         xVelocity += x * speed;
         yVelocity += y * speed;
 
@@ -133,13 +160,17 @@ public class Entity {
     }
 
     public void goInDirection(float rotationRad, float speedMultiplier) {
+        if (shouldApplyKnockBack()) {
+            return;
+        }
+
         xVelocity += (float) (Math.cos(rotationRad) * speedMultiplier * speed);
         yVelocity += (float) (Math.sin(rotationRad) * speedMultiplier * speed);
 
         if (flipWithMoveDirection) {
-            if (xVelocity < -0.5f) {
+            if (xVelocity < -0.01f) {
                 flipX = true;
-            }else if (xVelocity > 0.5f) {
+            }else if (xVelocity > 0.01f) {
                 flipX = false;
             }
         }
@@ -167,7 +198,9 @@ public class Entity {
                y + height > other.y - otherHeight;
     }
 
-
+    private boolean shouldApplyKnockBack() {
+        return this.invincibilityTimer > 10;
+    }
 
     // setters
     public Entity setX(float x) {

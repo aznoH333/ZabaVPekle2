@@ -48,6 +48,7 @@ public class PlayerSoulComponent extends EntityComponent {
                             .setX(owner.x)
                             .setY(owner.y)
                             .setDamage(5f)
+
                             .setTeam(EntityTeam.FROG)
                             .addComponent(new BulletComponent(NumberUtils.directionToward(
                                     owner.x,
@@ -61,5 +62,7 @@ public class PlayerSoulComponent extends EntityComponent {
     public void recalculateStats(Entity owner) {
         owner.speed = 3.5f;
         owner.flipWithMoveDirection =  true;
+        owner.health = 6f;
+        owner.canBeDamaged = true;
     }
 }
