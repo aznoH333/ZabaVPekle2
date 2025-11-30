@@ -1,6 +1,7 @@
 package com.mygdx.game.entities.components.visual;
 
 import com.mygdx.game.NumberUtils;
+import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
@@ -28,6 +29,8 @@ public class GameEntityBleed extends EntityComponent {
                     .setX(owner.x)
                     .setY(owner.y)
                     .addComponent(new BloodParticle(NumberUtils.randomFloat(0f, NumberUtils.TWO_PI), NumberUtils.randomFloat(0.5f, 2f), NumberUtils.randomFloat(0.5f, 2.5f)))
+                    .setDrawingLayer(DrawingLayer.PROJECTILES)
+
             );
         }
     }

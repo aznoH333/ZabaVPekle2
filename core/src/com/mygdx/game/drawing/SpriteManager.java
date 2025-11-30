@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.drawing;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ public class SpriteManager {
 
     private final HashMap<String, Texture> spriteMap = new HashMap<>();
     private final SpriteBatch batch = new SpriteBatch();
+    private final ArrayList<ArrayList<DrawingCommand>> drawingQueue = new ArrayList<>();
 
     private final OrthographicCamera camera = new OrthographicCamera();
     private final Viewport viewPort = new FitViewport(960f, 640f, camera);
@@ -53,50 +55,14 @@ public class SpriteManager {
         }
     }
 
-
-
-    public void loadSprite(String path, String name) {
+    private void loadSprite(String path, String name) {
         System.out.println("loading sprite " + name + " with path " + path);
         this.spriteMap.put(name, new Texture(path));
     }
 
 
-    public void drawSprite(String spriteName, float x, float y) {
-        this.drawSprite(
-                spriteName,
-                x,
-                y,
-                1f,
-                1f,
-                false,
-                false,
-                0f,
-                1f,
-                1f,
-                1f,
-                1f
-        );
-    }
 
-    public void drawSprite(String spriteName, float x, float y, float r, float g, float b) {
-        this.drawSprite(
-                spriteName,
-                x,
-                y,
-                1f,
-                1f,
-                false,
-                false,
-                0f,
-                r,
-                g,
-                b,
-                1f
-        );
-    }
-
-
-    public void drawSprite(String spriteName, float x, float y, float width, float height, boolean flipHorizontally, boolean flipVertically, float rotationRad, float r, float g, float b, float a) {
+    private void drawSprite(String spriteName, float x, float y, float width, float height, boolean flipHorizontally, boolean flipVertically, float rotationRad, float r, float g, float b, float a) {
         Texture sprite = spriteMap.getOrDefault(spriteName, null);
 
         if (sprite == null) {
@@ -129,8 +95,19 @@ public class SpriteManager {
         );
     }
 
-    public void renderBegin() {
+    public void drawSprite(DrawingCommand command, DrawingLayer layer) {
+        if (drawingQueue.size() < layer.value + 1) {
+            for (int i = drawingQueue.size(); i < layer.value + 1; i++) {
+                drawingQueue.add(new ArrayList<>());
+            }
+        }
 
+        drawingQueue.get(layer.value).add(command);
+    }
+
+
+
+    public void render() {
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
 
         viewPort.apply();
@@ -138,11 +115,25 @@ public class SpriteManager {
 
         batch.begin();
 
-
-    }
-
-    public void render() {
-        // TODO : this
+        for (ArrayList<DrawingCommand> layer : drawingQueue) {
+            for (DrawingCommand command : layer) {
+                drawSprite(
+                        command.spriteName,
+                        command.x,
+                        command.y,
+                        command.width,
+                        command.height,
+                        command.flipHorizontally,
+                        command.flipVertically,
+                        command.rotationRad,
+                        command.r,
+                        command.g,
+                        command.b,
+                        command.a
+                );
+            }
+            layer.clear();
+        }
 
 
         batch.end();

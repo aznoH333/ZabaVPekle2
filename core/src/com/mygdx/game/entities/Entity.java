@@ -1,7 +1,9 @@
 package com.mygdx.game.entities;
 
 import com.mygdx.game.NumberUtils;
-import com.mygdx.game.SpriteManager;
+import com.mygdx.game.drawing.DrawingCommand;
+import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.drawing.SpriteManager;
 import com.mygdx.game.WorldManager;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class Entity {
     public float width = 16f;
     public float height = 16f;
     private final ArrayList<EntityComponent> components = new ArrayList<>();
+    public DrawingLayer drawingLayer = DrawingLayer.WORLD;
 
     public int invincibilityTimer = 0;
     public int invincibilityTimerMax = 30;
@@ -104,7 +107,19 @@ public class Entity {
 
 
         // draw
-        spriteManager.drawSprite(this.sprite, x + spriteOffsetX, y + spriteOffsetY, scaleX, scaleY, flipX, flipY, spriteRotation, r, g, b, a);
+        spriteManager.drawSprite(
+                new DrawingCommand(sprite, x + spriteOffsetX, y + spriteOffsetY)
+                        .setWidth(scaleX)
+                        .setHeight(scaleY)
+                        .setFlipHorizontally(flipX)
+                        .setFlipVertically(flipY)
+                        .setRotationRad(spriteRotation)
+                        .setR(r)
+                        .setG(g)
+                        .setB(b)
+                        .setA(a),
+                drawingLayer
+        );
 
         // invincibility
         if (this.invincibilityTimer > 0) {
@@ -262,6 +277,11 @@ public class Entity {
             c.recalculateStats(this);
         }
 
+        return this;
+    }
+
+    public Entity setDrawingLayer(DrawingLayer layer) {
+        this.drawingLayer = layer;
         return this;
     }
 

@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.drawing.SpriteManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
@@ -32,6 +34,7 @@ public class FrogGame extends ApplicationAdapter {
 				.setSprite("player_1")
 				.setTeam(EntityTeam.FROG)
 				.addComponent(new PlayerSoul())
+				.setDrawingLayer(DrawingLayer.PLAYER)
 				.addComponent(new GameEntityAnimator("player", 1, 2, 8, 9, 3))
 		);
 
@@ -46,7 +49,6 @@ public class FrogGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		spriteManager.renderBegin();
 
 		worldManager.draw();
 		worldManager.update();

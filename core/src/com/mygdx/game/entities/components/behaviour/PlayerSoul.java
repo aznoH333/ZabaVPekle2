@@ -4,7 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.NumberUtils;
-import com.mygdx.game.SpriteManager;
+import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.drawing.SpriteManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
@@ -50,6 +51,7 @@ public class PlayerSoul extends EntityComponent {
                             .setDamage(5f)
 
                             .setTeam(EntityTeam.FROG)
+                            .setDrawingLayer(DrawingLayer.PROJECTILES)
                             .addComponent(new Bullet(NumberUtils.directionToward(
                                     owner.x,
                                     owner.y,

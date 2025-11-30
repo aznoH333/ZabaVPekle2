@@ -1,6 +1,7 @@
 package com.mygdx.game.entities.components.visual.particles;
 
 import com.mygdx.game.NumberUtils;
+import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
@@ -55,6 +56,7 @@ public class BloodParticle extends EntityComponent {
                         .setSpriteRotation(NumberUtils.randomFloat(0, NumberUtils.TWO_PI))
                         .addComponent(new FadeParticle(512))
                         .setSprite(sprite)
+                        .setDrawingLayer(DrawingLayer.BLOOD)
         );
     }
 }
