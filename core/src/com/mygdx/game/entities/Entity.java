@@ -15,6 +15,8 @@ public class Entity {
     public String sprite;
     public float x;
     public float y;
+    public float spriteOffsetX = 0f;
+    public float spriteOffsetY = 0f;
     public float width = 16f;
     public float height = 16f;
     private final ArrayList<EntityComponent> components = new ArrayList<>();
@@ -102,7 +104,7 @@ public class Entity {
 
 
         // draw
-        spriteManager.drawSprite(this.sprite, x, y, scaleX, scaleY, flipX, flipY, spriteRotation, r, g, b, a);
+        spriteManager.drawSprite(this.sprite, x + spriteOffsetX, y + spriteOffsetY, scaleX, scaleY, flipX, flipY, spriteRotation, r, g, b, a);
 
         // invincibility
         if (this.invincibilityTimer > 0) {
@@ -120,8 +122,17 @@ public class Entity {
             this.health -= other.damage;
             this.invincibilityTimer = this.invincibilityTimerMax;
 
+
+
+
             if (this.health <= 0f) {
                 this.commitSudoku();
+
+
+            }else {
+                for (EntityComponent c : components) {
+                    c.onTakeDamage(this, other.damage);
+                }
             }
 
             // knock back
@@ -218,6 +229,11 @@ public class Entity {
         return this;
     }
 
+    public Entity setSpriteRotation(float rotation) {
+        this.spriteRotation = rotation;
+        return this;
+    }
+
 
 
     public Entity setHealth(float maxHealth) {
@@ -250,6 +266,10 @@ public class Entity {
     }
 
     public void commitSudoku() {
+        for (EntityComponent c: components) {
+            c.onSudoku(this);
+        }
+
         this.wantsToLive = false;
     }
 }

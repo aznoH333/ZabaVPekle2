@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 public class NumberUtils {
     public final static float HALF_PI = (float) (Math.PI / 2f);
+    public final static float TWO_PI = (float) (Math.PI * 2f);
 
 
     public static int boolToInt(boolean value) {
@@ -25,8 +26,18 @@ public class NumberUtils {
     }
 
     public static int randomInt(int min, int max) {
-        int range = max - min;
+        int range = max - min + 1;
 
         return (int) Math.floor(Math.random() * range) + min;
+    }
+
+    public static float randomFloat(float min, float max) {
+        float range = max - min + 1f;
+
+        return (float) (Math.random() * range + min);
+    }
+
+    public static boolean randomChance(float chance) {
+        return randomFloat(0, 1) < chance;
     }
 }

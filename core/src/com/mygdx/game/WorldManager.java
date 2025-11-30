@@ -3,8 +3,9 @@ package com.mygdx.game;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
-import com.mygdx.game.entities.components.behaviour.DemonSoulComponent;
+import com.mygdx.game.entities.components.behaviour.DemonSoul;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
+import com.mygdx.game.entities.components.visual.GameEntityBleed;
 
 public class WorldManager {
 
@@ -24,8 +25,10 @@ public class WorldManager {
     private int enemiesToSpawn = 10;
     private int enemySpawnCooldown = 30;
     private int nextEnemySpawnCooldown = 0;
-    private final int outerWorldSize = 30;
-    private final int innerWorldSize = 20;
+
+
+    private final int outerWorldSize = 25;
+    private final int innerWorldSize = 15;
     private Entity player = null;
 
 
@@ -33,9 +36,9 @@ public class WorldManager {
         for (int x = -outerWorldSize; x < outerWorldSize; x++) {
             for (int y = -outerWorldSize; y < outerWorldSize; y++) {
                 if (Math.abs(x) < innerWorldSize && Math.abs(y) < innerWorldSize) {
-                    spriteManager.drawSprite("floor_tile", x * 32f - 16f, y * 32f - 16f, 0.7f, 0.2f, 0.2f);
+                    spriteManager.drawSprite("floor_tile", x * 32f - 16f, y * 32f - 16f, 0.6f, 0.4f, 0.0f);
                 }else {
-                    spriteManager.drawSprite("brick_wall", x * 32f - 16f, y * 32f - 16f, 0.7f, 0.2f, 0.2f);
+                    spriteManager.drawSprite("brick_wall", x * 32f - 16f, y * 32f - 16f, 0.6f, 0.4f, 0.2f);
                 }
             }
         }
@@ -79,8 +82,9 @@ public class WorldManager {
                 .setHealth(20f)
                 .setX(x)
                 .setY(y)
-                .addComponent(new DemonSoulComponent())
+                .addComponent(new DemonSoul())
                 .addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
+                .addComponent(new GameEntityBleed())
         );
     }
 

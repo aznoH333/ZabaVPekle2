@@ -3,10 +3,10 @@ package com.mygdx.game.entities.components.behaviour;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 
-public class BulletComponent extends EntityComponent {
+public class Bullet extends EntityComponent {
 
     private final float direction;
-    public BulletComponent(float direction) {
+    public Bullet(float direction) {
 
         this.direction = direction;
     }

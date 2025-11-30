@@ -10,11 +10,11 @@ import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
 
-public class PlayerSoulComponent extends EntityComponent {
+public class PlayerSoul extends EntityComponent {
     private static final SpriteManager spriteManager = SpriteManager.getInstance();
     private static final EntityManager entityManager = EntityManager.getInstance();
 
-    public PlayerSoulComponent() {
+    public PlayerSoul() {
         super.name = "soul";
     }
 
@@ -50,7 +50,7 @@ public class PlayerSoulComponent extends EntityComponent {
                             .setDamage(5f)
 
                             .setTeam(EntityTeam.FROG)
-                            .addComponent(new BulletComponent(NumberUtils.directionToward(
+                            .addComponent(new Bullet(NumberUtils.directionToward(
                                     owner.x,
                                     owner.y,
                                     mousePos.x,

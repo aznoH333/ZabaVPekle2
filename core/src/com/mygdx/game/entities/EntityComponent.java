@@ -19,6 +19,10 @@ public class EntityComponent {
 
     public void recalculateStats(Entity owner) {}
 
+    public void onTakeDamage(Entity owner, float damageAmount) {}
+
+    public void onSudoku(Entity owner) {}
+
 
 
 

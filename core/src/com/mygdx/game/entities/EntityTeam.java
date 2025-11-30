@@ -6,6 +6,6 @@ public enum EntityTeam {
     NONE;
 
     public boolean isAggressiveAgainst(EntityTeam other) {
-        return other != NONE && other != this;
+        return other != NONE && this != NONE && other != this;
     }
 }

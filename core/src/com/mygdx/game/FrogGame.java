@@ -5,8 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
-import com.mygdx.game.entities.components.behaviour.DemonSoulComponent;
-import com.mygdx.game.entities.components.behaviour.PlayerSoulComponent;
+import com.mygdx.game.entities.components.behaviour.PlayerSoul;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 
 public class FrogGame extends ApplicationAdapter {
@@ -32,21 +31,13 @@ public class FrogGame extends ApplicationAdapter {
 		entityManager.addEntity(new Entity()
 				.setSprite("player_1")
 				.setTeam(EntityTeam.FROG)
-				.addComponent(new PlayerSoulComponent())
+				.addComponent(new PlayerSoul())
 				.addComponent(new GameEntityAnimator("player", 1, 2, 8, 9, 3))
 		);
 
 
 
-		entityManager.addEntity(new Entity()
-				.setSprite("enemy_1")
-				.setTeam(EntityTeam.DEMON)
-				.setHealth(20f)
-				.setX(320f)
-				.setY(20f)
-				.addComponent(new DemonSoulComponent())
-				.addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
-		);
+
 
 
 		worldManager = WorldManager.getInstance();

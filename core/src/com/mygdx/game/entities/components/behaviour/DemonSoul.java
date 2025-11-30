@@ -5,13 +5,13 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
 
-public class DemonSoulComponent extends EntityComponent {
+public class DemonSoul extends EntityComponent {
     private final EntityManager entityManager = EntityManager.getInstance();
 
 
     private Entity target = null;
 
-    public DemonSoulComponent() {
+    public DemonSoul() {
         super.name = "evil soul";
     }
 
