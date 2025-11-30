@@ -23,4 +23,10 @@ public class NumberUtils {
     public static float pythagoras(float x, float y, float x2, float y2) {
         return (float) Math.sqrt(Math.pow(x2 - x, 2) + Math.pow(y2 - y, 2));
     }
+
+    public static int randomInt(int min, int max) {
+        int range = max - min;
+
+        return (int) Math.floor(Math.random() * range) + min;
+    }
 }

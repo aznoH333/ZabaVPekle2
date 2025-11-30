@@ -51,6 +51,24 @@ public class EntityManager {
         waitingRoom.clear();
     }
 
+    public Entity findClosestEntityWithComponent(float x, float y, String componentName) {
+        Entity closestEntity = null;
+        float closestDistance = 0;
+
+        for (Entity e : entities) {
+            if (e.hasComponent(componentName)) {
+                float distance = NumberUtils.pythagoras(x, y, e.x, e.y);
+
+                if (closestEntity == null || distance < closestDistance) {
+                    closestEntity = e;
+                    closestDistance = distance;
+                }
+            }
+        }
+
+        return closestEntity;
+    }
+
     public Entity findClosestEntityWithComponent(Entity caller, String componentName) {
         Entity closestEntity = null;
         float closestDistance = 0;

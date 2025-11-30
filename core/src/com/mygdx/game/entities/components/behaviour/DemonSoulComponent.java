@@ -38,4 +38,12 @@ public class DemonSoulComponent extends EntityComponent {
         owner.flipWithMoveDirection = true;
         owner.canBeDamaged = true;
     }
+
+    @Override
+    public void onCollide(Entity owner, Entity other) {
+        if (NumberUtils.pythagoras(owner.x, owner.y, other.x, other.y) < 16f && other.hasComponent("evil soul")) {
+            // bump away from each other
+            owner.goInDirection(NumberUtils.directionToward(other.x, other.y, owner.x, owner.y), 0.25f);
+        }
+    }
 }

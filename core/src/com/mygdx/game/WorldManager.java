@@ -1,8 +1,15 @@
 package com.mygdx.game;
 
+import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.EntityManager;
+import com.mygdx.game.entities.EntityTeam;
+import com.mygdx.game.entities.components.behaviour.DemonSoulComponent;
+import com.mygdx.game.entities.components.visual.GameEntityAnimator;
+
 public class WorldManager {
 
     private static WorldManager instance = null;
+
 
 
     public static WorldManager getInstance() {
@@ -12,12 +19,20 @@ public class WorldManager {
         return instance;
     }
 
-    private static SpriteManager spriteManager = SpriteManager.getInstance();
+    private static final SpriteManager spriteManager = SpriteManager.getInstance();
+    private static final EntityManager entityManager = EntityManager.getInstance();
+    private int enemiesToSpawn = 10;
+    private int enemySpawnCooldown = 30;
+    private int nextEnemySpawnCooldown = 0;
+    private final int outerWorldSize = 30;
+    private final int innerWorldSize = 20;
+    private Entity player = null;
+
 
     public void draw() {
-        for (int x = -30; x < 30; x++) {
-            for (int y = -30; y < 30; y++) {
-                if (Math.abs(x) < 20 && Math.abs(y) < 20) {
+        for (int x = -outerWorldSize; x < outerWorldSize; x++) {
+            for (int y = -outerWorldSize; y < outerWorldSize; y++) {
+                if (Math.abs(x) < innerWorldSize && Math.abs(y) < innerWorldSize) {
                     spriteManager.drawSprite("floor_tile", x * 32f - 16f, y * 32f - 16f, 0.7f, 0.2f, 0.2f);
                 }else {
                     spriteManager.drawSprite("brick_wall", x * 32f - 16f, y * 32f - 16f, 0.7f, 0.2f, 0.2f);
@@ -26,14 +41,57 @@ public class WorldManager {
         }
     }
 
+    public void update() {
+
+        if (player == null) {
+            player = entityManager.findClosestEntityWithComponent(0f, 0f, "soul");
+            return;
+        }
+
+        // spawn enemies
+        if (enemiesToSpawn > 0) {
+
+            if (nextEnemySpawnCooldown == 0) {
+                nextEnemySpawnCooldown = enemySpawnCooldown;
+                spawnEnemy();
+                enemiesToSpawn--;
+            }else {
+                nextEnemySpawnCooldown--;
+            }
+        }
+    }
+
+    private void spawnEnemy() {
+
+
+        int x;
+        int y;
+
+        do {
+            x = NumberUtils.randomInt(-innerWorldSize, innerWorldSize) * 32;
+            y = NumberUtils.randomInt(-innerWorldSize, innerWorldSize) * 32;
+        }while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, player.x, player.y) < 128f);
+
+        System.out.println("spawning enemy at " + x + ", " + y);
+        entityManager.addEntity(new Entity()
+                .setSprite("enemy_1")
+                .setTeam(EntityTeam.DEMON)
+                .setHealth(20f)
+                .setX(x)
+                .setY(y)
+                .addComponent(new DemonSoulComponent())
+                .addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
+        );
+    }
+
     public boolean isSpaceEmpty(float x, float y, float width, float height) {
         // placehodler logic
         float widthValue = width / 2f;
         float heightValue = height / 2f;
 
-        return x - widthValue > -20 * 32f &&
-               x + widthValue < 19 * 32f &&
-               y - heightValue > -20 * 32f &&
-               y + heightValue < 19 * 32f;
+        return x - widthValue > -innerWorldSize * 32f &&
+               x + widthValue < (innerWorldSize - 1) * 32f &&
+               y - heightValue > -innerWorldSize * 32f &&
+               y + heightValue < (innerWorldSize - 1) * 32f;
     }
 }

@@ -58,7 +58,7 @@ public class FrogGame extends ApplicationAdapter {
 		spriteManager.renderBegin();
 
 		worldManager.draw();
-
+		worldManager.update();
 		entityManager.update();
 
 		spriteManager.render();
