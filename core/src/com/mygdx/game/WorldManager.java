@@ -18,9 +18,9 @@ public class WorldManager {
         for (int x = -30; x < 30; x++) {
             for (int y = -30; y < 30; y++) {
                 if (Math.abs(x) < 20 && Math.abs(y) < 20) {
-                    spriteManager.drawSprite("floor", x * 32f - 16f, y * 32f - 16f, 0.7f, 0.2f, 0.2f);
+                    spriteManager.drawSprite("floor_tile", x * 32f - 16f, y * 32f - 16f, 0.7f, 0.2f, 0.2f);
                 }else {
-                    spriteManager.drawSprite("wall", x * 32f - 16f, y * 32f - 16f, 0.7f, 0.2f, 0.2f);
+                    spriteManager.drawSprite("brick_wall", x * 32f - 16f, y * 32f - 16f, 0.7f, 0.2f, 0.2f);
                 }
             }
         }

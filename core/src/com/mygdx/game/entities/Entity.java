@@ -27,6 +27,8 @@ public class Entity {
     public boolean wantsToLive = true;
     public float xVelocity = 0f;
     public float yVelocity = 0f;
+    public float lastFrameXVelocity = 0f;
+    public float lastFrameYVelocity = 0f;
 
 
     // appearance
@@ -57,14 +59,18 @@ public class Entity {
         boolean collidedWithWorld = false;
         if (worldManager.isSpaceEmpty(x + xVelocity, y, width, height)) {
             x += xVelocity;
+            lastFrameXVelocity = xVelocity;
         }else {
             collidedWithWorld = true;
+            lastFrameXVelocity = 0f;
         }
 
         if (worldManager.isSpaceEmpty(x, y + yVelocity, width, height)) {
             y += yVelocity;
+            lastFrameYVelocity = yVelocity;
         }else {
             collidedWithWorld = true;
+            lastFrameYVelocity = 0f;
         }
 
         xVelocity = 0;
@@ -143,6 +149,11 @@ public class Entity {
         return this.components.stream().anyMatch((a)-> Objects.equals(a.name, name));
     }
 
+    public EntityComponent getComponentByName(String name) {
+        return this.components.stream().filter((a)-> Objects.equals(a.name, name)).findFirst().get();
+
+    }
+
     public boolean collidesWithEntity(Entity other) {
         float width = this.width / 2.0f;
         float height = this.height / 2.0f;
@@ -195,6 +206,7 @@ public class Entity {
 
     public Entity addComponent(EntityComponent component) {
         this.components.add(component);
+        component.onEntityAttach(this);
 
         resetStats();
         for (EntityComponent c : components) {

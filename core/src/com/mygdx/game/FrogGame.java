@@ -7,6 +7,7 @@ import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.DemonSoulComponent;
 import com.mygdx.game.entities.components.behaviour.PlayerSoulComponent;
+import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 
 public class FrogGame extends ApplicationAdapter {
 
@@ -19,12 +20,6 @@ public class FrogGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		spriteManager = SpriteManager.getInstance();
-		spriteManager.loadSprite("player_1.png", "test");
-		spriteManager.loadSprite("badlogic.jpg", "penis");
-		spriteManager.loadSprite("brick_wall.png", "wall");
-		spriteManager.loadSprite("floor_tile.png", "floor");
-		spriteManager.loadSprite("Enemy_1.png", "enemy");
-		spriteManager.loadSprite("bullet.png", "bullet");
 		spriteManager.loadSpritesInDirectory("assets/sprites");
 
 
@@ -37,17 +32,21 @@ public class FrogGame extends ApplicationAdapter {
 		entityManager.addEntity(new Entity()
 				.setSprite("player_1")
 				.setTeam(EntityTeam.FROG)
-				.addComponent(new PlayerSoulComponent()));
+				.addComponent(new PlayerSoulComponent())
+				.addComponent(new GameEntityAnimator("player", 1, 2, 8, 9, 3))
+		);
 
 
 
 		entityManager.addEntity(new Entity()
-				.setSprite("enemy")
+				.setSprite("enemy_1")
 				.setTeam(EntityTeam.DEMON)
 				.setHealth(20f)
 				.setX(320f)
 				.setY(20f)
-				.addComponent(new DemonSoulComponent()));
+				.addComponent(new DemonSoulComponent())
+				.addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
+		);
 
 
 		worldManager = WorldManager.getInstance();
