@@ -32,7 +32,7 @@ public class NumberUtils {
     }
 
     public static float randomFloat(float min, float max) {
-        float range = max - min + 1f;
+        float range = max - min;
 
         return (float) (Math.random() * range + min);
     }

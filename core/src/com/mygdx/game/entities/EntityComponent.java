@@ -8,8 +8,7 @@ public class EntityComponent {
 
     }
 
-
-    public void onEntityAttach(Entity owner) {}
+    public void onAnyComponentAttachedToEntity(Entity owner) {}
 
     public void onUpdate(Entity owner) {}
 

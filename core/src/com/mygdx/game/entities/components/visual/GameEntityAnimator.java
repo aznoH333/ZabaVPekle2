@@ -28,7 +28,7 @@ public class GameEntityAnimator extends EntityComponent {
 
 
         // hurt
-        if (owner.invincibilityTimer != 0) {
+        if (owner.knockBackTimer != 0) {
             owner.sprite = baseSprite + "_" + hurtIndex;
             return;
         }

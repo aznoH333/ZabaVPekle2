@@ -8,6 +8,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.PlayerSoul;
+import com.mygdx.game.entities.components.behaviour.Shooter;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 
 public class FrogGame extends ApplicationAdapter {
@@ -36,6 +37,7 @@ public class FrogGame extends ApplicationAdapter {
 				.addComponent(new PlayerSoul())
 				.setDrawingLayer(DrawingLayer.PLAYER)
 				.addComponent(new GameEntityAnimator("player", 1, 2, 8, 9, 3))
+				.addComponent(new Shooter("hand_0001"))
 		);
 
 

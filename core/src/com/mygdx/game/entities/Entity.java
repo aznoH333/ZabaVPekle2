@@ -23,9 +23,12 @@ public class Entity {
     public float height = 16f;
     private final ArrayList<EntityComponent> components = new ArrayList<>();
     public DrawingLayer drawingLayer = DrawingLayer.WORLD;
+    public boolean triggerInvincibility = true;
 
     public int invincibilityTimer = 0;
     public int invincibilityTimerMax = 30;
+    public int knockBackTimer = 0;
+    public int knockBackTimerMax = 20;
     public EntityTeam team = EntityTeam.NONE;
     public boolean wantsToLive = true;
     public float xVelocity = 0f;
@@ -125,6 +128,9 @@ public class Entity {
         if (this.invincibilityTimer > 0) {
             this.invincibilityTimer--;
         }
+        if (knockBackTimer > 0) {
+            this.knockBackTimer--;
+        }
     }
 
 
@@ -135,8 +141,11 @@ public class Entity {
         // take damage
         if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.damage != 0f && canBeDamaged) {
             this.health -= other.damage;
-            this.invincibilityTimer = this.invincibilityTimerMax;
 
+            if (other.triggerInvincibility) {
+                this.invincibilityTimer = this.invincibilityTimerMax;
+            }
+            this.knockBackTimer = this.knockBackTimerMax;
 
 
 
@@ -160,11 +169,12 @@ public class Entity {
 
 
     private void resetStats() {
-        setHealth(1f);
-        damage = 0f;
-        speed = 1f;
-        flipWithMoveDirection = false;
-        knockBackMultiplier = 1f;
+        // setHealth(1f);
+        // damage = 0f;
+        // speed = 1f;
+        // flipWithMoveDirection = false;
+        // knockBackMultiplier = 1f;
+        // TODO : this is bad code
     }
 
 
@@ -207,7 +217,7 @@ public class Entity {
     }
 
     public EntityComponent getComponentByName(String name) {
-        return this.components.stream().filter((a)-> Objects.equals(a.name, name)).findFirst().get();
+        return this.components.stream().filter((a)-> Objects.equals(a.name, name)).findFirst().orElse(null);
 
     }
 
@@ -225,7 +235,7 @@ public class Entity {
     }
 
     private boolean shouldApplyKnockBack() {
-        return this.invincibilityTimer > 10;
+        return knockBackTimer > 0;
     }
 
     // setters
@@ -278,10 +288,10 @@ public class Entity {
 
     public Entity addComponent(EntityComponent component) {
         this.components.add(component);
-        component.onEntityAttach(this);
 
         resetStats();
         for (EntityComponent c : components) {
+            c.onAnyComponentAttachedToEntity(this);
             c.recalculateStats(this);
         }
 
@@ -293,6 +303,16 @@ public class Entity {
         return this;
     }
 
+    public Entity setSpeed(float speed) {
+        this.speed = speed;
+        return this;
+    }
+
+    public Entity setTriggerInvincibility(boolean triggerInvincibility) {
+        this.triggerInvincibility = triggerInvincibility;
+        return this;
+    }
+
     public void commitSudoku() {
         for (EntityComponent c: components) {
             c.onSudoku(this);
@@ -300,4 +320,6 @@ public class Entity {
 
         this.wantsToLive = false;
     }
+
+
 }
