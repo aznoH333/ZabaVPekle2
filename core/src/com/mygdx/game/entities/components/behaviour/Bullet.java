@@ -5,18 +5,16 @@ import com.mygdx.game.entities.EntityComponent;
 
 public class Bullet extends EntityComponent {
 
-    private final float direction;
+    public float direction;
     public Bullet(float direction) {
-
+        super.name = "bullet";
         this.direction = direction;
     }
 
     @Override
     public void onUpdate(Entity owner) {
-
         owner.goInDirection(direction, 6f);
         owner.knockBackMultiplier = 2f;
-        owner.spriteRotation = direction;
     }
 
     @Override
@@ -35,5 +33,7 @@ public class Bullet extends EntityComponent {
     @Override
     public void recalculateStats(Entity owner) {
         owner.damage = 1f;
+        owner.spriteRotation = direction;
+
     }
 }

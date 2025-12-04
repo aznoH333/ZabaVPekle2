@@ -291,7 +291,7 @@ public class Entity {
 
         resetStats();
         for (EntityComponent c : components) {
-            c.onAnyComponentAttachedToEntity(this);
+            c.onComponentAttached(this);
             c.recalculateStats(this);
         }
 

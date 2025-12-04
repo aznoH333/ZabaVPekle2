@@ -8,7 +8,7 @@ public class EntityComponent {
 
     }
 
-    public void onAnyComponentAttachedToEntity(Entity owner) {}
+    public void onComponentAttached(Entity owner) {}
 
     public void onUpdate(Entity owner) {}
 
@@ -22,7 +22,8 @@ public class EntityComponent {
 
     public void onSudoku(Entity owner) {}
 
-
-
+    public EntityComponent copy() {
+        throw new RuntimeException("Copy not supported for " + getClass().getName());
+    }
 
 }

@@ -8,6 +8,10 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
+import com.mygdx.game.entities.components.behaviour.projectile.Guided;
+import com.mygdx.game.entities.components.behaviour.projectile.SineTravel;
+import com.mygdx.game.entities.components.behaviour.projectile.SpinObject;
+import com.mygdx.game.entities.components.behaviour.projectile.SpinSprite;
 
 import java.util.ArrayList;
 
@@ -23,11 +27,11 @@ public class Shooter extends EntityComponent {
 
     // statistics
     public int fireRate = 8;
-    public float spread = 0.075f;
+    public float spread = 0.015f;
     public int bulletsPerShot = 1;
-    public float bulletSpeed = 2f;
+    public float bulletSpeed = 0.25f;
     public float damage = 2f;
-    public String bulletSprite = "bullet";
+    public String bulletSprite = "fire_ball";
 
 
     private ArrayList<EntityComponent> bulletComponents = new ArrayList<>();
@@ -36,6 +40,9 @@ public class Shooter extends EntityComponent {
     public Shooter(String sprite) {
         super.name = "shooter";
         this.sprite = sprite;
+        // addBulletComponent(new SineTravel());
+        addBulletComponent(new Guided("evil soul"));
+        // addBulletComponent(new SpinObject());
     }
 
     @Override
@@ -75,8 +82,7 @@ public class Shooter extends EntityComponent {
         for (int i = 0; i < bulletsPerShot; i++) {
             float bulletDirection = direction + NumberUtils.randomFloat(-spread, spread);
 
-            entityManager
-                    .addEntity(new Entity()
+            Entity bullet = new Entity()
                             .setSprite(bulletSprite)
                             .setX(owner.x)
                             .setY(owner.y)
@@ -85,7 +91,13 @@ public class Shooter extends EntityComponent {
                             .setTriggerInvincibility(false)
                             .setTeam(EntityTeam.FROG)
                             .setDrawingLayer(DrawingLayer.PROJECTILES)
-                            .addComponent(new Bullet(bulletDirection)));
+                            .addComponent(new Bullet(bulletDirection));
+
+            for (EntityComponent c : bulletComponents) {
+                bullet.addComponent(c.copy());
+            }
+
+            entityManager.addEntity(bullet);
         }
 
     }

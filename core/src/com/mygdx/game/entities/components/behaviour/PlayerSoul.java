@@ -20,7 +20,7 @@ public class PlayerSoul extends EntityComponent {
 
 
     @Override
-    public void onAnyComponentAttachedToEntity(Entity owner) {
+    public void onComponentAttached(Entity owner) {
         shooter = (Shooter) owner.getComponentByName("shooter");
     }
 
