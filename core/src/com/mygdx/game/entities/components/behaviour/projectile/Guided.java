@@ -24,7 +24,6 @@ public class Guided extends EntityComponent {
             target = entityManager.findClosestEntityWithComponent(owner, targetComponent);
         }else if (NumberUtils.pythagoras(owner.x, owner.y, target.x, target.y) < 680f){
             float direction = NumberUtils.directionToward(owner.x, owner.y, target.x, target.y);
-            float bulletDirection =
             System.out.println(direction + ", " + bullet.direction);
             if ((direction - bullet.direction) < 0f) {
                 bullet.direction -= 0.05f;
