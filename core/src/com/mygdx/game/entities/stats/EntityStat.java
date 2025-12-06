@@ -10,14 +10,14 @@ public class EntityStat {
 
     public EntityStat(Stat stat) {
         this.defaultValue = stat.defaultValue;
-        value = defaultValue;
+        value = 0f;
         multiplier = 1f;
         overridePriority = 0f;
         this.stat = stat;
     }
 
     public float getValue() {
-        return value * multiplier;
+        return (defaultValue + value) * multiplier;
     }
 
     public void add(float value) {
@@ -31,7 +31,6 @@ public class EntityStat {
     public boolean overrideDefault(float value, float overridePriority) {
         if (overridePriority > this.overridePriority) {
             this.defaultValue = value;
-            this.value += defaultValue - value;
             this.overridePriority = overridePriority;
             return true;
         }
@@ -44,10 +43,10 @@ public class EntityStat {
     }
 
     public void resetToDefault() {
-        value = defaultValue;
-        multiplier = 1f;
-        overridePriority = 0f;
         defaultValue = stat.defaultValue;
+        overridePriority = 0f;
+        value = 0f;
+        multiplier = 1f;
     }
 
 

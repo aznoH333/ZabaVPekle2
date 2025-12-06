@@ -34,6 +34,7 @@ public class Bullet extends EntityComponent {
     @Override
     public void recalculateStats(Entity owner) {
         owner.overrideDefault(Stat.Damage, 1f, 1f);
+        owner.overrideDefault(Stat.Speed, 0.1f, 1f);
         owner.spriteRotation = direction;
 
     }

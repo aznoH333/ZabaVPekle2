@@ -27,7 +27,7 @@ public class SpinObject extends EntityComponent {
     @Override
     public void onComponentAttached(Entity owner) {
         bullet = (Bullet) owner.getComponentByName("bullet");
-        // owner.addStat(Stat.Speed, 0.5f);
+        owner.addStat(Stat.Speed, 0.2f);
     }
 
     @Override
