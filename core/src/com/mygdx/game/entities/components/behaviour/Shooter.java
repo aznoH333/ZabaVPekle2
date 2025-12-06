@@ -8,10 +8,8 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
-import com.mygdx.game.entities.components.behaviour.projectile.Guided;
-import com.mygdx.game.entities.components.behaviour.projectile.SineTravel;
 import com.mygdx.game.entities.components.behaviour.projectile.SpinObject;
-import com.mygdx.game.entities.components.behaviour.projectile.SpinSprite;
+import com.mygdx.game.entities.stats.Stat;
 
 import java.util.ArrayList;
 
@@ -42,7 +40,7 @@ public class Shooter extends EntityComponent {
         this.sprite = sprite;
         // addBulletComponent(new SineTravel());
         // addBulletComponent(new Guided("evil soul"));
-        // addBulletComponent(new SpinObject());
+        addBulletComponent(new SpinObject());
     }
 
     @Override
@@ -86,8 +84,8 @@ public class Shooter extends EntityComponent {
                             .setSprite(bulletSprite)
                             .setX(owner.x)
                             .setY(owner.y)
-                            .setDamage(damage)
-                            .setSpeed(bulletSpeed)
+                            .overrideDefault(Stat.Damage, damage, 2f)
+                            .overrideDefault(Stat.Speed, bulletSpeed, 2f)
                             .setTriggerInvincibility(false)
                             .setTeam(EntityTeam.FROG)
                             .setDrawingLayer(DrawingLayer.PROJECTILES)
@@ -96,6 +94,7 @@ public class Shooter extends EntityComponent {
             for (EntityComponent c : bulletComponents) {
                 bullet.addComponent(c.copy());
             }
+
 
             entityManager.addEntity(bullet);
         }

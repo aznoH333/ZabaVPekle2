@@ -5,6 +5,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.behaviour.Bullet;
+import com.mygdx.game.entities.stats.Stat;
 
 public class Guided extends EntityComponent {
 
@@ -27,12 +28,13 @@ public class Guided extends EntityComponent {
 
             float direction = NumberUtils.constrictRotationToRad(NumberUtils.directionToward(owner.x, owner.y, target.x, target.y) + NumberUtils.TWO_PI);
             float bulletDirection = NumberUtils.constrictRotationToRad(bullet.direction);
-            owner.speed += 0.01f;
+            owner.addStat(Stat.Speed, 0.01f);
+
 
             if (NumberUtils.constrictRotationToRad(direction - bulletDirection + NumberUtils.TWO_PI) < Math.PI) {
-                bullet.direction += 0.5f * owner.speed;
+                bullet.direction += 0.5f * owner.stats.get(Stat.Speed);
             }else {
-                bullet.direction -= 0.5f * owner.speed;
+                bullet.direction -= 0.5f * owner.stats.get(Stat.Speed);
             }
 
 

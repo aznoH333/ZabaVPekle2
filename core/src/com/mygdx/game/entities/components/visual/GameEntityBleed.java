@@ -6,6 +6,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.visual.particles.BloodParticle;
+import com.mygdx.game.entities.stats.Stat;
 
 public class GameEntityBleed extends EntityComponent {
     private final static EntityManager entityManager = EntityManager.getInstance();
@@ -17,7 +18,7 @@ public class GameEntityBleed extends EntityComponent {
 
     @Override
     public void onSudoku(Entity owner) {
-        spawnParticles(owner, 20f - owner.health);
+        spawnParticles(owner, 20f - owner.stats.get(Stat.Health));
     }
 
     private void spawnParticles(Entity owner, float amount) {

@@ -5,6 +5,8 @@ import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.drawing.SpriteManager;
 import com.mygdx.game.WorldManager;
+import com.mygdx.game.entities.stats.EntityStats;
+import com.mygdx.game.entities.stats.Stat;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -24,6 +26,7 @@ public class Entity {
     private final ArrayList<EntityComponent> components = new ArrayList<>();
     public DrawingLayer drawingLayer = DrawingLayer.WORLD;
     public boolean triggerInvincibility = true;
+    public EntityStats stats = new EntityStats();
 
     public int invincibilityTimer = 0;
     public int invincibilityTimerMax = 30;
@@ -39,10 +42,6 @@ public class Entity {
 
     // combat
     public float knockBackMultiplier = 0f;
-    public float speed;
-    public float health = 1f;
-    public float maxHealth = 1f;
-    public float damage = 0f;
     public float knockBackDirection = 0f;
     public float knockBackSpeed = 0f;
     public boolean canBeDamaged = false;
@@ -139,8 +138,9 @@ public class Entity {
             component.onCollide(this, other);
         }
         // take damage
-        if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.damage != 0f && canBeDamaged) {
-            this.health -= other.damage;
+        if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.stats.get(Stat.Damage) != 0f && canBeDamaged) {
+            this.stats.add(Stat.Health, -other.stats.get(Stat.Damage));
+
 
             if (other.triggerInvincibility) {
                 this.invincibilityTimer = this.invincibilityTimerMax;
@@ -149,13 +149,13 @@ public class Entity {
 
 
 
-            if (this.health <= 0f) {
+            if (this.stats.get(Stat.Health) <= 0f) {
                 this.commitSudoku();
 
 
             }else {
                 for (EntityComponent c : components) {
-                    c.onTakeDamage(this, other.damage);
+                    c.onTakeDamage(this, other.stats.get(Stat.Damage));
                 }
             }
 
@@ -169,12 +169,7 @@ public class Entity {
 
 
     private void resetStats() {
-        // setHealth(1f);
-        // damage = 0f;
-        // speed = 1f;
-        // flipWithMoveDirection = false;
-        // knockBackMultiplier = 1f;
-        // TODO : this is bad code
+        stats.reset();
     }
 
 
@@ -183,8 +178,8 @@ public class Entity {
             return;
         }
 
-        xVelocity += x * speed;
-        yVelocity += y * speed;
+        xVelocity += x * stats.get(Stat.Speed);
+        yVelocity += y * stats.get(Stat.Speed);
 
         if (flipWithMoveDirection) {
             if (xVelocity < -0.5f) {
@@ -200,8 +195,8 @@ public class Entity {
             return;
         }
 
-        xVelocity += (float) (Math.cos(rotationRad) * speedMultiplier * speed);
-        yVelocity += (float) (Math.sin(rotationRad) * speedMultiplier * speed);
+        xVelocity += (float) (Math.cos(rotationRad) * speedMultiplier * stats.get(Stat.Speed));
+        yVelocity += (float) (Math.sin(rotationRad) * speedMultiplier * stats.get(Stat.Speed));
 
         if (flipWithMoveDirection) {
             if (xVelocity < -0.01f) {
@@ -260,18 +255,6 @@ public class Entity {
     }
 
 
-
-    public Entity setHealth(float maxHealth) {
-        this.maxHealth = maxHealth;
-        this.health = maxHealth;
-        return this;
-    }
-
-    public Entity setDamage(float damage) {
-        this.damage = damage;
-        return this;
-    }
-
     public Entity setTeam(EntityTeam team) {
         this.team = team;
         return this;
@@ -303,10 +286,6 @@ public class Entity {
         return this;
     }
 
-    public Entity setSpeed(float speed) {
-        this.speed = speed;
-        return this;
-    }
 
     public Entity setTriggerInvincibility(boolean triggerInvincibility) {
         this.triggerInvincibility = triggerInvincibility;
@@ -321,5 +300,39 @@ public class Entity {
         this.wantsToLive = false;
     }
 
+    public Entity copy() {
+        Entity clone = new Entity()
+                .setSprite(sprite)
+                .setX(x)
+                .setY(y)
+                .setTeam(team)
+                .setDrawingLayer(drawingLayer)
+                .setTriggerInvincibility(triggerInvincibility);
+        // components
+        for (EntityComponent c : components) {
+            clone.addComponent(c.copy());
+        }
+        // stats
+        clone.stats.importValues(stats);
+
+        return clone;
+    }
+
+
+    // overrides
+    public Entity overrideDefault(Stat stat, float value, float overridePriority) {
+        stats.overrideDefault(stat, value, overridePriority);
+        return this;
+    }
+
+    public Entity addStat(Stat stat, float value) {
+        stats.add(stat, value);
+        return this;
+    }
+
+    public Entity multiplyStat(Stat stat, float value) {
+        stats.multiply(stat, value);
+        return this;
+    }
 
 }

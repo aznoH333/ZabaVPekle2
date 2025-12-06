@@ -4,6 +4,7 @@ import com.mygdx.game.NumberUtils;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
+import com.mygdx.game.entities.stats.Stat;
 
 public class DemonSoul extends EntityComponent {
     private final EntityManager entityManager = EntityManager.getInstance();
@@ -31,9 +32,10 @@ public class DemonSoul extends EntityComponent {
 
     @Override
     public void recalculateStats(Entity owner) {
-        owner.speed = 1.3f;
-        owner.setHealth(6f);
-        owner.damage = 1f;
+        owner.overrideDefault(Stat.Speed, 1.3f, 1f);
+        owner.overrideDefault(Stat.Health, 6f, 1f);
+        owner.overrideDefault(Stat.Damage, 1f, 1f);
+
         owner.knockBackMultiplier = 8f;
         owner.flipWithMoveDirection = true;
         owner.canBeDamaged = true;

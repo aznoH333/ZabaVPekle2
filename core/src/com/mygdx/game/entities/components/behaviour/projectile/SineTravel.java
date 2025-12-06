@@ -4,6 +4,7 @@ import com.mygdx.game.NumberUtils;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
+import com.mygdx.game.entities.stats.Stat;
 
 public class SineTravel extends EntityComponent {
 
@@ -24,7 +25,8 @@ public class SineTravel extends EntityComponent {
     @Override
     public void onComponentAttached(Entity owner) {
         bullet = (Bullet) owner.getComponentByName("bullet");
-        owner.speed += 0.2f;
+        owner.addStat(Stat.Speed, 0.2f);
+
     }
 
     @Override

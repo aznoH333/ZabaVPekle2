@@ -7,6 +7,7 @@ import com.mygdx.game.NumberUtils;
 import com.mygdx.game.drawing.SpriteManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.entities.stats.Stat;
 
 public class PlayerSoul extends EntityComponent {
     private static final SpriteManager spriteManager = SpriteManager.getInstance();
@@ -65,9 +66,9 @@ public class PlayerSoul extends EntityComponent {
 
     @Override
     public void recalculateStats(Entity owner) {
-        owner.speed = 3.5f;
+        owner.overrideDefault(Stat.Speed, 3.5f, 1f);
         owner.flipWithMoveDirection =  true;
-        owner.health = 6f;
+        owner.overrideDefault(Stat.MaxHealth, 6f, 1f);
         owner.canBeDamaged = true;
     }
 }

@@ -11,6 +11,7 @@ import com.mygdx.game.entities.components.behaviour.Spawner;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.components.visual.particles.FadeParticle;
+import com.mygdx.game.entities.stats.Stat;
 
 public class WorldManager {
 
@@ -98,7 +99,7 @@ public class WorldManager {
                         .addComponent(new Spawner(new Entity()
                                 .setSprite("enemy_1")
                                 .setTeam(EntityTeam.DEMON)
-                                .setHealth(20f)
+                                .overrideDefault(Stat.Health, 20f, 1f)
                                 .setX(x)
                                 .setY(y)
                                 .addComponent(new DemonSoul())
