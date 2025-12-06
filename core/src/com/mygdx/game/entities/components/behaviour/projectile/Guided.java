@@ -22,13 +22,17 @@ public class Guided extends EntityComponent {
     public void onUpdate(Entity owner) {
         if (target == null || !target.wantsToLive) {
             target = entityManager.findClosestEntityWithComponent(owner, targetComponent);
-        }else if (NumberUtils.pythagoras(owner.x, owner.y, target.x, target.y) < 680f){
-            float direction = NumberUtils.directionToward(owner.x, owner.y, target.x, target.y);
-            System.out.println(direction + ", " + bullet.direction);
-            if ((direction - bullet.direction) < 0f) {
-                bullet.direction -= 0.05f;
+        }else if (NumberUtils.pythagoras(owner.x, owner.y, target.x, target.y) < 96f){
+
+
+            float direction = NumberUtils.constrictRotationToRad(NumberUtils.directionToward(owner.x, owner.y, target.x, target.y) + NumberUtils.TWO_PI);
+            float bulletDirection = NumberUtils.constrictRotationToRad(bullet.direction);
+            owner.speed += 0.01f;
+
+            if (NumberUtils.constrictRotationToRad(direction - bulletDirection + NumberUtils.TWO_PI) < Math.PI) {
+                bullet.direction += 0.5f * owner.speed;
             }else {
-                bullet.direction += 0.05f;
+                bullet.direction -= 0.5f * owner.speed;
             }
 
 

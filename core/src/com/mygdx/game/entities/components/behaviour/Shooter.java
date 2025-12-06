@@ -41,7 +41,7 @@ public class Shooter extends EntityComponent {
         super.name = "shooter";
         this.sprite = sprite;
         // addBulletComponent(new SineTravel());
-        addBulletComponent(new Guided("evil soul"));
+        // addBulletComponent(new Guided("evil soul"));
         // addBulletComponent(new SpinObject());
     }
 

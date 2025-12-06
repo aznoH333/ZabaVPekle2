@@ -51,5 +51,8 @@ public class NumberUtils {
 
     }
 
+    public static float constrictRotationToRad(float rotation) {
+        return rotation % TWO_PI;
+    }
 
 }

@@ -27,7 +27,7 @@ public class WorldManager {
 
     private static final SpriteManager spriteManager = SpriteManager.getInstance();
     private static final EntityManager entityManager = EntityManager.getInstance();
-    private int enemiesToSpawn = 1;
+    private int enemiesToSpawn = 30;
     private int enemySpawnCooldown = 30;
     private int nextEnemySpawnCooldown = 0;
 
