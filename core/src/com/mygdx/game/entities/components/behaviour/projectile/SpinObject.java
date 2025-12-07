@@ -19,6 +19,7 @@ public class SpinObject extends EntityComponent {
             float spinSpeedMultiplier = 0.25f * owner.stats.get(Stat.Speed);
             spinSpeed -= 0.02f * spinSpeedMultiplier;
             //owner.speed -= 0.05f;
+            owner.addStat(Stat.Speed, -0.0025f * spinSpeedMultiplier);
             bullet.direction += 0.7f * spinSpeed * spinSpeedMultiplier;
             owner.spriteRotation += 0.7f * spinSpeed * spinSpeedMultiplier;
         }
@@ -27,7 +28,7 @@ public class SpinObject extends EntityComponent {
     @Override
     public void onComponentAttached(Entity owner) {
         bullet = (Bullet) owner.getComponentByName("bullet");
-        owner.addStat(Stat.Speed, 0.2f);
+        owner.addStat(Stat.Speed, 0.5f);
     }
 
     @Override
