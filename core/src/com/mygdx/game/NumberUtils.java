@@ -3,6 +3,10 @@ package com.mygdx.game;
 public class NumberUtils {
     public final static float HALF_PI = (float) (Math.PI / 2f);
     public final static float TWO_PI = (float) (Math.PI * 2f);
+    public final static float PI = (float) Math.PI;
+    public final static float QUARTER_PI = HALF_PI / 2f;
+    public final static float EIGHTH_PI = QUARTER_PI / 2f;
+    public final static float THIRD_PI = PI / 3f;
 
 
     public static int boolToInt(boolean value) {

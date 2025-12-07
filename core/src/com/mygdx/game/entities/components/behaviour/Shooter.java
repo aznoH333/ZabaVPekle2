@@ -24,12 +24,13 @@ public class Shooter extends EntityComponent {
 
 
     // statistics
-    public int fireRate = 34;
-    public float spread = 0.35f;
-    public int bulletsPerShot = 4;
+    public int fireRate = 8;
+    public float spread = 0.45f;
+    public int bulletsPerShot = 3;
     public float bulletSpeed = 1.25f;
     public float damage = 2f;
     public String bulletSprite = "fire_ball";
+    private ArrayList<BulletOrigin> bulletOrigins = new ArrayList<>();
 
 
     private ArrayList<EntityComponent> bulletComponents = new ArrayList<>();
@@ -38,10 +39,21 @@ public class Shooter extends EntityComponent {
     public Shooter(String sprite) {
         super.name = "shooter";
         this.sprite = sprite;
-        // addBulletComponent(new SineTravel());
+        // add default origin
+        // bulletOrigins.add(new BulletOrigin(0f));
+        // bulletOrigins.add(new BulletOrigin(NumberUtils.PI - NumberUtils.THIRD_PI));
+        // bulletOrigins.add(new BulletOrigin(NumberUtils.PI + NumberUtils.THIRD_PI));
+        float temp = 0f;
+        for (int i = 0; i < 6; i++) {
+            bulletOrigins.add(new BulletOrigin(temp));
+            temp += NumberUtils.THIRD_PI;
+        }
+
+
+        addBulletComponent(new SineTravel());
         // addBulletComponent(new Guided("evil soul"));
 
-        addBulletComponent(new SpinObject());
+        // addBulletComponent(new SpinObject());
 
         addBulletComponent(new SpinSprite(0.25f));
         addBulletComponent(new Shrapnel(8));
@@ -49,11 +61,7 @@ public class Shooter extends EntityComponent {
         // addBulletComponent(new Boomerang());
 
         addBulletComponent(new WallBounce());
-        addBulletComponent(new WallBounce());
-        addBulletComponent(new WallBounce());
-        addBulletComponent(new WallBounce());
-        addBulletComponent(new WallBounce());
-        addBulletComponent(new WallBounce());
+
 
 
     }
@@ -69,19 +77,25 @@ public class Shooter extends EntityComponent {
         }
 
 
+
         // draw
         if (sprite != null) {
-            spriteManager.drawSprite(
-                    new DrawingCommand(sprite,
-                            (float) Math.cos(direction) * (10f - (scaleTimer / 10f) * 2f) + owner.x,
-                            (float) Math.sin(direction) * (10f - (scaleTimer / 10f) * 2f) + owner.y
-                    )
-                            .setRotationRad(direction)
-                            .setFlipVertically(owner.flipX)
-                            .setWidth(1 + ((scaleTimer / 10f) * 0.25f))
-                            .setHeight(1 + ((scaleTimer / 10f) * 0.25f)),
-                    DrawingLayer.HAND);
+            for (BulletOrigin b : bulletOrigins) {
+                float handDir = direction + b.aimOffset;
+
+                spriteManager.drawSprite(
+                        new DrawingCommand(sprite,
+                                (float) Math.cos(handDir) * (10f - (scaleTimer / 10f) * 2f) + owner.x,
+                                (float) Math.sin(handDir) * (10f - (scaleTimer / 10f) * 2f) + owner.y
+                        )
+                                .setRotationRad(handDir)
+                                .setFlipVertically(owner.flipX)
+                                .setWidth(1 + ((scaleTimer / 10f) * 0.25f))
+                                .setHeight(1 + ((scaleTimer / 10f) * 0.25f)),
+                        DrawingLayer.HAND);
+            }
         }
+
     }
 
     public void shoot(Entity owner) {
@@ -92,28 +106,41 @@ public class Shooter extends EntityComponent {
         scaleTimer = 10;
         fireCooldown = fireRate;
 
-        for (int i = 0; i < bulletsPerShot; i++) {
-            float bulletDirection = direction + NumberUtils.randomFloat(-spread, spread);
+        for (BulletOrigin b : bulletOrigins) {
+            float handDirection = direction + b.aimOffset;
+
+            for (int i = 0; i < bulletsPerShot; i++) {
+                float bulletDirection = handDirection + NumberUtils.randomFloat(-spread, spread);
 
 
-            Entity bullet = ProjectileFactory.buildBullet(
-                    owner.x,
-                    owner.y,
-                    bulletSprite,
-                    damage,
-                    bulletSpeed,
-                    EntityTeam.FROG,
-                    bulletDirection,
-                    120,
-                    bulletComponents
-            );
+                Entity bullet = ProjectileFactory.buildBullet(
+                        owner.x,
+                        owner.y,
+                        bulletSprite,
+                        damage,
+                        bulletSpeed,
+                        EntityTeam.FROG,
+                        bulletDirection,
+                        120,
+                        bulletComponents
+                );
 
-            entityManager.addEntity(bullet);
+                entityManager.addEntity(bullet);
+            }
         }
+
 
     }
 
     public void addBulletComponent(EntityComponent component) {
         this.bulletComponents.add(component);
+    }
+}
+
+class BulletOrigin {
+    public float aimOffset;
+
+    public BulletOrigin(float aimOffset) {
+        this.aimOffset = aimOffset;
     }
 }
