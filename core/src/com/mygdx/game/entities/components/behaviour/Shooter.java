@@ -8,10 +8,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
-import com.mygdx.game.entities.components.behaviour.projectile.Guided;
-import com.mygdx.game.entities.components.behaviour.projectile.Shrapnel;
-import com.mygdx.game.entities.components.behaviour.projectile.SpinObject;
-import com.mygdx.game.entities.components.behaviour.projectile.SpinSprite;
+import com.mygdx.game.entities.components.behaviour.projectile.*;
 import com.mygdx.game.entities.factories.ProjectileFactory;
 import com.mygdx.game.entities.stats.Stat;
 
@@ -43,12 +40,13 @@ public class Shooter extends EntityComponent {
         super.name = "shooter";
         this.sprite = sprite;
         // addBulletComponent(new SineTravel());
-        addBulletComponent(new Guided("evil soul"));
+        // addBulletComponent(new Guided("evil soul"));
 
         // addBulletComponent(new SpinObject());
 
         addBulletComponent(new SpinSprite(0.25f));
         addBulletComponent(new Shrapnel(8));
+        addBulletComponent(new Boomerang());
     }
 
     @Override

@@ -17,7 +17,8 @@ public enum Stat {
 
 
 
-
+    /** Amount of time (in frames) that the projectile will live for */
+    ProjectileLifeTime(120f, null),
     /** The number of times the projectile bounced*/
     BounceCount(0f, null);
 

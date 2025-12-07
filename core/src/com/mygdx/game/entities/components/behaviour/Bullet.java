@@ -7,7 +7,7 @@ import com.mygdx.game.entities.stats.Stat;
 public class Bullet extends EntityComponent {
 
     public float direction;
-    public int lifeTime;
+    private final int lifeTime;
     public Bullet(float direction, int lifeTime) {
         super.name = "bullet";
         this.direction = direction;
@@ -18,9 +18,9 @@ public class Bullet extends EntityComponent {
     public void onUpdate(Entity owner) {
         owner.goInDirection(direction, 6f);
         owner.knockBackMultiplier = 2f;
-        lifeTime--;
+        owner.stats.add(Stat.ProjectileLifeTime, -1f);
 
-        if (lifeTime <= 0) {
+        if (owner.stats.get(Stat.ProjectileLifeTime) <= 0) {
             owner.commitSudoku();
         }
     }
@@ -43,7 +43,7 @@ public class Bullet extends EntityComponent {
         owner.overrideDefault(Stat.Damage, 1f, 1f);
         owner.overrideDefault(Stat.Speed, 0.1f, 1f);
         owner.spriteRotation = direction;
-
+        owner.overrideDefault(Stat.ProjectileLifeTime, lifeTime, 1f);
     }
 
     @Override
