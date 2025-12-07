@@ -43,8 +43,8 @@ public class EntityStat {
     }
 
     public void resetToDefault() {
-        defaultValue = stat.defaultValue;
-        overridePriority = 0f;
+        // defaultValue = stat.defaultValue;
+        // overridePriority = 0f;
         value = 0f;
         multiplier = 1f;
     }

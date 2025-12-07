@@ -8,7 +8,11 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
+import com.mygdx.game.entities.components.behaviour.projectile.Guided;
+import com.mygdx.game.entities.components.behaviour.projectile.Shrapnel;
 import com.mygdx.game.entities.components.behaviour.projectile.SpinObject;
+import com.mygdx.game.entities.components.behaviour.projectile.SpinSprite;
+import com.mygdx.game.entities.factories.ProjectileFactory;
 import com.mygdx.game.entities.stats.Stat;
 
 import java.util.ArrayList;
@@ -27,7 +31,7 @@ public class Shooter extends EntityComponent {
     public int fireRate = 8;
     public float spread = 0.015f;
     public int bulletsPerShot = 1;
-    public float bulletSpeed = 0.25f;
+    public float bulletSpeed = 1.25f;
     public float damage = 2f;
     public String bulletSprite = "fire_ball";
 
@@ -39,8 +43,12 @@ public class Shooter extends EntityComponent {
         super.name = "shooter";
         this.sprite = sprite;
         // addBulletComponent(new SineTravel());
-        // addBulletComponent(new Guided("evil soul"));
-        addBulletComponent(new SpinObject());
+        addBulletComponent(new Guided("evil soul"));
+
+        // addBulletComponent(new SpinObject());
+
+        addBulletComponent(new SpinSprite(0.25f));
+        addBulletComponent(new Shrapnel(8));
     }
 
     @Override
@@ -80,21 +88,18 @@ public class Shooter extends EntityComponent {
         for (int i = 0; i < bulletsPerShot; i++) {
             float bulletDirection = direction + NumberUtils.randomFloat(-spread, spread);
 
-            Entity bullet = new Entity()
-                            .setSprite(bulletSprite)
-                            .setX(owner.x)
-                            .setY(owner.y)
-                            .overrideDefault(Stat.Damage, damage, 2f)
-                            .overrideDefault(Stat.Speed, bulletSpeed, 2f)
-                            .setTriggerInvincibility(false)
-                            .setTeam(EntityTeam.FROG)
-                            .setDrawingLayer(DrawingLayer.PROJECTILES)
-                            .addComponent(new Bullet(bulletDirection));
 
-            for (EntityComponent c : bulletComponents) {
-                bullet.addComponent(c.copy());
-            }
-
+            Entity bullet = ProjectileFactory.buildBullet(
+                    owner.x,
+                    owner.y,
+                    bulletSprite,
+                    damage,
+                    bulletSpeed,
+                    EntityTeam.FROG,
+                    bulletDirection,
+                    120,
+                    bulletComponents
+            );
 
             entityManager.addEntity(bullet);
         }

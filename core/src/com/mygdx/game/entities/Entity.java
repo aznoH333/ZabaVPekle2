@@ -322,6 +322,7 @@ public class Entity {
     // overrides
     public Entity overrideDefault(Stat stat, float value, float overridePriority) {
         stats.overrideDefault(stat, value, overridePriority);
+
         return this;
     }
 
