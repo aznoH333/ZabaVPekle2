@@ -11,6 +11,7 @@ public class DemonSoul extends EntityComponent {
 
 
     private Entity target = null;
+    private Shooter shooter = null;
 
     public DemonSoul() {
         super.name = "evil soul";
@@ -26,8 +27,18 @@ public class DemonSoul extends EntityComponent {
             float direction = NumberUtils.directionToward(owner.x, owner.y, target.x, target.y);
 
 
+            if (shooter != null) {
+                shooter.direction = direction;
+                shooter.shoot(owner);
+            }
+
             owner.goInDirection(direction, 1f);
         }
+    }
+
+    @Override
+    public void onComponentAttached(Entity owner) {
+        shooter = (Shooter) owner.getComponentByName("shooter");
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.DemonSoul;
+import com.mygdx.game.entities.components.behaviour.Shooter;
 import com.mygdx.game.entities.components.behaviour.Spawner;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
@@ -28,7 +29,7 @@ public class WorldManager {
 
     private static final SpriteManager spriteManager = SpriteManager.getInstance();
     private static final EntityManager entityManager = EntityManager.getInstance();
-    private int enemiesToSpawn = 40;
+    private int enemiesToSpawn = 1;
     private int enemySpawnCooldown = 30;
     private int nextEnemySpawnCooldown = 0;
 
@@ -105,6 +106,8 @@ public class WorldManager {
                                 .addComponent(new DemonSoul())
                                 .addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
                                 .addComponent(new GameEntityBleed())
+                                .addComponent(new Shooter("hand_0001"))
+
                                 .setDrawingLayer(DrawingLayer.ENEMIES)))
         );
 

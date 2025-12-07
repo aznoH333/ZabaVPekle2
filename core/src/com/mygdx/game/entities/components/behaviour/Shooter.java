@@ -27,7 +27,7 @@ public class Shooter extends EntityComponent {
     public int fireRate = 8;
     public float spread = 0.45f;
     public int bulletsPerShot = 3;
-    public float bulletSpeed = 1.25f;
+    public float bulletSpeed = 0.5f;
     public float damage = 2f;
     public String bulletSprite = "fire_ball";
     private ArrayList<BulletOrigin> bulletOrigins = new ArrayList<>();
@@ -40,24 +40,21 @@ public class Shooter extends EntityComponent {
         super.name = "shooter";
         this.sprite = sprite;
         // add default origin
-        // bulletOrigins.add(new BulletOrigin(0f));
-        // bulletOrigins.add(new BulletOrigin(NumberUtils.PI - NumberUtils.THIRD_PI));
-        // bulletOrigins.add(new BulletOrigin(NumberUtils.PI + NumberUtils.THIRD_PI));
-        float temp = 0f;
-        for (int i = 0; i < 6; i++) {
-            bulletOrigins.add(new BulletOrigin(temp));
-            temp += NumberUtils.THIRD_PI;
-        }
+        bulletOrigins.add(new BulletOrigin(0f));
+
+        bulletOrigins.add(new BulletOrigin(NumberUtils.PI - NumberUtils.THIRD_PI));
+        bulletOrigins.add(new BulletOrigin(NumberUtils.PI + NumberUtils.THIRD_PI));
 
 
-        addBulletComponent(new SineTravel());
+
+        // addBulletComponent(new SineTravel());
         // addBulletComponent(new Guided("evil soul"));
 
-        // addBulletComponent(new SpinObject());
+        addBulletComponent(new SpinObject());
 
         addBulletComponent(new SpinSprite(0.25f));
-        addBulletComponent(new Shrapnel(8));
-        // addBulletComponent(new Boomerang());
+        addBulletComponent(new Shrapnel(3));
+        addBulletComponent(new Boomerang());
         // addBulletComponent(new Boomerang());
 
         addBulletComponent(new WallBounce());
@@ -119,7 +116,7 @@ public class Shooter extends EntityComponent {
                         bulletSprite,
                         damage,
                         bulletSpeed,
-                        EntityTeam.FROG,
+                        owner.team,
                         bulletDirection,
                         120,
                         bulletComponents
