@@ -17,10 +17,13 @@ public class EntityStat {
     }
 
     public float getValue() {
+
+
         return (defaultValue + value) * multiplier;
     }
 
     public void add(float value) {
+
         this.value += value;
     }
 
@@ -43,10 +46,15 @@ public class EntityStat {
     }
 
     public void resetToDefault() {
-        // defaultValue = stat.defaultValue;
-        // overridePriority = 0f;
         value = 0f;
         multiplier = 1f;
+    }
+
+    public void copyFromStat(EntityStat other) {
+        this.defaultValue = other.defaultValue;
+        this.value = other.value;
+        this.overridePriority = other.overridePriority;
+        this.multiplier = other.multiplier;
     }
 
 

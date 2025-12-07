@@ -15,6 +15,7 @@ public class EntityStats {
     }
 
     public float get(Stat stat) {
+
         return stats.get(stat).getValue();
     }
 
@@ -52,7 +53,7 @@ public class EntityStats {
 
     public void importValues(EntityStats other) {
         for (Stat stat : Stat.values()) {
-            stats.get(stat).set(other.get(stat));
+            stats.get(stat).copyFromStat(other.stats.get(stat));
         }
     }
 }

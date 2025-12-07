@@ -18,7 +18,7 @@ public class Shrapnel extends EntityComponent {
 
     @Override
     public void onSudoku(Entity owner) {
-        if (owner.stats.get(Stat.BounceCount) != 0f) {
+        if (owner.stats.get(Stat.BounceCount) != 1f) {
             return;
         }
 
@@ -31,7 +31,7 @@ public class Shrapnel extends EntityComponent {
             bullet.direction += currentRotation;
             currentRotation += rotationPercentage;
             newBullet.overrideDefault(Stat.ProjectileLifeTime, 120f, 60f);
-            newBullet.addStat(Stat.BounceCount, 1f);
+            newBullet.overrideDefault(Stat.BounceCount, 0f, 60f);
 
             entityManager.addEntity(newBullet);
         }

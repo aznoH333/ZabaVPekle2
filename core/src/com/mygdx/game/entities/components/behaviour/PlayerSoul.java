@@ -70,6 +70,5 @@ public class PlayerSoul extends EntityComponent {
         owner.flipWithMoveDirection =  true;
         owner.overrideDefault(Stat.MaxHealth, 6f, 1f);
         owner.canBeDamaged = true;
-        System.out.println(owner.stats.get(Stat.Health));
     }
 }
