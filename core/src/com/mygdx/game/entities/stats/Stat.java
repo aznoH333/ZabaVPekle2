@@ -15,8 +15,6 @@ public enum Stat {
     Health(1f, null),
     MaxHealth(1f, Health),
 
-
-
     /** Amount of time (in frames) that the projectile will live for */
     ProjectileLifeTime(120f, null),
     /** The number of times the projectile bounced*/

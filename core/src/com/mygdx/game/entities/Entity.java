@@ -38,6 +38,8 @@ public class Entity {
     public float yVelocity = 0f;
     public float lastFrameXVelocity = 0f;
     public float lastFrameYVelocity = 0f;
+    public boolean collidedWithWorldOnX = false;
+    public boolean collidedWithWorldOnY = false;
 
 
     // combat
@@ -79,12 +81,13 @@ public class Entity {
         }
 
         // move
-        boolean collidedWithWorld = false;
+        collidedWithWorldOnX = false;
+        collidedWithWorldOnY = false;
         if (worldManager.isSpaceEmpty(x + xVelocity, y, width, height)) {
             x += xVelocity;
             lastFrameXVelocity = xVelocity;
         }else {
-            collidedWithWorld = true;
+            collidedWithWorldOnX = true;
             lastFrameXVelocity = 0f;
         }
 
@@ -92,7 +95,9 @@ public class Entity {
             y += yVelocity;
             lastFrameYVelocity = yVelocity;
         }else {
-            collidedWithWorld = true;
+            if (!collidedWithWorldOnX) {
+                collidedWithWorldOnY = true;
+            }
             lastFrameYVelocity = 0f;
         }
 
@@ -101,7 +106,7 @@ public class Entity {
         yVelocity = 0;
 
         // world collision
-        if (collidedWithWorld) {
+        if (collidedWithWorldOnX || collidedWithWorldOnY) {
             for (EntityComponent c : components) {
                 c.onWorldCollide(this);
             }
@@ -323,6 +328,11 @@ public class Entity {
     public Entity overrideDefault(Stat stat, float value, float overridePriority) {
         stats.overrideDefault(stat, value, overridePriority);
 
+        return this;
+    }
+
+    public Entity setStat(Stat stat, float value) {
+        stats.setStat(stat, value);
         return this;
     }
 

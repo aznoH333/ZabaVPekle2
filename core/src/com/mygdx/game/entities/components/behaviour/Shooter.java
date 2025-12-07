@@ -25,9 +25,9 @@ public class Shooter extends EntityComponent {
 
 
     // statistics
-    public int fireRate = 8;
-    public float spread = 0.015f;
-    public int bulletsPerShot = 1;
+    public int fireRate = 34;
+    public float spread = 0.35f;
+    public int bulletsPerShot = 4;
     public float bulletSpeed = 1.25f;
     public float damage = 2f;
     public String bulletSprite = "fire_ball";
@@ -39,14 +39,15 @@ public class Shooter extends EntityComponent {
     public Shooter(String sprite) {
         super.name = "shooter";
         this.sprite = sprite;
-        // addBulletComponent(new SineTravel());
-        // addBulletComponent(new Guided("evil soul"));
+        addBulletComponent(new SineTravel());
+        addBulletComponent(new Guided("evil soul"));
 
-        // addBulletComponent(new SpinObject());
+        addBulletComponent(new SpinObject());
 
         addBulletComponent(new SpinSprite(0.25f));
         addBulletComponent(new Shrapnel(8));
         addBulletComponent(new Boomerang());
+        addBulletComponent(new WallBounce());
     }
 
     @Override

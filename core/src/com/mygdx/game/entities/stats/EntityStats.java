@@ -56,4 +56,12 @@ public class EntityStats {
             stats.get(stat).copyFromStat(other.stats.get(stat));
         }
     }
+
+    public void setStat(Stat stat, float value) {
+        if (stat.pairedWith != null) {
+            setStat(stat.pairedWith, value);
+        }
+
+        stats.get(stat).set(value);
+    }
 }
