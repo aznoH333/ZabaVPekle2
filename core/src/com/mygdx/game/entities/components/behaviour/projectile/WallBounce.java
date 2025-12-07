@@ -12,8 +12,17 @@ public class WallBounce extends EntityComponent {
     private Bullet bullet;
     private final static EntityManager entityManager = EntityManager.getInstance();
 
+    public WallBounce() {
+        super.name = "wall bounce";
+        super.componentCountLimit = 3;
+    }
+
     @Override
     public void onWorldCollide(Entity owner) {
+        if (owner.stats.get(Stat.BounceCount) <= 1f) {
+            return;
+        }
+
         float xDir = (float) Math.cos(bullet.direction);
         float yDir = (float) Math.sin(bullet.direction);
 
@@ -25,6 +34,7 @@ public class WallBounce extends EntityComponent {
 
         Entity newBullet = owner.copy();
         newBullet.addStat(Stat.BounceCount, -1f);
+
         entityManager.addEntity(newBullet);
 
     }

@@ -10,7 +10,6 @@ import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.projectile.*;
 import com.mygdx.game.entities.factories.ProjectileFactory;
-import com.mygdx.game.entities.stats.Stat;
 
 import java.util.ArrayList;
 
@@ -39,15 +38,24 @@ public class Shooter extends EntityComponent {
     public Shooter(String sprite) {
         super.name = "shooter";
         this.sprite = sprite;
-        addBulletComponent(new SineTravel());
-        addBulletComponent(new Guided("evil soul"));
+        // addBulletComponent(new SineTravel());
+        // addBulletComponent(new Guided("evil soul"));
 
         addBulletComponent(new SpinObject());
 
         addBulletComponent(new SpinSprite(0.25f));
         addBulletComponent(new Shrapnel(8));
-        addBulletComponent(new Boomerang());
+        // addBulletComponent(new Boomerang());
+        // addBulletComponent(new Boomerang());
+
         addBulletComponent(new WallBounce());
+        addBulletComponent(new WallBounce());
+        addBulletComponent(new WallBounce());
+        addBulletComponent(new WallBounce());
+        addBulletComponent(new WallBounce());
+        addBulletComponent(new WallBounce());
+
+
     }
 
     @Override

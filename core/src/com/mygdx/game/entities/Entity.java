@@ -218,7 +218,10 @@ public class Entity {
 
     public EntityComponent getComponentByName(String name) {
         return this.components.stream().filter((a)-> Objects.equals(a.name, name)).findFirst().orElse(null);
+    }
 
+    public int countComponentsWithName(String name) {
+        return (int) this.components.stream().filter((a)->Objects.equals(a.name, name)).count();
     }
 
     public boolean collidesWithEntity(Entity other) {
@@ -275,6 +278,11 @@ public class Entity {
 
 
     public Entity addComponent(EntityComponent component) {
+        if (component.componentCountLimit > 0 && countComponentsWithName(component.name) >= component.componentCountLimit) {
+            // dont add component if over limit
+            return this;
+        }
+
         this.components.add(component);
 
         resetStats();

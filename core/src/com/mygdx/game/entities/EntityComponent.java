@@ -4,6 +4,7 @@ public class EntityComponent {
 
 
     public String name = null;
+    public int componentCountLimit = -1;
     public EntityComponent() {
 
     }
