@@ -106,7 +106,7 @@ public class WorldManager {
                                 .addComponent(new DemonSoul())
                                 .addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
                                 .addComponent(new GameEntityBleed())
-                                .addComponent(new Shooter("hand_0001"))
+                                // .addComponent(new Shooter("hand_0001")) TODO : lol, lmfao xd
 
                                 .setDrawingLayer(DrawingLayer.ENEMIES)))
         );

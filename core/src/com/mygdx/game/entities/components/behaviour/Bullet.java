@@ -20,7 +20,17 @@ public class Bullet extends EntityComponent {
         owner.knockBackMultiplier = 2f;
         owner.stats.add(Stat.ProjectileLifeTime, -1f);
 
-        if (owner.stats.get(Stat.ProjectileLifeTime) <= 0) {
+
+        float remainingLifetime = owner.stats.get(Stat.ProjectileLifeTime);
+
+        // scale down
+        if (remainingLifetime < 30f) {
+            owner.scaleX = remainingLifetime / 30f;
+            owner.scaleY = remainingLifetime / 30f;
+        }
+
+        // expire
+        if (remainingLifetime <= 0) {
             owner.commitSudoku();
         }
     }

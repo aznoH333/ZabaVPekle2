@@ -24,9 +24,9 @@ public class Shooter extends EntityComponent {
 
 
     // statistics
-    public int fireRate = 8;
-    public float spread = 0.45f;
-    public int bulletsPerShot = 3;
+    public int fireRate = 10;
+    public float spread = 0.045f;
+    public int bulletsPerShot = 1;
     public float bulletSpeed = 0.5f;
     public float damage = 2f;
     public String bulletSprite = "fire_ball";
@@ -42,22 +42,22 @@ public class Shooter extends EntityComponent {
         // add default origin
         bulletOrigins.add(new BulletOrigin(0f));
 
-        bulletOrigins.add(new BulletOrigin(NumberUtils.PI - NumberUtils.THIRD_PI));
-        bulletOrigins.add(new BulletOrigin(NumberUtils.PI + NumberUtils.THIRD_PI));
+        // bulletOrigins.add(new BulletOrigin(NumberUtils.PI - NumberUtils.THIRD_PI));
+        // bulletOrigins.add(new BulletOrigin(NumberUtils.PI + NumberUtils.THIRD_PI));
 
 
 
         // addBulletComponent(new SineTravel());
         // addBulletComponent(new Guided("evil soul"));
 
-        addBulletComponent(new SpinObject());
+        // addBulletComponent(new SpinObject());
 
-        addBulletComponent(new SpinSprite(0.25f));
-        addBulletComponent(new Shrapnel(3));
-        addBulletComponent(new Boomerang());
+        addBulletComponent(new SpinSprite(-0.25f));
+        // addBulletComponent(new Shrapnel(3));
+        // addBulletComponent(new Boomerang());
         // addBulletComponent(new Boomerang());
 
-        addBulletComponent(new WallBounce());
+        // addBulletComponent(new WallBounce());
 
 
 
