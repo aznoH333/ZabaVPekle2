@@ -7,7 +7,6 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.DemonSoul;
-import com.mygdx.game.entities.components.behaviour.Shooter;
 import com.mygdx.game.entities.components.behaviour.Spawner;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
@@ -29,7 +28,7 @@ public class WorldManager {
 
     private static final SpriteManager spriteManager = SpriteManager.getInstance();
     private static final EntityManager entityManager = EntityManager.getInstance();
-    private int enemiesToSpawn = 1;
+    private int enemiesToSpawn = 10;
     private int enemySpawnCooldown = 30;
     private int nextEnemySpawnCooldown = 0;
 
