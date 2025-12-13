@@ -33,6 +33,7 @@ public class WorldManager {
     private int enemiesToSpawn = 10;
     private int enemySpawnCooldown = 30;
     private int nextEnemySpawnCooldown = 0;
+    private boolean doorsOpen = false;
 
 
     private final int outerWorldSize = 25;
@@ -42,7 +43,8 @@ public class WorldManager {
 
     private Color floorColor = new Color(0.2f, 0.2f, 0.2f, 1f);
     private Color brickColor = new Color(0.95f, 0.25f, 0.1f, 1f);
-    private Color headerColor = new Color(0.6f, 0.6f, 0.6f, 1f);
+    private Color worldTopColor = new Color(0.95f, 0.25f, 0.1f, 1f);
+    private Color doorColor = new Color(0.8f, 0.8f, 0.8f, 1f);
 
 
     public void draw() {
@@ -51,17 +53,34 @@ public class WorldManager {
 
 
                 WorldTileType tileType = getTileType(x, y);
-                spriteManager.drawSprite(
-                        setColorForCommandBasedOnTileType(new DrawingCommand(tileType.textureName, x * 32f - 16f, y * 32f - 16f), tileType),
-                        DrawingLayer.WORLD);
+                DrawingLayer layer = null;
 
+                if (tileType.isSolid) {
+                    layer = DrawingLayer.WALLS;
+                }else {
+                    layer = DrawingLayer.FLOOR;
+                }
+
+                Color tileColor = getColorForTile(tileType.color);
+
+                spriteManager.drawSprite(
+                        new DrawingCommand(tileType.textureName, x * 32f - 16f, y * 32f - 16f).setColor(tileColor),
+                        layer);
+
+                if (tileType.decorationTextureName != null) {
+                    Color decorationColor = getColorForTile(tileType.decorationColor);
+
+                    spriteManager.drawSprite(
+                            new DrawingCommand(tileType.decorationTextureName, x * 32f - 16f, y * 32f - 16f).setColor(decorationColor),
+                            DrawingLayer.DOOR);
+                }
 
             }
         }
     }
 
     public DrawingCommand setColorForCommandBasedOnTileType(DrawingCommand command, WorldTileType type) {
-        Color color = headerColor;
+        Color color = worldTopColor;
 
         if (type.color == WorldTileColor.BRICKS) {
             color = brickColor;
@@ -74,11 +93,39 @@ public class WorldManager {
         return command.setR(color.r).setG(color.g).setB(color.b);
     }
 
+    public Color getColorForTile(WorldTileColor tileColor) {
+        switch (tileColor) {
+            case BRICKS:
+                return brickColor;
+            case WORLD_TOP:
+                return worldTopColor;
+            case FLOOR:
+                return floorColor;
+            default:
+                return doorColor;
+        }
+    }
+
+
     public WorldTileType getTileType(int x, int y) {
         int absX = Math.abs(x);
         int absY = Math.abs(y);
 
         int headerPos = innerWorldSize + 1;
+
+
+        // doors
+        if (x == 0 && y == innerWorldSize) {
+            if (doorsOpen) {
+                return WorldTileType.DOOR_TOP_OPEN;
+            } else {
+                return WorldTileType.DOOR_TOP_CLOSED;
+            }
+        }
+        if (x == 0 && y == -innerWorldSize) {
+            return WorldTileType.DOOR_BOTTOM_CLOSED;
+        }
+
 
         // bricks
         if (absX < innerWorldSize && y == innerWorldSize) {
@@ -113,13 +160,13 @@ public class WorldManager {
             return WorldTileType.BRICK_HEADER_CORNER_LEFT_TOP;
         }
         if (x == -headerPos && y == -headerPos) {
-            return WorldTileType.BRICK_HEADER_CORNER_LEFT_BOTTOM;
+            return WorldTileType.BRICK_HEADER_CORNER_RIGHT_BOTTOM;
         }
         if (x == headerPos && y == headerPos) {
             return WorldTileType.BRICK_HEADER_CORNER_RIGHT_TOP;
         }
         if (x == headerPos && y == -headerPos) {
-            return WorldTileType.BRICK_HEADER_CORNER_RIGHT_BOTTOM;
+            return WorldTileType.BRICK_HEADER_CORNER_LEFT_BOTTOM;
         }
 
         // world top

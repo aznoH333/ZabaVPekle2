@@ -1,5 +1,7 @@
 package com.mygdx.game.drawing;
 
+import com.badlogic.gdx.graphics.Color;
+
 public class DrawingCommand {
     String spriteName;
     float x;
@@ -63,6 +65,14 @@ public class DrawingCommand {
 
     public DrawingCommand setA(float a) {
         this.a = a;
+        return this;
+    }
+
+    public DrawingCommand setColor(Color color) {
+        this.r = color.r;
+        this.g = color.g;
+        this.b = color.b;
+        this.a = color.a;
         return this;
     }
 

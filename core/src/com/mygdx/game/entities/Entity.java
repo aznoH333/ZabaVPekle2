@@ -24,7 +24,7 @@ public class Entity {
     public float width = 16f;
     public float height = 16f;
     private final ArrayList<EntityComponent> components = new ArrayList<>();
-    public DrawingLayer drawingLayer = DrawingLayer.WORLD;
+    public DrawingLayer drawingLayer = DrawingLayer.FLOOR;
     public boolean triggerInvincibility = true;
     public EntityStats stats = new EntityStats();
 
