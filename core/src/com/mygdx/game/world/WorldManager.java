@@ -10,6 +10,7 @@ import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.DemonSoul;
 import com.mygdx.game.entities.components.behaviour.Spawner;
+import com.mygdx.game.entities.components.control.Door;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.components.visual.particles.FadeParticle;
@@ -18,8 +19,6 @@ import com.mygdx.game.entities.stats.Stat;
 public class WorldManager {
 
     private static WorldManager instance = null;
-
-
 
     public static WorldManager getInstance() {
         if (instance == null) {
@@ -31,7 +30,8 @@ public class WorldManager {
     private static final SpriteManager spriteManager = SpriteManager.getInstance();
     private static final EntityManager entityManager = EntityManager.getInstance();
     private int enemiesToSpawn = 10;
-    private int enemySpawnCooldown = 30;
+    private int enemiesToKill = enemiesToSpawn;
+    private int enemySpawnCooldown = 10;
     private int nextEnemySpawnCooldown = 0;
     private boolean doorsOpen = false;
 
@@ -50,8 +50,6 @@ public class WorldManager {
     public void draw() {
         for (int x = -outerWorldSize; x < outerWorldSize; x++) {
             for (int y = -outerWorldSize; y < outerWorldSize; y++) {
-
-
                 WorldTileType tileType = getTileType(x, y);
                 DrawingLayer layer = null;
 
@@ -68,6 +66,7 @@ public class WorldManager {
                         layer);
 
                 if (tileType.decorationTextureName != null) {
+                    assert tileType.decorationColor != null;
                     Color decorationColor = getColorForTile(tileType.decorationColor);
 
                     spriteManager.drawSprite(
@@ -79,19 +78,6 @@ public class WorldManager {
         }
     }
 
-    public DrawingCommand setColorForCommandBasedOnTileType(DrawingCommand command, WorldTileType type) {
-        Color color = worldTopColor;
-
-        if (type.color == WorldTileColor.BRICKS) {
-            color = brickColor;
-        }
-
-        if (type.color == WorldTileColor.FLOOR) {
-            color = floorColor;
-        }
-
-        return command.setR(color.r).setG(color.g).setB(color.b);
-    }
 
     public Color getColorForTile(WorldTileColor tileColor) {
         switch (tileColor) {
@@ -225,8 +211,6 @@ public class WorldManager {
             y = NumberUtils.randomInt(-innerWorldSize, innerWorldSize) * 32;
         }while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, player.x, player.y) < 128f);
 
-        System.out.println("spawning enemy at " + x + ", " + y);
-
         entityManager.addEntity(
                 new Entity()
                         .setX(x)
@@ -237,7 +221,7 @@ public class WorldManager {
                         .addComponent(new Spawner(new Entity()
                                 .setSprite("enemy_1")
                                 .setTeam(EntityTeam.DEMON)
-                                .overrideDefault(Stat.Health, 20f, 1f)
+                                .overrideDefault(Stat.Health, 6f, 1f)
                                 .setX(x)
                                 .setY(y)
                                 .addComponent(new DemonSoul())
@@ -247,9 +231,24 @@ public class WorldManager {
 
                                 .setDrawingLayer(DrawingLayer.ENEMIES)))
         );
-
-
     }
+
+    public void killedEnemy() {
+        this.enemiesToKill--;
+
+        if (enemiesToKill == 0) {
+            doorsOpen = true;
+
+            // spawn door object
+            entityManager.addEntity(
+                    new Entity()
+                            .setX(-16f)
+                            .setY((innerWorldSize -1) * 32f)
+                            .addComponent(new Door())
+            );
+        }
+    }
+
 
     public boolean isSpaceEmpty(float x, float y, float width, float height) {
         // placehodler logic
@@ -260,5 +259,16 @@ public class WorldManager {
                x + widthValue < (innerWorldSize - 1) * 32f &&
                y - heightValue > -innerWorldSize * 32f &&
                y + heightValue < (innerWorldSize - 1) * 32f;
+    }
+
+    public void moveToNewLevel(Entity playerRef) {
+        entityManager.clearAllEntities();
+        entityManager.addEntity(playerRef.setX(-16f).setY((-innerWorldSize +1) * 32f + 16f));
+
+
+        this.enemiesToSpawn = 10;
+        this.enemySpawnCooldown = 60;
+        this.doorsOpen = false;
+        this.enemiesToKill = enemiesToSpawn;
     }
 }

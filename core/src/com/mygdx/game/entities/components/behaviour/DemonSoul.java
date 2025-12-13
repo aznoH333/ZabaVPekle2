@@ -5,9 +5,11 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.world.WorldManager;
 
 public class DemonSoul extends EntityComponent {
     private final EntityManager entityManager = EntityManager.getInstance();
+    private final WorldManager worldManager = WorldManager.getInstance();
 
 
     private Entity target = null;
@@ -34,6 +36,11 @@ public class DemonSoul extends EntityComponent {
 
             owner.goInDirection(direction, 1f);
         }
+    }
+
+    @Override
+    public void onSudoku(Entity owner) {
+        worldManager.killedEnemy();
     }
 
     @Override

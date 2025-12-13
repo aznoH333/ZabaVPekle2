@@ -20,6 +20,7 @@ public class EntityManager {
 
     private final ArrayList<Entity> entities = new ArrayList<>();
     private final ArrayList<Entity> waitingRoom = new ArrayList<>();
+    private boolean clearAllEntitiesOnCycleEnd = false;
     private EntityManager() {
 
     }
@@ -45,7 +46,8 @@ public class EntityManager {
             }
         }
 
-        entities.removeIf((it)->!it.wantsToLive);
+        entities.removeIf((it)->!it.wantsToLive || clearAllEntitiesOnCycleEnd);
+        clearAllEntitiesOnCycleEnd = false;
 
         entities.addAll(waitingRoom);
         waitingRoom.clear();
@@ -85,5 +87,9 @@ public class EntityManager {
         }
 
         return closestEntity;
+    }
+
+    public void clearAllEntities() {
+        clearAllEntitiesOnCycleEnd = true;
     }
 }

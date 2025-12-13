@@ -113,20 +113,23 @@ public class Entity {
         }
 
 
-        // draw
-        spriteManager.drawSprite(
-                new DrawingCommand(sprite, x + spriteOffsetX, y + spriteOffsetY)
-                        .setWidth(scaleX)
-                        .setHeight(scaleY)
-                        .setFlipHorizontally(flipX)
-                        .setFlipVertically(flipY)
-                        .setRotationRad(spriteRotation)
-                        .setR(r)
-                        .setG(g)
-                        .setB(b)
-                        .setA(a),
-                drawingLayer
-        );
+        if (sprite != null) {
+            // draw
+            spriteManager.drawSprite(
+                    new DrawingCommand(sprite, x + spriteOffsetX, y + spriteOffsetY)
+                            .setWidth(scaleX)
+                            .setHeight(scaleY)
+                            .setFlipHorizontally(flipX)
+                            .setFlipVertically(flipY)
+                            .setRotationRad(spriteRotation)
+                            .setR(r)
+                            .setG(g)
+                            .setB(b)
+                            .setA(a),
+                    drawingLayer
+            );
+        }
+
 
         // invincibility
         if (this.invincibilityTimer > 0) {
