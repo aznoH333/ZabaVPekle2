@@ -10,6 +10,7 @@ import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.PlayerSoul;
 import com.mygdx.game.entities.components.behaviour.Shooter;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
+import com.mygdx.game.world.WorldManager;
 
 public class FrogGame extends ApplicationAdapter {
 

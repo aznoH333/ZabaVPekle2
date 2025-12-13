@@ -4,7 +4,7 @@ import com.mygdx.game.NumberUtils;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.drawing.SpriteManager;
-import com.mygdx.game.WorldManager;
+import com.mygdx.game.world.WorldManager;
 import com.mygdx.game.entities.stats.EntityStats;
 import com.mygdx.game.entities.stats.Stat;
 

@@ -1,5 +1,7 @@
-package com.mygdx.game;
+package com.mygdx.game.world;
 
+import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.NumberUtils;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.drawing.SpriteManager;
@@ -34,26 +36,117 @@ public class WorldManager {
 
 
     private final int outerWorldSize = 25;
-    private final int innerWorldSize = 15;
+    private final int innerWorldSize = 10;
     private Entity player = null;
+
+
+    private Color floorColor = new Color(0.2f, 0.2f, 0.2f, 1f);
+    private Color brickColor = new Color(0.95f, 0.25f, 0.1f, 1f);
+    private Color headerColor = new Color(0.6f, 0.6f, 0.6f, 1f);
 
 
     public void draw() {
         for (int x = -outerWorldSize; x < outerWorldSize; x++) {
             for (int y = -outerWorldSize; y < outerWorldSize; y++) {
-                if (Math.abs(x) < innerWorldSize && Math.abs(y) < innerWorldSize) {
-                    spriteManager.drawSprite(
-                            new DrawingCommand("floor_tile", x * 32f - 16f, y * 32f - 16f)
-                                    .setR(0.6f).setG(0.4f).setB(0.0f),
-                            DrawingLayer.WORLD);
-                }else {
-                    spriteManager.drawSprite(
-                            new DrawingCommand("brick_wall", x * 32f - 16f, y * 32f - 16f)
-                                    .setR(0.6f).setG(0.4f).setB(0.2f),
-                            DrawingLayer.WORLD);
-                }
+
+
+                WorldTileType tileType = getTileType(x, y);
+                spriteManager.drawSprite(
+                        setColorForCommandBasedOnTileType(new DrawingCommand(tileType.textureName, x * 32f - 16f, y * 32f - 16f), tileType),
+                        DrawingLayer.WORLD);
+
+
             }
         }
+    }
+
+    public DrawingCommand setColorForCommandBasedOnTileType(DrawingCommand command, WorldTileType type) {
+        Color color = headerColor;
+
+        if (type.color == WorldTileColor.BRICKS) {
+            color = brickColor;
+        }
+
+        if (type.color == WorldTileColor.FLOOR) {
+            color = floorColor;
+        }
+
+        return command.setR(color.r).setG(color.g).setB(color.b);
+    }
+
+    public WorldTileType getTileType(int x, int y) {
+        int absX = Math.abs(x);
+        int absY = Math.abs(y);
+
+        int headerPos = innerWorldSize + 1;
+
+        // bricks
+        if (absX < innerWorldSize && y == innerWorldSize) {
+            return WorldTileType.BRICK_WALL_TOP;
+        }
+        if (absX < innerWorldSize && y == -innerWorldSize) {
+            return WorldTileType.BRICK_WALL_BOTTOM;
+        }
+        if (absY < innerWorldSize && x == innerWorldSize) {
+            return WorldTileType.BRICK_WALL_RIGHT;
+        }
+        if (absY < innerWorldSize && x == -innerWorldSize) {
+            return WorldTileType.BRICK_WALL_LEFT;
+        }
+
+        // brick corners
+        if (x == -innerWorldSize && y == innerWorldSize) {
+            return WorldTileType.BRICK_CORNER_LEFT_TOP;
+        }
+        if (x == -innerWorldSize && y == -innerWorldSize) {
+            return WorldTileType.BRICK_CORNER_LEFT_BOTTOM;
+        }
+        if (x == innerWorldSize && y == innerWorldSize) {
+            return WorldTileType.BRICK_CORNER_RIGHT_TOP;
+        }
+        if (x == innerWorldSize && y == -innerWorldSize) {
+            return WorldTileType.BRICK_CORNER_RIGHT_BOTTOM;
+        }
+
+        // world top corners
+        if (x == -headerPos && y == headerPos) {
+            return WorldTileType.BRICK_HEADER_CORNER_LEFT_TOP;
+        }
+        if (x == -headerPos && y == -headerPos) {
+            return WorldTileType.BRICK_HEADER_CORNER_LEFT_BOTTOM;
+        }
+        if (x == headerPos && y == headerPos) {
+            return WorldTileType.BRICK_HEADER_CORNER_RIGHT_TOP;
+        }
+        if (x == headerPos && y == -headerPos) {
+            return WorldTileType.BRICK_HEADER_CORNER_RIGHT_BOTTOM;
+        }
+
+        // world top
+        if (absX < innerWorldSize + 1 && y == innerWorldSize + 1) {
+            return WorldTileType.BRICK_HEADER_TOP;
+        }
+        if (absX < innerWorldSize + 1 && y == -innerWorldSize - 1) {
+            return WorldTileType.BRICK_HEADER_BOTTOM;
+        }
+        if (absY < innerWorldSize + 1 && x == innerWorldSize + 1) {
+            return WorldTileType.BRICK_HEADER_RIGHT;
+        }
+        if (absY < innerWorldSize + 1 && x == -innerWorldSize - 1) {
+            return WorldTileType.BRICK_HEADER_LEFT;
+        }
+
+
+
+
+        // floor texture
+        if (Math.abs(x) < innerWorldSize && Math.abs(y) < innerWorldSize) {
+            return WorldTileType.FLOOR_TILE;
+        }
+
+        // colorless void
+        return WorldTileType.VOID;
+
     }
 
     public void update() {
@@ -77,8 +170,6 @@ public class WorldManager {
     }
 
     private void spawnEnemy() {
-
-
         int x;
         int y;
 
