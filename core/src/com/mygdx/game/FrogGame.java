@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.drawing.TextDrawingCommand;
@@ -60,6 +61,7 @@ public class FrogGame extends ApplicationAdapter {
 		drawingManager.drawText(new TextDrawingCommand("hjelapwe", 20f, 20f));
 		drawingManager.drawText(new TextDrawingCommand("hjelapwe", 200f, 200f));
 		drawingManager.drawText(new TextDrawingCommand("hjelapwe", -200f, -200f));
+		drawingManager.drawSpriteStatic(new DrawingCommand("player_1", 0f, 0), DrawingLayer.PLAYER);
 
 
 

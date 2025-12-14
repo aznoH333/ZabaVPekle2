@@ -32,6 +32,7 @@ public class DrawingManager {
     private final SpriteBatch batch = new SpriteBatch();
     private final SpriteBatch staticBatch = new SpriteBatch();
     private final ArrayList<ArrayList<DrawingCommand>> drawingQueue = new ArrayList<>();
+    private final ArrayList<ArrayList<DrawingCommand>> staticDrawingQueue = new ArrayList<>();
     private final ArrayList<TextDrawingCommand> fontDrawingQueue = new ArrayList<>();
 
     private final OrthographicCamera camera = new OrthographicCamera();
@@ -72,7 +73,7 @@ public class DrawingManager {
 
 
 
-    private void drawSprite(String spriteName, float x, float y, float width, float height, boolean flipHorizontally, boolean flipVertically, float rotationRad, float r, float g, float b, float a) {
+    private void drawSprite(SpriteBatch batch, String spriteName, float x, float y, float width, float height, boolean flipHorizontally, boolean flipVertically, float rotationRad, float r, float g, float b, float a) {
         Texture sprite = spriteMap.getOrDefault(spriteName, null);
 
         if (sprite == null) {
@@ -105,14 +106,30 @@ public class DrawingManager {
         );
     }
 
-    public void drawSprite(DrawingCommand command, DrawingLayer layer) {
-        if (drawingQueue.size() < layer.value + 1) {
-            for (int i = drawingQueue.size(); i < layer.value + 1; i++) {
-                drawingQueue.add(new ArrayList<>());
+    public void drawSprite(DrawingCommand command, DrawingLayer layer, boolean isStatic) {
+        ArrayList<ArrayList<DrawingCommand>> queue;
+
+        if (isStatic) {
+            queue = staticDrawingQueue;
+        }else {
+            queue = drawingQueue;
+        }
+
+        if (queue.size() < layer.value + 1) {
+            for (int i = queue.size(); i < layer.value + 1; i++) {
+                queue.add(new ArrayList<>());
             }
         }
 
-        drawingQueue.get(layer.value).add(command);
+        queue.get(layer.value).add(command);
+    }
+
+    public void drawSprite(DrawingCommand command, DrawingLayer layer) {
+        drawSprite(command, layer, false);
+    }
+
+    public void drawSpriteStatic(DrawingCommand command, DrawingLayer layer) {
+        drawSprite(command, layer, true);
     }
 
     public void drawText(TextDrawingCommand command) {
@@ -135,6 +152,7 @@ public class DrawingManager {
         for (ArrayList<DrawingCommand> layer : drawingQueue) {
             for (DrawingCommand command : layer) {
                 drawSprite(
+                        batch,
                         command.spriteName,
                         command.x,
                         command.y,
@@ -157,6 +175,27 @@ public class DrawingManager {
         staticBatch.setProjectionMatrix(staticCamera.combined);
         staticViewPort.apply();
         staticBatch.begin();
+
+        for (ArrayList<DrawingCommand> layer : staticDrawingQueue) {
+            for (DrawingCommand command : layer) {
+                drawSprite(
+                        staticBatch,
+                        command.spriteName,
+                        command.x,
+                        command.y,
+                        command.width,
+                        command.height,
+                        command.flipHorizontally,
+                        command.flipVertically,
+                        command.rotationRad,
+                        command.r,
+                        command.g,
+                        command.b,
+                        command.a
+                );
+            }
+            layer.clear();
+        }
 
         // font
         for (TextDrawingCommand textDrawingCommand : fontDrawingQueue) {
