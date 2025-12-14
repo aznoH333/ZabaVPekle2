@@ -57,6 +57,10 @@ public class FrogGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		drawingManager.drawText(new TextDrawingCommand("hjelapwe", 0f, 0f));
+		drawingManager.drawText(new TextDrawingCommand("hjelapwe", 20f, 20f));
+		drawingManager.drawText(new TextDrawingCommand("hjelapwe", 200f, 200f));
+		drawingManager.drawText(new TextDrawingCommand("hjelapwe", -200f, -200f));
+
 
 
 		worldManager.draw();

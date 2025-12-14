@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -29,17 +30,22 @@ public class DrawingManager {
 
     private final HashMap<String, Texture> spriteMap = new HashMap<>();
     private final SpriteBatch batch = new SpriteBatch();
+    private final SpriteBatch staticBatch = new SpriteBatch();
     private final ArrayList<ArrayList<DrawingCommand>> drawingQueue = new ArrayList<>();
     private final ArrayList<TextDrawingCommand> fontDrawingQueue = new ArrayList<>();
 
     private final OrthographicCamera camera = new OrthographicCamera();
+    private final OrthographicCamera staticCamera = new OrthographicCamera();
+
     private final Viewport viewPort = new FitViewport(960f, 640f, camera);
+    private final Viewport staticViewPort = new ExtendViewport(960f, 640f, staticCamera);
 
     BitmapFont font = new BitmapFont();
 
     private DrawingManager() {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.7f;
+        staticCamera.zoom = 0.7f;
     }
 
 
@@ -114,7 +120,7 @@ public class DrawingManager {
     }
 
     private void renderText(TextDrawingCommand command) {
-        font.draw(batch, command.text, command.x, command.y);
+        font.draw(staticBatch, command.text, command.x, command.y);
     }
 
 
@@ -145,14 +151,19 @@ public class DrawingManager {
             }
             layer.clear();
         }
+        batch.end();
+
+
+        staticBatch.setProjectionMatrix(staticCamera.combined);
+        staticViewPort.apply();
+        staticBatch.begin();
 
         // font
         for (TextDrawingCommand textDrawingCommand : fontDrawingQueue) {
             renderText(textDrawingCommand);
         }
         fontDrawingQueue.clear();
-
-        batch.end();
+        staticBatch.end();
     }
 
     public void dispose() {
@@ -163,16 +174,20 @@ public class DrawingManager {
         font.dispose();
 
         spriteMap.clear();
+        staticBatch.dispose();
+        batch.dispose();
     }
 
     public void resizedWindow(int width, int height) {
         viewPort.update(width, height);
+        staticViewPort.update(width, height);
     }
 
     public void setCameraPosition(float x, float y) {
         camera.position.x = x;
         camera.position.y = y;
         camera.update();
+
     }
 
     public Vector2 getMousePosition() {

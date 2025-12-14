@@ -46,7 +46,12 @@ public class EntityManager {
             }
         }
 
-        entities.removeIf((it)->!it.wantsToLive || clearAllEntitiesOnCycleEnd);
+        entities.removeIf((it)->{
+            if (!it.wantsToLive) {
+                it.invokeSudoku();
+            }
+            return !it.wantsToLive || clearAllEntitiesOnCycleEnd;
+        });
         clearAllEntitiesOnCycleEnd = false;
 
         entities.addAll(waitingRoom);

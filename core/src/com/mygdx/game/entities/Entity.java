@@ -309,11 +309,13 @@ public class Entity {
     }
 
     public void commitSudoku() {
+        this.wantsToLive = false;
+    }
+
+    public void invokeSudoku() {
         for (EntityComponent c: components) {
             c.onSudoku(this);
         }
-
-        this.wantsToLive = false;
     }
 
     public Entity copy() {
