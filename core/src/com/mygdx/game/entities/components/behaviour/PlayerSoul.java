@@ -4,13 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.NumberUtils;
-import com.mygdx.game.drawing.SpriteManager;
+import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.stats.Stat;
 
 public class PlayerSoul extends EntityComponent {
-    private static final SpriteManager spriteManager = SpriteManager.getInstance();
+    private static final DrawingManager DRAWING_MANAGER = DrawingManager.getInstance();
 
     private Shooter shooter = null;
 
@@ -27,6 +27,8 @@ public class PlayerSoul extends EntityComponent {
 
     @Override
     public void onUpdate(Entity owner) {
+
+
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             owner.walk(-1f, 0f);
         }
@@ -44,11 +46,11 @@ public class PlayerSoul extends EntityComponent {
         }
 
         // set camera
-        spriteManager.setCameraPosition(owner.x, owner.y);
+        DRAWING_MANAGER.setCameraPosition(owner.x, owner.y);
 
 
         if (shooter != null) {
-            Vector2 mousePos = spriteManager.getMousePosition();
+            Vector2 mousePos = DRAWING_MANAGER.getMousePosition();
 
             shooter.direction = NumberUtils.directionToward(
                     owner.x,

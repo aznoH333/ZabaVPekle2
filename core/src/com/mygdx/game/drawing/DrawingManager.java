@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -14,26 +15,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SpriteManager {
+public class DrawingManager {
 
-    public static SpriteManager getInstance() {
+    public static DrawingManager getInstance() {
         if (instance == null) {
-            instance = new SpriteManager();
+            instance = new DrawingManager();
         }
         return instance;
     }
 
-    private static SpriteManager instance;
+    private static DrawingManager instance;
 
 
     private final HashMap<String, Texture> spriteMap = new HashMap<>();
     private final SpriteBatch batch = new SpriteBatch();
     private final ArrayList<ArrayList<DrawingCommand>> drawingQueue = new ArrayList<>();
+    private final ArrayList<TextDrawingCommand> fontDrawingQueue = new ArrayList<>();
 
     private final OrthographicCamera camera = new OrthographicCamera();
     private final Viewport viewPort = new FitViewport(960f, 640f, camera);
 
-    private SpriteManager() {
+    BitmapFont font = new BitmapFont();
+
+    private DrawingManager() {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 0.7f;
     }
@@ -105,6 +109,13 @@ public class SpriteManager {
         drawingQueue.get(layer.value).add(command);
     }
 
+    public void drawText(TextDrawingCommand command) {
+        this.fontDrawingQueue.add(command);
+    }
+
+    private void renderText(TextDrawingCommand command) {
+        font.draw(batch, command.text, command.x, command.y);
+    }
 
 
     public void render() {
@@ -114,7 +125,7 @@ public class SpriteManager {
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
-
+        // sprites
         for (ArrayList<DrawingCommand> layer : drawingQueue) {
             for (DrawingCommand command : layer) {
                 drawSprite(
@@ -135,6 +146,11 @@ public class SpriteManager {
             layer.clear();
         }
 
+        // font
+        for (TextDrawingCommand textDrawingCommand : fontDrawingQueue) {
+            renderText(textDrawingCommand);
+        }
+        fontDrawingQueue.clear();
 
         batch.end();
     }
@@ -143,6 +159,9 @@ public class SpriteManager {
         for (Map.Entry<String, Texture> entry : spriteMap.entrySet()) {
             entry.getValue().dispose();
         }
+
+        font.dispose();
+
         spriteMap.clear();
     }
 

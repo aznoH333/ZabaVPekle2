@@ -4,7 +4,7 @@ import com.mygdx.game.NumberUtils;
 import com.mygdx.game.SoundManager;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
-import com.mygdx.game.drawing.SpriteManager;
+import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
@@ -14,7 +14,7 @@ import com.mygdx.game.entities.factories.ProjectileFactory;
 import java.util.ArrayList;
 
 public class Shooter extends EntityComponent {
-    private static final SpriteManager spriteManager = SpriteManager.getInstance();
+    private static final DrawingManager DRAWING_MANAGER = DrawingManager.getInstance();
     private static final EntityManager entityManager = EntityManager.getInstance();
     private static final SoundManager soundManager = SoundManager.getInstance();
 
@@ -82,7 +82,7 @@ public class Shooter extends EntityComponent {
             for (BulletOrigin b : bulletOrigins) {
                 float handDir = direction + b.aimOffset;
 
-                spriteManager.drawSprite(
+                DRAWING_MANAGER.drawSprite(
                         new DrawingCommand(sprite,
                                 (float) Math.cos(handDir) * (10f - (scaleTimer / 10f) * 2f) + owner.x,
                                 (float) Math.sin(handDir) * (10f - (scaleTimer / 10f) * 2f) + owner.y

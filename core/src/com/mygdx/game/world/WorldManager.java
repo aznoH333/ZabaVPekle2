@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.NumberUtils;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
-import com.mygdx.game.drawing.SpriteManager;
+import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
@@ -27,7 +27,7 @@ public class WorldManager {
         return instance;
     }
 
-    private static final SpriteManager spriteManager = SpriteManager.getInstance();
+    private static final DrawingManager DRAWING_MANAGER = DrawingManager.getInstance();
     private static final EntityManager entityManager = EntityManager.getInstance();
     private int enemiesToSpawn = 10;
     private int enemiesToKill = enemiesToSpawn;
@@ -61,7 +61,7 @@ public class WorldManager {
 
                 Color tileColor = getColorForTile(tileType.color);
 
-                spriteManager.drawSprite(
+                DRAWING_MANAGER.drawSprite(
                         new DrawingCommand(tileType.textureName, x * 32f - 16f, y * 32f - 16f).setColor(tileColor),
                         layer);
 
@@ -69,7 +69,7 @@ public class WorldManager {
                     assert tileType.decorationColor != null;
                     Color decorationColor = getColorForTile(tileType.decorationColor);
 
-                    spriteManager.drawSprite(
+                    DRAWING_MANAGER.drawSprite(
                             new DrawingCommand(tileType.decorationTextureName, x * 32f - 16f, y * 32f - 16f).setColor(decorationColor),
                             DrawingLayer.DOOR);
                 }

@@ -34,6 +34,7 @@ public class Shrapnel extends EntityComponent {
             newBullet.overrideDefault(Stat.ProjectileLifeTime, 0f, 60f);
 
             newBullet.setStat(Stat.BounceCount, 0f);
+            newBullet.multiplyStat(Stat.Damage, -0.75f);
             newBullet.overrideDefault(Stat.BounceCount, 0f, 60f);
 
             entityManager.addEntity(newBullet);

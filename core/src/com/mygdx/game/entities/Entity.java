@@ -3,7 +3,7 @@ package com.mygdx.game.entities;
 import com.mygdx.game.NumberUtils;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
-import com.mygdx.game.drawing.SpriteManager;
+import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.world.WorldManager;
 import com.mygdx.game.entities.stats.EntityStats;
 import com.mygdx.game.entities.stats.Stat;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity {
-    private static SpriteManager spriteManager = SpriteManager.getInstance();
+    private static DrawingManager drawingManager = DrawingManager.getInstance();
     private static WorldManager worldManager = WorldManager.getInstance();
 
 
@@ -115,7 +115,7 @@ public class Entity {
 
         if (sprite != null) {
             // draw
-            spriteManager.drawSprite(
+            drawingManager.drawSprite(
                     new DrawingCommand(sprite, x + spriteOffsetX, y + spriteOffsetY)
                             .setWidth(scaleX)
                             .setHeight(scaleY)
