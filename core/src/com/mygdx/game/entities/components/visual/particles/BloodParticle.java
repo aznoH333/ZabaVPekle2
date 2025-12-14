@@ -1,6 +1,7 @@
 package com.mygdx.game.entities.components.visual.particles;
 
 import com.mygdx.game.NumberUtils;
+import com.mygdx.game.SoundManager;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
@@ -9,6 +10,7 @@ import com.mygdx.game.entities.EntityManager;
 public class BloodParticle extends EntityComponent {
 
     private final static EntityManager entityManager = EntityManager.getInstance();
+    private final static SoundManager soundManager = SoundManager.getInstance();
 
     private final float direction;
     private float verticalVelocity;
@@ -48,6 +50,12 @@ public class BloodParticle extends EntityComponent {
         if (NumberUtils.randomChance(0.8f)) {
             sprite = "blood_" + NumberUtils.randomInt(4, 8);
         }
+
+        // sound
+        soundManager.playSound("blood_splat", 0.1f, 0.1f);
+
+
+
         // spawn on ground particle
         entityManager.addEntity(
                 new Entity()

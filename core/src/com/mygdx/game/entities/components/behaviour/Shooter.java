@@ -1,13 +1,13 @@
 package com.mygdx.game.entities.components.behaviour;
 
 import com.mygdx.game.NumberUtils;
+import com.mygdx.game.SoundManager;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.drawing.SpriteManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
-import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.projectile.*;
 import com.mygdx.game.entities.factories.ProjectileFactory;
 
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class Shooter extends EntityComponent {
     private static final SpriteManager spriteManager = SpriteManager.getInstance();
     private static final EntityManager entityManager = EntityManager.getInstance();
+    private static final SoundManager soundManager = SoundManager.getInstance();
 
     public float direction = 0f;
     private int scaleTimer = 0;
@@ -24,8 +25,8 @@ public class Shooter extends EntityComponent {
 
 
     // statistics
-    public int fireRate = 10;
-    public float spread = 0.045f;
+    public int fireRate = 20;
+    public float spread = 0.0045f;
     public int bulletsPerShot = 1;
     public float bulletSpeed = 0.5f;
     public float damage = 2f;
@@ -56,8 +57,9 @@ public class Shooter extends EntityComponent {
         // addBulletComponent(new Shrapnel(3));
         // addBulletComponent(new Boomerang());
         // addBulletComponent(new Boomerang());
+        addBulletComponent(new Shrapnel(5));
 
-        // addBulletComponent(new WallBounce());
+        //addBulletComponent(new WallBounce());
 
 
 
@@ -102,6 +104,9 @@ public class Shooter extends EntityComponent {
 
         scaleTimer = 10;
         fireCooldown = fireRate;
+
+        // play sound
+        soundManager.playSound("fire_ball", 1f, 0.1f);
 
         for (BulletOrigin b : bulletOrigins) {
             float handDirection = direction + b.aimOffset;

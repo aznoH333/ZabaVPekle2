@@ -267,7 +267,6 @@ public class WorldManager {
 
 
         this.enemiesToSpawn = 10;
-        this.enemySpawnCooldown = 60;
         this.doorsOpen = false;
         this.enemiesToKill = enemiesToSpawn;
     }

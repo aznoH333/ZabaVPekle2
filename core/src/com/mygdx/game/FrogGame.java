@@ -18,6 +18,7 @@ public class FrogGame extends ApplicationAdapter {
 	SpriteManager spriteManager;
 	EntityManager entityManager;
 	WorldManager worldManager;
+	SoundManager soundManager;
 
 
 	@Override
@@ -48,6 +49,8 @@ public class FrogGame extends ApplicationAdapter {
 
 		worldManager = WorldManager.getInstance();
 
+		soundManager = SoundManager.getInstance();
+
 	}
 
 	@Override
@@ -63,6 +66,7 @@ public class FrogGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		spriteManager.dispose();
+		soundManager.dispose();
 	}
 
 	@Override

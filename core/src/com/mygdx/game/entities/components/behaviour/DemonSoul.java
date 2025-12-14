@@ -1,6 +1,7 @@
 package com.mygdx.game.entities.components.behaviour;
 
 import com.mygdx.game.NumberUtils;
+import com.mygdx.game.SoundManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
@@ -8,8 +9,9 @@ import com.mygdx.game.entities.stats.Stat;
 import com.mygdx.game.world.WorldManager;
 
 public class DemonSoul extends EntityComponent {
-    private final EntityManager entityManager = EntityManager.getInstance();
-    private final WorldManager worldManager = WorldManager.getInstance();
+    private final static EntityManager entityManager = EntityManager.getInstance();
+    private final static WorldManager worldManager = WorldManager.getInstance();
+    private final static SoundManager soundManager = SoundManager.getInstance();
 
 
     private Entity target = null;
@@ -40,7 +42,13 @@ public class DemonSoul extends EntityComponent {
 
     @Override
     public void onSudoku(Entity owner) {
+        soundManager.playSound("enemy_death", 1f, 0.1f);
         worldManager.killedEnemy();
+    }
+
+    @Override
+    public void onTakeDamage(Entity owner, float amount) {
+        soundManager.playSound("enemy_hit", 1f, 0.1f);
     }
 
     @Override
