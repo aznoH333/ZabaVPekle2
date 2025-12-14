@@ -1,7 +1,7 @@
 package com.mygdx.game.world;
 
 import com.badlogic.gdx.graphics.Color;
-import com.mygdx.game.NumberUtils;
+import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.drawing.DrawingManager;
@@ -227,7 +227,7 @@ public class WorldManager {
                                 .addComponent(new DemonSoul())
                                 .addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
                                 .addComponent(new GameEntityBleed())
-                                // .addComponent(new Shooter("hand_0001")) TODO : lol, lmfao xd
+                                // .addComponent(new Shooter("hand_0001"))
 
                                 .setDrawingLayer(DrawingLayer.ENEMIES)))
         );

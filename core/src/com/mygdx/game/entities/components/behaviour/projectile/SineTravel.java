@@ -1,6 +1,6 @@
 package com.mygdx.game.entities.components.behaviour.projectile;
 
-import com.mygdx.game.NumberUtils;
+import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;

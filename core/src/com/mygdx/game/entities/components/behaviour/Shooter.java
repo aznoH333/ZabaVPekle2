@@ -1,6 +1,6 @@
 package com.mygdx.game.entities.components.behaviour;
 
-import com.mygdx.game.NumberUtils;
+import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.SoundManager;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
@@ -26,9 +26,9 @@ public class Shooter extends EntityComponent {
 
     // statistics
     public int fireRate = 20;
-    public float spread = 0.0045f;
+    public float spread = 0.45f;
     public int bulletsPerShot = 1;
-    public float bulletSpeed = 0.5f;
+    public float bulletSpeed = 0.75f;
     public float damage = 2f;
     public String bulletSprite = "fire_ball";
     private ArrayList<BulletOrigin> bulletOrigins = new ArrayList<>();
@@ -43,23 +43,25 @@ public class Shooter extends EntityComponent {
         // add default origin
         bulletOrigins.add(new BulletOrigin(0f));
 
-        // bulletOrigins.add(new BulletOrigin(NumberUtils.PI - NumberUtils.THIRD_PI));
-        // bulletOrigins.add(new BulletOrigin(NumberUtils.PI + NumberUtils.THIRD_PI));
+        //bulletOrigins.add(new BulletOrigin(NumberUtils.PI - NumberUtils.THIRD_PI));
+        //bulletOrigins.add(new BulletOrigin(NumberUtils.PI + NumberUtils.THIRD_PI));
 
 
 
         // addBulletComponent(new SineTravel());
         // addBulletComponent(new Guided("evil soul"));
 
-        // addBulletComponent(new SpinObject());
+        //addBulletComponent(new SpinObject());
 
         addBulletComponent(new SpinSprite(-0.25f));
         // addBulletComponent(new Shrapnel(3));
         // addBulletComponent(new Boomerang());
-        // addBulletComponent(new Boomerang());
-        addBulletComponent(new Shrapnel(5));
+        //addBulletComponent(new Boomerang());
+        //addBulletComponent(new Shrapnel(5));
 
         //addBulletComponent(new WallBounce());
+        //addBulletComponent(new WallBounce());
+
 
 
 

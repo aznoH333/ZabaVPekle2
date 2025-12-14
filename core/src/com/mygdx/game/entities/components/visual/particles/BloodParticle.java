@@ -1,6 +1,6 @@
 package com.mygdx.game.entities.components.visual.particles;
 
-import com.mygdx.game.NumberUtils;
+import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.SoundManager;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;

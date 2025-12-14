@@ -137,7 +137,11 @@ public class DrawingManager {
     }
 
     private void renderText(TextDrawingCommand command) {
-        font.draw(staticBatch, command.text, command.x, command.y);
+        float xScale = font.getScaleX();
+
+        // TODO : this thing here i supposed to center the text. it assumes that the font is monospaced and that the width of a letter is 8
+        float textWidthGuess = command.text.length() / 2f * xScale * 8f;
+        font.draw(staticBatch, command.text, command.x - textWidthGuess, command.y);
     }
 
 
@@ -234,7 +238,13 @@ public class DrawingManager {
                 camera.position.x + Gdx.input.getX() - (Gdx.graphics.getWidth() / 2f),
                 camera.position.y - Gdx.input.getY() + (Gdx.graphics.getHeight() / 2f)
         );
+    }
 
+    public Vector2 getScreenMousePosition() {
+        return new Vector2(
+                Gdx.input.getX() - (Gdx.graphics.getWidth() / 2f),
+                -Gdx.input.getY() + (Gdx.graphics.getHeight() / 2f)
+        );
     }
 
 }

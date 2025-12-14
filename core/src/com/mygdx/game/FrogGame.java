@@ -12,6 +12,7 @@ import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.PlayerSoul;
 import com.mygdx.game.entities.components.behaviour.Shooter;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
+import com.mygdx.game.gameStates.GameStateManager;
 import com.mygdx.game.world.WorldManager;
 
 public class FrogGame extends ApplicationAdapter {
@@ -22,9 +23,12 @@ public class FrogGame extends ApplicationAdapter {
 	WorldManager worldManager;
 	SoundManager soundManager;
 
+	GameStateManager gameStateManager;
 
 	@Override
 	public void create () {
+		gameStateManager = GameStateManager.getInstance();
+
 		drawingManager = DrawingManager.getInstance();
 		drawingManager.loadSpritesInDirectory("assets/sprites");
 
@@ -35,20 +39,6 @@ public class FrogGame extends ApplicationAdapter {
 
 		entityManager = EntityManager.getInstance();
 
-		entityManager.addEntity(new Entity()
-				.setSprite("player_1")
-				.setTeam(EntityTeam.FROG)
-				.addComponent(new PlayerSoul())
-				.setDrawingLayer(DrawingLayer.PLAYER)
-				.addComponent(new GameEntityAnimator("player", 1, 2, 8, 9, 3))
-				.addComponent(new Shooter("hand_0001"))
-		);
-
-
-
-
-
-
 		worldManager = WorldManager.getInstance();
 
 		soundManager = SoundManager.getInstance();
@@ -57,19 +47,9 @@ public class FrogGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-		drawingManager.drawText(new TextDrawingCommand("hjelapwe", 0f, 0f));
-		drawingManager.drawText(new TextDrawingCommand("hjelapwe", 20f, 20f));
-		drawingManager.drawText(new TextDrawingCommand("hjelapwe", 200f, 200f));
-		drawingManager.drawText(new TextDrawingCommand("hjelapwe", -200f, -200f));
-		drawingManager.drawSpriteStatic(new DrawingCommand("player_1", 0f, 0), DrawingLayer.PLAYER);
 
 
-
-		worldManager.draw();
-		worldManager.update();
-		entityManager.update();
-
-		drawingManager.render();
+		gameStateManager.update();
 	}
 	
 	@Override

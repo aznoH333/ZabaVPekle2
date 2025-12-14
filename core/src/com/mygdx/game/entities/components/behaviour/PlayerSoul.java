@@ -3,7 +3,7 @@ package com.mygdx.game.entities.components.behaviour;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.NumberUtils;
+import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;

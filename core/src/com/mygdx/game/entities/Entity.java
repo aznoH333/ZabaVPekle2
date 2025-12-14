@@ -1,6 +1,6 @@
 package com.mygdx.game.entities;
 
-import com.mygdx.game.NumberUtils;
+import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.drawing.DrawingManager;
@@ -59,6 +59,7 @@ public class Entity {
     public boolean flipX = false;
     public boolean flipY = false;
     public boolean flipWithMoveDirection = false;
+    public boolean drawAsStatic = false;
 
 
     public Entity() {
@@ -126,7 +127,8 @@ public class Entity {
                             .setG(g)
                             .setB(b)
                             .setA(a),
-                    drawingLayer
+                    drawingLayer,
+                    drawAsStatic
             );
         }
 
@@ -228,16 +230,12 @@ public class Entity {
     }
 
     public boolean collidesWithEntity(Entity other) {
-        float width = this.width / 2.0f;
-        float height = this.height / 2.0f;
 
-        float otherWidth = other.width / 2.0f;
-        float otherHeight = other.height / 2.0f;
+        return NumberUtils.checkCollisions(
+                x, y, width, height,
+                other.x, other.y, other.width, other.height
+        );
 
-        return x - width < other.x + otherWidth &&
-               x + width > other.x - otherWidth &&
-               y - height < other.y + otherHeight &&
-               y + height > other.y - otherHeight;
     }
 
     private boolean shouldApplyKnockBack() {
@@ -276,6 +274,11 @@ public class Entity {
         this.g = g;
         this.b = b;
         this.a = a;
+        return this;
+    }
+
+    public Entity makeStatic() {
+        drawAsStatic = true;
         return this;
     }
 

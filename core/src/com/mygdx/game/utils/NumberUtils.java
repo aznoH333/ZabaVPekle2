@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.utils;
 
 public class NumberUtils {
     public final static float HALF_PI = (float) (Math.PI / 2f);
@@ -57,6 +57,28 @@ public class NumberUtils {
 
     public static float constrictRotationToRad(float rotation) {
         return rotation % TWO_PI;
+    }
+
+    public static boolean checkCollisions(
+            float x1,
+            float y1,
+            float w1,
+            float h1,
+            float x2,
+            float y2,
+            float w2,
+            float h2
+    ) {
+        float width = w1 / 2.0f;
+        float height = h1 / 2.0f;
+
+        float otherWidth = w2/ 2.0f;
+        float otherHeight = h2 / 2.0f;
+
+        return x1 - width < x2 + otherWidth &&
+                x1 + width > x2 - otherWidth &&
+                y1 - height < y2 + otherHeight &&
+                y1 + height > y2 - otherHeight;
     }
 
 }
