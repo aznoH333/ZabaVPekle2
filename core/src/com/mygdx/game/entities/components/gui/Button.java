@@ -19,13 +19,13 @@ public class Button extends EntityComponent {
 
     @Override
     public void onUpdate(Entity owner) {
-
+        //
         Vector2 mousePos = drawingManager.getScreenMousePosition();
 
         if (NumberUtils.checkCollisions(
                 owner.x, owner.y, owner.width, owner.height,
                 mousePos.x, mousePos.y, 1, 1
-        ) && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+        ) && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) || Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             buttonAction.run();
         }
     }

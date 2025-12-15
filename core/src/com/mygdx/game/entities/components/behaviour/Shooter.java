@@ -26,7 +26,7 @@ public class Shooter extends EntityComponent {
 
     // statistics
     public int fireRate = 20;
-    public float spread = 0.45f;
+    public float spread = 0.045f;
     public int bulletsPerShot = 1;
     public float bulletSpeed = 0.75f;
     public float damage = 2f;

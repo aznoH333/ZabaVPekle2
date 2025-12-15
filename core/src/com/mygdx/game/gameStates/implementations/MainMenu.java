@@ -20,7 +20,6 @@ public class MainMenu extends GameState {
     public void initializeState() {
         entityManager.addEntity(
                 new Entity()
-                        .setSprite("player_1")
                         .makeStatic()
                         .addComponent(
                                 new Text("Play game")

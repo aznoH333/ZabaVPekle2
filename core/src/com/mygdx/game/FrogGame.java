@@ -13,6 +13,8 @@ import com.mygdx.game.entities.components.behaviour.PlayerSoul;
 import com.mygdx.game.entities.components.behaviour.Shooter;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 import com.mygdx.game.gameStates.GameStateManager;
+import com.mygdx.game.gameStates.implementations.Game;
+import com.mygdx.game.gameStates.implementations.MainMenu;
 import com.mygdx.game.world.WorldManager;
 
 public class FrogGame extends ApplicationAdapter {
@@ -42,6 +44,11 @@ public class FrogGame extends ApplicationAdapter {
 		worldManager = WorldManager.getInstance();
 
 		soundManager = SoundManager.getInstance();
+
+		// game states
+		gameStateManager.addGameState(new Game());
+		gameStateManager.addGameState(new MainMenu());
+		gameStateManager.switchState("main menu");
 
 	}
 

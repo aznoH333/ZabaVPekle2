@@ -1,6 +1,7 @@
 package com.mygdx.game.gameStates;
 
 import com.mygdx.game.drawing.DrawingManager;
+import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.gameStates.implementations.Game;
 import com.mygdx.game.gameStates.implementations.MainMenu;
@@ -27,26 +28,22 @@ public class GameStateManager {
 
 
 
-    private HashMap<String, GameState> states = new HashMap<>();
+    private final HashMap<String, GameState> states = new HashMap<>();
     private GameState currentState;
 
-    public GameStateManager() {
-        addGameState(new Game());
-        addGameState(new MainMenu());
-
-        currentState = states.get("main menu");
-        currentState.initializeState();
+    private GameStateManager() {
     }
 
-    private void addGameState(GameState state) {
+    public void addGameState(GameState state) {
         states.put(state.name, state);
     }
 
 
     public void switchState(String newState) {
 
-        System.out.println("switching state from " + currentState.name + " to " + newState);
-        currentState.cleanUpState();
+        if (currentState != null) {
+            currentState.cleanUpState();
+        }
 
         currentState = states.get(newState);
         entityManager.clearAllEntities();
@@ -57,7 +54,7 @@ public class GameStateManager {
 
 
     public void update() {
-        System.out.println(currentState.name + " , " + currentState.drawWorld);
+        drawingManager.drawText(new TextDrawingCommand(currentState.name, 0f, 200f));
         if (currentState.drawWorld) {
             worldManager.draw();
             worldManager.update();
