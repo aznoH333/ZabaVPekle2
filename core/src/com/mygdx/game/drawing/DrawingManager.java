@@ -139,6 +139,8 @@ public class DrawingManager {
     private void renderText(TextDrawingCommand command) {
         float xScale = font.getScaleX();
 
+        font.setColor(command.r, command.b, command.g, command.a);
+
         // TODO : this thing here i supposed to center the text. it assumes that the font is monospaced and that the width of a letter is 8
         float textWidthGuess = command.text.length() / 2f * xScale * 8f;
         font.draw(staticBatch, command.text, command.x - textWidthGuess, command.y);
@@ -241,7 +243,6 @@ public class DrawingManager {
     }
 
     public Vector2 getScreenMousePosition() {
-        System.out.println(((float) Gdx.input.getX() / Gdx.graphics.getWidth() - 0.5f) * staticViewPort.getWorldWidth());
 
         return new Vector2(
                 ((float) Gdx.input.getX() / Gdx.graphics.getWidth() - 0.5f) * (staticViewPort.getWorldWidth() * staticCamera.zoom),

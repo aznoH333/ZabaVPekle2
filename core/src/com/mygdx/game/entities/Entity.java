@@ -253,6 +253,16 @@ public class Entity {
         return this;
     }
 
+    public Entity setWidth(float width) {
+        this.width = width;
+        return this;
+    }
+
+    public Entity setHeight(float height) {
+        this.height = height;
+        return this;
+    }
+
     public Entity setSprite(String sprite) {
         this.sprite = sprite;
         return this;
