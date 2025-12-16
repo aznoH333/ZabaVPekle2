@@ -1,9 +1,9 @@
 package com.mygdx.game.gameStates.implementations;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.SoundManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityManager;
-import com.mygdx.game.entities.components.behaviour.PlayerSoul;
 import com.mygdx.game.entities.components.gui.Button;
 import com.mygdx.game.entities.components.gui.Hover;
 import com.mygdx.game.entities.components.gui.Text;
@@ -13,6 +13,7 @@ import com.mygdx.game.gameStates.GameStateManager;
 public class MainMenu extends GameState {
     private static final EntityManager entityManager = EntityManager.getInstance();
     private static final GameStateManager gameStateManager = GameStateManager.getInstance();
+    private static final SoundManager soungManager = SoundManager.getInstance();
 
 
     public MainMenu() {
@@ -39,9 +40,11 @@ public class MainMenu extends GameState {
                         })).addComponent(new Hover(
                                 ()->{
                                     text.color.b = 0f;
+                                    soungManager.playSound("click", 1f, 0.1f);
                                 },
                                 ()->{
                                     text.color.b = 1f;
+                                    soungManager.playSound("click", 1f, 0.1f);
                                 }
                         ))
         );

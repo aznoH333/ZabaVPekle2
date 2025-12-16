@@ -36,20 +36,14 @@ public class WorldManager {
     private boolean doorsOpen = false;
 
 
-    private final int outerWorldSize = 25;
-    private final int innerWorldSize = 10;
     private Entity player = null;
 
-
-    private Color floorColor = new Color(0.2f, 0.2f, 0.2f, 1f);
-    private Color brickColor = new Color(0.95f, 0.25f, 0.1f, 1f);
-    private Color worldTopColor = new Color(0.95f, 0.25f, 0.1f, 1f);
-    private Color doorColor = new Color(0.8f, 0.8f, 0.8f, 1f);
+    private WorldProgress progress = new WorldProgress();
 
 
     public void draw() {
-        for (int x = -outerWorldSize; x < outerWorldSize; x++) {
-            for (int y = -outerWorldSize; y < outerWorldSize; y++) {
+        for (int x = -progress.outerWorldSize; x < progress.outerWorldSize; x++) {
+            for (int y = -progress.outerWorldSize; y < progress.outerWorldSize; y++) {
                 WorldTileType tileType = getTileType(x, y);
                 DrawingLayer layer = null;
 
@@ -82,13 +76,13 @@ public class WorldManager {
     public Color getColorForTile(WorldTileColor tileColor) {
         switch (tileColor) {
             case BRICKS:
-                return brickColor;
+                return progress.brickColor;
             case WORLD_TOP:
-                return worldTopColor;
+                return progress.worldTopColor;
             case FLOOR:
-                return floorColor;
+                return progress.floorColor;
             default:
-                return doorColor;
+                return progress.doorColor;
         }
     }
 
@@ -97,47 +91,47 @@ public class WorldManager {
         int absX = Math.abs(x);
         int absY = Math.abs(y);
 
-        int headerPos = innerWorldSize + 1;
+        int headerPos = progress.innerWorldSize + 1;
 
 
         // doors
-        if (x == 0 && y == innerWorldSize) {
+        if (x == 0 && y == progress.innerWorldSize) {
             if (doorsOpen) {
                 return WorldTileType.DOOR_TOP_OPEN;
             } else {
                 return WorldTileType.DOOR_TOP_CLOSED;
             }
         }
-        if (x == 0 && y == -innerWorldSize) {
+        if (x == 0 && y == -progress.innerWorldSize) {
             return WorldTileType.DOOR_BOTTOM_CLOSED;
         }
 
 
         // bricks
-        if (absX < innerWorldSize && y == innerWorldSize) {
+        if (absX < progress.innerWorldSize && y == progress.innerWorldSize) {
             return WorldTileType.BRICK_WALL_TOP;
         }
-        if (absX < innerWorldSize && y == -innerWorldSize) {
+        if (absX < progress.innerWorldSize && y == -progress.innerWorldSize) {
             return WorldTileType.BRICK_WALL_BOTTOM;
         }
-        if (absY < innerWorldSize && x == innerWorldSize) {
+        if (absY < progress.innerWorldSize && x == progress.innerWorldSize) {
             return WorldTileType.BRICK_WALL_RIGHT;
         }
-        if (absY < innerWorldSize && x == -innerWorldSize) {
+        if (absY < progress.innerWorldSize && x == -progress.innerWorldSize) {
             return WorldTileType.BRICK_WALL_LEFT;
         }
 
         // brick corners
-        if (x == -innerWorldSize && y == innerWorldSize) {
+        if (x == -progress.innerWorldSize && y == progress.innerWorldSize) {
             return WorldTileType.BRICK_CORNER_LEFT_TOP;
         }
-        if (x == -innerWorldSize && y == -innerWorldSize) {
+        if (x == -progress.innerWorldSize && y == -progress.innerWorldSize) {
             return WorldTileType.BRICK_CORNER_LEFT_BOTTOM;
         }
-        if (x == innerWorldSize && y == innerWorldSize) {
+        if (x == progress.innerWorldSize && y == progress.innerWorldSize) {
             return WorldTileType.BRICK_CORNER_RIGHT_TOP;
         }
-        if (x == innerWorldSize && y == -innerWorldSize) {
+        if (x == progress.innerWorldSize && y == -progress.innerWorldSize) {
             return WorldTileType.BRICK_CORNER_RIGHT_BOTTOM;
         }
 
@@ -156,16 +150,16 @@ public class WorldManager {
         }
 
         // world top
-        if (absX < innerWorldSize + 1 && y == innerWorldSize + 1) {
+        if (absX < progress.innerWorldSize + 1 && y == progress.innerWorldSize + 1) {
             return WorldTileType.BRICK_HEADER_TOP;
         }
-        if (absX < innerWorldSize + 1 && y == -innerWorldSize - 1) {
+        if (absX < progress.innerWorldSize + 1 && y == -progress.innerWorldSize - 1) {
             return WorldTileType.BRICK_HEADER_BOTTOM;
         }
-        if (absY < innerWorldSize + 1 && x == innerWorldSize + 1) {
+        if (absY < progress.innerWorldSize + 1 && x == progress.innerWorldSize + 1) {
             return WorldTileType.BRICK_HEADER_RIGHT;
         }
-        if (absY < innerWorldSize + 1 && x == -innerWorldSize - 1) {
+        if (absY < progress.innerWorldSize + 1 && x == -progress.innerWorldSize - 1) {
             return WorldTileType.BRICK_HEADER_LEFT;
         }
 
@@ -173,7 +167,7 @@ public class WorldManager {
 
 
         // floor texture
-        if (Math.abs(x) < innerWorldSize && Math.abs(y) < innerWorldSize) {
+        if (Math.abs(x) < progress.innerWorldSize && Math.abs(y) < progress.innerWorldSize) {
             return WorldTileType.FLOOR_TILE;
         }
 
@@ -207,8 +201,8 @@ public class WorldManager {
         int y;
 
         do {
-            x = NumberUtils.randomInt(-innerWorldSize, innerWorldSize) * 32;
-            y = NumberUtils.randomInt(-innerWorldSize, innerWorldSize) * 32;
+            x = NumberUtils.randomInt(-progress.innerWorldSize, progress.innerWorldSize) * 32;
+            y = NumberUtils.randomInt(-progress.innerWorldSize, progress.innerWorldSize) * 32;
         }while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, player.x, player.y) < 128f);
 
         entityManager.addEntity(
@@ -243,7 +237,7 @@ public class WorldManager {
             entityManager.addEntity(
                     new Entity()
                             .setX(-16f)
-                            .setY((innerWorldSize -1) * 32f)
+                            .setY((progress.innerWorldSize -1) * 32f)
                             .addComponent(new Door())
             );
         }
@@ -255,18 +249,22 @@ public class WorldManager {
         float widthValue = width / 2f;
         float heightValue = height / 2f;
 
-        return x - widthValue > -innerWorldSize * 32f &&
-               x + widthValue < (innerWorldSize - 1) * 32f &&
-               y - heightValue > -innerWorldSize * 32f &&
-               y + heightValue < (innerWorldSize - 1) * 32f;
+        return x - widthValue > -progress.innerWorldSize * 32f &&
+               x + widthValue < (progress.innerWorldSize - 1) * 32f &&
+               y - heightValue > -progress.innerWorldSize * 32f &&
+               y + heightValue < (progress.innerWorldSize - 1) * 32f;
     }
 
     public void moveToNewLevel(Entity playerRef) {
         entityManager.clearAllEntities();
-        entityManager.addEntity(playerRef.setX(-16f).setY((-innerWorldSize +1) * 32f + 16f));
 
 
-        this.enemiesToSpawn = 10;
+        progress.completedLevel();
+
+        entityManager.addEntity(playerRef.setX(-16f).setY((-progress.innerWorldSize +1) * 32f + 16f));
+
+
+        this.enemiesToSpawn = progress.howManyEnemiesShouldSpawn();
         this.doorsOpen = false;
         this.enemiesToKill = enemiesToSpawn;
     }
