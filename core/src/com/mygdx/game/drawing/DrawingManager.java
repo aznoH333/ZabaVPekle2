@@ -241,9 +241,11 @@ public class DrawingManager {
     }
 
     public Vector2 getScreenMousePosition() {
+        System.out.println(((float) Gdx.input.getX() / Gdx.graphics.getWidth() - 0.5f) * staticViewPort.getWorldWidth());
+
         return new Vector2(
-                Gdx.input.getX() - (Gdx.graphics.getWidth() / 2f),
-                -Gdx.input.getY() + (Gdx.graphics.getHeight() / 2f)
+                ((float) Gdx.input.getX() / Gdx.graphics.getWidth() - 0.5f) * (staticViewPort.getWorldWidth() * staticCamera.zoom),
+                (-(float) Gdx.input.getY() / Gdx.graphics.getHeight() + 0.5f) * (staticViewPort.getWorldHeight() * staticCamera.zoom)
         );
     }
 

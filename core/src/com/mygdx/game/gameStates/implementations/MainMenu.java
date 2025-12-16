@@ -21,6 +21,7 @@ public class MainMenu extends GameState {
         entityManager.addEntity(
                 new Entity()
                         .makeStatic()
+                        .setY(100)
                         .addComponent(
                                 new Text("Play game")
                         ).addComponent(new Button(()->{
