@@ -1,0 +1,484 @@
+[
+  {
+    "id": "TASK_1",
+    "priority": "LOW",
+    "tags": [
+      "🗿MVP"
+    ],
+    "title": "Title screen",
+    "description": "",
+    "status": "DONE",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 13
+      },
+      "time": {
+        "hour": 22,
+        "minute": 13,
+        "second": 19,
+        "nano": 948691282
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_3",
+    "priority": "LOW",
+    "tags": [
+      "🗿MVP"
+    ],
+    "title": "Sound",
+    "description": "",
+    "status": "DONE",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 13
+      },
+      "time": {
+        "hour": 22,
+        "minute": 13,
+        "second": 40,
+        "nano": 842172709
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_6",
+    "priority": "LOW",
+    "tags": [
+      "🗿MVP"
+    ],
+    "title": "GUI",
+    "description": "",
+    "status": "DONE",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 13
+      },
+      "time": {
+        "hour": 22,
+        "minute": 14,
+        "second": 1,
+        "nano": 183023587
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 21,
+        "minute": 32,
+        "second": 47,
+        "nano": 409107971
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_13",
+    "priority": "LOW",
+    "tags": [
+      "🗿MVP"
+    ],
+    "title": "Font drawing",
+    "description": "",
+    "status": "DONE",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 14
+      },
+      "time": {
+        "hour": 11,
+        "minute": 57,
+        "second": 41,
+        "nano": 355589908
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 21,
+        "minute": 32,
+        "second": 50,
+        "nano": 647020846
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_30",
+    "priority": "LOW",
+    "tags": [
+      "👀art"
+    ],
+    "title": "split body and head sprites",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 21,
+        "minute": 59,
+        "second": 25,
+        "nano": 5565660
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_36",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "implement two segment bodies",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 0,
+        "second": 1,
+        "nano": 200417668
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_43",
+    "priority": "LOW",
+    "tags": [
+      "👀art"
+    ],
+    "title": "shop art",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 0,
+        "second": 20,
+        "nano": 117456404
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_51",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "shop implement",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 0,
+        "second": 30,
+        "nano": 535278426
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_60",
+    "priority": "LOW",
+    "tags": [
+      "👀art"
+    ],
+    "title": "items art",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 0,
+        "second": 40,
+        "nano": 274917314
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_70",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "items implement",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 0,
+        "second": 48,
+        "nano": 137615188
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_81",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "enemy variety",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 0,
+        "second": 55,
+        "nano": 159324812
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_93",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "enemy mutation",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 1,
+        "second": 3,
+        "nano": 79280605
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_106",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "bosses",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 1,
+        "second": 8,
+        "nano": 77493237
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_120",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "world segments?",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 1,
+        "second": 27,
+        "nano": 45615118
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_135",
+    "priority": "LOW",
+    "tags": [
+      "👀art"
+    ],
+    "title": "better menu",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 1,
+        "second": 41,
+        "nano": 124156974
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_151",
+    "priority": "LOW",
+    "tags": [
+      "👀art"
+    ],
+    "title": "healthbars sprites",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 1,
+        "second": 57,
+        "nano": 12442496
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_168",
+    "priority": "LOW",
+    "tags": [
+      "👀art"
+    ],
+    "title": "button sprites",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 2,
+        "second": 2,
+        "nano": 632357743
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_186",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "healthbars",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 2,
+        "second": 9,
+        "nano": 830131165
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_205",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "change world color on progress",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 16
+      },
+      "time": {
+        "hour": 22,
+        "minute": 2,
+        "second": 20,
+        "nano": 829267398
+      }
+    },
+    "isImported": false
+  }
+]
