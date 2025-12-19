@@ -69,6 +69,25 @@ public class Entity {
 
     public void update() {
 
+        if (sprite != null) {
+            // draw
+            drawingManager.drawSprite(
+                    new DrawingCommand(sprite, x + spriteOffsetX, y + spriteOffsetY)
+                            .setWidth(scaleX)
+                            .setHeight(scaleY)
+                            .setFlipHorizontally(flipX)
+                            .setFlipVertically(flipY)
+                            .setRotationRad(spriteRotation)
+                            .setR(r)
+                            .setG(g)
+                            .setB(b)
+                            .setA(a),
+                    drawingLayer,
+                    drawAsStatic
+            );
+        }
+
+
         for (EntityComponent component : this.components) {
             component.onUpdate(this);
         }
@@ -114,23 +133,7 @@ public class Entity {
         }
 
 
-        if (sprite != null) {
-            // draw
-            drawingManager.drawSprite(
-                    new DrawingCommand(sprite, x + spriteOffsetX, y + spriteOffsetY)
-                            .setWidth(scaleX)
-                            .setHeight(scaleY)
-                            .setFlipHorizontally(flipX)
-                            .setFlipVertically(flipY)
-                            .setRotationRad(spriteRotation)
-                            .setR(r)
-                            .setG(g)
-                            .setB(b)
-                            .setA(a),
-                    drawingLayer,
-                    drawAsStatic
-            );
-        }
+
 
 
         // invincibility
@@ -240,6 +243,10 @@ public class Entity {
 
     private boolean shouldApplyKnockBack() {
         return knockBackTimer > 0;
+    }
+
+    public boolean isStunned() {
+        return this.knockBackTimer != 0;
     }
 
     // setters
@@ -371,5 +378,6 @@ public class Entity {
         stats.multiply(stat, value);
         return this;
     }
+
 
 }

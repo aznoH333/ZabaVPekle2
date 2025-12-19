@@ -1,5 +1,7 @@
 package com.mygdx.game.entities.components.behaviour;
 
+import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.SoundManager;
 import com.mygdx.game.drawing.DrawingCommand;
@@ -32,6 +34,8 @@ public class Shooter extends EntityComponent {
     public float damage = 2f;
     public String bulletSprite = "fire_ball";
     private ArrayList<BulletOrigin> bulletOrigins = new ArrayList<>();
+    public Color color;
+    private AnimatedLegsWithHat legs;
 
 
     private ArrayList<EntityComponent> bulletComponents = new ArrayList<>();
@@ -92,7 +96,8 @@ public class Shooter extends EntityComponent {
                                 .setRotationRad(handDir)
                                 .setFlipVertically(owner.flipX)
                                 .setWidth(1 + ((scaleTimer / 10f) * 0.25f))
-                                .setHeight(1 + ((scaleTimer / 10f) * 0.25f)),
+                                .setHeight(1 + ((scaleTimer / 10f) * 0.25f))
+                                .setColor(legs.currentColor),
                         DrawingLayer.HAND);
             }
         }
@@ -134,6 +139,11 @@ public class Shooter extends EntityComponent {
         }
 
 
+    }
+
+    @Override
+    public void onComponentAttached(Entity owner) {
+        legs = (AnimatedLegsWithHat) owner.getComponentByName("legs");
     }
 
     public void addBulletComponent(EntityComponent component) {
