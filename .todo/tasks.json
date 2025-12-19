@@ -183,313 +183,193 @@
     "isImported": false
   },
   {
-    "id": "TASK_43",
+    "id": "TASK_419",
     "priority": "LOW",
     "tags": [
-      "👀art"
+      "🤔clarify"
     ],
-    "title": "shop art",
+    "title": "World progress",
     "description": "",
     "status": "TODO",
     "date": {
       "date": {
         "year": 2025,
         "month": 12,
-        "day": 16
+        "day": 19
       },
       "time": {
-        "hour": 22,
-        "minute": 0,
-        "second": 20,
-        "nano": 117456404
+        "hour": 12,
+        "minute": 42,
+        "second": 58,
+        "nano": 563560567
       }
     },
     "isImported": false
   },
   {
-    "id": "TASK_51",
+    "id": "TASK_427",
     "priority": "LOW",
     "tags": [
-      "🔧code"
+      "🤔clarify"
     ],
-    "title": "shop implement",
+    "title": "boxes",
     "description": "",
     "status": "TODO",
     "date": {
       "date": {
         "year": 2025,
         "month": 12,
-        "day": 16
+        "day": 19
       },
       "time": {
-        "hour": 22,
-        "minute": 0,
-        "second": 30,
-        "nano": 535278426
-      }
-    },
-    "isImported": false
-  },
-  {
-    "id": "TASK_60",
-    "priority": "LOW",
-    "tags": [
-      "👀art"
-    ],
-    "title": "items art",
-    "description": "",
-    "status": "TODO",
-    "date": {
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 16
-      },
-      "time": {
-        "hour": 22,
-        "minute": 0,
-        "second": 40,
-        "nano": 274917314
-      }
-    },
-    "isImported": false
-  },
-  {
-    "id": "TASK_70",
-    "priority": "LOW",
-    "tags": [
-      "🔧code"
-    ],
-    "title": "items implement",
-    "description": "",
-    "status": "TODO",
-    "date": {
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 16
-      },
-      "time": {
-        "hour": 22,
-        "minute": 0,
-        "second": 48,
-        "nano": 137615188
-      }
-    },
-    "isImported": false
-  },
-  {
-    "id": "TASK_81",
-    "priority": "LOW",
-    "tags": [
-      "🔧code"
-    ],
-    "title": "enemy variety",
-    "description": "",
-    "status": "TODO",
-    "date": {
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 16
-      },
-      "time": {
-        "hour": 22,
-        "minute": 0,
-        "second": 55,
-        "nano": 159324812
-      }
-    },
-    "isImported": false
-  },
-  {
-    "id": "TASK_93",
-    "priority": "LOW",
-    "tags": [
-      "🔧code"
-    ],
-    "title": "enemy mutation",
-    "description": "",
-    "status": "TODO",
-    "date": {
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 16
-      },
-      "time": {
-        "hour": 22,
-        "minute": 1,
-        "second": 3,
-        "nano": 79280605
-      }
-    },
-    "isImported": false
-  },
-  {
-    "id": "TASK_106",
-    "priority": "LOW",
-    "tags": [
-      "🔧code"
-    ],
-    "title": "bosses",
-    "description": "",
-    "status": "TODO",
-    "date": {
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 16
-      },
-      "time": {
-        "hour": 22,
-        "minute": 1,
-        "second": 8,
-        "nano": 77493237
-      }
-    },
-    "isImported": false
-  },
-  {
-    "id": "TASK_120",
-    "priority": "LOW",
-    "tags": [
-      "🔧code"
-    ],
-    "title": "world segments?",
-    "description": "",
-    "status": "TODO",
-    "date": {
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 16
-      },
-      "time": {
-        "hour": 22,
-        "minute": 1,
-        "second": 27,
-        "nano": 45615118
-      }
-    },
-    "isImported": false
-  },
-  {
-    "id": "TASK_135",
-    "priority": "LOW",
-    "tags": [
-      "👀art"
-    ],
-    "title": "better menu",
-    "description": "",
-    "status": "TODO",
-    "date": {
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 16
-      },
-      "time": {
-        "hour": 22,
-        "minute": 1,
+        "hour": 12,
+        "minute": 45,
         "second": 41,
-        "nano": 124156974
+        "nano": 556162767
       }
     },
     "isImported": false
   },
   {
-    "id": "TASK_151",
+    "id": "TASK_436",
+    "priority": "LOW",
+    "tags": [
+      "🤔clarify"
+    ],
+    "title": "perks",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 19
+      },
+      "time": {
+        "hour": 12,
+        "minute": 45,
+        "second": 49,
+        "nano": 109064707
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_446",
+    "priority": "LOW",
+    "tags": [
+      "🤔clarify"
+    ],
+    "title": "augments",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 19
+      },
+      "time": {
+        "hour": 12,
+        "minute": 45,
+        "second": 54,
+        "nano": 844816614
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_457",
+    "priority": "LOW",
+    "tags": [
+      "🤔clarify"
+    ],
+    "title": "enemy variations",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 19
+      },
+      "time": {
+        "hour": 12,
+        "minute": 46,
+        "second": 31,
+        "nano": 555367002
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_469",
     "priority": "LOW",
     "tags": [
       "👀art"
     ],
-    "title": "healthbars sprites",
+    "title": "Augment sprites",
     "description": "",
     "status": "TODO",
     "date": {
       "date": {
         "year": 2025,
         "month": 12,
-        "day": 16
+        "day": 19
       },
       "time": {
-        "hour": 22,
-        "minute": 1,
-        "second": 57,
-        "nano": 12442496
+        "hour": 12,
+        "minute": 56,
+        "second": 0,
+        "nano": 946747911
       }
     },
     "isImported": false
   },
   {
-    "id": "TASK_168",
-    "priority": "LOW",
-    "tags": [
-      "👀art"
-    ],
-    "title": "button sprites",
-    "description": "",
-    "status": "TODO",
-    "date": {
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 16
-      },
-      "time": {
-        "hour": 22,
-        "minute": 2,
-        "second": 2,
-        "nano": 632357743
-      }
-    },
-    "isImported": false
-  },
-  {
-    "id": "TASK_186",
+    "id": "TASK_482",
     "priority": "LOW",
     "tags": [
       "🔧code"
     ],
-    "title": "healthbars",
+    "title": "Augment pickup code",
     "description": "",
     "status": "TODO",
     "date": {
       "date": {
         "year": 2025,
         "month": 12,
-        "day": 16
+        "day": 19
       },
       "time": {
-        "hour": 22,
-        "minute": 2,
-        "second": 9,
-        "nano": 830131165
+        "hour": 12,
+        "minute": 56,
+        "second": 10,
+        "nano": 765826514
       }
     },
     "isImported": false
   },
   {
-    "id": "TASK_205",
+    "id": "TASK_496",
     "priority": "LOW",
     "tags": [
       "🔧code"
     ],
-    "title": "change world color on progress",
+    "title": "Augment picker",
     "description": "",
     "status": "TODO",
     "date": {
       "date": {
         "year": 2025,
         "month": 12,
-        "day": 16
+        "day": 19
       },
       "time": {
-        "hour": 22,
-        "minute": 2,
-        "second": 20,
-        "nano": 829267398
+        "hour": 12,
+        "minute": 56,
+        "second": 16,
+        "nano": 686532476
       }
     },
     "isImported": false
