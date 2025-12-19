@@ -1,6 +1,7 @@
 package com.mygdx.game.world;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
@@ -219,7 +220,8 @@ public class WorldManager {
                                 .setX(x)
                                 .setY(y)
                                 .addComponent(new DemonSoul())
-                                .addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
+                                .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2,11)))
+                                //.addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
                                 .addComponent(new GameEntityBleed())
                                 // .addComponent(new Shooter("hand_0001"))
 

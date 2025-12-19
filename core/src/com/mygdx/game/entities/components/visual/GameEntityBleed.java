@@ -22,14 +22,18 @@ public class GameEntityBleed extends EntityComponent {
     }
 
     private void spawnParticles(Entity owner, float amount) {
-        int amountOfBloodToSpawn = (int) Math.min(Math.ceil(amount * NumberUtils.randomFloat(0.6f, 1.6f) / 10f) + 1, 5f);
+        int amountOfBloodToSpawn = (int) Math.min(Math.ceil(amount * NumberUtils.randomFloat(0.6f, 1.6f) / 2f) + 1, 20f);
 
         for (int i = 0; i < amountOfBloodToSpawn; i++) {
             entityManager.addEntity(new Entity()
                     .setSprite("blood_" + NumberUtils.randomInt(1, 3))
                     .setX(owner.x)
                     .setY(owner.y)
-                    .addComponent(new BloodParticle(NumberUtils.randomFloat(0f, NumberUtils.TWO_PI), NumberUtils.randomFloat(0.5f, 2f), NumberUtils.randomFloat(0.5f, 2.5f)))
+                    .addComponent(new BloodParticle(
+                            NumberUtils.randomFloat(0f, NumberUtils.TWO_PI),
+                            NumberUtils.randomFloat(0.5f, 6f),
+                            NumberUtils.randomFloat(0.5f, 2.5f)
+                    ))
                     .setDrawingLayer(DrawingLayer.PROJECTILES)
 
             );

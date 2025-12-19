@@ -1,5 +1,6 @@
 package com.mygdx.game.entities.components.visual.particles;
 
+import com.mygdx.game.entities.stats.Stat;
 import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.SoundManager;
 import com.mygdx.game.drawing.DrawingLayer;
@@ -40,6 +41,11 @@ public class BloodParticle extends EntityComponent {
         }
 
         owner.goInDirection(direction, horizontalVelocity);
+    }
+
+    @Override
+    public void onComponentAttached(Entity owner) {
+        owner.addStat(Stat.Speed, 1f);
     }
 
     @Override
