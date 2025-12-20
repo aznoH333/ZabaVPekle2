@@ -9,7 +9,8 @@ public enum DrawingLayer {
     PROJECTILES(5),
     EFFECTS(6),
     PLAYER(7),
-    HAND(8);
+    HAND(8),
+    GUI(9);
 
     public final int value;
 

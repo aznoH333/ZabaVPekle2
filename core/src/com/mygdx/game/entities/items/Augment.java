@@ -1,10 +1,13 @@
 package com.mygdx.game.entities.items;
 
+import com.mygdx.game.drawing.DrawingManager;
+import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Augment extends EntityComponent {
 
@@ -14,6 +17,11 @@ public class Augment extends EntityComponent {
     public final ArrayList<String> displayText = new ArrayList<>();
 
 
+    private final static DrawingManager drawingManager = DrawingManager.getInstance();
+    private final static float Y_TEXT_OFFSET = -60f;
+    private final static float Y_LINE_OFFSET = -16f;
+
+
     public Augment(Quality quality, ArrayList<EntityComponent> includedComponents) {
         this.quality = quality;
         this.includedComponents = includedComponents;
@@ -21,17 +29,51 @@ public class Augment extends EntityComponent {
 
 
         // construct display text
-
-        HashMap<String, Integer> effectPotencyMap;
+        HashMap<String, Integer> effectPotencyMap = new HashMap<>();
         for (EntityComponent component : includedComponents) {
             if (component.effectDescription != null) {
+                if (!effectPotencyMap.containsKey(component.effectDescription)) {
+                    effectPotencyMap.put(component.effectDescription, 0);
+                }
 
+                if (component.potency != EffectPotency.NOT_QUALIFIED) {
+                    effectPotencyMap.put(component.effectDescription, effectPotencyMap.get(component.effectDescription) + component.potency.quantifier);
+                }
             }
+        }
+
+        displayText.add(quality.textName + " augment");
+
+        // convert to text
+        for (Map.Entry<String, Integer> entry : effectPotencyMap.entrySet()) {
+            EffectPotency potency = EffectPotency.getPotencyBasedOnValue(entry.getValue());
+            String text = "grants";
+
+            if (potency != EffectPotency.NOT_QUALIFIED) {
+                text += " " + potency.textName;
+            }
+
+            text += " " + entry.getKey();
+
+            displayText.add(text);
+        }
+    }
+
+    @Override
+    public void onUpdate(Entity owner) {
+        float nextLineY = owner.y + Y_TEXT_OFFSET;
+        for (String line : displayText) {
+            drawingManager.drawText(new TextDrawingCommand(line, owner.x, nextLineY));
+
+            nextLineY += Y_LINE_OFFSET;
         }
     }
 
 
-    public void attachToEntity(Entity attachTo) {
 
+    public void attachToEntity(Entity attachTo) {
+        for (EntityComponent component : includedComponents) {
+            attachTo.addComponent(component);
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -137,13 +138,13 @@ public class DrawingManager {
     }
 
     private void renderText(TextDrawingCommand command) {
-        float xScale = font.getScaleX();
 
         font.setColor(command.r, command.b, command.g, command.a);
 
-        // TODO : this thing here i supposed to center the text. it assumes that the font is monospaced and that the width of a letter is 8
-        float textWidthGuess = command.text.length() / 2f * xScale * 8f;
-        font.draw(staticBatch, command.text, command.x - textWidthGuess, command.y);
+
+        GlyphLayout layout = new GlyphLayout(font, command.text);
+
+        font.draw(staticBatch, command.text, command.x - (layout.width / 2f), command.y);
     }
 
 

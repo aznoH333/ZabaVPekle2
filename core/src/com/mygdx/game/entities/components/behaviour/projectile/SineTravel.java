@@ -12,6 +12,10 @@ public class SineTravel extends EntityComponent {
     private int timer = 3;
 
 
+    public SineTravel(){
+        effectDescription = "wave shot";
+    }
+
     @Override
     public void onUpdate(Entity owner) {
         timer++;

@@ -1,5 +1,6 @@
 package com.mygdx.game.entities.components.behaviour.projectile;
 
+import com.mygdx.game.entities.items.EffectPotency;
 import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
@@ -14,6 +15,9 @@ public class Shrapnel extends EntityComponent {
 
     public Shrapnel(int amountToSpawn) {
         this.amountToSpawn = amountToSpawn;
+
+        super.effectDescription = "shrapnel";
+        super.potency = EffectPotency.MODERATE;
     }
 
     @Override

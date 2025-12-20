@@ -21,7 +21,7 @@ public enum EffectPotency {
 
         EffectPotency potencyToReturn = NOT_QUALIFIED;
         for (EffectPotency potency : EffectPotency.values()) {
-            if (potencyToReturn.quantifier > value) {
+            if (potencyToReturn.quantifier >= value) {
                 break;
             }
             potencyToReturn = potency;
