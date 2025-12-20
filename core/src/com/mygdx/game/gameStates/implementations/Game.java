@@ -41,7 +41,7 @@ public class Game extends GameState {
                 .addComponent(new AnimatedLegsWithHat(new Color(0f, 1f, 0f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_1"))
                 .addComponent(new Shooter("hands_0002"))
         );
-
+        /*
 
         ArrayList<EntityComponent> debugList = new ArrayList<EntityComponent>();
 
@@ -86,7 +86,7 @@ public class Game extends GameState {
                                     soundManager.playSound("click", 1f, 0.1f);
                                 }
                         ))
-        );
+        );*/
     }
 
     @Override

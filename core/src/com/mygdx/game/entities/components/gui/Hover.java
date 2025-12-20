@@ -10,11 +10,11 @@ public class Hover extends EntityComponent {
 
     private final static DrawingManager drawingManager = DrawingManager.getInstance();
 
-    private final Runnable onHoverStart;
-    private final Runnable onHoverEnd;
+    private final GUIRunnable onHoverStart;
+    private final GUIRunnable onHoverEnd;
     private boolean wasHoveredLastFrame = false;
 
-    public Hover(Runnable onHoverStart, Runnable onHoverEnd) {
+    public Hover(GUIRunnable onHoverStart, GUIRunnable onHoverEnd) {
         this.onHoverStart = onHoverStart;
         this.onHoverEnd = onHoverEnd;
     }
@@ -31,10 +31,10 @@ public class Hover extends EntityComponent {
 
 
         if (hoveredThisFrame && !wasHoveredLastFrame) {
-            onHoverStart.run();
+            onHoverStart.run(owner);
         }
         else if (!hoveredThisFrame && wasHoveredLastFrame) {
-            onHoverEnd.run();
+            onHoverEnd.run(owner);
         }
 
 

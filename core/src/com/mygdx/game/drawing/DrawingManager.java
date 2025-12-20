@@ -251,4 +251,8 @@ public class DrawingManager {
         );
     }
 
+    public float getTextWidth(String text) {
+        return new GlyphLayout(font, text).width;
+    }
+
 }

@@ -13,6 +13,7 @@ public class Text extends EntityComponent {
     public Color color;
 
     public Text(String text) {
+        super.name = "text";
         this.text = text;
         this.color = new Color(1f, 1f, 1f, 1f);
     }

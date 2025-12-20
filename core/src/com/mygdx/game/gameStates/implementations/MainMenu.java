@@ -7,6 +7,7 @@ import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.gui.Button;
 import com.mygdx.game.entities.components.gui.Hover;
 import com.mygdx.game.entities.components.gui.Text;
+import com.mygdx.game.entities.factories.GUIFactory;
 import com.mygdx.game.gameStates.GameState;
 import com.mygdx.game.gameStates.GameStateManager;
 
@@ -24,54 +25,20 @@ public class MainMenu extends GameState {
     public void initializeState() {
 
 
+        entityManager.addEntity(GUIFactory.createButton(
+                "Play game",
+                0f,
+                25f,
+                owner -> gameStateManager.switchState("game")
+        ));
 
-        // play game button
-        Text text =  new Text("Play game"); // I fucking despise this. But it works
-        entityManager.addEntity(
-                new Entity()
-                        .makeStatic()
-                        .setY(25f)
-                        .setHeight(16f)
-                        .setWidth(128f)
-                        .addComponent(
-                               text
-                        ).addComponent(new Button(()->{
-                            gameStateManager.switchState("game");
-                        })).addComponent(new Hover(
-                                ()->{
-                                    text.color.b = 0f;
-                                    soundManager.playSound("click", 1f, 0.1f);
-                                },
-                                ()->{
-                                    text.color.b = 1f;
-                                    soundManager.playSound("click", 1f, 0.1f);
-                                }
-                        ))
-        );
+        entityManager.addEntity(GUIFactory.createButton(
+                "Quit game",
+                0f,
+                -25f,
+                owner -> Gdx.app.exit()
+        ));
 
-
-        // quit game button
-        Text text2 =  new Text("Quit game"); // I fucking despise this. But it works
-
-        entityManager.addEntity(
-                new Entity()
-                        .makeStatic()
-                        .setY(-25f)
-                        .setHeight(16f)
-                        .setWidth(128f)
-                        .addComponent(
-                                text2
-                        ).addComponent(new Button(()->{
-                            Gdx.app.exit();
-                        })).addComponent(new Hover(
-                                ()->{
-                                    text2.color.b = 0f;
-                                },
-                                ()->{
-                                    text2.color.b = 1f;
-                                }
-                        ))
-        );
     }
 
     @Override

@@ -310,7 +310,7 @@
     ],
     "title": "Augment sprites",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -324,6 +324,19 @@
         "nano": 946747911
       }
     },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 1,
+        "second": 10,
+        "nano": 486309808
+      }
+    },
     "isImported": false
   },
   {
@@ -334,7 +347,7 @@
     ],
     "title": "Augment pickup code",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -358,7 +371,7 @@
     ],
     "title": "Augment picker",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -370,6 +383,163 @@
         "minute": 56,
         "second": 16,
         "nano": 686532476
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 1,
+        "second": 13,
+        "nano": 466924523
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_553",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Implement augment generation",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 3,
+        "second": 50,
+        "nano": 768363395
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_569",
+    "priority": "LOW",
+    "tags": [
+      "👀art"
+    ],
+    "title": "Box art",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 3,
+        "second": 59,
+        "nano": 380756928
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_586",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Box item and openning",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 4,
+        "second": 10,
+        "nano": 24417593
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_604",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Clean up shooter code",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 4,
+        "second": 56,
+        "nano": 519412399
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_623",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Make factory methods for buttons",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 5,
+        "second": 10,
+        "nano": 894577276
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_643",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Make factory methods for augments",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 5,
+        "second": 25,
+        "nano": 45450505
       }
     },
     "isImported": false

@@ -11,9 +11,9 @@ import com.mygdx.game.utils.NumberUtils;
 public class Button extends EntityComponent {
 
     private final static DrawingManager drawingManager = DrawingManager.getInstance();
-    private final Runnable buttonAction;
+    private final GUIRunnable buttonAction;
 
-    public Button(Runnable buttonAction) {
+    public Button(GUIRunnable buttonAction) {
         this.buttonAction = buttonAction;
     }
 
@@ -25,7 +25,7 @@ public class Button extends EntityComponent {
                 owner.x, owner.y, owner.width, owner.height,
                 mousePos.x, mousePos.y, 1, 1
         ) && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-            buttonAction.run();
+            buttonAction.run(owner);
         }
     }
 }
