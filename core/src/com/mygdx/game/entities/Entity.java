@@ -305,7 +305,7 @@ public class Entity {
             // dont add component if over limit
             return this;
         }
-
+        component.owner = this;
         this.components.add(component);
 
         resetStats();
@@ -322,6 +322,15 @@ public class Entity {
         return this;
     }
 
+    public Entity setScaleX(float scaleX) {
+        this.scaleX = scaleX;
+        return this;
+    }
+
+    public Entity setScaleY(float scaleY) {
+        this.scaleY = scaleY;
+        return this;
+    }
 
     public Entity setTriggerInvincibility(boolean triggerInvincibility) {
         this.triggerInvincibility = triggerInvincibility;

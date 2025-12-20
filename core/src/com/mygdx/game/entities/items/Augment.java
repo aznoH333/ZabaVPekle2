@@ -4,6 +4,7 @@ import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.entities.components.behaviour.Shooter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +15,7 @@ public class Augment extends EntityComponent {
 
     public final Quality quality;
     public final ArrayList<EntityComponent> includedComponents;
+    public final ArrayList<EntityComponent> componentsForGun;
     public final ArrayList<String> displayText = new ArrayList<>();
 
 
@@ -22,15 +24,27 @@ public class Augment extends EntityComponent {
     private final static float Y_LINE_OFFSET = -16f;
 
 
-    public Augment(Quality quality, ArrayList<EntityComponent> includedComponents) {
+    public Augment(Quality quality, ArrayList<EntityComponent> componentsForEntity, ArrayList<EntityComponent> componentsForGun) {
         this.quality = quality;
-        this.includedComponents = includedComponents;
+        this.includedComponents = componentsForEntity;
+        this.componentsForGun = componentsForGun;
 
 
 
         // construct display text
         HashMap<String, Integer> effectPotencyMap = new HashMap<>();
-        for (EntityComponent component : includedComponents) {
+        for (EntityComponent component : componentsForEntity) {
+            if (component.effectDescription != null) {
+                if (!effectPotencyMap.containsKey(component.effectDescription)) {
+                    effectPotencyMap.put(component.effectDescription, 0);
+                }
+
+                if (component.potency != EffectPotency.NOT_QUALIFIED) {
+                    effectPotencyMap.put(component.effectDescription, effectPotencyMap.get(component.effectDescription) + component.potency.quantifier);
+                }
+            }
+        }
+        for (EntityComponent component : componentsForGun) {
             if (component.effectDescription != null) {
                 if (!effectPotencyMap.containsKey(component.effectDescription)) {
                     effectPotencyMap.put(component.effectDescription, 0);
@@ -74,6 +88,11 @@ public class Augment extends EntityComponent {
     public void attachToEntity(Entity attachTo) {
         for (EntityComponent component : includedComponents) {
             attachTo.addComponent(component);
+        }
+
+        Shooter gun = (Shooter) attachTo.getComponentByName("shooter");
+        for (EntityComponent gunComponent : componentsForGun) {
+            gun.addBulletComponent(gunComponent);
         }
     }
 }

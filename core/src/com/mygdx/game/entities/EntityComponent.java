@@ -8,6 +8,7 @@ public class EntityComponent {
     public String name = null;
     public String effectDescription = null;
     public EffectPotency potency = EffectPotency.NOT_QUALIFIED;
+    public Entity owner = null;
 
     public int componentCountLimit = -1;
     public EntityComponent() {

@@ -25,8 +25,9 @@ public class EntityManager {
 
     }
 
-    public void addEntity(Entity entity) {
+    public Entity addEntity(Entity entity) {
         this.waitingRoom.add(entity);
+        return entity;
     }
 
     public void update() {

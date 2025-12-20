@@ -1,6 +1,7 @@
 package com.mygdx.game.gameStates.implementations;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.SoundManager;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
@@ -10,6 +11,9 @@ import com.mygdx.game.entities.components.behaviour.PlayerSoul;
 import com.mygdx.game.entities.components.behaviour.Shooter;
 import com.mygdx.game.entities.components.behaviour.projectile.Shrapnel;
 import com.mygdx.game.entities.components.behaviour.projectile.SineTravel;
+import com.mygdx.game.entities.components.gui.Button;
+import com.mygdx.game.entities.components.gui.Hover;
+import com.mygdx.game.entities.components.gui.Text;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 import com.mygdx.game.entities.items.Augment;
@@ -20,6 +24,7 @@ import java.util.ArrayList;
 
 public class Game extends GameState {
     private static final EntityManager entityManager = EntityManager.getInstance();
+    private static final SoundManager soundManager = SoundManager.getInstance();
 
     public Game() {
         super("game");
@@ -28,7 +33,8 @@ public class Game extends GameState {
 
     @Override
     public void initializeState() {
-        entityManager.addEntity(new Entity()
+
+        Entity player = entityManager.addEntity(new Entity()
                 .setTeam(EntityTeam.FROG)
                 .addComponent(new PlayerSoul())
                 .setDrawingLayer(DrawingLayer.PLAYER)
@@ -41,17 +47,45 @@ public class Game extends GameState {
 
         debugList.add(new SineTravel());
         debugList.add(new Shrapnel(8));
+        Augment augment = new Augment(
+                Quality.COMMON,
+                new ArrayList<>(),
+                debugList
+        );
 
 
         entityManager.addEntity(
                 new Entity()
                         .setSprite("augments_0002")
-                        .addComponent(new Augment(
-                                Quality.COMMON,
-                                debugList
-                        ))
+                        .addComponent(augment)
+                        .setScaleX(3f)
+                        .setScaleY(3f)
                         .makeStatic()
                         .setDrawingLayer(DrawingLayer.GUI)
+        );
+
+
+        Text text = new Text("Pick");
+        Entity button = new Entity();
+
+        entityManager.addEntity(
+                button
+                        .addComponent(text)
+                        .addComponent(new Button(()->{
+                            augment.attachToEntity(player);
+                            button.commitSudoku();
+                            augment.owner.commitSudoku();
+                        }))
+                        .addComponent(new Hover(
+                                ()->{
+                                    text.color.b = 0f;
+                                    soundManager.playSound("click", 1f, 0.1f);
+                                },
+                                ()->{
+                                    text.color.b = 1f;
+                                    soundManager.playSound("click", 1f, 0.1f);
+                                }
+                        ))
         );
     }
 
