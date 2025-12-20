@@ -13,6 +13,7 @@ import java.util.Map;
 public class Augment extends EntityComponent {
 
 
+
     public final Quality quality;
     public final ArrayList<EntityComponent> includedComponents;
     public final ArrayList<EntityComponent> componentsForGun;
@@ -22,6 +23,7 @@ public class Augment extends EntityComponent {
     private final static DrawingManager drawingManager = DrawingManager.getInstance();
     private final static float Y_TEXT_OFFSET = -60f;
     private final static float Y_LINE_OFFSET = -16f;
+
 
 
     public Augment(Quality quality, ArrayList<EntityComponent> componentsForEntity, ArrayList<EntityComponent> componentsForGun) {

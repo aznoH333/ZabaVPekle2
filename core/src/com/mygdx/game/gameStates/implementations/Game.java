@@ -16,6 +16,7 @@ import com.mygdx.game.entities.components.gui.Hover;
 import com.mygdx.game.entities.components.gui.Text;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
+import com.mygdx.game.entities.facades.GUIFacade;
 import com.mygdx.game.entities.items.Augment;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.gameStates.GameState;
@@ -41,7 +42,7 @@ public class Game extends GameState {
                 .addComponent(new AnimatedLegsWithHat(new Color(0f, 1f, 0f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_1"))
                 .addComponent(new Shooter("hands_0002"))
         );
-        /*
+
 
         ArrayList<EntityComponent> debugList = new ArrayList<EntityComponent>();
 
@@ -54,39 +55,7 @@ public class Game extends GameState {
         );
 
 
-        entityManager.addEntity(
-                new Entity()
-                        .setSprite("augments_0002")
-                        .addComponent(augment)
-                        .setScaleX(3f)
-                        .setScaleY(3f)
-                        .makeStatic()
-                        .setDrawingLayer(DrawingLayer.GUI)
-        );
-
-
-        Text text = new Text("Pick");
-        Entity button = new Entity();
-
-        entityManager.addEntity(
-                button
-                        .addComponent(text)
-                        .addComponent(new Button(()->{
-                            augment.attachToEntity(player);
-                            button.commitSudoku();
-                            augment.owner.commitSudoku();
-                        }))
-                        .addComponent(new Hover(
-                                ()->{
-                                    text.color.b = 0f;
-                                    soundManager.playSound("click", 1f, 0.1f);
-                                },
-                                ()->{
-                                    text.color.b = 1f;
-                                    soundManager.playSound("click", 1f, 0.1f);
-                                }
-                        ))
-        );*/
+        GUIFacade.createAugmentGUI(augment, 0f, 0f, player);
     }
 
     @Override

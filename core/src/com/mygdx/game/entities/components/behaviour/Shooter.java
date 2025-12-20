@@ -11,7 +11,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.behaviour.projectile.*;
-import com.mygdx.game.entities.factories.ProjectileFactory;
+import com.mygdx.game.entities.facades.ProjectileFactory;
 
 import java.util.ArrayList;
 

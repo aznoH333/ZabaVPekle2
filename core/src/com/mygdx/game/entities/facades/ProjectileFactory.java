@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.factories;
+package com.mygdx.game.entities.facades;
 
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
@@ -10,6 +10,10 @@ import com.mygdx.game.entities.stats.Stat;
 import java.util.ArrayList;
 
 public class ProjectileFactory {
+
+    // TODO : this this should be rewritten to be a facade instead
+
+
     public static Entity buildBullet(
             float x,
             float y,

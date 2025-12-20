@@ -504,7 +504,7 @@
     ],
     "title": "Make factory methods for buttons",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -516,6 +516,19 @@
         "minute": 5,
         "second": 10,
         "nano": 894577276
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 57,
+        "second": 9,
+        "nano": 730128335
       }
     },
     "isImported": false
@@ -540,6 +553,54 @@
         "minute": 5,
         "second": 25,
         "nano": 45450505
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_664",
+    "priority": "LOW",
+    "tags": [
+      "👀art"
+    ],
+    "title": "button sprites",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 41,
+        "second": 49,
+        "nano": 418637131
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_707",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Rewrite projectile factory",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 17,
+        "minute": 57,
+        "second": 26,
+        "nano": 417784950
       }
     },
     "isImported": false
