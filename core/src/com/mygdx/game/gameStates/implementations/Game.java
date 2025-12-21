@@ -16,6 +16,7 @@ import com.mygdx.game.entities.components.gui.Hover;
 import com.mygdx.game.entities.components.gui.Text;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityAnimator;
+import com.mygdx.game.entities.facades.AugmentBoxFacade;
 import com.mygdx.game.entities.facades.GUIFacade;
 import com.mygdx.game.entities.items.Augment;
 import com.mygdx.game.entities.items.Quality;
@@ -44,18 +45,7 @@ public class Game extends GameState {
         );
 
 
-        ArrayList<EntityComponent> debugList = new ArrayList<EntityComponent>();
-
-        debugList.add(new SineTravel());
-        debugList.add(new Shrapnel(8));
-        Augment augment = new Augment(
-                Quality.COMMON,
-                new ArrayList<>(),
-                debugList
-        );
-
-
-        GUIFacade.createAugmentGUI(augment, 0f, 0f, player);
+        AugmentBoxFacade.openNewBox(player, Quality.COMMON);
     }
 
     @Override

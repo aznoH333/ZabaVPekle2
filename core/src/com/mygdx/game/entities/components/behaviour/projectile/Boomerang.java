@@ -13,6 +13,11 @@ public class Boomerang extends EntityComponent {
     private Bullet bullet;
     private boolean leftWard = NumberUtils.randomChance(0.5f);
 
+
+    public Boomerang() {
+        super.effectDescription = "boomerang";
+    }
+
     @Override
     public void onUpdate(Entity owner) {
         float speedMultiplier = owner.stats.get(Stat.Speed) / 32f;

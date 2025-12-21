@@ -604,5 +604,77 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_730",
+    "priority": "LOW",
+    "tags": [
+      "🤔clarify"
+    ],
+    "title": "Player manager?",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 18,
+        "minute": 10,
+        "second": 0,
+        "nano": 417259088
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_754",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "augment stacking",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 18,
+        "minute": 19,
+        "second": 12,
+        "nano": 885875794
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_779",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Entity children",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 20
+      },
+      "time": {
+        "hour": 18,
+        "minute": 20,
+        "second": 15,
+        "nano": 744145183
+      }
+    },
+    "isImported": false
   }
 ]
