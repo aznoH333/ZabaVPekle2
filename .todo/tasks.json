@@ -432,7 +432,7 @@
     ],
     "title": "Box art",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -444,6 +444,19 @@
         "minute": 3,
         "second": 59,
         "nano": 380756928
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 12,
+        "minute": 45,
+        "second": 47,
+        "nano": 943521849
       }
     },
     "isImported": false
@@ -661,7 +674,7 @@
     ],
     "title": "Entity children",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -673,6 +686,19 @@
         "minute": 20,
         "second": 15,
         "nano": 744145183
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 12,
+        "minute": 26,
+        "second": 2,
+        "nano": 70626972
       }
     },
     "isImported": false
