@@ -62,6 +62,9 @@ public class Entity {
     public boolean drawAsStatic = false;
 
 
+    public ArrayList<Entity> children = new ArrayList<>();
+    public Entity parent = null;
+
     public Entity() {
         resetStats();
     }
@@ -142,6 +145,10 @@ public class Entity {
         }
         if (knockBackTimer > 0) {
             this.knockBackTimer--;
+        }
+
+        for (Entity child : children) {
+            child.update();
         }
     }
 
@@ -339,6 +346,10 @@ public class Entity {
 
     public void commitSudoku() {
         this.wantsToLive = false;
+
+        for (Entity child : children) {
+            child.commitSudoku();
+        }
     }
 
     public void invokeSudoku() {
@@ -363,6 +374,12 @@ public class Entity {
         clone.stats.importValues(stats);
 
         return clone;
+    }
+
+    public Entity addChild(Entity child) {
+        this.children.add(child);
+        child.parent = this;
+        return this;
     }
 
 

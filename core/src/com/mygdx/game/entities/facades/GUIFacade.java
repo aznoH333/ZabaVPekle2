@@ -17,7 +17,11 @@ public class GUIFacade {
 
 
     public static void createButton(String text, float x, float y, GUIRunnable action) {
-        entityManager.addEntity(new Entity()
+        entityManager.addEntity(buildButton(text, x, y, action));
+    }
+
+    public static Entity buildButton(String text, float x, float y, GUIRunnable action) {
+        return new Entity()
                 .makeStatic()
                 .setX(x)
                 .setY(y)
@@ -36,12 +40,11 @@ public class GUIFacade {
                             textComponent.color.b = 1f;
                         }
                 ))
-                .setWidth(DrawingManager.getInstance().getTextWidth(text))
-        );
+                .setWidth(DrawingManager.getInstance().getTextWidth(text));
     }
 
-    public static void createAugmentGUI(Augment augment, float x, float y, Entity player) {
-        Entity augmentGui = entityManager.addEntity(
+    public static void createAugmentGUI(Augment augment, float x, float y, Entity player, Entity guiOwner) {
+        guiOwner.addChild(
                 new Entity()
                         .setSprite(augment.quality.augmentSprite)
                         .addComponent(augment)
@@ -50,14 +53,13 @@ public class GUIFacade {
                         .setX(x)
                         .setY(y)
                         .makeStatic()
-                        .setDrawingLayer(DrawingLayer.GUI)
-        );
+                        .setDrawingLayer(DrawingLayer.GUI));
 
-        createButton("Choose", x, y + 48f,
+
+        guiOwner.addChild(buildButton("Choose", x, y + 48f,
                 owner -> {
-                    owner.commitSudoku();
-                    augmentGui.commitSudoku();
+                    guiOwner.commitSudoku();
                     augment.attachToEntity(player);
-                });
+                }));
     }
 }

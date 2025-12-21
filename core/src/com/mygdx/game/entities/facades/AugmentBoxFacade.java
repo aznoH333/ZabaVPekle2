@@ -2,6 +2,7 @@ package com.mygdx.game.entities.facades;
 
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.behaviour.projectile.Boomerang;
 import com.mygdx.game.entities.components.behaviour.projectile.Shrapnel;
 import com.mygdx.game.entities.components.behaviour.projectile.SineTravel;
@@ -14,7 +15,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class AugmentBoxFacade {
+
+    private final static EntityManager entityManager = EntityManager.getInstance();
+
     public static void openNewBox(Entity player, Quality targetQuality) {
+
+        Entity guiOwner = new Entity();
+
+
         for (int i = -1; i <= 1; i++) {
 
             int augmentQuality = targetQuality.numericValue;
@@ -31,11 +39,11 @@ public class AugmentBoxFacade {
             Augment augment = generateAugment(quality);
 
 
-            GUIFacade.createAugmentGUI(augment, i * 200f, 0f, player);
-
+            GUIFacade.createAugmentGUI(augment, i * 200f, 0f, player, guiOwner);
 
         }
 
+        entityManager.addEntity(guiOwner);
 
     }
 
