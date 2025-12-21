@@ -190,7 +190,7 @@
     ],
     "title": "World progress",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -202,6 +202,19 @@
         "minute": 42,
         "second": 58,
         "nano": 563560567
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 13,
+        "minute": 5,
+        "second": 49,
+        "nano": 783870989
       }
     },
     "isImported": false
@@ -469,7 +482,7 @@
     ],
     "title": "Box item and openning",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -481,6 +494,19 @@
         "minute": 4,
         "second": 10,
         "nano": 24417593
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 13,
+        "minute": 3,
+        "second": 57,
+        "nano": 422151459
       }
     },
     "isImported": false
@@ -554,7 +580,7 @@
     ],
     "title": "Make factory methods for augments",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -566,6 +592,19 @@
         "minute": 5,
         "second": 25,
         "nano": 45450505
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 13,
+        "minute": 4,
+        "second": 21,
+        "nano": 588951786
       }
     },
     "isImported": false
@@ -699,6 +738,150 @@
         "minute": 26,
         "second": 2,
         "nano": 70626972
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_930",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "world places",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 13,
+        "minute": 5,
+        "second": 44,
+        "nano": 235511091
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_983",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "loot rooms",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 13,
+        "minute": 5,
+        "second": 59,
+        "nano": 949158794
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1011",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "big combat rooms",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 13,
+        "minute": 6,
+        "second": 8,
+        "nano": 194938803
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1040",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "minor combat rooms",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 13,
+        "minute": 6,
+        "second": 16,
+        "nano": 611019790
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1070",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "boss rooms",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 13,
+        "minute": 6,
+        "second": 21,
+        "nano": 916773182
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1101",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Better place generation",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 21
+      },
+      "time": {
+        "hour": 16,
+        "minute": 30,
+        "second": 14,
+        "nano": 314699600
       }
     },
     "isImported": false

@@ -1,6 +1,11 @@
 package com.mygdx.game.world;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.world.places.Place;
+import com.mygdx.game.world.places.PlaceRoom;
+import com.mygdx.game.world.places.WorldPlaceDefinition;
+
+import java.util.ArrayList;
 
 public class WorldProgress {
 
@@ -19,19 +24,44 @@ public class WorldProgress {
     public int innerWorldSize = 10;
 
 
+    private int currentPlaceIndex = 0;
+    private ArrayList<Place> places = new ArrayList<>();
+    private Place currentPlace;
+
+    public WorldProgress() {
+        // temp place generation
+        for (WorldPlaceDefinition definition : WorldPlaceDefinition.values()) {
+            places.add(definition.generatePlace());
+        }
+        goToPlace(0);
+    }
+
 
     public void completedLevel() {
         levelsCompleted++;
 
-        if (levelsCompleted > 3) {
-            brickColor = new Color(0.1f, 0.2f, 1f, 1f);
-            worldTopColor = new Color(0.1f, 0.2f, 0.7f, 1f);
+        currentPlace.completedRoom();
+
+        if (currentPlace.isComplete()) {
+            currentPlaceIndex++;
+            goToPlace(currentPlaceIndex);
         }
+
+        PlaceRoom room = currentPlace.getCurrentRoom();
+        innerWorldSize = room.roomSize;
+        outerWorldSize = room.roomSize + 5;
 
     }
 
     public int howManyEnemiesShouldSpawn() {
-        return 2 + levelsCompleted;
+        return currentPlace.getCurrentRoom().enemiesToSpawn;
     }
 
+    private void goToPlace(int placeIndex) {
+        currentPlace = places.get(placeIndex);
+        floorColor = currentPlace.floorColor;
+        brickColor = currentPlace.brickColor;
+        doorColor = currentPlace.doorColor;
+        worldTopColor = currentPlace.worldTopColor;
+    }
 }
