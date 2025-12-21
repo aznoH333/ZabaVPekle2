@@ -14,6 +14,7 @@ public class WallBounce extends EntityComponent {
 
     public WallBounce() {
         super.name = "wall bounce";
+        super.effectDescription = "wall bounce";
         super.componentCountLimit = 3;
     }
 

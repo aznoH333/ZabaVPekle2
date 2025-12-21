@@ -45,7 +45,11 @@ public class Game extends GameState {
         );
 
 
-        AugmentBoxFacade.openNewBox(player, Quality.COMMON);
+        AugmentBoxFacade.createNewBox(
+                128f,
+                128f,
+                Quality.POOR
+        );
     }
 
     @Override

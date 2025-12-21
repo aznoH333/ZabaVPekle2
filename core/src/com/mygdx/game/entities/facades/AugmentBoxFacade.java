@@ -3,6 +3,7 @@ package com.mygdx.game.entities.facades;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityManager;
+import com.mygdx.game.entities.components.behaviour.AugmentBox;
 import com.mygdx.game.entities.components.behaviour.projectile.Boomerang;
 import com.mygdx.game.entities.components.behaviour.projectile.Shrapnel;
 import com.mygdx.game.entities.components.behaviour.projectile.SineTravel;
@@ -17,6 +18,17 @@ import java.util.HashMap;
 public class AugmentBoxFacade {
 
     private final static EntityManager entityManager = EntityManager.getInstance();
+
+
+    public static void createNewBox(float x, float y, Quality boxRarity) {
+        entityManager.addEntity(
+                new Entity()
+                        .addComponent(new AugmentBox(boxRarity))
+                        .setX(x)
+                        .setY(y)
+                        .setSprite(boxRarity.boxSprite)
+        );
+    }
 
     public static void openNewBox(Entity player, Quality targetQuality) {
 
