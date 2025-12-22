@@ -5,7 +5,7 @@ public enum RoomType {
     MAJOR_COMBAT(10, 10, 20, 10, true),
     FILLER(7, 3, 7, 20, true),
     LOOT(5, 0, 0, 1, false),
-    BOSS(20, 0, 0, 0, true);
+    BOSS(10, 0, 0, 0, true);
 
     public final int roomSize;
     public final int minEnemies;

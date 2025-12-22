@@ -33,12 +33,6 @@ public class Game extends GameState {
                 .addComponent(new Shooter("hands_0002"))
         );
 
-
-        AugmentBoxFacade.createNewBox(
-                128f,
-                128f,
-                Quality.POOR
-        );
     }
 
     @Override

@@ -1,8 +1,11 @@
 package com.mygdx.game.world;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.entities.items.Quality;
+import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.world.places.Place;
 import com.mygdx.game.world.places.PlaceRoom;
+import com.mygdx.game.world.places.RoomType;
 import com.mygdx.game.world.places.WorldPlaceDefinition;
 
 import java.util.ArrayList;
@@ -67,5 +70,31 @@ public class WorldProgress {
 
     public boolean shouldLockDoors() {
         return currentPlace.getCurrentRoom().enemiesToSpawn != 0;
+    }
+
+    public Quality shouldSpawnBox() {
+        PlaceRoom room = currentPlace.getCurrentRoom();
+
+
+        switch (room.type) {
+            case LOOT:
+                return currentPlace.type.lootRoomBoxQuality;
+            case BOSS:
+                return currentPlace.type.bossRoomDropQuality;
+            case MAJOR_COMBAT:
+                if (NumberUtils.randomChance(0.25f)) {
+                    return currentPlace.type.combatRoomDropQuality;
+                }else {
+                    return null;
+                }
+            case FILLER:
+                if (NumberUtils.randomChance(0.05f)) {
+                    return currentPlace.type.combatRoomDropQuality;
+                }else {
+                    return null;
+                }
+            default:
+                return null;
+        }
     }
 }

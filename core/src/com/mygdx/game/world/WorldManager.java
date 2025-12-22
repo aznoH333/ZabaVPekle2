@@ -12,6 +12,8 @@ import com.mygdx.game.entities.components.control.Door;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.components.visual.particles.FadeParticle;
+import com.mygdx.game.entities.facades.AugmentBoxFacade;
+import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.entities.stats.Stat;
 import com.mygdx.game.utils.NumberUtils;
 
@@ -247,6 +249,13 @@ public class WorldManager {
                         .setY((progress.innerWorldSize - 1) * 32f)
                         .addComponent(new Door())
         );
+
+
+        // spawn loot
+        Quality loot = progress.shouldSpawnBox();
+        if (loot != null) {
+            AugmentBoxFacade.createNewBox(-16f, -16f, loot);
+        }
     }
 
 
