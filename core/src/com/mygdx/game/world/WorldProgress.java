@@ -54,6 +54,7 @@ public class WorldProgress {
     }
 
     public int howManyEnemiesShouldSpawn() {
+        System.out.println(currentPlace.getCurrentRoom().enemiesToSpawn + " " + currentPlace.getCurrentRoom().type);
         return currentPlace.getCurrentRoom().enemiesToSpawn;
     }
 
@@ -63,5 +64,9 @@ public class WorldProgress {
         brickColor = currentPlace.brickColor;
         doorColor = currentPlace.doorColor;
         worldTopColor = currentPlace.worldTopColor;
+    }
+
+    public boolean shouldLockDoors() {
+        return currentPlace.getCurrentRoom().enemiesToSpawn != 0;
     }
 }

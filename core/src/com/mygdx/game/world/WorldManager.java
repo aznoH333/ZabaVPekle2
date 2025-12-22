@@ -1,6 +1,7 @@
 package com.mygdx.game.world;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.drawing.DrawingCommand;
@@ -28,8 +29,6 @@ public class WorldManager {
         return instance;
     }
 
-    private static final DrawingManager DRAWING_MANAGER = DrawingManager.getInstance();
-    private static final EntityManager entityManager = EntityManager.getInstance();
     private int enemiesToSpawn = 10;
     private int enemiesToKill = enemiesToSpawn;
     private int enemySpawnCooldown = 10;
@@ -40,6 +39,11 @@ public class WorldManager {
     private Entity player = null;
 
     private WorldProgress progress = new WorldProgress();
+
+
+    private WorldManager() {
+        loadLevel();
+    }
 
 
     public void draw() {
@@ -56,7 +60,7 @@ public class WorldManager {
 
                 Color tileColor = getColorForTile(tileType.color);
 
-                DRAWING_MANAGER.drawSprite(
+                Managers.drawingManager.drawSprite(
                         new DrawingCommand(tileType.textureName, x * 32f - 16f, y * 32f - 16f).setColor(tileColor),
                         layer);
 
@@ -64,7 +68,7 @@ public class WorldManager {
                     assert tileType.decorationColor != null;
                     Color decorationColor = getColorForTile(tileType.decorationColor);
 
-                    DRAWING_MANAGER.drawSprite(
+                    Managers.drawingManager.drawSprite(
                             new DrawingCommand(tileType.decorationTextureName, x * 32f - 16f, y * 32f - 16f).setColor(decorationColor),
                             DrawingLayer.DOOR);
                 }
@@ -180,7 +184,7 @@ public class WorldManager {
     public void update() {
 
         if (player == null) {
-            player = entityManager.findClosestEntityWithComponent(0f, 0f, "soul");
+            player = Managers.entityManager.findClosestEntityWithComponent(0f, 0f, "soul");
             return;
         }
 
@@ -206,7 +210,7 @@ public class WorldManager {
             y = NumberUtils.randomInt(-progress.innerWorldSize, progress.innerWorldSize) * 32;
         }while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, player.x, player.y) < 128f);
 
-        entityManager.addEntity(
+        Managers.entityManager.addEntity(
                 new Entity()
                         .setX(x)
                         .setY(y)
@@ -233,16 +237,21 @@ public class WorldManager {
         this.enemiesToKill--;
 
         if (enemiesToKill == 0) {
-            doorsOpen = true;
-
-            // spawn door object
-            entityManager.addEntity(
-                    new Entity()
-                            .setX(-16f)
-                            .setY((progress.innerWorldSize -1) * 32f)
-                            .addComponent(new Door())
-            );
+            openDoors();
         }
+    }
+
+    private void openDoors() {
+        doorsOpen = true;
+
+
+        // spawn door object
+        Managers.entityManager.addEntity(
+                new Entity()
+                        .setX(-16f)
+                        .setY((progress.innerWorldSize -1) * 32f)
+                        .addComponent(new Door())
+        );
     }
 
 
@@ -257,17 +266,31 @@ public class WorldManager {
                y + heightValue < (progress.innerWorldSize - 1) * 32f;
     }
 
-    public void moveToNewLevel(Entity playerRef) {
-        entityManager.clearAllEntities();
 
-
-        progress.completedLevel();
-
-        entityManager.addEntity(playerRef.setX(-16f).setY((-progress.innerWorldSize +1) * 32f + 16f));
-
-
+    private void loadLevel() {
         this.enemiesToSpawn = progress.howManyEnemiesShouldSpawn();
         this.doorsOpen = false;
         this.enemiesToKill = enemiesToSpawn;
+
+        if (!progress.shouldLockDoors()) {
+            openDoors();
+        }
+
+
+    }
+
+    public void moveToNewLevel(Entity playerRef) {
+        Managers.entityManager.clearAllEntities();
+        progress.completedLevel();
+
+        Managers.entityManager.addEntity(playerRef.setX(-16f).setY((-progress.innerWorldSize +1) * 32f + 16f));
+
+
+        loadLevel();
+    }
+
+    public void restart() {
+        this.progress = new WorldProgress();
+        loadLevel();
     }
 }

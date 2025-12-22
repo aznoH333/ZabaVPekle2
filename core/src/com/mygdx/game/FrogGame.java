@@ -20,54 +20,39 @@ import com.mygdx.game.world.WorldManager;
 public class FrogGame extends ApplicationAdapter {
 
 
-	DrawingManager drawingManager;
-	EntityManager entityManager;
-	WorldManager worldManager;
-	SoundManager soundManager;
 
-	GameStateManager gameStateManager;
+
 
 	@Override
 	public void create () {
-		gameStateManager = GameStateManager.getInstance();
 
-		drawingManager = DrawingManager.getInstance();
-		drawingManager.loadSpritesInDirectory("assets/sprites");
+		Managers.drawingManager.loadSpritesInDirectory("assets/sprites");
 
 
 		Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayModes()[0]);
 
 
-
-		entityManager = EntityManager.getInstance();
-
-		worldManager = WorldManager.getInstance();
-
-		soundManager = SoundManager.getInstance();
-
 		// game states
-		gameStateManager.addGameState(new Game());
-		gameStateManager.addGameState(new MainMenu());
-		gameStateManager.switchState("main menu");
+		Managers.gameStateManager.addGameState(new Game());
+		Managers.gameStateManager.addGameState(new MainMenu());
+		Managers.gameStateManager.switchState("main menu");
 
 	}
 
 	@Override
 	public void render () {
-
-
-		gameStateManager.update();
+		Managers.gameStateManager.update();
 	}
 	
 	@Override
 	public void dispose () {
-		drawingManager.dispose();
-		soundManager.dispose();
+		Managers.drawingManager.dispose();
+		Managers.soundManager.dispose();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		drawingManager.resizedWindow(width, height);
+		Managers.drawingManager.resizedWindow(width, height);
 	}
 
 }

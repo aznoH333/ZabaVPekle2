@@ -1,6 +1,7 @@
 package com.mygdx.game.gameStates.implementations;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.Managers;
 import com.mygdx.game.SoundManager;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
@@ -21,12 +22,13 @@ import com.mygdx.game.entities.facades.GUIFacade;
 import com.mygdx.game.entities.items.Augment;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.gameStates.GameState;
+import com.mygdx.game.world.WorldManager;
 
 import java.util.ArrayList;
 
 public class Game extends GameState {
-    private static final EntityManager entityManager = EntityManager.getInstance();
-    private static final SoundManager soundManager = SoundManager.getInstance();
+
+
 
     public Game() {
         super("game");
@@ -36,7 +38,9 @@ public class Game extends GameState {
     @Override
     public void initializeState() {
 
-        Entity player = entityManager.addEntity(new Entity()
+        Managers.worldManager.restart();
+
+        Managers.entityManager.addEntity(new Entity()
                 .setTeam(EntityTeam.FROG)
                 .addComponent(new PlayerSoul())
                 .setDrawingLayer(DrawingLayer.PLAYER)
