@@ -42,6 +42,6 @@ public class Place {
     }
 
     public boolean isComplete() {
-        return currentProgress > rooms.size();
+        return currentProgress >= rooms.size();
     }
 }

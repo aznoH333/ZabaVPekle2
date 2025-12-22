@@ -5,15 +5,32 @@ import com.mygdx.game.entities.items.Quality;
 
 public enum WorldPlaceDefinition {
 
-    TEST(
-            "test",
+    START(
+            "start",
             new Color(0.2f, 0.2f, 0.2f, 1f),
             new Color(0.95f, 0.25f, 0.1f, 1f),
             new Color(0.95f, 0.25f, 0.1f, 1f),
             new Color(0.8f, 0.8f, 0.8f, 1f),
             Quality.POOR,
             Quality.POOR,
-            Quality.COMMON);
+            Quality.COMMON),
+    BLUE(
+            "blue",
+            new Color(0.2f, 0.2f, 0.2f, 1f),
+            new Color(0.1f, 0.25f, 0.95f, 1f),
+            new Color(0.1f, 0.25f, 0.95f, 1f),
+            new Color(0.8f, 0.8f, 0.8f, 1f),
+            Quality.COMMON,
+            Quality.POOR,
+            Quality.COMMON),
+    BLACK("black",
+            new Color(0.2f, 0.2f, 0.2f, 1f),
+            new Color(0.1f, 0.1f, 0.1f, 1f),
+            new Color(0.1f, 0.1f, 0.1f, 1f),
+            new Color(0.4f, 0.4f, 0.4f, 1f),
+            Quality.COMMON,
+            Quality.COMMON,
+            Quality.REFINED);
 
 
     public final Color floorColor;
