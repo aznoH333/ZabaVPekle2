@@ -1,16 +1,14 @@
 package com.mygdx.game.entities.components.behaviour.projectile;
 
-import com.mygdx.game.entities.items.EffectPotency;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.behaviour.Bullet;
+import com.mygdx.game.entities.items.EffectPotency;
 import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.utils.NumberUtils;
 
 public class Shrapnel extends EntityComponent {
-
-    private final static EntityManager entityManager = EntityManager.getInstance();
     private final int amountToSpawn;
 
     public Shrapnel(int amountToSpawn) {
@@ -31,7 +29,7 @@ public class Shrapnel extends EntityComponent {
         for (int i = 0; i < amountToSpawn; i++) {
             Entity newBullet = owner.copy();
 
-            Bullet bullet = (Bullet)newBullet.getComponentByName("bullet");
+            Bullet bullet = (Bullet) newBullet.getComponentByName("bullet");
             bullet.direction += currentRotation;
             currentRotation += rotationPercentage;
             newBullet.setStat(Stat.ProjectileLifeTime, 20f);
@@ -41,7 +39,7 @@ public class Shrapnel extends EntityComponent {
             newBullet.multiplyStat(Stat.Damage, -0.75f);
             newBullet.overrideDefault(Stat.BounceCount, 0f, 60f);
 
-            entityManager.addEntity(newBullet);
+            Managers.entityManager.addEntity(newBullet);
         }
     }
 

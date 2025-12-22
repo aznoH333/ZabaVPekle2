@@ -9,6 +9,7 @@ public class FadeParticle extends EntityComponent {
     private final int lowPercent;
     private final int highPercent;
     private final boolean fadeIn;
+
     public FadeParticle(int lifeTime, boolean fadeIn, float fadePercentage) {
         this.lifeTime = lifeTime;
         this.lowPercent = (int) (lifeTime * fadePercentage);

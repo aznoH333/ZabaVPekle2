@@ -24,12 +24,11 @@ public enum Quality {
     public static Quality getFromNumeric(int numericValue) {
         if (numericValue < 0) {
             return POOR;
-        }else if (numericValue > 4) {
+        } else if (numericValue > 4) {
             return DIVINE;
         }
         return Quality.values()[numericValue];
     }
-
 
 
 }

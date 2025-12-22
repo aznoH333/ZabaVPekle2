@@ -1,15 +1,13 @@
 package com.mygdx.game.entities.components.behaviour.projectile;
 
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.behaviour.Bullet;
 import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.utils.NumberUtils;
 
 public class Guided extends EntityComponent {
-
-    private final static EntityManager entityManager = EntityManager.getInstance();
 
     private final String targetComponent;
     private Bullet bullet;
@@ -22,8 +20,8 @@ public class Guided extends EntityComponent {
     @Override
     public void onUpdate(Entity owner) {
         if (target == null || !target.wantsToLive) {
-            target = entityManager.findClosestEntityWithComponent(owner, targetComponent);
-        }else if (NumberUtils.pythagoras(owner.x, owner.y, target.x, target.y) < 96f){
+            target = Managers.entityManager.findClosestEntityWithComponent(owner, targetComponent);
+        } else if (NumberUtils.pythagoras(owner.x, owner.y, target.x, target.y) < 96f) {
 
 
             float direction = NumberUtils.constrictRotationToRad(NumberUtils.directionToward(owner.x, owner.y, target.x, target.y) + NumberUtils.TWO_PI);
@@ -33,7 +31,7 @@ public class Guided extends EntityComponent {
 
             if (NumberUtils.constrictRotationToRad(direction - bulletDirection + NumberUtils.TWO_PI) < Math.PI) {
                 bullet.direction += 0.5f * owner.stats.get(Stat.Speed);
-            }else {
+            } else {
                 bullet.direction -= 0.5f * owner.stats.get(Stat.Speed);
             }
 

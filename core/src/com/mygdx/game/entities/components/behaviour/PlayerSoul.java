@@ -3,14 +3,13 @@ package com.mygdx.game.entities.components.behaviour;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.utils.NumberUtils;
-import com.mygdx.game.drawing.DrawingManager;
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.utils.NumberUtils;
 
 public class PlayerSoul extends EntityComponent {
-    private static final DrawingManager DRAWING_MANAGER = DrawingManager.getInstance();
 
     private Shooter shooter = null;
 
@@ -46,11 +45,11 @@ public class PlayerSoul extends EntityComponent {
         }
 
         // set camera
-        DRAWING_MANAGER.setCameraPosition(owner.x, owner.y);
+        Managers.drawingManager.setCameraPosition(owner.x, owner.y);
 
 
         if (shooter != null) {
-            Vector2 mousePos = DRAWING_MANAGER.getMousePosition();
+            Vector2 mousePos = Managers.drawingManager.getMousePosition();
 
             shooter.direction = NumberUtils.directionToward(
                     owner.x,
@@ -69,7 +68,7 @@ public class PlayerSoul extends EntityComponent {
     @Override
     public void recalculateStats(Entity owner) {
         owner.overrideDefault(Stat.Speed, 3.5f, 1f);
-        owner.flipWithMoveDirection =  true;
+        owner.flipWithMoveDirection = true;
         owner.overrideDefault(Stat.MaxHealth, 6f, 1f);
         owner.canBeDamaged = true;
         owner.addStat(Stat.Health, 6666666f);

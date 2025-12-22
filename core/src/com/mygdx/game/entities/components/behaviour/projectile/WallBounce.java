@@ -1,16 +1,15 @@
 package com.mygdx.game.entities.components.behaviour.projectile;
 
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.behaviour.Bullet;
 import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.utils.NumberUtils;
 
 public class WallBounce extends EntityComponent {
 
     private Bullet bullet;
-    private final static EntityManager entityManager = EntityManager.getInstance();
 
     public WallBounce() {
         super.name = "wall bounce";
@@ -29,14 +28,14 @@ public class WallBounce extends EntityComponent {
 
         if (owner.collidedWithWorldOnX) {
             bullet.direction = NumberUtils.directionToward(0, 0, -xDir, yDir);
-        }else {
+        } else {
             bullet.direction = NumberUtils.directionToward(0, 0, xDir, -yDir);
         }
 
         Entity newBullet = owner.copy();
         newBullet.addStat(Stat.BounceCount, -1f);
 
-        entityManager.addEntity(newBullet);
+        Managers.entityManager.addEntity(newBullet);
 
     }
 

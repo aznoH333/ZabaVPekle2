@@ -1,15 +1,14 @@
 package com.mygdx.game.entities.components.visual;
 
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.visual.particles.BloodParticle;
 import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.utils.NumberUtils;
 
 public class GameEntityBleed extends EntityComponent {
-    private final static EntityManager entityManager = EntityManager.getInstance();
 
     @Override
     public void onTakeDamage(Entity owner, float amount) {
@@ -25,7 +24,7 @@ public class GameEntityBleed extends EntityComponent {
         int amountOfBloodToSpawn = (int) Math.min(Math.ceil(amount * NumberUtils.randomFloat(0.6f, 1.6f) / 2f) + 1, 20f);
 
         for (int i = 0; i < amountOfBloodToSpawn; i++) {
-            entityManager.addEntity(new Entity()
+            Managers.entityManager.addEntity(new Entity()
                     .setSprite("blood_" + NumberUtils.randomInt(1, 3))
                     .setX(owner.x)
                     .setY(owner.y)

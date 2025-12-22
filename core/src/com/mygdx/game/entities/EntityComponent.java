@@ -11,23 +11,31 @@ public class EntityComponent {
     public Entity owner = null;
 
     public int componentCountLimit = -1;
+
     public EntityComponent() {
 
     }
 
-    public void onComponentAttached(Entity owner) {}
+    public void onComponentAttached(Entity owner) {
+    }
 
-    public void onUpdate(Entity owner) {}
+    public void onUpdate(Entity owner) {
+    }
 
-    public void onCollide(Entity owner, Entity other) {}
+    public void onCollide(Entity owner, Entity other) {
+    }
 
-    public void onWorldCollide(Entity owner) {}
+    public void onWorldCollide(Entity owner) {
+    }
 
-    public void recalculateStats(Entity owner) {}
+    public void recalculateStats(Entity owner) {
+    }
 
-    public void onTakeDamage(Entity owner, float damageAmount) {}
+    public void onTakeDamage(Entity owner, float damageAmount) {
+    }
 
-    public void onSudoku(Entity owner) {}
+    public void onSudoku(Entity owner) {
+    }
 
     public EntityComponent copy() {
         throw new RuntimeException("Copy not supported for " + getClass().getName());

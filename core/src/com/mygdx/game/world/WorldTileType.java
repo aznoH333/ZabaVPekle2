@@ -27,7 +27,6 @@ public enum WorldTileType {
     BRICK_CORNER_RIGHT_BOTTOM("world_0016", WorldTileColor.BRICKS, true),
 
 
-
     FLOOR_TILE("world_0017", WorldTileColor.FLOOR, false),
     VOID("world_0018", WorldTileColor.WORLD_TOP, true);
 

@@ -24,7 +24,7 @@ public class ProjectileFactory {
             float direction,
             int lifeTime,
             ArrayList<EntityComponent> components
-            ) {
+    ) {
         Entity bullet = new Entity()
                 .setSprite(sprite)
                 .setX(x)

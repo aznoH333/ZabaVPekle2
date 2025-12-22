@@ -7,6 +7,7 @@ public class SpinSprite extends EntityComponent {
 
 
     private final float spinSpeed;
+
     public SpinSprite(float spinSpeed) {
         this.spinSpeed = spinSpeed;
     }
@@ -16,7 +17,6 @@ public class SpinSprite extends EntityComponent {
         owner.spriteRotation += spinSpeed;
 
     }
-
 
 
     @Override

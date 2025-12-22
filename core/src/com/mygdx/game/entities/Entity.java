@@ -1,19 +1,16 @@
 package com.mygdx.game.entities;
 
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
-import com.mygdx.game.drawing.DrawingManager;
-import com.mygdx.game.world.WorldManager;
 import com.mygdx.game.entities.stats.EntityStats;
 import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.utils.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Entity {
-    private static DrawingManager drawingManager = DrawingManager.getInstance();
-    private static WorldManager worldManager = WorldManager.getInstance();
 
 
     public String sprite;
@@ -74,7 +71,7 @@ public class Entity {
 
         if (sprite != null) {
             // draw
-            drawingManager.drawSprite(
+            Managers.drawingManager.drawSprite(
                     new DrawingCommand(sprite, x + spriteOffsetX, y + spriteOffsetY)
                             .setWidth(scaleX)
                             .setHeight(scaleY)
@@ -106,18 +103,18 @@ public class Entity {
         // move
         collidedWithWorldOnX = false;
         collidedWithWorldOnY = false;
-        if (worldManager.isSpaceEmpty(x + xVelocity, y, width, height)) {
+        if (Managers.worldManager.isSpaceEmpty(x + xVelocity, y, width, height)) {
             x += xVelocity;
             lastFrameXVelocity = xVelocity;
-        }else {
+        } else {
             collidedWithWorldOnX = true;
             lastFrameXVelocity = 0f;
         }
 
-        if (worldManager.isSpaceEmpty(x, y + yVelocity, width, height)) {
+        if (Managers.worldManager.isSpaceEmpty(x, y + yVelocity, width, height)) {
             y += yVelocity;
             lastFrameYVelocity = yVelocity;
-        }else {
+        } else {
             if (!collidedWithWorldOnX) {
                 collidedWithWorldOnY = true;
             }
@@ -134,9 +131,6 @@ public class Entity {
                 c.onWorldCollide(this);
             }
         }
-
-
-
 
 
         // invincibility
@@ -168,12 +162,11 @@ public class Entity {
             this.knockBackTimer = this.knockBackTimerMax;
 
 
-
             if (this.stats.get(Stat.Health) <= 0f) {
                 this.commitSudoku();
 
 
-            }else {
+            } else {
                 for (EntityComponent c : components) {
                     c.onTakeDamage(this, other.stats.get(Stat.Damage));
                 }
@@ -204,7 +197,7 @@ public class Entity {
         if (flipWithMoveDirection) {
             if (xVelocity < -0.5f) {
                 flipX = true;
-            }else if (xVelocity > 0.5f) {
+            } else if (xVelocity > 0.5f) {
                 flipX = false;
             }
         }
@@ -221,22 +214,22 @@ public class Entity {
         if (flipWithMoveDirection) {
             if (xVelocity < -0.01f) {
                 flipX = true;
-            }else if (xVelocity > 0.01f) {
+            } else if (xVelocity > 0.01f) {
                 flipX = false;
             }
         }
     }
 
     public boolean hasComponent(String name) {
-        return this.components.stream().anyMatch((a)-> Objects.equals(a.name, name));
+        return this.components.stream().anyMatch((a) -> Objects.equals(a.name, name));
     }
 
     public EntityComponent getComponentByName(String name) {
-        return this.components.stream().filter((a)-> Objects.equals(a.name, name)).findFirst().orElse(null);
+        return this.components.stream().filter((a) -> Objects.equals(a.name, name)).findFirst().orElse(null);
     }
 
     public int countComponentsWithName(String name) {
-        return (int) this.components.stream().filter((a)->Objects.equals(a.name, name)).count();
+        return (int) this.components.stream().filter((a) -> Objects.equals(a.name, name)).count();
     }
 
     public boolean collidesWithEntity(Entity other) {
@@ -353,7 +346,7 @@ public class Entity {
     }
 
     public void invokeSudoku() {
-        for (EntityComponent c: components) {
+        for (EntityComponent c : components) {
             c.onSudoku(this);
         }
     }

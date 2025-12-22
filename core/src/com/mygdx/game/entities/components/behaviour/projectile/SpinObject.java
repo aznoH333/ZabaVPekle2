@@ -12,7 +12,6 @@ public class SpinObject extends EntityComponent {
     private float spinSpeed = 1f;
 
 
-
     @Override
     public void onUpdate(Entity owner) {
         if (spinSpeed > 0f) {

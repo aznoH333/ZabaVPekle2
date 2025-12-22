@@ -1,10 +1,8 @@
 package com.mygdx.game.entities.facades;
 
-import com.mygdx.game.SoundManager;
+import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
-import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.entities.Entity;
-import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.gui.Button;
 import com.mygdx.game.entities.components.gui.GUIRunnable;
 import com.mygdx.game.entities.components.gui.Hover;
@@ -12,12 +10,10 @@ import com.mygdx.game.entities.components.gui.Text;
 import com.mygdx.game.entities.items.Augment;
 
 public class GUIFacade {
-    private final static EntityManager entityManager = EntityManager.getInstance();
-    private final static SoundManager soundManager = SoundManager.getInstance();
 
 
     public static void createButton(String text, float x, float y, GUIRunnable action) {
-        entityManager.addEntity(buildButton(text, x, y, action));
+        Managers.entityManager.addEntity(buildButton(text, x, y, action));
     }
 
     public static Entity buildButton(String text, float x, float y, GUIRunnable action) {
@@ -30,17 +26,17 @@ public class GUIFacade {
                 )
                 .addComponent(new Button(action))
                 .addComponent(new Hover(
-                        (owner)->{
+                        (owner) -> {
                             Text textComponent = (Text) owner.getComponentByName("text");
                             textComponent.color.b = 0f;
-                            soundManager.playSound("click", 1f, 0.1f);
+                            Managers.soundManager.playSound("click", 1f, 0.1f);
                         },
                         owner -> {
                             Text textComponent = (Text) owner.getComponentByName("text");
                             textComponent.color.b = 1f;
                         }
                 ))
-                .setWidth(DrawingManager.getInstance().getTextWidth(text));
+                .setWidth(Managers.drawingManager.getTextWidth(text));
     }
 
     public static void createAugmentGUI(Augment augment, float x, float y, Entity player, Entity guiOwner) {

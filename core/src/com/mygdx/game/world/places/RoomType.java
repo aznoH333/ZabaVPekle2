@@ -13,7 +13,7 @@ public enum RoomType {
     public final int spawnSpeed;
     public final boolean locksWhenEntered;
 
-    RoomType(int size, int minEnemies, int maxEnemies, int spawnSpeed, boolean locksWhenEntered){
+    RoomType(int size, int minEnemies, int maxEnemies, int spawnSpeed, boolean locksWhenEntered) {
         this.roomSize = size;
         this.minEnemies = minEnemies;
         this.maxEnemies = maxEnemies;

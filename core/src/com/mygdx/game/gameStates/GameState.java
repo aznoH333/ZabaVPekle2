@@ -10,6 +10,7 @@ public abstract class GameState {
     }
 
     public abstract void initializeState();
+
     public abstract void cleanUpState();
 
 

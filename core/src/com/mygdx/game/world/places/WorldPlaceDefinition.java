@@ -13,8 +13,6 @@ public enum WorldPlaceDefinition {
     );
 
 
-
-
     public final Color floorColor;
     public final Color brickColor;
     public final Color worldTopColor;
@@ -23,11 +21,11 @@ public enum WorldPlaceDefinition {
 
 
     WorldPlaceDefinition(
-        String placeName,
-        Color floorColor,
-        Color brickColor,
-        Color worldTopColor,
-        Color doorColor
+            String placeName,
+            Color floorColor,
+            Color brickColor,
+            Color worldTopColor,
+            Color doorColor
 
     ) {
         this.placeName = placeName;

@@ -61,7 +61,7 @@ public class DrawingManager {
         for (FileHandle f : handle.list()) {
             if (!f.isDirectory()) {
                 loadSprite(f.path(), f.nameWithoutExtension());
-            }else  {
+            } else {
                 loadSpritesInDirectory(f.path());
             }
         }
@@ -71,7 +71,6 @@ public class DrawingManager {
         System.out.println("loading sprite " + name + " with path " + path);
         this.spriteMap.put(name, new Texture(path));
     }
-
 
 
     private void drawSprite(SpriteBatch batch, String spriteName, float x, float y, float width, float height, boolean flipHorizontally, boolean flipVertically, float rotationRad, float r, float g, float b, float a) {
@@ -112,7 +111,7 @@ public class DrawingManager {
 
         if (isStatic) {
             queue = staticDrawingQueue;
-        }else {
+        } else {
             queue = drawingQueue;
         }
 

@@ -1,15 +1,14 @@
 package com.mygdx.game.entities.components.behaviour;
 
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.visual.particles.FadeParticle;
 import com.mygdx.game.entities.components.visual.particles.FireParticle;
+import com.mygdx.game.utils.NumberUtils;
 
 public class Spawner extends EntityComponent {
-    private static final EntityManager entityManager = EntityManager.getInstance();
 
     private final Entity entityToSpawn;
     private int timer = 90;
@@ -24,7 +23,7 @@ public class Spawner extends EntityComponent {
         timer--;
 
         if (timer % 3 == 0) {
-            entityManager.addEntity(
+            Managers.entityManager.addEntity(
                     new Entity()
                             .setY(owner.y - NumberUtils.randomFloat(0f, 10f))
                             .setX(owner.x + NumberUtils.randomFloat(-10f, 10f))
@@ -39,9 +38,8 @@ public class Spawner extends EntityComponent {
 
         if (timer > 0) {
             owner.sprite = "enemy_spawner_000" + ((timer / 8) % 2 + 1);
-        }
-        else if (timer == 0) {
-            entityManager.addEntity(entityToSpawn.setX(owner.x).setY(owner.y));
+        } else if (timer == 0) {
+            Managers.entityManager.addEntity(entityToSpawn.setX(owner.x).setY(owner.y));
             owner.sprite = "enemy_spawner_0002";
         }
     }

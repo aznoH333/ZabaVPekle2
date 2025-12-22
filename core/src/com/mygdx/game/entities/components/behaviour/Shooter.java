@@ -1,24 +1,19 @@
 package com.mygdx.game.entities.components.behaviour;
 
 import com.badlogic.gdx.graphics.Color;
-import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
-import com.mygdx.game.utils.NumberUtils;
-import com.mygdx.game.SoundManager;
+import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
-import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.EntityManager;
-import com.mygdx.game.entities.components.behaviour.projectile.*;
+import com.mygdx.game.entities.components.behaviour.projectile.SpinSprite;
+import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.facades.ProjectileFactory;
+import com.mygdx.game.utils.NumberUtils;
 
 import java.util.ArrayList;
 
 public class Shooter extends EntityComponent {
-    private static final DrawingManager DRAWING_MANAGER = DrawingManager.getInstance();
-    private static final EntityManager entityManager = EntityManager.getInstance();
-    private static final SoundManager soundManager = SoundManager.getInstance();
 
     public float direction = 0f;
     private int scaleTimer = 0;
@@ -41,6 +36,7 @@ public class Shooter extends EntityComponent {
     private ArrayList<EntityComponent> bulletComponents = new ArrayList<>();
 
     private final String sprite;
+
     public Shooter(String sprite) {
         super.name = "shooter";
         this.sprite = sprite;
@@ -49,7 +45,6 @@ public class Shooter extends EntityComponent {
 
         //bulletOrigins.add(new BulletOrigin(NumberUtils.PI - NumberUtils.THIRD_PI));
         //bulletOrigins.add(new BulletOrigin(NumberUtils.PI + NumberUtils.THIRD_PI));
-
 
 
         // addBulletComponent(new SineTravel());
@@ -67,8 +62,6 @@ public class Shooter extends EntityComponent {
         //addBulletComponent(new WallBounce());
 
 
-
-
     }
 
     @Override
@@ -82,13 +75,12 @@ public class Shooter extends EntityComponent {
         }
 
 
-
         // draw
         if (sprite != null) {
             for (BulletOrigin b : bulletOrigins) {
                 float handDir = direction + b.aimOffset;
 
-                DRAWING_MANAGER.drawSprite(
+                Managers.drawingManager.drawSprite(
                         new DrawingCommand(sprite,
                                 (float) Math.cos(handDir) * (10f - (scaleTimer / 10f) * 2f) + owner.x,
                                 (float) Math.sin(handDir) * (10f - (scaleTimer / 10f) * 2f) + owner.y
@@ -113,7 +105,7 @@ public class Shooter extends EntityComponent {
         fireCooldown = fireRate;
 
         // play sound
-        soundManager.playSound("fire_ball", 1f, 0.1f);
+        Managers.soundManager.playSound("fire_ball", 1f, 0.1f);
 
         for (BulletOrigin b : bulletOrigins) {
             float handDirection = direction + b.aimOffset;
@@ -134,7 +126,7 @@ public class Shooter extends EntityComponent {
                         bulletComponents
                 );
 
-                entityManager.addEntity(bullet);
+                Managers.entityManager.addEntity(bullet);
             }
         }
 

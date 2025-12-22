@@ -44,7 +44,7 @@ public class SoundManager {
 
 
         long soundId = soundMap.get(soundName).play(volume);
-        float pitch = NumberUtils.randomFloat(1-pitchRandomization, 1+pitchRandomization);
+        float pitch = NumberUtils.randomFloat(1 - pitchRandomization, 1 + pitchRandomization);
 
         sound.setPitch(soundId, pitch);
     }

@@ -1,10 +1,10 @@
 package com.mygdx.game.entities.components.behaviour.projectile;
 
-import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
 import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.utils.NumberUtils;
 
 public class SineTravel extends EntityComponent {
 
@@ -12,7 +12,7 @@ public class SineTravel extends EntityComponent {
     private int timer = 3;
 
 
-    public SineTravel(){
+    public SineTravel() {
         effectDescription = "wave shot";
     }
 

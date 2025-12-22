@@ -1,6 +1,6 @@
 package com.mygdx.game.entities.items;
 
-import com.mygdx.game.drawing.DrawingManager;
+import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
@@ -13,24 +13,20 @@ import java.util.Map;
 public class Augment extends EntityComponent {
 
 
-
     public final Quality quality;
     public final ArrayList<EntityComponent> includedComponents;
     public final ArrayList<EntityComponent> componentsForGun;
     public final ArrayList<String> displayText = new ArrayList<>();
 
 
-    private final static DrawingManager drawingManager = DrawingManager.getInstance();
     private final static float Y_TEXT_OFFSET = -60f;
     private final static float Y_LINE_OFFSET = -16f;
-
 
 
     public Augment(Quality quality, ArrayList<EntityComponent> componentsForEntity, ArrayList<EntityComponent> componentsForGun) {
         this.quality = quality;
         this.includedComponents = componentsForEntity;
         this.componentsForGun = componentsForGun;
-
 
 
         // construct display text
@@ -79,12 +75,11 @@ public class Augment extends EntityComponent {
     public void onUpdate(Entity owner) {
         float nextLineY = owner.y + Y_TEXT_OFFSET;
         for (String line : displayText) {
-            drawingManager.drawText(new TextDrawingCommand(line, owner.x, nextLineY));
+            Managers.drawingManager.drawText(new TextDrawingCommand(line, owner.x, nextLineY));
 
             nextLineY += Y_LINE_OFFSET;
         }
     }
-
 
 
     public void attachToEntity(Entity attachTo) {

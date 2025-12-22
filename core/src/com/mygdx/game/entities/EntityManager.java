@@ -17,10 +17,10 @@ public class EntityManager {
     }
 
 
-
     private final ArrayList<Entity> entities = new ArrayList<>();
     private final ArrayList<Entity> waitingRoom = new ArrayList<>();
     private boolean clearAllEntitiesOnCycleEnd = false;
+
     private EntityManager() {
 
     }
@@ -47,7 +47,7 @@ public class EntityManager {
             }
         }
 
-        entities.removeIf((it)->{
+        entities.removeIf((it) -> {
             if (!it.wantsToLive) {
                 it.invokeSudoku();
             }

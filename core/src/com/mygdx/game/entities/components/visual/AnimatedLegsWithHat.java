@@ -1,14 +1,12 @@
 package com.mygdx.game.entities.components.visual;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
-import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.utils.NumberUtils;
 
 public class AnimatedLegsWithHat extends GameEntityAnimator {
-    private static final DrawingManager drawingManager = DrawingManager.getInstance();
-
     private static final float HAT_OFFSET_Y = 7f;
     private static final float HAT_OFFSET_X = 1f;
 
@@ -34,7 +32,7 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
         // draw hat
         float xOffset = HAT_OFFSET_X * (NumberUtils.boolToInt(owner.flipX) * 2 - 1);
 
-        drawingManager.drawSprite(
+        Managers.drawingManager.drawSprite(
                 new DrawingCommand(hatSprite, owner.x + xOffset, owner.y + HAT_OFFSET_Y)
                         .setFlipHorizontally(owner.flipX),
                 owner.drawingLayer
@@ -45,14 +43,13 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
         // color
         if (owner.isStunned()) {
             currentColor = hurtColor;
-        }else {
+        } else {
             currentColor = bodyColor;
         }
         owner.setColor(currentColor.r, currentColor.g, currentColor.b, currentColor.a);
 
 
     }
-
 
 
 }

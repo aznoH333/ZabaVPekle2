@@ -1,17 +1,13 @@
 package com.mygdx.game.entities.components.visual.particles;
 
-import com.mygdx.game.entities.stats.Stat;
-import com.mygdx.game.utils.NumberUtils;
-import com.mygdx.game.SoundManager;
+import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.EntityManager;
+import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.utils.NumberUtils;
 
 public class BloodParticle extends EntityComponent {
-
-    private final static EntityManager entityManager = EntityManager.getInstance();
-    private final static SoundManager soundManager = SoundManager.getInstance();
 
     private final float direction;
     private float verticalVelocity;
@@ -58,12 +54,11 @@ public class BloodParticle extends EntityComponent {
         }
 
         // sound
-        soundManager.playSound("blood_splat", 0.1f, 0.1f);
-
+        Managers.soundManager.playSound("blood_splat", 0.1f, 0.1f);
 
 
         // spawn on ground particle
-        entityManager.addEntity(
+        Managers.entityManager.addEntity(
                 new Entity()
                         .setX(owner.x)
                         .setY(owner.y)

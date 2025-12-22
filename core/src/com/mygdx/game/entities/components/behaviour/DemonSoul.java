@@ -1,17 +1,12 @@
 package com.mygdx.game.entities.components.behaviour;
 
-import com.mygdx.game.utils.NumberUtils;
-import com.mygdx.game.SoundManager;
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.stats.Stat;
-import com.mygdx.game.world.WorldManager;
+import com.mygdx.game.utils.NumberUtils;
 
 public class DemonSoul extends EntityComponent {
-    private final static EntityManager entityManager = EntityManager.getInstance();
-    private final static WorldManager worldManager = WorldManager.getInstance();
-    private final static SoundManager soundManager = SoundManager.getInstance();
 
 
     private Entity target = null;
@@ -24,7 +19,7 @@ public class DemonSoul extends EntityComponent {
     @Override
     public void onUpdate(Entity owner) {
         if (target == null) {
-            target = entityManager.findClosestEntityWithComponent(owner, "soul");
+            target = Managers.entityManager.findClosestEntityWithComponent(owner, "soul");
         }
 
         if (target != null) {
@@ -42,13 +37,13 @@ public class DemonSoul extends EntityComponent {
 
     @Override
     public void onSudoku(Entity owner) {
-        soundManager.playSound("enemy_death", 1f, 0.1f);
-        worldManager.killedEnemy();
+        Managers.soundManager.playSound("enemy_death", 1f, 0.1f);
+        Managers.worldManager.killedEnemy();
     }
 
     @Override
     public void onTakeDamage(Entity owner, float amount) {
-        soundManager.playSound("enemy_hit", 1f, 0.1f);
+        Managers.soundManager.playSound("enemy_hit", 1f, 0.1f);
     }
 
     @Override

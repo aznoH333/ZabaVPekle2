@@ -3,14 +3,13 @@ package com.mygdx.game.entities.components.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.drawing.DrawingManager;
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.utils.NumberUtils;
 
 public class Button extends EntityComponent {
 
-    private final static DrawingManager drawingManager = DrawingManager.getInstance();
     private final GUIRunnable buttonAction;
 
     public Button(GUIRunnable buttonAction) {
@@ -19,7 +18,7 @@ public class Button extends EntityComponent {
 
     @Override
     public void onUpdate(Entity owner) {
-        Vector2 mousePos = drawingManager.getScreenMousePosition();
+        Vector2 mousePos = Managers.drawingManager.getScreenMousePosition();
 
         if (NumberUtils.checkCollisions(
                 owner.x, owner.y, owner.width, owner.height,

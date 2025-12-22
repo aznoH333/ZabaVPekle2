@@ -8,6 +8,7 @@ public class Bullet extends EntityComponent {
 
     public float direction;
     private final int lifeTime;
+
     public Bullet(float direction, int lifeTime) {
         super.name = "bullet";
         this.direction = direction;

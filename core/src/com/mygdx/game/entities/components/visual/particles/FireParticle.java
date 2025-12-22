@@ -12,6 +12,6 @@ public class FireParticle extends EntityComponent {
     public void onUpdate(Entity owner) {
         owner.y += 0.5f;
         timer++;
-        owner.sprite = "fire_particle_000" + (((timer / 6) % 2 ) + 1);
+        owner.sprite = "fire_particle_000" + (((timer / 6) % 2) + 1);
     }
 }

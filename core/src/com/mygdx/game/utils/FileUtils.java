@@ -18,7 +18,7 @@ public class FileUtils {
         for (FileHandle f : handle.list()) {
             if (!f.isDirectory()) {
                 output.add(f.path());
-            }else  {
+            } else {
                 output.addAll(getFilesInFolder(f.path()));
             }
         }

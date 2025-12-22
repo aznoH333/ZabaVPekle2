@@ -1,10 +1,10 @@
 package com.mygdx.game.entities.components.behaviour.projectile;
 
-import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
 import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.utils.NumberUtils;
 
 public class Boomerang extends EntityComponent {
 
@@ -29,7 +29,7 @@ public class Boomerang extends EntityComponent {
 
             if (leftWard) {
                 bullet.direction += 5.5f * speedMultiplier;
-            }else {
+            } else {
                 bullet.direction -= 5.5f * speedMultiplier;
             }
 

@@ -9,6 +9,7 @@ public class AugmentBox extends EntityComponent {
 
 
     private final Quality quality;
+
     public AugmentBox(Quality quality) {
         this.quality = quality;
     }

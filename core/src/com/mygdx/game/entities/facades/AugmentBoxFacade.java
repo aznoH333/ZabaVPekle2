@@ -1,8 +1,8 @@
 package com.mygdx.game.entities.facades;
 
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.components.behaviour.AugmentBox;
 import com.mygdx.game.entities.components.behaviour.projectile.Boomerang;
 import com.mygdx.game.entities.components.behaviour.projectile.Shrapnel;
@@ -17,11 +17,9 @@ import java.util.HashMap;
 
 public class AugmentBoxFacade {
 
-    private final static EntityManager entityManager = EntityManager.getInstance();
-
 
     public static void createNewBox(float x, float y, Quality boxRarity) {
-        entityManager.addEntity(
+        Managers.entityManager.addEntity(
                 new Entity()
                         .addComponent(new AugmentBox(boxRarity))
                         .setX(x)
@@ -41,7 +39,7 @@ public class AugmentBoxFacade {
 
             if (NumberUtils.randomChance(0.10f)) {
                 augmentQuality++;
-            }else if (NumberUtils.randomChance(0.25f)) {
+            } else if (NumberUtils.randomChance(0.25f)) {
                 augmentQuality--;
             }
 
@@ -55,18 +53,18 @@ public class AugmentBoxFacade {
 
         }
 
-        entityManager.addEntity(guiOwner);
+        Managers.entityManager.addEntity(guiOwner);
     }
 
 
     private final static HashMap<Quality, ArrayList<AugmentGenerationSpecifier>> componentDistributionMap = new HashMap<>();
+
     static {
         componentDistributionMap.put(Quality.POOR, new ArrayList<>());
         componentDistributionMap.put(Quality.COMMON, new ArrayList<>());
         componentDistributionMap.put(Quality.REFINED, new ArrayList<>());
         componentDistributionMap.put(Quality.ELITE, new ArrayList<>());
         componentDistributionMap.put(Quality.DIVINE, new ArrayList<>());
-
 
 
         componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new SineTravel()));
@@ -109,7 +107,7 @@ public class AugmentBoxFacade {
         return augment;
     }
 
-    private static EntityComponent getAugmentComponent(Quality quality){
+    private static EntityComponent getAugmentComponent(Quality quality) {
         ArrayList<AugmentGenerationSpecifier> possibleComponents = componentDistributionMap.get(quality);
 
         float raritySum = 0f;

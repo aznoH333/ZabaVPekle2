@@ -72,7 +72,7 @@ public class NumberUtils {
         float width = w1 / 2.0f;
         float height = h1 / 2.0f;
 
-        float otherWidth = w2/ 2.0f;
+        float otherWidth = w2 / 2.0f;
         float otherHeight = h2 / 2.0f;
 
         return x1 - width < x2 + otherWidth &&

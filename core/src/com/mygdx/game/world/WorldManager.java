@@ -2,21 +2,18 @@ package com.mygdx.game.world;
 
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.Managers;
-import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
-import com.mygdx.game.utils.NumberUtils;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
-import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.entities.Entity;
-import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.DemonSoul;
 import com.mygdx.game.entities.components.behaviour.Spawner;
 import com.mygdx.game.entities.components.control.Door;
-import com.mygdx.game.entities.components.visual.GameEntityAnimator;
+import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.components.visual.particles.FadeParticle;
 import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.utils.NumberUtils;
 
 public class WorldManager {
 
@@ -54,7 +51,7 @@ public class WorldManager {
 
                 if (tileType.isSolid) {
                     layer = DrawingLayer.WALLS;
-                }else {
+                } else {
                     layer = DrawingLayer.FLOOR;
                 }
 
@@ -169,8 +166,6 @@ public class WorldManager {
         }
 
 
-
-
         // floor texture
         if (Math.abs(x) < progress.innerWorldSize && Math.abs(y) < progress.innerWorldSize) {
             return WorldTileType.FLOOR_TILE;
@@ -195,7 +190,7 @@ public class WorldManager {
                 nextEnemySpawnCooldown = enemySpawnCooldown;
                 spawnEnemy();
                 enemiesToSpawn--;
-            }else {
+            } else {
                 nextEnemySpawnCooldown--;
             }
         }
@@ -208,7 +203,7 @@ public class WorldManager {
         do {
             x = NumberUtils.randomInt(-progress.innerWorldSize, progress.innerWorldSize) * 32;
             y = NumberUtils.randomInt(-progress.innerWorldSize, progress.innerWorldSize) * 32;
-        }while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, player.x, player.y) < 128f);
+        } while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, player.x, player.y) < 128f);
 
         Managers.entityManager.addEntity(
                 new Entity()
@@ -224,7 +219,7 @@ public class WorldManager {
                                 .setX(x)
                                 .setY(y)
                                 .addComponent(new DemonSoul())
-                                .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2,11)))
+                                .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
                                 //.addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
                                 .addComponent(new GameEntityBleed())
                                 // .addComponent(new Shooter("hand_0001"))
@@ -249,7 +244,7 @@ public class WorldManager {
         Managers.entityManager.addEntity(
                 new Entity()
                         .setX(-16f)
-                        .setY((progress.innerWorldSize -1) * 32f)
+                        .setY((progress.innerWorldSize - 1) * 32f)
                         .addComponent(new Door())
         );
     }
@@ -261,9 +256,9 @@ public class WorldManager {
         float heightValue = height / 2f;
 
         return x - widthValue > -progress.innerWorldSize * 32f &&
-               x + widthValue < (progress.innerWorldSize - 1) * 32f &&
-               y - heightValue > -progress.innerWorldSize * 32f &&
-               y + heightValue < (progress.innerWorldSize - 1) * 32f;
+                x + widthValue < (progress.innerWorldSize - 1) * 32f &&
+                y - heightValue > -progress.innerWorldSize * 32f &&
+                y + heightValue < (progress.innerWorldSize - 1) * 32f;
     }
 
 
@@ -283,7 +278,7 @@ public class WorldManager {
         Managers.entityManager.clearAllEntities();
         progress.completedLevel();
 
-        Managers.entityManager.addEntity(playerRef.setX(-16f).setY((-progress.innerWorldSize +1) * 32f + 16f));
+        Managers.entityManager.addEntity(playerRef.setX(-16f).setY((-progress.innerWorldSize + 1) * 32f + 16f));
 
 
         loadLevel();

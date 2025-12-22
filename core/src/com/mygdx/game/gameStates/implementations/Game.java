@@ -2,32 +2,17 @@ package com.mygdx.game.gameStates.implementations;
 
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.Managers;
-import com.mygdx.game.SoundManager;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
-import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.EntityManager;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.PlayerSoul;
 import com.mygdx.game.entities.components.behaviour.Shooter;
-import com.mygdx.game.entities.components.behaviour.projectile.Shrapnel;
-import com.mygdx.game.entities.components.behaviour.projectile.SineTravel;
-import com.mygdx.game.entities.components.gui.Button;
-import com.mygdx.game.entities.components.gui.Hover;
-import com.mygdx.game.entities.components.gui.Text;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
-import com.mygdx.game.entities.components.visual.GameEntityAnimator;
 import com.mygdx.game.entities.facades.AugmentBoxFacade;
-import com.mygdx.game.entities.facades.GUIFacade;
-import com.mygdx.game.entities.items.Augment;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.gameStates.GameState;
-import com.mygdx.game.world.WorldManager;
-
-import java.util.ArrayList;
 
 public class Game extends GameState {
-
 
 
     public Game() {
