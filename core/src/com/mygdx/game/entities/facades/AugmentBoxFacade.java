@@ -1,13 +1,16 @@
 package com.mygdx.game.entities.facades;
 
 import com.mygdx.game.Managers;
+import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.AugmentBox;
+import com.mygdx.game.entities.components.behaviour.StatBoost;
 import com.mygdx.game.entities.components.behaviour.projectile.Boomerang;
 import com.mygdx.game.entities.components.behaviour.projectile.Shrapnel;
 import com.mygdx.game.entities.components.behaviour.projectile.SineTravel;
 import com.mygdx.game.entities.components.behaviour.projectile.WallBounce;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Augment;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.utils.NumberUtils;
@@ -24,6 +27,7 @@ public class AugmentBoxFacade {
                         .addComponent(new AugmentBox(boxRarity))
                         .setX(x)
                         .setY(y)
+                        .setDrawingLayer(DrawingLayer.WALLS)
                         .setSprite(boxRarity.boxSprite)
         );
     }
@@ -66,25 +70,41 @@ public class AugmentBoxFacade {
         componentDistributionMap.put(Quality.ELITE, new ArrayList<>());
         componentDistributionMap.put(Quality.DIVINE, new ArrayList<>());
 
+        // poor
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new SineTravel(), true));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new Shrapnel(4), true));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new WallBounce(), true));
 
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new SineTravel()));
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new Shrapnel(4)));
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new WallBounce()));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileDamage, 2f), false));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.FireRate, -10f), false));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileSpeed, 0.5f), false));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileLifeTime, 12f), false));
 
 
-        componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new SineTravel()));
-        componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new Shrapnel(8)));
-        componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new Boomerang()));
 
 
-        componentDistributionMap.get(Quality.REFINED).add(new AugmentGenerationSpecifier(0.5f, new SineTravel()));
-        componentDistributionMap.get(Quality.ELITE).add(new AugmentGenerationSpecifier(0.5f, new SineTravel()));
-        componentDistributionMap.get(Quality.DIVINE).add(new AugmentGenerationSpecifier(0.5f, new SineTravel()));
+
+        componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new SineTravel(), true));
+        componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new Shrapnel(8), true));
+        componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new Boomerang(), true));
+
+
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.Damage, 0.5f), false));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.FireRate, -1.5f), false));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileSpeed, 0.1f), false));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileLifeTime, 24f), false));
+
+
+
+        componentDistributionMap.get(Quality.REFINED).add(new AugmentGenerationSpecifier(0.5f, new SineTravel(), false));
+        componentDistributionMap.get(Quality.ELITE).add(new AugmentGenerationSpecifier(0.5f, new SineTravel(), false));
+        componentDistributionMap.get(Quality.DIVINE).add(new AugmentGenerationSpecifier(0.5f, new SineTravel(), false));
 
     }
 
     private static Augment generateAugment(Quality targetQuality) {
-        ArrayList<EntityComponent> components = new ArrayList<EntityComponent>();
+        ArrayList<EntityComponent> playerComponents = new ArrayList<>();
+        ArrayList<EntityComponent> gunComponents = new ArrayList<EntityComponent>();
 
 
         int targetCount = targetQuality.averageAugmentCount;
@@ -95,19 +115,27 @@ public class AugmentBoxFacade {
 
         for (int i = 0; i < targetCount; i++) {
             // pick possible augment
-            components.add(getAugmentComponent(targetQuality));
+            AugmentGenerationSpecifier specifier = getAugmentComponent(targetQuality);
+
+            if (specifier.intendedForProjectile) {
+                gunComponents.add(specifier.component.copy());
+
+            }else {
+                playerComponents.add(specifier.component.copy());
+            }
+
         }
 
         Augment augment = new Augment(
                 targetQuality,
-                new ArrayList<>(),
-                components
+                playerComponents,
+                gunComponents
         );
 
         return augment;
     }
 
-    private static EntityComponent getAugmentComponent(Quality quality) {
+    private static AugmentGenerationSpecifier getAugmentComponent(Quality quality) {
         ArrayList<AugmentGenerationSpecifier> possibleComponents = componentDistributionMap.get(quality);
 
         float raritySum = 0f;
@@ -121,7 +149,7 @@ public class AugmentBoxFacade {
         float rarityCounter = 0f;
         for (AugmentGenerationSpecifier specifier : possibleComponents) {
             if (specifier.rarity + rarityCounter >= chosenAugmentValue) {
-                return specifier.component.copy();
+                return specifier;
             }
 
             rarityCounter += specifier.rarity;

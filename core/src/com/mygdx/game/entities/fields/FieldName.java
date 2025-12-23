@@ -1,29 +1,45 @@
 package com.mygdx.game.entities.fields;
 
+import com.mygdx.game.utils.NumberUtils;
+
 public enum FieldName {
     // speed
     Speed,
-    SpeedMultiplier,
+    SpeedMultiplier(0f, 0f, null),
 
     // damage
-    Damage,
-    DamageMultiplier,
+    Damage(0f, 0f, null),
+    DamageMultiplier(1f, 0.01f, null),
 
     // health
-    Health,
-    MaxHealth,
+    Health(1f, null, null),
+    MaxHealth(null, 1f, null),
 
     // projectile stuff
     ProjectileLifeTime,
     /** number of times the projectile can bounce */
-    BounceCount,
+    BounceCount(0f, 0f, null),
     ProjectileDamage,
-    ProjectileSpeed,
-    FireRate,
-    ProjectileSpread,
-    ProjectilesPerShot,
-    ProjectileSprite,
+    ProjectileSpeed(0.1f, 0f, 10f),
+    FireRate(1f, 1f, 999f),
+    ProjectileSpread(0f, 0f, NumberUtils.PI),
+    ProjectilesPerShot(1f, 1f, null),
+    ProjectileSprite;
 
 
 
+    public final Float defaultValue;
+    public final Float minValue;
+    public final Float maxValue;
+    FieldName() {
+        this.defaultValue = null;
+        this.maxValue = null;
+        this.minValue = null;
+    }
+
+    FieldName(Float defaultValue, Float minValue, Float maxValue) {
+        this.defaultValue = defaultValue;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+    }
 }
