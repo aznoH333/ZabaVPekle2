@@ -13,7 +13,7 @@ import com.mygdx.game.utils.NumberUtils;
 
 import java.util.ArrayList;
 
-public class Shooter extends EntityComponent {
+public class Gun extends EntityComponent {
 
     public float direction = 0f;
     private int scaleTimer = 0;
@@ -37,7 +37,7 @@ public class Shooter extends EntityComponent {
 
     private final String sprite;
 
-    public Shooter(String sprite) {
+    public Gun(String sprite) {
         super.name = "shooter";
         this.sprite = sprite;
         // add default origin

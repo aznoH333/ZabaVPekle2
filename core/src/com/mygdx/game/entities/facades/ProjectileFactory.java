@@ -31,6 +31,7 @@ public class ProjectileFactory {
                 .setY(y)
                 .setNumericStat(FieldName.Damage, damage)
                 .setNumericStat(FieldName.Speed, speed)
+                .setNumericStat(FieldName.ProjectileLifeTime, 120f)
                 .setTriggerInvincibility(false)
                 .setTeam(team)
                 .setDrawingLayer(DrawingLayer.PROJECTILES)

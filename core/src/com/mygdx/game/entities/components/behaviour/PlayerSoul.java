@@ -11,7 +11,7 @@ import com.mygdx.game.utils.NumberUtils;
 
 public class PlayerSoul extends EntityComponent {
 
-    private Shooter shooter = null;
+    private Gun gun = null;
 
 
     public PlayerSoul() {
@@ -21,7 +21,7 @@ public class PlayerSoul extends EntityComponent {
 
     @Override
     public void onComponentAttached(Entity owner) {
-        shooter = (Shooter) owner.getComponentByName("shooter");
+        gun = (Gun) owner.getComponentByName("shooter");
     }
 
     @Override
@@ -48,17 +48,17 @@ public class PlayerSoul extends EntityComponent {
         Managers.drawingManager.setCameraPosition(owner.x, owner.y);
 
 
-        if (shooter != null) {
+        if (gun != null) {
             Vector2 mousePos = Managers.drawingManager.getMousePosition();
 
-            shooter.direction = NumberUtils.directionToward(
+            gun.direction = NumberUtils.directionToward(
                     owner.x,
                     owner.y,
                     mousePos.x,
                     mousePos.y);
 
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                shooter.shoot(owner);
+                gun.shoot(owner);
             }
         }
 

@@ -3,14 +3,13 @@ package com.mygdx.game.entities.components.behaviour;
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 public class DemonSoul extends EntityComponent {
 
 
     private Entity target = null;
-    private Shooter shooter = null;
+    private Gun gun = null;
 
     public DemonSoul() {
         super.name = "evil soul";
@@ -26,9 +25,9 @@ public class DemonSoul extends EntityComponent {
             float direction = NumberUtils.directionToward(owner.x, owner.y, target.x, target.y);
 
 
-            if (shooter != null) {
-                shooter.direction = direction;
-                shooter.shoot(owner);
+            if (gun != null) {
+                gun.direction = direction;
+                gun.shoot(owner);
             }
 
             owner.goInDirection(direction, 1f);
@@ -48,7 +47,7 @@ public class DemonSoul extends EntityComponent {
 
     @Override
     public void onComponentAttached(Entity owner) {
-        shooter = (Shooter) owner.getComponentByName("shooter");
+        gun = (Gun) owner.getComponentByName("shooter");
     }
 
 

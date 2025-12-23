@@ -70,6 +70,9 @@ public class Entity implements Copyable {
     public Entity() {
         setNumericStat(FieldName.Health, 1f);
         setNumericStat(FieldName.Speed, 0f);
+        setNumericStat(FieldName.SpeedMultiplier, 1f);
+        setNumericStat(FieldName.DamageMultiplier, 1f);
+        setNumericStat(FieldName.Damage, 0f);
     }
 
 
@@ -160,7 +163,7 @@ public class Entity implements Copyable {
         // take damage
         if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.getNumericStat(FieldName.Damage) != 0f && canBeDamaged) {
 
-            addNumericStat(FieldName.Health, other.getNumericStat(FieldName.Damage));
+            addNumericStat(FieldName.Health, -other.getNumericStat(FieldName.Damage) * other.getNumericStat(FieldName.DamageMultiplier));
 
 
             if (other.triggerInvincibility) {
@@ -192,8 +195,8 @@ public class Entity implements Copyable {
             return;
         }
 
-        xVelocity += x * getNumericStat(FieldName.Speed);
-        yVelocity += y * getNumericStat(FieldName.Speed);
+        xVelocity += x * getNumericStat(FieldName.Speed) * getNumericStat(FieldName.SpeedMultiplier);
+        yVelocity += y * getNumericStat(FieldName.Speed) * getNumericStat(FieldName.SpeedMultiplier);
 
         if (flipWithMoveDirection) {
             if (xVelocity < -0.5f) {
@@ -209,8 +212,8 @@ public class Entity implements Copyable {
             return;
         }
 
-        xVelocity += (float) (Math.cos(rotationRad) * speedMultiplier * getNumericStat(FieldName.Speed));
-        yVelocity += (float) (Math.sin(rotationRad) * speedMultiplier * getNumericStat(FieldName.Speed));
+        xVelocity += (float) (Math.cos(rotationRad) * speedMultiplier * getNumericStat(FieldName.Speed) * getNumericStat(FieldName.SpeedMultiplier));
+        yVelocity += (float) (Math.sin(rotationRad) * speedMultiplier * getNumericStat(FieldName.Speed) * getNumericStat(FieldName.SpeedMultiplier));
 
         if (flipWithMoveDirection) {
             if (xVelocity < -0.01f) {

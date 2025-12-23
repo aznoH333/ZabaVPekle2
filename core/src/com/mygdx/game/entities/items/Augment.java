@@ -4,7 +4,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.components.behaviour.Shooter;
+import com.mygdx.game.entities.components.behaviour.Gun;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -87,7 +87,7 @@ public class Augment extends EntityComponent {
             attachTo.addComponent(component);
         }
 
-        Shooter gun = (Shooter) attachTo.getComponentByName("shooter");
+        Gun gun = (Gun) attachTo.getComponentByName("shooter");
         for (EntityComponent gunComponent : componentsForGun) {
             gun.addBulletComponent(gunComponent);
         }

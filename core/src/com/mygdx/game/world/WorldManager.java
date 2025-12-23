@@ -218,14 +218,12 @@ public class WorldManager {
                                 .setSprite("enemy_1")
                                 .setTeam(EntityTeam.DEMON)
                                 .setNumericStat(FieldName.Health, 6f)
+                                .setNumericStat(FieldName.Speed, 1.3f)
                                 .setX(x)
                                 .setY(y)
                                 .addComponent(new DemonSoul())
                                 .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
-                                //.addComponent(new GameEntityAnimator("enemy", 1, 2, 8, 9, 3))
                                 .addComponent(new GameEntityBleed())
-                                // .addComponent(new Shooter("hand_0001"))
-
                                 .setDrawingLayer(DrawingLayer.ENEMIES)))
         );
     }
