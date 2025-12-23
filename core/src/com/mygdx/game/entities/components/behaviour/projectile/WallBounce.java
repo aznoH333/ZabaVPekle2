@@ -4,7 +4,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 public class WallBounce extends EntityComponent {
@@ -19,7 +19,7 @@ public class WallBounce extends EntityComponent {
 
     @Override
     public void onWorldCollide(Entity owner) {
-        if (owner.stats.get(Stat.BounceCount) <= 1f) {
+        if (owner.getNumericStat(FieldName.BounceCount) <= 1f) {
             return;
         }
 
@@ -33,7 +33,7 @@ public class WallBounce extends EntityComponent {
         }
 
         Entity newBullet = owner.copy();
-        newBullet.addStat(Stat.BounceCount, -1f);
+        newBullet.addNumericStat(FieldName.BounceCount, -1f);
 
         Managers.entityManager.addEntity(newBullet);
 
@@ -42,9 +42,14 @@ public class WallBounce extends EntityComponent {
 
     @Override
     public void onComponentAttached(Entity owner) {
-        owner.stats.add(Stat.BounceCount, 1f);
-        owner.stats.add(Stat.ProjectileLifeTime, 30f);
         bullet = (Bullet) owner.getComponentByName("bullet");
+    }
+
+    @Override
+    public void onFirstAttached(Entity owner) {
+        owner.setNumericStat(FieldName.BounceCount, 1f);
+        owner.addNumericStat(FieldName.ProjectileLifeTime, 30f);
+
     }
 
     @Override

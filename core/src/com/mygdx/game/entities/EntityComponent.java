@@ -28,8 +28,7 @@ public class EntityComponent {
     public void onWorldCollide(Entity owner) {
     }
 
-    public void recalculateStats(Entity owner) {
-    }
+    public void onFirstAttached(Entity owner) {}
 
     public void onTakeDamage(Entity owner, float damageAmount) {
     }

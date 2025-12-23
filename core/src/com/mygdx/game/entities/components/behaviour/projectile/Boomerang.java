@@ -3,7 +3,7 @@ package com.mygdx.game.entities.components.behaviour.projectile;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 public class Boomerang extends EntityComponent {
@@ -20,7 +20,7 @@ public class Boomerang extends EntityComponent {
 
     @Override
     public void onUpdate(Entity owner) {
-        float speedMultiplier = owner.stats.get(Stat.Speed) / 32f;
+        float speedMultiplier = owner.getNumericStat(FieldName.Speed) / 32f;
 
         boomerangTime -= speedMultiplier;
 
@@ -40,9 +40,13 @@ public class Boomerang extends EntityComponent {
 
     @Override
     public void onComponentAttached(Entity owner) {
-        owner.stats.add(Stat.ProjectileLifeTime, 120f);
         bullet = (Bullet) owner.getComponentByName("bullet");
 
+    }
+
+    @Override
+    public void onFirstAttached(Entity owner) {
+        owner.addNumericStat(FieldName.ProjectileLifeTime, 120f);
     }
 
     @Override

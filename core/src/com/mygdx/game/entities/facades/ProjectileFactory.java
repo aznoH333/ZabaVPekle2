@@ -5,7 +5,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.Bullet;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.FieldName;
 
 import java.util.ArrayList;
 
@@ -29,8 +29,8 @@ public class ProjectileFactory {
                 .setSprite(sprite)
                 .setX(x)
                 .setY(y)
-                .overrideDefault(Stat.Damage, damage, 2f)
-                .overrideDefault(Stat.Speed, speed, 2f)
+                .setNumericStat(FieldName.Damage, damage)
+                .setNumericStat(FieldName.Speed, speed)
                 .setTriggerInvincibility(false)
                 .setTeam(team)
                 .setDrawingLayer(DrawingLayer.PROJECTILES)

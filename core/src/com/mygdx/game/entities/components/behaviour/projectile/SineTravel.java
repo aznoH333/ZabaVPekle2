@@ -3,7 +3,7 @@ package com.mygdx.game.entities.components.behaviour.projectile;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 public class SineTravel extends EntityComponent {
@@ -29,8 +29,12 @@ public class SineTravel extends EntityComponent {
     @Override
     public void onComponentAttached(Entity owner) {
         bullet = (Bullet) owner.getComponentByName("bullet");
-        owner.addStat(Stat.Speed, 0.025f);
 
+    }
+
+    @Override
+    public void onFirstAttached(Entity owner) {
+        owner.addNumericStat(FieldName.Speed, 0.025f);
     }
 
     @Override

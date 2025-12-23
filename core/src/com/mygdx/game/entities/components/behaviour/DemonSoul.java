@@ -3,7 +3,7 @@ package com.mygdx.game.entities.components.behaviour;
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 public class DemonSoul extends EntityComponent {
@@ -51,12 +51,9 @@ public class DemonSoul extends EntityComponent {
         shooter = (Shooter) owner.getComponentByName("shooter");
     }
 
-    @Override
-    public void recalculateStats(Entity owner) {
-        owner.overrideDefault(Stat.Speed, 1.3f, 1f);
-        owner.overrideDefault(Stat.Health, 6f, 1f);
-        owner.overrideDefault(Stat.Damage, 1f, 1f);
 
+    @Override
+    public void onFirstAttached(Entity owner) {
         owner.knockBackMultiplier = 8f;
         owner.flipWithMoveDirection = true;
         owner.canBeDamaged = true;

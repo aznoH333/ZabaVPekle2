@@ -13,8 +13,8 @@ import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.components.visual.particles.FadeParticle;
 import com.mygdx.game.entities.facades.AugmentBoxFacade;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Quality;
-import com.mygdx.game.entities.stats.Stat;
 import com.mygdx.game.utils.NumberUtils;
 
 public class WorldManager {
@@ -217,7 +217,7 @@ public class WorldManager {
                         .addComponent(new Spawner(new Entity()
                                 .setSprite("enemy_1")
                                 .setTeam(EntityTeam.DEMON)
-                                .overrideDefault(Stat.Health, 6f, 1f)
+                                .setNumericStat(FieldName.Health, 6f)
                                 .setX(x)
                                 .setY(y)
                                 .addComponent(new DemonSoul())

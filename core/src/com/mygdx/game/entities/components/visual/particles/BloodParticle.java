@@ -4,7 +4,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 public class BloodParticle extends EntityComponent {
@@ -40,9 +40,10 @@ public class BloodParticle extends EntityComponent {
     }
 
     @Override
-    public void onComponentAttached(Entity owner) {
-        owner.addStat(Stat.Speed, 1f);
+    public void onFirstAttached(Entity owner) {
+        owner.addNumericStat(FieldName.Speed, 1f);
     }
+
 
     @Override
     public void onSudoku(Entity owner) {

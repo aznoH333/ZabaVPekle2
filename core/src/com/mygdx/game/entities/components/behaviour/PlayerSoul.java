@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 public class PlayerSoul extends EntityComponent {
@@ -66,11 +66,13 @@ public class PlayerSoul extends EntityComponent {
     }
 
     @Override
-    public void recalculateStats(Entity owner) {
-        owner.overrideDefault(Stat.Speed, 3.5f, 1f);
+    public void onFirstAttached(Entity owner) {
+        owner.setNumericStat(FieldName.Speed, 3.5f);
         owner.flipWithMoveDirection = true;
-        owner.overrideDefault(Stat.MaxHealth, 6f, 1f);
+        owner.setNumericStat(FieldName.MaxHealth, 6f);
+        owner.setNumericStat(FieldName.Health, 6f);
         owner.canBeDamaged = true;
-        owner.addStat(Stat.Health, 6666666f);
     }
+
+
 }

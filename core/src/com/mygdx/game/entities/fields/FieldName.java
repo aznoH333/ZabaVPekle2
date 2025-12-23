@@ -1,6 +1,6 @@
-package com.mygdx.game.entities.stats;
+package com.mygdx.game.entities.fields;
 
-public enum Stat {
+public enum FieldName {
 
     // combat
 
@@ -10,10 +10,13 @@ public enum Stat {
      */
     Speed(0f, null),
 
+    SpeedMultiplier(1f, null),
+
     /**
      * Damage the entity deals to entities of the opposing team on contact
      */
     Damage(0f, null),
+    DamageMultiplier(1f, null),
 
     /**
      * Health of the entity -- TODO : rewrite max values to be built into entity stat and remove maxHealth
@@ -32,9 +35,9 @@ public enum Stat {
 
 
     public final float defaultValue;
-    public final Stat pairedWith;
+    public final FieldName pairedWith;
 
-    Stat(float defaultValue, Stat pairedWith) {
+    FieldName(float defaultValue, FieldName pairedWith) {
         this.defaultValue = defaultValue;
         this.pairedWith = pairedWith;
     }

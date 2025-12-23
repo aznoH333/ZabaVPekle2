@@ -5,7 +5,7 @@ import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.visual.particles.BloodParticle;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 public class GameEntityBleed extends EntityComponent {
@@ -17,7 +17,7 @@ public class GameEntityBleed extends EntityComponent {
 
     @Override
     public void onSudoku(Entity owner) {
-        spawnParticles(owner, 20f - owner.stats.get(Stat.Health));
+        spawnParticles(owner, 20f - owner.getNumericStat(FieldName.Health));
     }
 
     private void spawnParticles(Entity owner, float amount) {

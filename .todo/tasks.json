@@ -750,7 +750,7 @@
     ],
     "title": "world places",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -774,7 +774,7 @@
     ],
     "title": "loot rooms",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -788,6 +788,19 @@
         "nano": 949158794
       }
     },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 22
+      },
+      "time": {
+        "hour": 12,
+        "minute": 6,
+        "second": 30,
+        "nano": 103684825
+      }
+    },
     "isImported": false
   },
   {
@@ -798,7 +811,7 @@
     ],
     "title": "big combat rooms",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -812,6 +825,19 @@
         "nano": 194938803
       }
     },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 22
+      },
+      "time": {
+        "hour": 12,
+        "minute": 6,
+        "second": 33,
+        "nano": 545093110
+      }
+    },
     "isImported": false
   },
   {
@@ -822,7 +848,7 @@
     ],
     "title": "minor combat rooms",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -834,6 +860,19 @@
         "minute": 6,
         "second": 16,
         "nano": 611019790
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 22
+      },
+      "time": {
+        "hour": 12,
+        "minute": 16,
+        "second": 14,
+        "nano": 327625100
       }
     },
     "isImported": false
@@ -882,6 +921,30 @@
         "minute": 30,
         "second": 14,
         "nano": 314699600
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1257",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Stat augments",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 22
+      },
+      "time": {
+        "hour": 12,
+        "minute": 16,
+        "second": 34,
+        "nano": 291247518
       }
     },
     "isImported": false

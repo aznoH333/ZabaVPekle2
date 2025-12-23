@@ -3,14 +3,16 @@ package com.mygdx.game.entities;
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
-import com.mygdx.game.entities.stats.EntityStats;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.Copyable;
+import com.mygdx.game.entities.fields.EntityFields;
+import com.mygdx.game.entities.fields.EntityNumericFields;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Entity {
+public class Entity implements Copyable {
 
 
     public String sprite;
@@ -23,7 +25,10 @@ public class Entity {
     private final ArrayList<EntityComponent> components = new ArrayList<>();
     public DrawingLayer drawingLayer = DrawingLayer.FLOOR;
     public boolean triggerInvincibility = true;
-    public EntityStats stats = new EntityStats();
+
+    private final EntityFields genericFields = new EntityFields();
+    private final EntityNumericFields numericFields = new EntityNumericFields();
+
 
     public int invincibilityTimer = 0;
     public int invincibilityTimerMax = 30;
@@ -63,7 +68,8 @@ public class Entity {
     public Entity parent = null;
 
     public Entity() {
-        resetStats();
+        setNumericStat(FieldName.Health, 1f);
+        setNumericStat(FieldName.Speed, 0f);
     }
 
 
@@ -152,8 +158,9 @@ public class Entity {
             component.onCollide(this, other);
         }
         // take damage
-        if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.stats.get(Stat.Damage) != 0f && canBeDamaged) {
-            this.stats.add(Stat.Health, -other.stats.get(Stat.Damage));
+        if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.getNumericStat(FieldName.Damage) != 0f && canBeDamaged) {
+
+            addNumericStat(FieldName.Health, other.getNumericStat(FieldName.Damage));
 
 
             if (other.triggerInvincibility) {
@@ -162,13 +169,11 @@ public class Entity {
             this.knockBackTimer = this.knockBackTimerMax;
 
 
-            if (this.stats.get(Stat.Health) <= 0f) {
+            if (this.getNumericStat(FieldName.Health) <= 0f) {
                 this.commitSudoku();
-
-
             } else {
                 for (EntityComponent c : components) {
-                    c.onTakeDamage(this, other.stats.get(Stat.Damage));
+                    c.onTakeDamage(this, other.getNumericStat(FieldName.Damage));
                 }
             }
 
@@ -181,18 +186,14 @@ public class Entity {
     }
 
 
-    private void resetStats() {
-        stats.reset();
-    }
-
 
     public void walk(float x, float y) {
         if (shouldApplyKnockBack()) {
             return;
         }
 
-        xVelocity += x * stats.get(Stat.Speed);
-        yVelocity += y * stats.get(Stat.Speed);
+        xVelocity += x * getNumericStat(FieldName.Speed);
+        yVelocity += y * getNumericStat(FieldName.Speed);
 
         if (flipWithMoveDirection) {
             if (xVelocity < -0.5f) {
@@ -208,8 +209,8 @@ public class Entity {
             return;
         }
 
-        xVelocity += (float) (Math.cos(rotationRad) * speedMultiplier * stats.get(Stat.Speed));
-        yVelocity += (float) (Math.sin(rotationRad) * speedMultiplier * stats.get(Stat.Speed));
+        xVelocity += (float) (Math.cos(rotationRad) * speedMultiplier * getNumericStat(FieldName.Speed));
+        yVelocity += (float) (Math.sin(rotationRad) * speedMultiplier * getNumericStat(FieldName.Speed));
 
         if (flipWithMoveDirection) {
             if (xVelocity < -0.01f) {
@@ -307,11 +308,10 @@ public class Entity {
         }
         component.owner = this;
         this.components.add(component);
+        component.onFirstAttached(this);
 
-        resetStats();
         for (EntityComponent c : components) {
             c.onComponentAttached(this);
-            c.recalculateStats(this);
         }
 
         return this;
@@ -364,10 +364,12 @@ public class Entity {
             clone.addComponent(c.copy());
         }
         // stats
-        clone.stats.importValues(stats);
+        clone.genericFields.importValues(this.genericFields);
+        clone.numericFields.importValues(this.numericFields);
 
         return clone;
     }
+
 
     public Entity addChild(Entity child) {
         this.children.add(child);
@@ -375,28 +377,18 @@ public class Entity {
         return this;
     }
 
+    public float getNumericStat(FieldName fieldName) {
+        return this.numericFields.getField(fieldName);
+    }
 
-    // overrides
-    public Entity overrideDefault(Stat stat, float value, float overridePriority) {
-        stats.overrideDefault(stat, value, overridePriority);
-
+    public Entity setNumericStat(FieldName fieldName, float value) {
+        this.numericFields.setField(fieldName, value);
         return this;
     }
 
-    public Entity setStat(Stat stat, float value) {
-        stats.setStat(stat, value);
+    public Entity addNumericStat(FieldName fieldName, float value) {
+        this.numericFields.addToField(fieldName, value);
         return this;
     }
-
-    public Entity addStat(Stat stat, float value) {
-        stats.add(stat, value);
-        return this;
-    }
-
-    public Entity multiplyStat(Stat stat, float value) {
-        stats.multiply(stat, value);
-        return this;
-    }
-
 
 }

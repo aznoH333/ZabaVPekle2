@@ -4,8 +4,8 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.EffectPotency;
-import com.mygdx.game.entities.stats.Stat;
 import com.mygdx.game.utils.NumberUtils;
 
 public class Shrapnel extends EntityComponent {
@@ -20,7 +20,7 @@ public class Shrapnel extends EntityComponent {
 
     @Override
     public void onSudoku(Entity owner) {
-        if (owner.stats.get(Stat.BounceCount) <= 0f) {
+        if (owner.getNumericStat(FieldName.BounceCount) <= 0f) {
             return;
         }
 
@@ -32,12 +32,12 @@ public class Shrapnel extends EntityComponent {
             Bullet bullet = (Bullet) newBullet.getComponentByName("bullet");
             bullet.direction += currentRotation;
             currentRotation += rotationPercentage;
-            newBullet.setStat(Stat.ProjectileLifeTime, 20f);
-            newBullet.overrideDefault(Stat.ProjectileLifeTime, 0f, 60f);
+            newBullet.setNumericStat(FieldName.ProjectileLifeTime, 20f);
+            newBullet.setNumericStat(FieldName.ProjectileLifeTime, 0f);
 
-            newBullet.setStat(Stat.BounceCount, 0f);
-            newBullet.multiplyStat(Stat.Damage, -0.75f);
-            newBullet.overrideDefault(Stat.BounceCount, 0f, 60f);
+            newBullet.setNumericStat(FieldName.BounceCount, 0f);
+            newBullet.setNumericStat(FieldName.DamageMultiplier, -0.75f);
+            newBullet.setNumericStat(FieldName.BounceCount, 0f);
 
             Managers.entityManager.addEntity(newBullet);
         }

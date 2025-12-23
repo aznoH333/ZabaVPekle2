@@ -2,7 +2,7 @@ package com.mygdx.game.entities.components.behaviour;
 
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.FieldName;
 
 public class Bullet extends EntityComponent {
 
@@ -19,10 +19,10 @@ public class Bullet extends EntityComponent {
     public void onUpdate(Entity owner) {
         owner.goInDirection(direction, 6f);
         owner.knockBackMultiplier = 2f;
-        owner.stats.add(Stat.ProjectileLifeTime, -1f);
+        owner.addNumericStat(FieldName.ProjectileLifeTime, -1f);
 
 
-        float remainingLifetime = owner.stats.get(Stat.ProjectileLifeTime);
+        float remainingLifetime = owner.getNumericStat(FieldName.ProjectileLifeTime);
 
         // scale down
         if (remainingLifetime < 30f) {
@@ -37,6 +37,11 @@ public class Bullet extends EntityComponent {
     }
 
     @Override
+    public void onFirstAttached(Entity owner) {
+        owner.spriteRotation = direction;
+    }
+
+    @Override
     public void onWorldCollide(Entity owner) {
         owner.commitSudoku();
     }
@@ -46,15 +51,6 @@ public class Bullet extends EntityComponent {
         if (other.team.isAggressiveAgainst(owner.team)) {
             owner.commitSudoku();
         }
-    }
-
-
-    @Override
-    public void recalculateStats(Entity owner) {
-        owner.overrideDefault(Stat.Damage, 1f, 1f);
-        owner.overrideDefault(Stat.Speed, 0.1f, 1f);
-        owner.spriteRotation = direction;
-        owner.overrideDefault(Stat.ProjectileLifeTime, lifeTime, 1f);
     }
 
     @Override

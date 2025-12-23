@@ -4,7 +4,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
-import com.mygdx.game.entities.stats.Stat;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 public class Guided extends EntityComponent {
@@ -26,13 +26,13 @@ public class Guided extends EntityComponent {
 
             float direction = NumberUtils.constrictRotationToRad(NumberUtils.directionToward(owner.x, owner.y, target.x, target.y) + NumberUtils.TWO_PI);
             float bulletDirection = NumberUtils.constrictRotationToRad(bullet.direction);
-            owner.addStat(Stat.Speed, 0.01f);
+            owner.addNumericStat(FieldName.Speed, 0.01f);
 
 
             if (NumberUtils.constrictRotationToRad(direction - bulletDirection + NumberUtils.TWO_PI) < Math.PI) {
-                bullet.direction += 0.5f * owner.stats.get(Stat.Speed);
+                bullet.direction += 0.5f * owner.getNumericStat(FieldName.Speed);
             } else {
-                bullet.direction -= 0.5f * owner.stats.get(Stat.Speed);
+                bullet.direction -= 0.5f * owner.getNumericStat(FieldName.Speed);
             }
 
 
@@ -43,7 +43,7 @@ public class Guided extends EntityComponent {
     @Override
     public void onComponentAttached(Entity owner) {
         bullet = (Bullet) owner.getComponentByName("bullet");
-        owner.multiplyStat(Stat.Speed, -0.1f);
+        owner.addNumericStat(FieldName.SpeedMultiplier, -0.1f);
     }
 
 
