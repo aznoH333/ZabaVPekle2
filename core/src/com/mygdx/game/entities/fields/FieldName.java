@@ -1,34 +1,29 @@
 package com.mygdx.game.entities.fields;
 
 public enum FieldName {
-
-    /**
-     * Movement speed of the entity
-     */
+    // speed
     Speed,
-
     SpeedMultiplier,
 
-    /**
-     * Damage the entity deals to entities of the opposing team on contact
-     */
+    // damage
     Damage,
     DamageMultiplier,
 
-    /**
-     * Health of the entity -- TODO : rewrite max values to be built into entity stat and remove maxHealth
-     */
+    // health
     Health,
     MaxHealth,
 
-    /**
-     * Amount of time (in frames) that the projectile will live for
-     */
+    // projectile stuff
     ProjectileLifeTime,
-    /**
-     * The number of times the projectile bounced
-     */
-    BounceCount;
+    /** number of times the projectile can bounce */
+    BounceCount,
+    ProjectileDamage,
+    ProjectileSpeed,
+    FireRate,
+    ProjectileSpread,
+    ProjectilesPerShot,
+    ProjectileSprite,
+
 
 
 }

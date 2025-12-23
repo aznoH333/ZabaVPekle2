@@ -9,6 +9,7 @@ import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.projectile.SpinSprite;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.facades.ProjectileFactory;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 import java.util.ArrayList;
@@ -22,12 +23,6 @@ public class Gun extends EntityComponent {
 
 
     // statistics
-    public int fireRate = 20;
-    public float spread = 0.045f;
-    public int bulletsPerShot = 1;
-    public float bulletSpeed = 0.75f;
-    public float damage = 2f;
-    public String bulletSprite = "fire_ball";
     private ArrayList<BulletOrigin> bulletOrigins = new ArrayList<>();
     public Color color;
     private AnimatedLegsWithHat legs;
@@ -102,24 +97,25 @@ public class Gun extends EntityComponent {
         }
 
         scaleTimer = 10;
-        fireCooldown = fireRate;
+        fireCooldown = (int) owner.getNumericStat(FieldName.FireRate);
 
         // play sound
         Managers.soundManager.playSound("fire_ball", 1f, 0.1f);
 
+        int projectilesPerShot = (int) owner.getNumericStat(FieldName.ProjectilesPerShot);
+
         for (BulletOrigin b : bulletOrigins) {
             float handDirection = direction + b.aimOffset;
-
-            for (int i = 0; i < bulletsPerShot; i++) {
-                float bulletDirection = handDirection + NumberUtils.randomFloat(-spread, spread);
+            for (int i = 0; i < projectilesPerShot; i++) {
+                float bulletDirection = handDirection + NumberUtils.randomFloat(-owner.getNumericStat(FieldName.ProjectileSpread), owner.getNumericStat(FieldName.ProjectileSpread));
 
 
                 Entity bullet = ProjectileFactory.buildBullet(
                         owner.x,
                         owner.y,
-                        bulletSprite,
-                        damage,
-                        bulletSpeed,
+                        owner.getField(FieldName.ProjectileSprite),
+                        owner.getNumericStat(FieldName.ProjectileDamage) * owner.getNumericStat(FieldName.DamageMultiplier),
+                        owner.getNumericStat(FieldName.ProjectileSpeed),
                         owner.team,
                         bulletDirection,
                         120,
@@ -136,6 +132,15 @@ public class Gun extends EntityComponent {
     @Override
     public void onComponentAttached(Entity owner) {
         legs = (AnimatedLegsWithHat) owner.getComponentByName("legs");
+    }
+
+    public void onFirstAttached(Entity owner) {
+        owner.setNumericStat(FieldName.ProjectileDamage, 0f);
+        owner.setNumericStat(FieldName.ProjectileSpeed, 0.1f);
+        owner.setNumericStat(FieldName.FireRate, 1f);
+        owner.setNumericStat(FieldName.ProjectileSpread, 0f);
+        owner.setNumericStat(FieldName.ProjectilesPerShot, 1f);
+        owner.setField(FieldName.ProjectileSprite, "fire_ball");
     }
 
     public void addBulletComponent(EntityComponent component) {

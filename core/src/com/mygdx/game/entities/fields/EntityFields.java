@@ -15,9 +15,9 @@ public class EntityFields {
 
     public void importValues(EntityFields other) {
         for (FieldName fieldName : other.fields.keySet()) {
-            Copyable field = other.getField(fieldName);
+            Object field = other.getField(fieldName);
 
-            setField(fieldName, field.copy());
+            setField(fieldName, field);
         }
     }
 }

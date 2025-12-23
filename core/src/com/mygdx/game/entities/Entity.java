@@ -394,4 +394,13 @@ public class Entity implements Copyable {
         return this;
     }
 
+    public <T> T getField(FieldName fieldName) {
+        return this.genericFields.getField(fieldName);
+    }
+
+    public <T> Entity setField(FieldName fieldName, T value) {
+        this.genericFields.setField(fieldName, value);
+        return this;
+    }
+
 }
