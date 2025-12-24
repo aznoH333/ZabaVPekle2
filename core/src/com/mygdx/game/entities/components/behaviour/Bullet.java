@@ -1,5 +1,7 @@
 package com.mygdx.game.entities.components.behaviour;
 
+import com.mygdx.game.Managers;
+import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.fields.FieldName;
@@ -23,6 +25,7 @@ public class Bullet extends EntityComponent {
 
 
         float remainingLifetime = owner.getNumericStat(FieldName.ProjectileLifeTime);
+
 
         // scale down
         if (remainingLifetime < 30f) {

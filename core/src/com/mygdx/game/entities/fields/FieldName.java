@@ -16,7 +16,7 @@ public enum FieldName {
     MaxHealth(null, 1f, null),
 
     // projectile stuff
-    ProjectileLifeTime,
+    ProjectileLifeTime(120f, null, null),
     /** number of times the projectile can bounce */
     BounceCount(0f, 0f, null),
     ProjectileDamage,

@@ -32,8 +32,7 @@ public class Shrapnel extends EntityComponent {
             Bullet bullet = (Bullet) newBullet.getComponentByName("bullet");
             bullet.direction += currentRotation;
             currentRotation += rotationPercentage;
-            newBullet.setNumericStat(FieldName.ProjectileLifeTime, 20f);
-            newBullet.setNumericStat(FieldName.ProjectileLifeTime, 0f);
+            newBullet.setNumericStat(FieldName.ProjectileLifeTime, 30f);
 
             newBullet.setNumericStat(FieldName.BounceCount, 0f);
             newBullet.setNumericStat(FieldName.DamageMultiplier, -0.75f);
@@ -42,6 +41,12 @@ public class Shrapnel extends EntityComponent {
             Managers.entityManager.addEntity(newBullet);
         }
     }
+
+    @Override
+    public void onFirstAttached(Entity owner) {
+        owner.addNumericStat(FieldName.BounceCount, 1f);
+    }
+
 
     @Override
     public EntityComponent copy() {

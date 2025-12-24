@@ -1,7 +1,5 @@
 package com.mygdx.game.entities.fields;
 
-import com.mygdx.game.utils.NumberUtils;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;

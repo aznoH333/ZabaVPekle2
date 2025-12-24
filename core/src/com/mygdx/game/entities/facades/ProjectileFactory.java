@@ -23,7 +23,8 @@ public class ProjectileFactory {
             EntityTeam team,
             float direction,
             int lifeTime,
-            ArrayList<EntityComponent> components
+            ArrayList<EntityComponent> components,
+            float bounceCount
     ) {
         Entity bullet = new Entity()
                 .setSprite(sprite)
@@ -32,7 +33,7 @@ public class ProjectileFactory {
                 .setNumericStat(FieldName.Damage, damage)
                 .setNumericStat(FieldName.Speed, speed)
                 .setNumericStat(FieldName.ProjectileLifeTime, lifeTime)
-                .setNumericStat(FieldName.BounceCount, 0f)
+                .setNumericStat(FieldName.BounceCount, bounceCount)
                 .setTriggerInvincibility(false)
                 .setTeam(team)
                 .setDrawingLayer(DrawingLayer.PROJECTILES)

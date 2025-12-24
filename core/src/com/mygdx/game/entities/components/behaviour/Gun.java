@@ -118,8 +118,9 @@ public class Gun extends EntityComponent {
                         owner.getNumericStat(FieldName.ProjectileSpeed),
                         owner.team,
                         bulletDirection,
-                        120,
-                        bulletComponents
+                        (int) owner.getNumericStat(FieldName.ProjectileLifeTime),
+                        bulletComponents,
+                        owner.getNumericStat(FieldName.BounceCount)
                 );
 
                 Managers.entityManager.addEntity(bullet);
