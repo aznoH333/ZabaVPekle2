@@ -1,6 +1,7 @@
 package com.mygdx.game.entities.components.behaviour.projectile;
 
 import com.mygdx.game.Managers;
+import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
@@ -16,6 +17,7 @@ public class WallBounce extends EntityComponent {
         super.effectDescription = "wall bounce";
         super.componentCountLimit = 3;
     }
+
 
     @Override
     public void onWorldCollide(Entity owner) {
@@ -47,7 +49,7 @@ public class WallBounce extends EntityComponent {
 
     @Override
     public void onFirstAttached(Entity owner) {
-        owner.setNumericStat(FieldName.BounceCount, 1f);
+        owner.addNumericStat(FieldName.BounceCount, 1f);
         owner.addNumericStat(FieldName.ProjectileLifeTime, 30f);
 
     }

@@ -90,10 +90,10 @@ public class AugmentBoxFacade {
         componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new Boomerang(), true));
 
 
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.Damage, 0.5f), false));
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.FireRate, -1.5f), false));
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileSpeed, 0.1f), false));
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileLifeTime, 24f), false));
+        componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.Damage, 0.5f), false));
+        componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.FireRate, -1.5f), false));
+        componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileSpeed, 0.1f), false));
+        componentDistributionMap.get(Quality.COMMON).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileLifeTime, 24f), false));
 
 
 

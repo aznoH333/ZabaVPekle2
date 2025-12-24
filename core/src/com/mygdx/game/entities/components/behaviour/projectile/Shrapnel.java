@@ -42,10 +42,6 @@ public class Shrapnel extends EntityComponent {
         }
     }
 
-    @Override
-    public void onFirstAttached(Entity owner) {
-        owner.addNumericStat(FieldName.BounceCount, 1f);
-    }
 
 
     @Override

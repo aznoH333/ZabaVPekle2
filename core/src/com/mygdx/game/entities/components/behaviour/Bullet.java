@@ -42,6 +42,7 @@ public class Bullet extends EntityComponent {
     @Override
     public void onFirstAttached(Entity owner) {
         owner.spriteRotation = direction;
+
     }
 
     @Override

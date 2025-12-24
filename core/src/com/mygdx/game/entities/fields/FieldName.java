@@ -18,7 +18,7 @@ public enum FieldName {
     // projectile stuff
     ProjectileLifeTime(120f, null, null),
     /** number of times the projectile can bounce */
-    BounceCount(0f, 0f, null),
+    BounceCount(1f, null, null),
     ProjectileDamage,
     ProjectileSpeed(0.1f, 0f, 10f),
     FireRate(1f, 1f, 999f),
