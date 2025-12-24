@@ -33,7 +33,7 @@ public class Game extends GameState {
                 .addComponent(new AnimatedLegsWithHat(new Color(0f, 1f, 0f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_1"))
                 .addComponent(new Gun("hands_0002"))
                 .setNumericStat(FieldName.ProjectileSpeed, 0.75f)
-                .setNumericStat(FieldName.FireRate, 24f)
+                .setNumericStat(FieldName.FireRate, 25f)
                 .setNumericStat(FieldName.ProjectileDamage, 2f)
         );
 

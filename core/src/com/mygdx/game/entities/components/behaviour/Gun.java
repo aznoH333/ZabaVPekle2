@@ -104,10 +104,12 @@ public class Gun extends EntityComponent {
 
         int projectilesPerShot = (int) owner.getNumericStat(FieldName.ProjectilesPerShot);
 
+        float spreadValue = owner.getNumericStat(FieldName.ProjectileSpread) * owner.getNumericStat(FieldName.ProjectileSpread);
+
         for (BulletOrigin b : bulletOrigins) {
             float handDirection = direction + b.aimOffset;
             for (int i = 0; i < projectilesPerShot; i++) {
-                float bulletDirection = handDirection + NumberUtils.randomFloat(-owner.getNumericStat(FieldName.ProjectileSpread), owner.getNumericStat(FieldName.ProjectileSpread));
+                float bulletDirection = handDirection + NumberUtils.randomFloat(-spreadValue, spreadValue);
 
 
                 Entity bullet = ProjectileFactory.buildBullet(
@@ -136,10 +138,7 @@ public class Gun extends EntityComponent {
     }
 
     public void onFirstAttached(Entity owner) {
-        owner.setNumericStat(FieldName.ProjectileDamage, 0f);
-        owner.setNumericStat(FieldName.ProjectileSpeed, 0.1f);
         owner.setNumericStat(FieldName.FireRate, 1f);
-        owner.setNumericStat(FieldName.ProjectileSpread, 0f);
         owner.setNumericStat(FieldName.ProjectilesPerShot, 1f);
         owner.setField(FieldName.ProjectileSprite, "fire_ball");
     }

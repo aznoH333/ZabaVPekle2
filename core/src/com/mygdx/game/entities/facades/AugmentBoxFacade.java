@@ -5,6 +5,8 @@ import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.AugmentBox;
+import com.mygdx.game.entities.components.behaviour.augments.statChangers.ScrapyMachineGun;
+import com.mygdx.game.entities.components.behaviour.augments.statChangers.ScrapyShotGun;
 import com.mygdx.game.entities.components.behaviour.augments.statChangers.StatBoost;
 import com.mygdx.game.entities.components.behaviour.augments.projectile.Boomerang;
 import com.mygdx.game.entities.components.behaviour.augments.projectile.Shrapnel;
@@ -71,17 +73,19 @@ public class AugmentBoxFacade {
         componentDistributionMap.put(Quality.DIVINE, new ArrayList<>());
 
         // poor
-        // componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new SineTravel(), true));
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new Shrapnel(4), true));
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new WallBounce(), true));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.25f, new SineTravel(), true));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.25f, new Shrapnel(4), true));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.25f, new WallBounce(), true));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.25f, new ScrapyMachineGun(), false));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.25f, new ScrapyShotGun(), false));
 
-        /*
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileDamage, 2f), false));
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.FireRate, -10f), false));
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileSpeed, 0.5f), false));
-        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.5f, new StatBoost(FieldName.ProjectileLifeTime, 12f), false));
 
-        */
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.75f, new StatBoost(FieldName.ProjectileDamage, 2f), false));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.75f, new StatBoost(FieldName.FireRate, -10f), false));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.75f, new StatBoost(FieldName.ProjectileSpeed, 0.5f), false));
+        componentDistributionMap.get(Quality.POOR).add(new AugmentGenerationSpecifier(0.75f, new StatBoost(FieldName.ProjectileLifeTime, 12f), false));
+
+
 
 
 

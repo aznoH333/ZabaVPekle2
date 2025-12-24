@@ -4,8 +4,8 @@ import com.mygdx.game.utils.NumberUtils;
 
 public enum FieldName {
     // speed
-    Speed,
-    SpeedMultiplier(0f, 0f, null),
+    Speed(0f, 0f, 10f),
+    SpeedMultiplier(1f, 0f, null),
 
     // damage
     Damage(0f, 0f, null),
@@ -16,13 +16,17 @@ public enum FieldName {
     MaxHealth(null, 1f, null),
 
     // projectile stuff
-    ProjectileLifeTime(120f, null, null),
+    ProjectileLifeTime(120f, 30f, 1000f),
     /** number of times the projectile can bounce */
     BounceCount(1f, null, null),
     ProjectileDamage,
     ProjectileSpeed(0.1f, 0f, 10f),
-    FireRate(1f, 1f, 999f),
-    ProjectileSpread(0f, 0f, NumberUtils.PI),
+
+    FireRate(25f, 1f, 50f),
+    FireRateMultiplier(1f, 0.05f, 4f),
+
+    ProjectileSpread(0.25f, 0.01f, NumberUtils.PI),
+    ProjectileSpreadMultiplier(1f, 0f, 2f),
     ProjectilesPerShot(1f, 1f, null),
     ProjectileSprite;
 
