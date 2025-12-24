@@ -1,7 +1,6 @@
-package com.mygdx.game.entities.components.behaviour.projectile;
+package com.mygdx.game.entities.components.behaviour.augments.projectile;
 
 import com.mygdx.game.Managers;
-import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;

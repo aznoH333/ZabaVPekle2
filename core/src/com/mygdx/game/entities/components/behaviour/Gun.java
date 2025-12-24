@@ -6,7 +6,7 @@ import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.components.behaviour.projectile.SpinSprite;
+import com.mygdx.game.entities.components.behaviour.augments.projectile.SpinSprite;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.facades.ProjectileFactory;
 import com.mygdx.game.entities.fields.FieldName;

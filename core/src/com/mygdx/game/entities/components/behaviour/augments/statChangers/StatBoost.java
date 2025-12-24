@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.components.behaviour;
+package com.mygdx.game.entities.components.behaviour.augments.statChangers;
 
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;

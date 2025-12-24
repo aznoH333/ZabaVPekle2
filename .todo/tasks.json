@@ -933,7 +933,7 @@
     ],
     "title": "Stat augments",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -945,6 +945,30 @@
         "minute": 16,
         "second": 34,
         "nano": 291247518
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1322",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Hand augments",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 24
+      },
+      "time": {
+        "hour": 16,
+        "minute": 54,
+        "second": 3,
+        "nano": 89731571
       }
     },
     "isImported": false

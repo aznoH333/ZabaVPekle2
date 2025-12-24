@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.components.behaviour.projectile;
+package com.mygdx.game.entities.components.behaviour.augments.projectile;
 
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
