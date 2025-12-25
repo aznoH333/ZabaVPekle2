@@ -403,4 +403,14 @@ public class Entity implements Copyable {
         return this;
     }
 
+    public <T> Entity initializeField(FieldName fieldName, T value) {
+        this.genericFields.initializeValue(fieldName, value);
+        return this;
+    }
+
+    public Entity initializeNumericField(FieldName fieldName, float value) {
+        this.numericFields.initializeValue(fieldName, value);
+        return this;
+    }
+
 }

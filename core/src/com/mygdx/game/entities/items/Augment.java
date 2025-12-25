@@ -4,7 +4,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.components.behaviour.Gun;
+import com.mygdx.game.entities.components.behaviour.gun.Gun;
 
 import java.util.ArrayList;
 import java.util.HashMap;

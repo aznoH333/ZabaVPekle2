@@ -6,7 +6,7 @@ import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.PlayerSoul;
-import com.mygdx.game.entities.components.behaviour.Gun;
+import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.facades.AugmentBoxFacade;
 import com.mygdx.game.entities.fields.FieldName;

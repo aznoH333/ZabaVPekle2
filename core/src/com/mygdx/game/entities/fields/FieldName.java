@@ -28,7 +28,12 @@ public enum FieldName {
     ProjectileSpread(0.25f, 0.01f, NumberUtils.PI),
     ProjectileSpreadMultiplier(1f, 0f, 2f),
     ProjectilesPerShot(1f, 1f, null),
-    ProjectileSprite;
+    ProjectileSprite,
+
+    /** an arraylist containing a list of projectile origins */
+    Guns,
+    /** an arraylist containing a list of components assigned to each projectile */
+    ProjectileComponents;
 
 
 
