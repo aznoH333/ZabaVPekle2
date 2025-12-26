@@ -6,6 +6,10 @@ import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.BoomerangShot;
+import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.Boomerang;
+import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.Shrapnel;
+import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.SpinObject;
 import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.SpinSprite;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.facades.ProjectileFactory;
@@ -212,6 +216,8 @@ public class Gun extends EntityComponent {
 
 
         addBulletComponent(new SpinSprite(-0.25f));
+        addBulletComponent(new Boomerang());
+        addBulletComponent(new Shrapnel(6));
     }
 
     public void addBulletComponent(EntityComponent component) {
