@@ -35,7 +35,7 @@ public class Shrapnel extends EntityComponent {
             newBullet.setNumericStat(FieldName.ProjectileLifeTime, 30f);
 
             newBullet.setNumericStat(FieldName.BounceCount, 0f);
-            newBullet.setNumericStat(FieldName.DamageMultiplier, -0.75f);
+            newBullet.addNumericStat(FieldName.DamageMultiplier, -0.75f);
             newBullet.setNumericStat(FieldName.BounceCount, 0f);
 
             Managers.entityManager.addEntity(newBullet);

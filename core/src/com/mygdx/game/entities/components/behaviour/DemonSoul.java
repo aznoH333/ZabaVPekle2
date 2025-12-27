@@ -4,6 +4,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
+import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 public class DemonSoul extends EntityComponent {
@@ -44,6 +45,8 @@ public class DemonSoul extends EntityComponent {
     @Override
     public void onTakeDamage(Entity owner, float amount) {
         Managers.soundManager.playSound("enemy_hit", 1f, 0.1f);
+        System.out.println("took damage " + amount + ", remaining health " + owner.getNumericStat(FieldName.Health));
+
     }
 
     @Override

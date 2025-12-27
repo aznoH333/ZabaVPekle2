@@ -163,7 +163,8 @@ public class Entity implements Copyable {
         // take damage
         if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.getNumericStat(FieldName.Damage) != 0f && canBeDamaged) {
 
-            addNumericStat(FieldName.Health, -other.getNumericStat(FieldName.Damage) * other.getNumericStat(FieldName.DamageMultiplier));
+            float damageToDeal = (other.getNumericStat(FieldName.Damage) * other.getNumericStat(FieldName.DamageMultiplier));
+            addNumericStat(FieldName.Health, -damageToDeal);
 
 
             if (other.triggerInvincibility) {
@@ -176,7 +177,7 @@ public class Entity implements Copyable {
                 this.commitSudoku();
             } else {
                 for (EntityComponent c : components) {
-                    c.onTakeDamage(this, other.getNumericStat(FieldName.Damage));
+                    c.onTakeDamage(this, damageToDeal);
                 }
             }
 

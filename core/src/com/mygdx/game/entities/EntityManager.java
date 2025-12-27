@@ -53,7 +53,11 @@ public class EntityManager {
             }
             return !it.wantsToLive || clearAllEntitiesOnCycleEnd;
         });
+
+
         clearAllEntitiesOnCycleEnd = false;
+
+
 
         entities.addAll(waitingRoom);
         waitingRoom.clear();
