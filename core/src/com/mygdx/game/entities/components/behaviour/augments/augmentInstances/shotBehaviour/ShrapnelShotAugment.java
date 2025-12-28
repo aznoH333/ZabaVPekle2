@@ -1,7 +1,5 @@
-package com.mygdx.game.entities.components.behaviour.augments.augmentInstances;
+package com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour;
 
-import com.mygdx.game.entities.Entity;
-import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.augments.ProjectileModifierAugmentInstance;
 import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.Shrapnel;
 import com.mygdx.game.entities.items.Quality;

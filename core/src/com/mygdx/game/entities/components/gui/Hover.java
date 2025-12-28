@@ -8,11 +8,11 @@ import com.mygdx.game.utils.NumberUtils;
 
 public class Hover extends EntityComponent {
 
-    private final GUIRunnable onHoverStart;
-    private final GUIRunnable onHoverEnd;
+    private final EntityRunnable onHoverStart;
+    private final EntityRunnable onHoverEnd;
     private boolean wasHoveredLastFrame = false;
 
-    public Hover(GUIRunnable onHoverStart, GUIRunnable onHoverEnd) {
+    public Hover(EntityRunnable onHoverStart, EntityRunnable onHoverEnd) {
         this.onHoverStart = onHoverStart;
         this.onHoverEnd = onHoverEnd;
     }

@@ -5,17 +5,13 @@ import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.AugmentBox;
-import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.BoomerangShotAugment;
-import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.StatBoostAugment;
 import com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationTable.AugmentGenerationTable;
 import com.mygdx.game.entities.facades.GUIFacade;
-import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Augment;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.utils.NumberUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class AugmentBoxFacade {
 

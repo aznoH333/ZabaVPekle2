@@ -47,8 +47,7 @@ public class Gun extends EntityComponent {
     private ArrayList<EntityComponent> bulletComponents = null;
 
     /** a reference value tied to the owners [FieldName.ProjectileComponents] field */
-
-    private ArrayList<BulletOrigin> bulletOrigins = null;
+    public ArrayList<BulletOrigin> bulletOrigins = null;
 
     private final String sprite;
 
@@ -146,7 +145,12 @@ public class Gun extends EntityComponent {
      * @param newOrigin
      */
     public void addBulletOrigin(BulletOrigin newOrigin) {
+
+
+        // add new origin
         this.bulletOrigins.add(newOrigin);
+
+
 
         bulletOrigins.sort((a, b)-> (int) (a.aimOffset - b.aimOffset));
         // recalculate firing delays

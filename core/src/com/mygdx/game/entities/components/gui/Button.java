@@ -10,9 +10,9 @@ import com.mygdx.game.utils.NumberUtils;
 
 public class Button extends EntityComponent {
 
-    private final GUIRunnable buttonAction;
+    private final EntityRunnable buttonAction;
 
-    public Button(GUIRunnable buttonAction) {
+    public Button(EntityRunnable buttonAction) {
         this.buttonAction = buttonAction;
     }
 

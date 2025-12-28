@@ -1,6 +1,11 @@
 package com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationTable;
 
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.*;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.MachineGunAugment;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.ShotGunAugment;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.DoubleHank;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.BoomerangShotAugment;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.ShrapnelShotAugment;
 import com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationSpecifier;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Quality;
@@ -27,6 +32,9 @@ public class PoorAugmentProvider implements AugmentGenerationProvider{
         // projectile modifiers
         target.add(new AugmentGenerationSpecifier(0.25f, new BoomerangShotAugment()));
         target.add(new AugmentGenerationSpecifier(0.25f, new ShrapnelShotAugment(Quality.POOR)));
+
+        // hand modifiers
+        target.add(new AugmentGenerationSpecifier(99f, new DoubleHank()));
 
     }
 }

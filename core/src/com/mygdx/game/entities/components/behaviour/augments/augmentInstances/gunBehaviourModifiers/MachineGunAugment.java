@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.components.behaviour.augments.augmentInstances;
+package com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers;
 
 import com.mygdx.game.entities.components.behaviour.augments.StatModifierAugmentInstance;
 import com.mygdx.game.entities.fields.FieldName;

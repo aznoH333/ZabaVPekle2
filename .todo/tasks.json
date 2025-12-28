@@ -1057,5 +1057,29 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_1534",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Rewrite components to use an enum instead of a string name",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 28
+      },
+      "time": {
+        "hour": 19,
+        "minute": 24,
+        "second": 35,
+        "nano": 687188688
+      }
+    },
+    "isImported": false
   }
 ]
