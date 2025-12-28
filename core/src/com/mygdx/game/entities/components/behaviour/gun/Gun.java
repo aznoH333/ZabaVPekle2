@@ -6,10 +6,8 @@ import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.BoomerangShot;
 import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.Boomerang;
 import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.Shrapnel;
-import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.SpinObject;
 import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.SpinSprite;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.facades.ProjectileFactory;
@@ -17,7 +15,6 @@ import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -201,23 +198,10 @@ public class Gun extends EntityComponent {
 
 
         // add default gun values
-
-        for (float f = 0f; f < NumberUtils.TWO_PI; f += NumberUtils.EIGHTH_PI) {
-            addBulletOrigin(new BulletOrigin(f, true));
-        }
-        /*
         addBulletOrigin(new BulletOrigin(0f, true));
-        addBulletOrigin(new BulletOrigin(NumberUtils.PI, true));
-
-        addBulletOrigin(new BulletOrigin(NumberUtils.TWO_PI-0.3f, true));
-        addBulletOrigin(new BulletOrigin(0.3f, true));
-        */
-        //addBulletOrigin(new BulletOrigin(NumberUtils.HALF_PI, true));
 
 
         addBulletComponent(new SpinSprite(-0.25f));
-        addBulletComponent(new Boomerang());
-        addBulletComponent(new Shrapnel(6));
     }
 
     public void addBulletComponent(EntityComponent component) {

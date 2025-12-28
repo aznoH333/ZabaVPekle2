@@ -4,12 +4,12 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.fields.FieldName;
 
-public class StatBoost extends EntityComponent {
+public class StatBoostAugment extends EntityComponent {
 
 
     private final FieldName fieldName;
     private final float value;
-    public StatBoost(FieldName fieldName, float value) {
+    public StatBoostAugment(FieldName fieldName, float value) {
         super.effectDescription = fieldName.name() + " boost";
         this.fieldName = fieldName;
         this.value = value;
@@ -22,6 +22,6 @@ public class StatBoost extends EntityComponent {
 
     @Override
     public EntityComponent copy() {
-        return new StatBoost(fieldName, value);
+        return new StatBoostAugment(fieldName, value);
     }
 }

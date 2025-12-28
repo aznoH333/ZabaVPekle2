@@ -15,7 +15,6 @@ public class Augment extends EntityComponent {
 
     public final Quality quality;
     public final ArrayList<EntityComponent> includedComponents;
-    public final ArrayList<EntityComponent> componentsForGun;
     public final ArrayList<String> displayText = new ArrayList<>();
 
 
@@ -23,26 +22,14 @@ public class Augment extends EntityComponent {
     private final static float Y_LINE_OFFSET = -16f;
 
 
-    public Augment(Quality quality, ArrayList<EntityComponent> componentsForEntity, ArrayList<EntityComponent> componentsForGun) {
+    public Augment(Quality quality, ArrayList<EntityComponent> componentsForEntity) {
         this.quality = quality;
         this.includedComponents = componentsForEntity;
-        this.componentsForGun = componentsForGun;
 
 
         // construct display text
         HashMap<String, Integer> effectPotencyMap = new HashMap<>();
         for (EntityComponent component : componentsForEntity) {
-            if (component.effectDescription != null) {
-                if (!effectPotencyMap.containsKey(component.effectDescription)) {
-                    effectPotencyMap.put(component.effectDescription, 0);
-                }
-
-                if (component.potency != EffectPotency.NOT_QUALIFIED) {
-                    effectPotencyMap.put(component.effectDescription, effectPotencyMap.get(component.effectDescription) + component.potency.quantifier);
-                }
-            }
-        }
-        for (EntityComponent component : componentsForGun) {
             if (component.effectDescription != null) {
                 if (!effectPotencyMap.containsKey(component.effectDescription)) {
                     effectPotencyMap.put(component.effectDescription, 0);
@@ -85,11 +72,6 @@ public class Augment extends EntityComponent {
     public void attachToEntity(Entity attachTo) {
         for (EntityComponent component : includedComponents) {
             attachTo.addComponent(component);
-        }
-
-        Gun gun = (Gun) attachTo.getComponentByName("shooter");
-        for (EntityComponent gunComponent : componentsForGun) {
-            gun.addBulletComponent(gunComponent);
         }
     }
 }

@@ -8,7 +8,7 @@ import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.PlayerSoul;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
-import com.mygdx.game.entities.facades.AugmentBoxFacade;
+import com.mygdx.game.entities.facades.AugmentBox.AugmentBoxFacade;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.gameStates.GameState;

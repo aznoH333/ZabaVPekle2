@@ -12,7 +12,7 @@ import com.mygdx.game.entities.components.control.Door;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.components.visual.particles.FadeParticle;
-import com.mygdx.game.entities.facades.AugmentBoxFacade;
+import com.mygdx.game.entities.facades.AugmentBox.AugmentBoxFacade;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.utils.NumberUtils;

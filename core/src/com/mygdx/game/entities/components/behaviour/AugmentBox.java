@@ -2,7 +2,7 @@ package com.mygdx.game.entities.components.behaviour;
 
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.facades.AugmentBoxFacade;
+import com.mygdx.game.entities.facades.AugmentBox.AugmentBoxFacade;
 import com.mygdx.game.entities.items.Quality;
 
 public class AugmentBox extends EntityComponent {
