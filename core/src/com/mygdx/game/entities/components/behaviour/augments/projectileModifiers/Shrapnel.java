@@ -32,7 +32,7 @@ public class Shrapnel extends EntityComponent {
             Bullet bullet = (Bullet) newBullet.getComponentByName("bullet");
             bullet.direction += currentRotation;
             currentRotation += rotationPercentage;
-            newBullet.setNumericStat(FieldName.ProjectileLifeTime, 30f);
+            newBullet.setNumericStat(FieldName.RemainingProjectileLifeTime, 30f);
 
             newBullet.setNumericStat(FieldName.BounceCount, 0f);
             newBullet.addNumericStat(FieldName.DamageMultiplier, -0.75f);

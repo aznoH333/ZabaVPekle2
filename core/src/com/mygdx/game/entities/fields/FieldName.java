@@ -16,7 +16,11 @@ public enum FieldName {
     MaxHealth(null, 1f, null),
 
     // projectile stuff
+    /** How many frames will the projectile live for. */
+    RemainingProjectileLifeTime,
+    /** Used as default RemainingProjectileLifeTime when spawning a new projectile */
     ProjectileLifeTime(120f, 30f, 1000f),
+
     /** number of times the projectile can bounce */
     BounceCount(1f, null, null),
     ProjectileDamage,

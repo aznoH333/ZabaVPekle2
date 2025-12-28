@@ -34,7 +34,7 @@ public class ProjectileFactory {
                 .setY(y)
                 .setNumericStat(FieldName.Damage, damage)
                 .setNumericStat(FieldName.Speed, speed)
-                .setNumericStat(FieldName.ProjectileLifeTime, lifeTime)
+                .setNumericStat(FieldName.RemainingProjectileLifeTime, lifeTime)
                 .setNumericStat(FieldName.BounceCount, bounceCount)
                 .setTriggerInvincibility(false)
                 .setTeam(team)

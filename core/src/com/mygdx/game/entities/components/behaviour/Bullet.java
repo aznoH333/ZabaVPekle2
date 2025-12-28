@@ -21,10 +21,10 @@ public class Bullet extends EntityComponent {
     public void onUpdate(Entity owner) {
         owner.goInDirection(direction, 6f);
         owner.knockBackMultiplier = 2f;
-        owner.addNumericStat(FieldName.ProjectileLifeTime, -1f);
+        owner.addNumericStat(FieldName.RemainingProjectileLifeTime, -1f);
 
 
-        float remainingLifetime = owner.getNumericStat(FieldName.ProjectileLifeTime);
+        float remainingLifetime = owner.getNumericStat(FieldName.RemainingProjectileLifeTime);
 
 
         // scale down

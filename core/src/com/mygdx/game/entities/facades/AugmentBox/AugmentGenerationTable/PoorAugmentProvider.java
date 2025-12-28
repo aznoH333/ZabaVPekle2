@@ -1,11 +1,9 @@
 package com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationTable;
 
-import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.BoomerangShotAugment;
-import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.ScrapyMachineGunAugment;
-import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.ScrapyShotGunAugment;
-import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.StatBoostAugment;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.*;
 import com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationSpecifier;
 import com.mygdx.game.entities.fields.FieldName;
+import com.mygdx.game.entities.items.Quality;
 
 import java.util.ArrayList;
 
@@ -23,11 +21,12 @@ public class PoorAugmentProvider implements AugmentGenerationProvider{
 
 
         // weapon types
-        target.add(new AugmentGenerationSpecifier(0.25f, new ScrapyMachineGunAugment()));
-        target.add(new AugmentGenerationSpecifier(0.25f, new ScrapyShotGunAugment()));
+        target.add(new AugmentGenerationSpecifier(0.25f, new MachineGunAugment(Quality.POOR)));
+        target.add(new AugmentGenerationSpecifier(0.25f, new ShotGunAugment(Quality.POOR)));
 
         // projectile modifiers
         target.add(new AugmentGenerationSpecifier(0.25f, new BoomerangShotAugment()));
+        target.add(new AugmentGenerationSpecifier(0.25f, new ShrapnelShotAugment(Quality.POOR)));
 
     }
 }
