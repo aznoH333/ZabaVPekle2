@@ -3,6 +3,7 @@ package com.mygdx.game.entities.components.visual;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.utils.NumberUtils;
 
@@ -19,7 +20,7 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
         super(
                 "legs", 1, 2, 8, 9, 3
         );
-        super.name = "legs";
+        super.name = ComponentName.LEGS;
 
 
         this.bodyColor = bodyColor;

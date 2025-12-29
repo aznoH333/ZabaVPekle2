@@ -63,7 +63,7 @@ public class EntityManager {
         waitingRoom.clear();
     }
 
-    public Entity findClosestEntityWithComponent(float x, float y, String componentName) {
+    public Entity findClosestEntityWithComponent(float x, float y, ComponentName componentName) {
         Entity closestEntity = null;
         float closestDistance = 0;
 
@@ -81,7 +81,7 @@ public class EntityManager {
         return closestEntity;
     }
 
-    public Entity findClosestEntityWithComponent(Entity caller, String componentName) {
+    public Entity findClosestEntityWithComponent(Entity caller, ComponentName componentName) {
         Entity closestEntity = null;
         float closestDistance = 0;
 

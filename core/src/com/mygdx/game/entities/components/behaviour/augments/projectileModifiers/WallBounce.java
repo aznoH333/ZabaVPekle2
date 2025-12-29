@@ -1,6 +1,7 @@
 package com.mygdx.game.entities.components.behaviour.augments.projectileModifiers;
 
 import com.mygdx.game.Managers;
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
@@ -12,7 +13,6 @@ public class WallBounce extends EntityComponent {
     private Bullet bullet;
 
     public WallBounce() {
-        super.name = "wall bounce";
         super.effectDescription = "wall bounce";
         super.componentCountLimit = 3;
     }
@@ -43,7 +43,7 @@ public class WallBounce extends EntityComponent {
 
     @Override
     public void onComponentAttached(Entity owner) {
-        bullet = (Bullet) owner.getComponentByName("bullet");
+        bullet = (Bullet) owner.getComponentByName(ComponentName.BULLET);
     }
 
     @Override

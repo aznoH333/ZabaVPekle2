@@ -1,5 +1,6 @@
 package com.mygdx.game.entities.components.behaviour;
 
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.facades.AugmentBox.AugmentBoxFacade;
@@ -16,7 +17,7 @@ public class AugmentBox extends EntityComponent {
 
     @Override
     public void onCollide(Entity owner, Entity other) {
-        if (other.getComponentByName("soul") != null) {
+        if (other.getComponentByName(ComponentName.PLAYER) != null) {
             owner.commitSudoku();
             AugmentBoxFacade.openNewBox(other, quality);
         }

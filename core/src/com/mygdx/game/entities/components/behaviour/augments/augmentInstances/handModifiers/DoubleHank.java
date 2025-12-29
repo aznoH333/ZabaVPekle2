@@ -1,5 +1,6 @@
 package com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers;
 
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.components.behaviour.augments.SimpleOnApplyModifierAugmentInstance;
 import com.mygdx.game.entities.components.behaviour.gun.BulletOrigin;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
@@ -11,7 +12,7 @@ public class DoubleHank extends SimpleOnApplyModifierAugmentInstance {
         super(
                 "gives another hand",
                 (owner)->{
-                    Gun gun = (Gun) owner.getComponentByName("shooter");
+                    Gun gun = (Gun) owner.getComponentByName(ComponentName.GUN);
 
                     Optional<BulletOrigin> firstOrigin = gun.bulletOrigins.stream().filter((it)->it.aimOffset == 0f).findFirst();
                     firstOrigin.ifPresent(bulletOrigin -> bulletOrigin.aimOffset = -0.15f);

@@ -519,7 +519,7 @@
     ],
     "title": "Clean up shooter code",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -531,6 +531,19 @@
         "minute": 4,
         "second": 56,
         "nano": 519412399
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 29
+      },
+      "time": {
+        "hour": 15,
+        "minute": 20,
+        "second": 54,
+        "nano": 596410622
       }
     },
     "isImported": false
@@ -957,7 +970,7 @@
     ],
     "title": "Hand augments",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -1066,7 +1079,7 @@
     ],
     "title": "Rewrite components to use an enum instead of a string name",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -1078,6 +1091,19 @@
         "minute": 24,
         "second": 35,
         "nano": 687188688
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 29
+      },
+      "time": {
+        "hour": 15,
+        "minute": 34,
+        "second": 15,
+        "nano": 544817069
       }
     },
     "isImported": false

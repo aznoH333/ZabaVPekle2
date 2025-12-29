@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.Boomerang;
@@ -53,7 +54,7 @@ public class Gun extends EntityComponent {
 
     /** Constructs a new gun. Initializes a new bullet origin with offset 0f */
     public Gun(String sprite) {
-        super.name = "shooter";
+        super.name = ComponentName.GUN;
         this.sprite = sprite;
 
     }
@@ -186,7 +187,7 @@ public class Gun extends EntityComponent {
 
     @Override
     public void onComponentAttached(Entity owner) {
-        legs = (AnimatedLegsWithHat) owner.getComponentByName("legs");
+        legs = (AnimatedLegsWithHat) owner.getComponentByName(ComponentName.LEGS);
     }
 
     public void onFirstAttached(Entity owner) {

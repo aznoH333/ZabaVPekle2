@@ -1,6 +1,7 @@
 package com.mygdx.game.entities.components.behaviour.augments.projectileModifiers;
 
 import com.mygdx.game.Managers;
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
@@ -29,7 +30,7 @@ public class Shrapnel extends EntityComponent {
         for (int i = 0; i < amountToSpawn; i++) {
             Entity newBullet = owner.copy();
 
-            Bullet bullet = (Bullet) newBullet.getComponentByName("bullet");
+            Bullet bullet = (Bullet) newBullet.getComponentByName(ComponentName.BULLET);
             bullet.direction += currentRotation;
             currentRotation += rotationPercentage;
             newBullet.setNumericStat(FieldName.RemainingProjectileLifeTime, 30f);

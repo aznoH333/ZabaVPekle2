@@ -4,25 +4,26 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Managers;
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
-public class PlayerSoul extends EntityComponent {
+public class PlayerBehaviour extends EntityComponent {
 
     private Gun gun = null;
 
 
-    public PlayerSoul() {
-        super.name = "soul";
+    public PlayerBehaviour() {
+        super.name = ComponentName.PLAYER;
     }
 
 
     @Override
     public void onComponentAttached(Entity owner) {
-        gun = (Gun) owner.getComponentByName("shooter");
+        gun = (Gun) owner.getComponentByName(ComponentName.GUN);
     }
 
     @Override

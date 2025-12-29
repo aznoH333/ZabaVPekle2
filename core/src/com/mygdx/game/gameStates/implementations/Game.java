@@ -5,7 +5,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityTeam;
-import com.mygdx.game.entities.components.behaviour.PlayerSoul;
+import com.mygdx.game.entities.components.behaviour.PlayerBehaviour;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.facades.AugmentBox.AugmentBoxFacade;
@@ -28,7 +28,7 @@ public class Game extends GameState {
 
         Managers.entityManager.addEntity(new Entity()
                 .setTeam(EntityTeam.FROG)
-                .addComponent(new PlayerSoul())
+                .addComponent(new PlayerBehaviour())
                 .setDrawingLayer(DrawingLayer.PLAYER)
                 .addComponent(new AnimatedLegsWithHat(new Color(0f, 1f, 0f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_1"))
                 .addComponent(new Gun("hands_0002"))

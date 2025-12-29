@@ -4,9 +4,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityTeam;
-import com.mygdx.game.entities.components.behaviour.DemonSoul;
+import com.mygdx.game.entities.components.behaviour.EnemyBehaviour;
 import com.mygdx.game.entities.components.behaviour.Spawner;
 import com.mygdx.game.entities.components.control.Door;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
@@ -181,7 +182,7 @@ public class WorldManager {
     public void update() {
 
         if (player == null) {
-            player = Managers.entityManager.findClosestEntityWithComponent(0f, 0f, "soul");
+            player = Managers.entityManager.findClosestEntityWithComponent(0f, 0f, ComponentName.PLAYER);
             return;
         }
 
@@ -221,7 +222,7 @@ public class WorldManager {
                                 .setNumericStat(FieldName.Speed, 1.3f)
                                 .setX(x)
                                 .setY(y)
-                                .addComponent(new DemonSoul())
+                                .addComponent(new EnemyBehaviour())
                                 .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
                                 .addComponent(new GameEntityBleed())
                                 .setDrawingLayer(DrawingLayer.ENEMIES)))

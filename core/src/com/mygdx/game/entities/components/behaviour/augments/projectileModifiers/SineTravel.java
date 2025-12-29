@@ -1,5 +1,6 @@
 package com.mygdx.game.entities.components.behaviour.augments.projectileModifiers;
 
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
@@ -28,7 +29,7 @@ public class SineTravel extends EntityComponent {
 
     @Override
     public void onComponentAttached(Entity owner) {
-        bullet = (Bullet) owner.getComponentByName("bullet");
+        bullet = (Bullet) owner.getComponentByName(ComponentName.BULLET);
 
     }
 

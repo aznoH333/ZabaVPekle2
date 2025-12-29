@@ -1,6 +1,7 @@
 package com.mygdx.game.entities.components.behaviour.augments.projectileModifiers;
 
 import com.mygdx.game.Managers;
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Bullet;
@@ -9,12 +10,12 @@ import com.mygdx.game.utils.NumberUtils;
 
 public class Guided extends EntityComponent {
 
-    private final String targetComponent;
+    private final ComponentName targetComponent;
     private Bullet bullet;
     private Entity target;
 
-    public Guided(String targetTeam) {
-        this.targetComponent = targetTeam;
+    public Guided(ComponentName targetComponent) {
+        this.targetComponent = targetComponent;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class Guided extends EntityComponent {
 
     @Override
     public void onComponentAttached(Entity owner) {
-        bullet = (Bullet) owner.getComponentByName("bullet");
+        bullet = (Bullet) owner.getComponentByName(ComponentName.BULLET);
         owner.addNumericStat(FieldName.SpeedMultiplier, -0.1f);
     }
 

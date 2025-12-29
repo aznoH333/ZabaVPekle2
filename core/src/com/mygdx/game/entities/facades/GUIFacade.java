@@ -2,6 +2,7 @@ package com.mygdx.game.entities.facades;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.components.gui.Button;
 import com.mygdx.game.entities.components.gui.EntityRunnable;
@@ -27,12 +28,12 @@ public class GUIFacade {
                 .addComponent(new Button(action))
                 .addComponent(new Hover(
                         (owner) -> {
-                            Text textComponent = (Text) owner.getComponentByName("text");
+                            Text textComponent = (Text) owner.getComponentByName(ComponentName.TEXT);
                             textComponent.color.b = 0f;
                             Managers.soundManager.playSound("click", 1f, 0.1f);
                         },
                         owner -> {
-                            Text textComponent = (Text) owner.getComponentByName("text");
+                            Text textComponent = (Text) owner.getComponentByName(ComponentName.TEXT);
                             textComponent.color.b = 1f;
                         }
                 ))

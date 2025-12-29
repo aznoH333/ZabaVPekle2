@@ -225,15 +225,15 @@ public class Entity implements Copyable {
         }
     }
 
-    public boolean hasComponent(String name) {
+    public boolean hasComponent(ComponentName name) {
         return this.components.stream().anyMatch((a) -> Objects.equals(a.name, name));
     }
 
-    public EntityComponent getComponentByName(String name) {
+    public EntityComponent getComponentByName(ComponentName name) {
         return this.components.stream().filter((a) -> Objects.equals(a.name, name)).findFirst().orElse(null);
     }
 
-    public int countComponentsWithName(String name) {
+    public int countComponentsWithName(ComponentName name) {
         return (int) this.components.stream().filter((a) -> Objects.equals(a.name, name)).count();
     }
 

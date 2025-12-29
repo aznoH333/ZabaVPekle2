@@ -5,7 +5,7 @@ import com.mygdx.game.entities.items.EffectPotency;
 public class EntityComponent {
 
 
-    public String name = null;
+    public ComponentName name = ComponentName.NONE;
     public String effectDescription = null;
     public EffectPotency potency = EffectPotency.NOT_QUALIFIED;
     public Entity owner = null;
