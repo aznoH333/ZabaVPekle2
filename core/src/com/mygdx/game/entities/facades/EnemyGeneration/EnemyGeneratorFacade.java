@@ -81,7 +81,7 @@ public class EnemyGeneratorFacade {
                     generateEnemyType(
                             NumberUtils.randomFloat(0.2f, 0.4f),
                             NumberUtils.randomFloat(0.4f, 0.6f),
-                            0.3f,
+                            0.9f,
                             placeDifficulty
                     )
             );
@@ -99,6 +99,9 @@ public class EnemyGeneratorFacade {
 
         boolean isTurret = false;
         boolean hasRangedAttack = false;
+        float size = 1f;
+        float additionalHeight = 1f;
+        float additionalWidth = 1f;
 
         float speed;
         float health;
@@ -133,6 +136,25 @@ public class EnemyGeneratorFacade {
         // generate health
         health = targetDifficulty * (3f + (toughness * 2f));
 
+        // size
+        if (toughness < 0.35f) {
+            size -= 0.2f;
+        }
+        if (toughness < 0.2f) {
+            size -= 0.2f;
+        }
+        if (toughness > 0.6f) {
+            size += (toughness - 0.6f) * 2f;
+        }
+        // width height
+        if (toughness > 0.6f) {
+            additionalWidth += (toughness - 0.6f) * 2f;
+        }
+        if (threat > 0.6f) {
+            additionalHeight += (threat - 0.6f) * 2f;
+        }
+
+
         // TODO ranged attacks
 
         return new Entity()
@@ -143,6 +165,8 @@ public class EnemyGeneratorFacade {
                 .addComponent(new EnemyBehaviour())
                 .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
                 .addComponent(new GameEntityBleed())
+                .setScaleX(size * additionalWidth)
+                .setScaleY(size * additionalHeight)
                 .setDrawingLayer(DrawingLayer.ENEMIES);
     }
 

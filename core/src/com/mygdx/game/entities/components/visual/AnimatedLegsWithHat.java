@@ -35,8 +35,10 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
         float xOffset = HAT_OFFSET_X * (NumberUtils.boolToInt(owner.flipX) * 2 - 1);
 
         Managers.drawingManager.drawSprite(
-                new DrawingCommand(hatSprite, owner.x + xOffset, owner.y + HAT_OFFSET_Y)
-                        .setFlipHorizontally(owner.flipX),
+                new DrawingCommand(hatSprite, owner.x + xOffset, owner.y + (HAT_OFFSET_Y * owner.scaleY))
+                        .setFlipHorizontally(owner.flipX)
+                        .setWidth(owner.scaleX)
+                        .setHeight(owner.scaleY),
                 owner.drawingLayer
         );
 

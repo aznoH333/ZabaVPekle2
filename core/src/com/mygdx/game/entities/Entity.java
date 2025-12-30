@@ -360,6 +360,8 @@ public class Entity implements Copyable {
                 .setSprite(sprite)
                 .setX(x)
                 .setY(y)
+                .setScaleX(scaleX)
+                .setScaleY(scaleY)
                 .setTeam(team)
                 .setDrawingLayer(drawingLayer)
                 .setTriggerInvincibility(triggerInvincibility);
