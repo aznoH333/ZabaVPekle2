@@ -70,4 +70,9 @@ public class EnemyBehaviour extends EntityComponent {
             owner.goInDirection(NumberUtils.directionToward(other.x, other.y, owner.x, owner.y), 0.25f);
         }
     }
+
+    @Override
+    public EntityComponent copy() {
+        return new EnemyBehaviour();
+    }
 }

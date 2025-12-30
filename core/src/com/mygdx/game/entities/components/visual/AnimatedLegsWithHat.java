@@ -5,6 +5,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.utils.NumberUtils;
 
 public class AnimatedLegsWithHat extends GameEntityAnimator {
@@ -50,6 +51,15 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
         owner.setColor(currentColor.r, currentColor.g, currentColor.b, currentColor.a);
 
 
+    }
+
+    @Override
+    public EntityComponent copy() {
+        return new AnimatedLegsWithHat(
+                this.bodyColor,
+                this.hurtColor,
+                this.hatSprite
+        );
     }
 
 

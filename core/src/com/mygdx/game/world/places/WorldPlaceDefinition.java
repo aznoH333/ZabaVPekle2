@@ -68,15 +68,6 @@ public enum WorldPlaceDefinition {
                 this
         );
 
-        for (int i = 0; i < 2; i++) {
-            place.rooms.add(new PlaceRoom(RoomType.FILLER));
-            place.rooms.add(new PlaceRoom(RoomType.FILLER));
-            place.rooms.add(new PlaceRoom(RoomType.MAJOR_COMBAT));
-            place.rooms.add(new PlaceRoom(RoomType.FILLER));
-            place.rooms.add(new PlaceRoom(RoomType.LOOT));
-        }
-        place.rooms.add(new PlaceRoom(RoomType.BOSS));
-
         return place;
     }
 }

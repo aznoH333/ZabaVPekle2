@@ -215,17 +215,10 @@ public class WorldManager {
                         .setDrawingLayer(DrawingLayer.BLOOD)
                         .setSprite("enemy_spawner_0001")
                         .addComponent(new FadeParticle(120, true, 0.2f))
-                        .addComponent(new Spawner(new Entity()
-                                .setSprite("enemy_1")
-                                .setTeam(EntityTeam.DEMON)
-                                .setNumericStat(FieldName.Health, 6f)
-                                .setNumericStat(FieldName.Speed, 1.3f)
-                                .setX(x)
-                                .setY(y)
-                                .addComponent(new EnemyBehaviour())
-                                .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
-                                .addComponent(new GameEntityBleed())
-                                .setDrawingLayer(DrawingLayer.ENEMIES)))
+                        .addComponent(
+                                new Spawner(
+                                        progress.getReferenceEnemyToSpawn().copy())
+                        )
         );
     }
 

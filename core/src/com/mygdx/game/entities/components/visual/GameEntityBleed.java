@@ -38,4 +38,10 @@ public class GameEntityBleed extends EntityComponent {
             );
         }
     }
+
+
+    @Override
+    public EntityComponent copy() {
+        return new GameEntityBleed();
+    }
 }

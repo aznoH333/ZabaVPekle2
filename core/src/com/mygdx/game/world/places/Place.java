@@ -1,6 +1,8 @@
 package com.mygdx.game.world.places;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.facades.EnemyGeneration.EnemyGeneratorFacade;
 
 import java.util.ArrayList;
 
@@ -17,6 +19,8 @@ public class Place {
 
     private int currentProgress = 0;
 
+    private ArrayList<Entity> enemyRoster;
+
 
     public Place(WorldPlaceDefinition type) {
         this.type = type;
@@ -27,10 +31,21 @@ public class Place {
         this.doorColor = type.doorColor;
         this.placeName = type.placeName;
 
+        this.enemyRoster = EnemyGeneratorFacade.generateEnemyRoster(2, 1f);
 
         rooms.add(
-                new PlaceRoom(RoomType.SPAWN)
+                new PlaceRoom(RoomType.SPAWN, enemyRoster)
         );
+
+        for (int i = 0; i < 2; i++) {
+            this.rooms.add(new PlaceRoom(RoomType.FILLER, enemyRoster));
+            this.rooms.add(new PlaceRoom(RoomType.FILLER, enemyRoster));
+            this.rooms.add(new PlaceRoom(RoomType.MAJOR_COMBAT, enemyRoster));
+            this.rooms.add(new PlaceRoom(RoomType.FILLER, enemyRoster));
+            this.rooms.add(new PlaceRoom(RoomType.LOOT, enemyRoster));
+        }
+        this.rooms.add(new PlaceRoom(RoomType.BOSS, enemyRoster));
+
     }
 
     public void completedRoom() {
