@@ -32,10 +32,6 @@ public class StatModifierAugmentInstance extends EntityComponent {
 
     @Override
     public void onFirstAttached(Entity owner) {
-        if (augmentMap.isEmpty()) {
-            throw new NullPointerException("Stat modifier augment instance needs to modify at least one stat");
-        }
-
         for (Map.Entry<FieldName, Float> entry : augmentMap.entrySet()) {
             owner.addNumericStat(entry.getKey(), entry.getValue());
         }

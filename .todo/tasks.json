@@ -654,7 +654,7 @@
     ],
     "title": "Rewrite projectile factory",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -666,6 +666,19 @@
         "minute": 57,
         "second": 26,
         "nano": 417784950
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 29
+      },
+      "time": {
+        "hour": 15,
+        "minute": 36,
+        "second": 23,
+        "nano": 726638441
       }
     },
     "isImported": false
@@ -1031,7 +1044,7 @@
     ],
     "title": "Rewrite bullet augments to be the same as player augments",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -1045,6 +1058,19 @@
         "nano": 965373646
       }
     },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 29
+      },
+      "time": {
+        "hour": 15,
+        "minute": 36,
+        "second": 14,
+        "nano": 675944483
+      }
+    },
     "isImported": false
   },
   {
@@ -1055,7 +1081,7 @@
     ],
     "title": "Rewrite entity fields to use initializers",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -1067,6 +1093,19 @@
         "minute": 39,
         "second": 46,
         "nano": 295932301
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 29
+      },
+      "time": {
+        "hour": 15,
+        "minute": 36,
+        "second": 2,
+        "nano": 564769998
       }
     },
     "isImported": false

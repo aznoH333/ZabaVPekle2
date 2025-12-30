@@ -4,7 +4,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.gui.EntityRunnable;
 
-public class SimpleOnApplyModifierAugmentInstance extends EntityComponent {
+public class SimpleOnApplyModifierAugmentInstance extends StatModifierAugmentInstance {
 
     private final EntityRunnable applyFunction;
 
@@ -12,20 +12,26 @@ public class SimpleOnApplyModifierAugmentInstance extends EntityComponent {
             String effectDescription,
             EntityRunnable applyFunction
     ) {
+        super(effectDescription);
         super.effectDescription = effectDescription;
         this.applyFunction = applyFunction;
     }
 
+
+
     @Override
     public void onFirstAttached(Entity owner) {
+        super.onFirstAttached(owner);
         applyFunction.run(owner);
     }
 
     @Override
     public EntityComponent copy() {
-        return new SimpleOnApplyModifierAugmentInstance(
+        SimpleOnApplyModifierAugmentInstance out = new SimpleOnApplyModifierAugmentInstance(
                 super.effectDescription,
                 applyFunction
         );
+        out.augmentMap = this.augmentMap;
+        return out;
     }
 }

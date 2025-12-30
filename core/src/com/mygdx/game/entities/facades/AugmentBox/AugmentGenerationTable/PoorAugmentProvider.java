@@ -4,6 +4,9 @@ import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.*;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.MachineGunAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.ShotGunAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.DoubleHank;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.OctoHank;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.SideHank;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.TripleHank;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.BoomerangShotAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.ShrapnelShotAugment;
 import com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationSpecifier;
@@ -34,7 +37,11 @@ public class PoorAugmentProvider implements AugmentGenerationProvider{
         target.add(new AugmentGenerationSpecifier(0.25f, new ShrapnelShotAugment(Quality.POOR)));
 
         // hand modifiers
-        target.add(new AugmentGenerationSpecifier(99f, new DoubleHank()));
+        target.add(new AugmentGenerationSpecifier(0.15f, new DoubleHank()));
+        target.add(new AugmentGenerationSpecifier(0.15f, new TripleHank()));
+        target.add(new AugmentGenerationSpecifier(0.15f, new OctoHank()));
+        target.add(new AugmentGenerationSpecifier(0.15f, new SideHank()));
+
 
     }
 }

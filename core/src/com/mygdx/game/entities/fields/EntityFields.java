@@ -36,4 +36,5 @@ public class EntityFields {
             setField(fieldName, field);
         }
     }
+
 }

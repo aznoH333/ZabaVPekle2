@@ -4,6 +4,7 @@ import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.components.behaviour.augments.SimpleOnApplyModifierAugmentInstance;
 import com.mygdx.game.entities.components.behaviour.gun.BulletOrigin;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
+import com.mygdx.game.entities.fields.FieldName;
 
 import java.util.Optional;
 
@@ -21,5 +22,8 @@ public class DoubleHank extends SimpleOnApplyModifierAugmentInstance {
                             new BulletOrigin(0.15f, true)
                     );
                 });
+
+        super.augmentMap.put(FieldName.FireRateMultiplier, 0.25f);
+
     }
 }
