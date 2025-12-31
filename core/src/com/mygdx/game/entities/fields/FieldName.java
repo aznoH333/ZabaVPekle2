@@ -26,7 +26,7 @@ public enum FieldName {
     ProjectileDamage,
     ProjectileSpeed(0.1f, 0f, 10f),
 
-    FireRate(25f, 1f, 50f),
+    FireRate(25f, 1f, 120f),
     FireRateMultiplier(1f, 0.05f, 4f),
 
     ProjectileSpread(0.25f, 0.01f, NumberUtils.PI),

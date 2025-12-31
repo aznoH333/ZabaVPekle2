@@ -193,6 +193,10 @@ public class Gun extends EntityComponent {
     public void onFirstAttached(Entity owner) {
         owner.initializeNumericField(FieldName.FireRate, 1f);
         owner.initializeNumericField(FieldName.ProjectilesPerShot, 1f);
+        owner.initializeNumericField(FieldName.ProjectileDamage, 1f);
+        owner.initializeNumericField(FieldName.DamageMultiplier, 1f);
+
+
         owner.initializeField(FieldName.ProjectileSprite, "fire_ball");
 
         owner.initializeField(FieldName.ProjectileComponents, new ArrayList<EntityComponent>());
@@ -211,6 +215,11 @@ public class Gun extends EntityComponent {
 
     public void addBulletComponent(EntityComponent component) {
         this.bulletComponents.add(component);
+    }
+
+    @Override
+    public EntityComponent copy() {
+        return new Gun(sprite);
     }
 }
 

@@ -1146,5 +1146,53 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_1572",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Rewrite enemy spawning to use trait picker",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 31
+      },
+      "time": {
+        "hour": 11,
+        "minute": 51,
+        "second": 4,
+        "nano": 494022913
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1611",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Rewrite augment generation to use trait picker",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 31
+      },
+      "time": {
+        "hour": 11,
+        "minute": 51,
+        "second": 20,
+        "nano": 584398521
+      }
+    },
+    "isImported": false
   }
 ]

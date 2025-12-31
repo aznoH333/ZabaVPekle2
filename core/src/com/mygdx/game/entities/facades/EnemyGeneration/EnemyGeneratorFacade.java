@@ -5,6 +5,8 @@ import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.EnemyBehaviour;
+import com.mygdx.game.entities.components.behaviour.gun.Gun;
+import com.mygdx.game.entities.components.gui.EntityRunnable;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.fields.FieldName;
@@ -155,9 +157,7 @@ public class EnemyGeneratorFacade {
         }
 
 
-        // TODO ranged attacks
-
-        return new Entity()
+        Entity entity = new Entity()
                 .setSprite("enemy_1")
                 .setTeam(EntityTeam.DEMON)
                 .setNumericStat(FieldName.Health, health)
@@ -168,6 +168,31 @@ public class EnemyGeneratorFacade {
                 .setScaleX(size * additionalWidth)
                 .setScaleY(size * additionalHeight)
                 .setDrawingLayer(DrawingLayer.ENEMIES);
+
+
+        if (hasRangedAttack) {
+            float rangedAttackPowerScale = (1f + threat) * targetDifficulty;
+
+
+            TraitPicker<EntityRunnable> rangedAttackTraitPicker = new TraitPicker<>(RangedEnemyTraits.traits, rangedAttackPowerScale);
+
+            entity.setNumericStat(FieldName.ProjectileLifeTime, 60f);
+            entity.setNumericStat(FieldName.ProjectileSpread, 0f);
+            entity.setNumericStat(FieldName.ProjectileSpeed, 0.75f);
+            entity.setNumericStat(FieldName.FireRate, 120f);
+            entity.setNumericStat(FieldName.FireRateMultiplier, 1.5f);
+
+            entity.addComponent(
+                    new Gun("hands_0002")
+            );
+
+            while (rangedAttackTraitPicker.hasBudget()) {
+                Trait<EntityRunnable> trait = rangedAttackTraitPicker.pickTrait();
+                trait.trait.run(entity);
+            }
+        }
+
+        return entity;
     }
 
 
