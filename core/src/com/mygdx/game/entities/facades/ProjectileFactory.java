@@ -15,16 +15,16 @@ public class ProjectileFactory {
 
 
     public static Entity buildBullet(
-            float x,
-            float y,
-            String sprite,
-            float damage,
-            float speed,
-            EntityTeam team,
-            float direction,
-            int lifeTime,
-            ArrayList<EntityComponent> components,
-            float bounceCount
+        float x,
+        float y,
+        String sprite,
+        float damage,
+        float speed,
+        EntityTeam team,
+        float direction,
+        int lifeTime,
+        ArrayList<EntityComponent> components,
+        float bounceCount
     ) {
         Entity bullet = new Entity()
             .setSprite(sprite)

@@ -10,9 +10,9 @@ public class EntityNumericFields {
 
     public EntityNumericFields() {
         List<FieldName> fieldsToInitialize = Arrays
-                .stream(FieldName.values())
-                .filter((it)->it.defaultValue != null)
-                .toList();
+            .stream(FieldName.values())
+            .filter((it) -> it.defaultValue != null)
+            .toList();
 
         for (FieldName fieldName : fieldsToInitialize) {
             setField(fieldName, fieldName.defaultValue);
@@ -53,8 +53,9 @@ public class EntityNumericFields {
      * Ensures that field is initialized.
      * If the field has no value initializes it with the passed value.
      * Does nothing if field is already initialized.
+     *
      * @param fieldName - field specifier
-     * @param value - the value to initialize the field with
+     * @param value     - the value to initialize the field with
      */
     public void initializeValue(FieldName fieldName, float value) {
         if (fields.containsKey(fieldName)) {

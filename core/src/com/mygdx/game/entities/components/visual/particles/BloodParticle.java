@@ -60,13 +60,13 @@ public class BloodParticle extends EntityComponent {
 
         // spawn on ground particle
         Managers.entityManager.addEntity(
-                new Entity()
-                        .setX(owner.x)
-                        .setY(owner.y)
-                        .setSpriteRotation(NumberUtils.randomFloat(0, NumberUtils.TWO_PI))
-                        .addComponent(new FadeParticle(512, false, 0.3f))
-                        .setSprite(sprite)
-                        .setDrawingLayer(DrawingLayer.BLOOD)
+            new Entity()
+                .setX(owner.x)
+                .setY(owner.y)
+                .setSpriteRotation(NumberUtils.randomFloat(0, NumberUtils.TWO_PI))
+                .addComponent(new FadeParticle(512, false, 0.3f))
+                .setSprite(sprite)
+                .setDrawingLayer(DrawingLayer.BLOOD)
         );
     }
 }

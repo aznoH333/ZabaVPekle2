@@ -44,7 +44,6 @@ public class Shrapnel extends EntityComponent {
     }
 
 
-
     @Override
     public EntityComponent copy() {
         return new Shrapnel(amountToSpawn);

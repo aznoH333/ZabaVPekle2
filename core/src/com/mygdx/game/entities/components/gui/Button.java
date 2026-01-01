@@ -21,8 +21,8 @@ public class Button extends EntityComponent {
         Vector2 mousePos = Managers.drawingManager.getScreenMousePosition();
 
         if (NumberUtils.checkCollisions(
-                owner.x, owner.y, owner.width, owner.height,
-                mousePos.x, mousePos.y, 1, 1
+            owner.x, owner.y, owner.width, owner.height,
+            mousePos.x, mousePos.y, 1, 1
         ) && Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
             buttonAction.run(owner);
         }

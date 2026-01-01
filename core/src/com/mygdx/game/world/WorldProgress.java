@@ -84,13 +84,13 @@ public class WorldProgress {
             case MAJOR_COMBAT:
                 if (NumberUtils.randomChance(0.25f)) {
                     return currentPlace.type.combatRoomDropQuality;
-                }else {
+                } else {
                     return null;
                 }
             case FILLER:
                 if (NumberUtils.randomChance(0.05f)) {
                     return currentPlace.type.combatRoomDropQuality;
-                }else {
+                } else {
                     return null;
                 }
             default:

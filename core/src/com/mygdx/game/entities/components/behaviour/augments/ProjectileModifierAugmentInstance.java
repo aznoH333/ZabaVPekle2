@@ -6,10 +6,13 @@ import com.mygdx.game.entities.fields.FieldName;
 
 import java.util.ArrayList;
 
-/** A wrapper for entity components. Adds a component to owners bullets when first attached*/
+/**
+ * A wrapper for entity components. Adds a component to owners bullets when first attached
+ */
 public class ProjectileModifierAugmentInstance extends EntityComponent {
 
     private final EntityComponent componentToAttach;
+
     public ProjectileModifierAugmentInstance(String effectDescription, EntityComponent componentToAttach) {
         super.effectDescription = effectDescription;
         this.componentToAttach = componentToAttach;
@@ -19,7 +22,7 @@ public class ProjectileModifierAugmentInstance extends EntityComponent {
     @Override
     public void onFirstAttached(Entity owner) {
         ((ArrayList<EntityComponent>) owner.getField(FieldName.ProjectileComponents))
-                .add(componentToAttach.copy());
+            .add(componentToAttach.copy());
     }
 
     @Override

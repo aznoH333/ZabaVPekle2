@@ -58,7 +58,6 @@ public class EntityManager {
         clearAllEntitiesOnCycleEnd = false;
 
 
-
         entities.addAll(waitingRoom);
         waitingRoom.clear();
     }

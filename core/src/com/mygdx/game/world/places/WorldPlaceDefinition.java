@@ -6,31 +6,31 @@ import com.mygdx.game.entities.items.Quality;
 public enum WorldPlaceDefinition {
 
     START(
-            "start",
-            new Color(0.2f, 0.2f, 0.2f, 1f),
-            new Color(0.95f, 0.25f, 0.1f, 1f),
-            new Color(0.95f, 0.25f, 0.1f, 1f),
-            new Color(0.8f, 0.8f, 0.8f, 1f),
-            Quality.POOR,
-            Quality.POOR,
-            Quality.COMMON),
+        "start",
+        new Color(0.2f, 0.2f, 0.2f, 1f),
+        new Color(0.95f, 0.25f, 0.1f, 1f),
+        new Color(0.95f, 0.25f, 0.1f, 1f),
+        new Color(0.8f, 0.8f, 0.8f, 1f),
+        Quality.POOR,
+        Quality.POOR,
+        Quality.COMMON),
     BLUE(
-            "blue",
-            new Color(0.2f, 0.2f, 0.2f, 1f),
-            new Color(0.1f, 0.25f, 0.95f, 1f),
-            new Color(0.1f, 0.25f, 0.95f, 1f),
-            new Color(0.8f, 0.8f, 0.8f, 1f),
-            Quality.COMMON,
-            Quality.POOR,
-            Quality.COMMON),
+        "blue",
+        new Color(0.2f, 0.2f, 0.2f, 1f),
+        new Color(0.1f, 0.25f, 0.95f, 1f),
+        new Color(0.1f, 0.25f, 0.95f, 1f),
+        new Color(0.8f, 0.8f, 0.8f, 1f),
+        Quality.COMMON,
+        Quality.POOR,
+        Quality.COMMON),
     BLACK("black",
-            new Color(0.2f, 0.2f, 0.2f, 1f),
-            new Color(0.1f, 0.1f, 0.1f, 1f),
-            new Color(0.1f, 0.1f, 0.1f, 1f),
-            new Color(0.4f, 0.4f, 0.4f, 1f),
-            Quality.COMMON,
-            Quality.COMMON,
-            Quality.REFINED);
+        new Color(0.2f, 0.2f, 0.2f, 1f),
+        new Color(0.1f, 0.1f, 0.1f, 1f),
+        new Color(0.1f, 0.1f, 0.1f, 1f),
+        new Color(0.4f, 0.4f, 0.4f, 1f),
+        Quality.COMMON,
+        Quality.COMMON,
+        Quality.REFINED);
 
 
     public final Color floorColor;
@@ -44,14 +44,14 @@ public enum WorldPlaceDefinition {
 
 
     WorldPlaceDefinition(
-            String placeName,
-            Color floorColor,
-            Color brickColor,
-            Color worldTopColor,
-            Color doorColor,
-            Quality lootRoomBoxQuality,
-            Quality combatRoomDropQuality,
-            Quality bossRoomDropQuality
+        String placeName,
+        Color floorColor,
+        Color brickColor,
+        Color worldTopColor,
+        Color doorColor,
+        Quality lootRoomBoxQuality,
+        Quality combatRoomDropQuality,
+        Quality bossRoomDropQuality
     ) {
         this.placeName = placeName;
         this.floorColor = floorColor;
@@ -65,7 +65,7 @@ public enum WorldPlaceDefinition {
 
     public Place generatePlace() {
         Place place = new Place(
-                this
+            this
         );
 
         return place;

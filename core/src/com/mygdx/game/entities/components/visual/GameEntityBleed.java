@@ -25,15 +25,15 @@ public class GameEntityBleed extends EntityComponent {
 
         for (int i = 0; i < amountOfBloodToSpawn; i++) {
             Managers.entityManager.addEntity(new Entity()
-                    .setSprite("blood_" + NumberUtils.randomInt(1, 3))
-                    .setX(owner.x)
-                    .setY(owner.y)
-                    .addComponent(new BloodParticle(
-                            NumberUtils.randomFloat(0f, NumberUtils.TWO_PI),
-                            NumberUtils.randomFloat(0.5f, 6f),
-                            NumberUtils.randomFloat(0.5f, 2.5f)
-                    ))
-                    .setDrawingLayer(DrawingLayer.PROJECTILES)
+                .setSprite("blood_" + NumberUtils.randomInt(1, 3))
+                .setX(owner.x)
+                .setY(owner.y)
+                .addComponent(new BloodParticle(
+                    NumberUtils.randomFloat(0f, NumberUtils.TWO_PI),
+                    NumberUtils.randomFloat(0.5f, 6f),
+                    NumberUtils.randomFloat(0.5f, 2.5f)
+                ))
+                .setDrawingLayer(DrawingLayer.PROJECTILES)
 
             );
         }

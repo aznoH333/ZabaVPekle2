@@ -17,17 +17,17 @@ public class MainMenu extends GameState {
 
 
         GUIFacade.createButton(
-                "Play game",
-                0f,
-                25f,
-                owner -> Managers.gameStateManager.switchState("game")
+            "Play game",
+            0f,
+            25f,
+            owner -> Managers.gameStateManager.switchState("game")
         );
 
         GUIFacade.createButton(
-                "Quit game",
-                0f,
-                -25f,
-                owner -> Gdx.app.exit()
+            "Quit game",
+            0f,
+            -25f,
+            owner -> Gdx.app.exit()
         );
 
     }

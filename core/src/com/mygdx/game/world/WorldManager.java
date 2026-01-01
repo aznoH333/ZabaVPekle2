@@ -6,15 +6,10 @@ import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
-import com.mygdx.game.entities.EntityTeam;
-import com.mygdx.game.entities.components.behaviour.EnemyBehaviour;
 import com.mygdx.game.entities.components.behaviour.Spawner;
 import com.mygdx.game.entities.components.control.Door;
-import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
-import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.components.visual.particles.FadeParticle;
 import com.mygdx.game.entities.facades.AugmentBox.AugmentBoxFacade;
-import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.utils.NumberUtils;
 
@@ -61,16 +56,16 @@ public class WorldManager {
                 Color tileColor = getColorForTile(tileType.color);
 
                 Managers.drawingManager.drawSprite(
-                        new DrawingCommand(tileType.textureName, x * 32f - 16f, y * 32f - 16f).setColor(tileColor),
-                        layer);
+                    new DrawingCommand(tileType.textureName, x * 32f - 16f, y * 32f - 16f).setColor(tileColor),
+                    layer);
 
                 if (tileType.decorationTextureName != null) {
                     assert tileType.decorationColor != null;
                     Color decorationColor = getColorForTile(tileType.decorationColor);
 
                     Managers.drawingManager.drawSprite(
-                            new DrawingCommand(tileType.decorationTextureName, x * 32f - 16f, y * 32f - 16f).setColor(decorationColor),
-                            DrawingLayer.DOOR);
+                        new DrawingCommand(tileType.decorationTextureName, x * 32f - 16f, y * 32f - 16f).setColor(decorationColor),
+                        DrawingLayer.DOOR);
                 }
 
             }
@@ -209,16 +204,16 @@ public class WorldManager {
         } while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, player.x, player.y) < 128f);
 
         Managers.entityManager.addEntity(
-                new Entity()
-                        .setX(x)
-                        .setY(y)
-                        .setDrawingLayer(DrawingLayer.BLOOD)
-                        .setSprite("enemy_spawner_0001")
-                        .addComponent(new FadeParticle(120, true, 0.2f))
-                        .addComponent(
-                                new Spawner(
-                                        progress.getReferenceEnemyToSpawn().copy())
-                        )
+            new Entity()
+                .setX(x)
+                .setY(y)
+                .setDrawingLayer(DrawingLayer.BLOOD)
+                .setSprite("enemy_spawner_0001")
+                .addComponent(new FadeParticle(120, true, 0.2f))
+                .addComponent(
+                    new Spawner(
+                        progress.getReferenceEnemyToSpawn().copy())
+                )
         );
     }
 
@@ -236,10 +231,10 @@ public class WorldManager {
 
         // spawn door object
         Managers.entityManager.addEntity(
-                new Entity()
-                        .setX(-16f)
-                        .setY((progress.innerWorldSize - 1) * 32f)
-                        .addComponent(new Door())
+            new Entity()
+                .setX(-16f)
+                .setY((progress.innerWorldSize - 1) * 32f)
+                .addComponent(new Door())
         );
 
 
@@ -257,9 +252,9 @@ public class WorldManager {
         float heightValue = height / 2f;
 
         return x - widthValue > -progress.innerWorldSize * 32f &&
-                x + widthValue < (progress.innerWorldSize - 1) * 32f &&
-                y - heightValue > -progress.innerWorldSize * 32f &&
-                y + heightValue < (progress.innerWorldSize - 1) * 32f;
+            x + widthValue < (progress.innerWorldSize - 1) * 32f &&
+            y - heightValue > -progress.innerWorldSize * 32f &&
+            y + heightValue < (progress.innerWorldSize - 1) * 32f;
     }
 
 

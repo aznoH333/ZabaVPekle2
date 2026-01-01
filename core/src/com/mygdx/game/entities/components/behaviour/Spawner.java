@@ -24,14 +24,14 @@ public class Spawner extends EntityComponent {
 
         if (timer % 3 == 0) {
             Managers.entityManager.addEntity(
-                    new Entity()
-                            .setY(owner.y - NumberUtils.randomFloat(0f, 10f))
-                            .setX(owner.x + NumberUtils.randomFloat(-10f, 10f))
-                            .setSprite("fire_particle_0003")
-                            .setDrawingLayer(DrawingLayer.EFFECTS)
-                            .setColor(1f, NumberUtils.randomFloat(0.4f, 0.5f), 0.1f, 1f)
-                            .addComponent(new FadeParticle(30, true, 0.2f))
-                            .addComponent(new FireParticle())
+                new Entity()
+                    .setY(owner.y - NumberUtils.randomFloat(0f, 10f))
+                    .setX(owner.x + NumberUtils.randomFloat(-10f, 10f))
+                    .setSprite("fire_particle_0003")
+                    .setDrawingLayer(DrawingLayer.EFFECTS)
+                    .setColor(1f, NumberUtils.randomFloat(0.4f, 0.5f), 0.1f, 1f)
+                    .addComponent(new FadeParticle(30, true, 0.2f))
+                    .addComponent(new FireParticle())
             );
         }
 

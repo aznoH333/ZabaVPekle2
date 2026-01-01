@@ -9,6 +9,7 @@ public class StatBoostAugment extends EntityComponent {
 
     private final FieldName fieldName;
     private final float value;
+
     public StatBoostAugment(FieldName fieldName, float value) {
         super.effectDescription = fieldName.name() + " boost";
         this.fieldName = fieldName;

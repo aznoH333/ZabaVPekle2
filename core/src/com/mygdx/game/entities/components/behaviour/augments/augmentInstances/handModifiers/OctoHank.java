@@ -9,14 +9,13 @@ import com.mygdx.game.utils.NumberUtils;
 
 public class OctoHank extends SimpleOnApplyModifierAugmentInstance {
     public OctoHank() {
-        super("too many hands", (owner)->{
+        super("too many hands", (owner) -> {
             Gun gun = (Gun) owner.getComponentByName(ComponentName.GUN);
-
 
 
             for (float i = NumberUtils.QUARTER_PI; i <= NumberUtils.TWO_PI - NumberUtils.QUARTER_PI; i += NumberUtils.QUARTER_PI) {
                 gun.addBulletOrigin(
-                        new BulletOrigin(i, true)
+                    new BulletOrigin(i, true)
                 );
             }
 

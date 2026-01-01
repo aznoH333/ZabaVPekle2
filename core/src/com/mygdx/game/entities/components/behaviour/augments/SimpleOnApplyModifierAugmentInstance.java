@@ -9,14 +9,13 @@ public class SimpleOnApplyModifierAugmentInstance extends StatModifierAugmentIns
     private final EntityRunnable applyFunction;
 
     public SimpleOnApplyModifierAugmentInstance(
-            String effectDescription,
-            EntityRunnable applyFunction
+        String effectDescription,
+        EntityRunnable applyFunction
     ) {
         super(effectDescription);
         super.effectDescription = effectDescription;
         this.applyFunction = applyFunction;
     }
-
 
 
     @Override
@@ -28,8 +27,8 @@ public class SimpleOnApplyModifierAugmentInstance extends StatModifierAugmentIns
     @Override
     public EntityComponent copy() {
         SimpleOnApplyModifierAugmentInstance out = new SimpleOnApplyModifierAugmentInstance(
-                super.effectDescription,
-                applyFunction
+            super.effectDescription,
+            applyFunction
         );
         out.augmentMap = this.augmentMap;
         return out;

@@ -17,9 +17,10 @@ public class EntityFields {
      * Ensures that field is initialized.
      * If the field has no value initializes it with the passed value.
      * Does nothing if field is already initialized.
+     *
      * @param fieldName - field specifier
-     * @param value - the value to initialize the field with
-     * @param <T> - type to store
+     * @param value     - the value to initialize the field with
+     * @param <T>       - type to store
      */
     public <T> void initializeValue(FieldName fieldName, T value) {
         if (this.fields.containsKey(fieldName)) {

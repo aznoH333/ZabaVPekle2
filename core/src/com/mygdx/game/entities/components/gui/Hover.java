@@ -23,8 +23,8 @@ public class Hover extends EntityComponent {
         Vector2 mousePos = Managers.drawingManager.getScreenMousePosition();
 
         boolean hoveredThisFrame = NumberUtils.checkCollisions(
-                owner.x, owner.y, owner.width, owner.height,
-                mousePos.x, mousePos.y, 1, 1
+            owner.x, owner.y, owner.width, owner.height,
+            mousePos.x, mousePos.y, 1, 1
         );
 
 

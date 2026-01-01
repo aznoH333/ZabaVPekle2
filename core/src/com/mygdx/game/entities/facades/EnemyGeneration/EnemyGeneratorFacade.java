@@ -40,7 +40,7 @@ import java.util.ArrayList;
  *     <li>tiny fodder enemy (low stats)</li>
  *     <li>a somewhat common generalist enemy (average stats)</li>
  * </ol>
- *
+ * <p>
  * Specified difficulty scales linearly - (diff jump from 3 to 4 is the same as from 2 to 3)
  * The system is intended to have the first place always generate with diff 1
  */
@@ -50,6 +50,7 @@ public class EnemyGeneratorFacade {
      * Each roster is intended to last for 1 place.
      * Always generates a small fodder enemy
      * And a low threat generalist enemy
+     *
      * @param specializedEnemyCount
      * @param placeDifficulty
      * @return
@@ -109,9 +110,6 @@ public class EnemyGeneratorFacade {
     }
 
 
-
-
-
     private static Entity generateEnemyType(EnemyGenerationBase base) {
 
         boolean isTurret = false;
@@ -137,7 +135,7 @@ public class EnemyGeneratorFacade {
             speed = 0f;
             isTurret = true;
             hasRangedAttack = true;
-        }else {
+        } else {
             speed = 0.5f + (base.mobility * 2.2f);
 
             if (!hasRangedAttack && base.threat > 0.5f) {
@@ -173,16 +171,16 @@ public class EnemyGeneratorFacade {
 
 
         Entity entity = new Entity()
-                .setSprite("enemy_1")
-                .setTeam(EntityTeam.DEMON)
-                .setNumericStat(FieldName.Health, health)
-                .setNumericStat(FieldName.Speed, speed)
-                .addComponent(new EnemyBehaviour())
-                .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
-                .addComponent(new GameEntityBleed())
-                .setScaleX(size * additionalWidth)
-                .setScaleY(size * additionalHeight)
-                .setDrawingLayer(DrawingLayer.ENEMIES);
+            .setSprite("enemy_1")
+            .setTeam(EntityTeam.DEMON)
+            .setNumericStat(FieldName.Health, health)
+            .setNumericStat(FieldName.Speed, speed)
+            .addComponent(new EnemyBehaviour())
+            .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
+            .addComponent(new GameEntityBleed())
+            .setScaleX(size * additionalWidth)
+            .setScaleY(size * additionalHeight)
+            .setDrawingLayer(DrawingLayer.ENEMIES);
 
 
         if (hasRangedAttack) {
@@ -198,7 +196,7 @@ public class EnemyGeneratorFacade {
             entity.setNumericStat(FieldName.FireRateMultiplier, 1.5f);
 
             entity.addComponent(
-                    new Gun("hands_0002")
+                new Gun("hands_0002")
             );
 
             while (rangedAttackTraitPicker.hasBudget()) {

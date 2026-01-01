@@ -54,10 +54,10 @@ public class PlayerBehaviour extends EntityComponent {
             Vector2 mousePos = Managers.drawingManager.getMousePosition();
 
             gun.direction = NumberUtils.directionToward(
-                    owner.x,
-                    owner.y,
-                    mousePos.x,
-                    mousePos.y);
+                owner.x,
+                owner.y,
+                mousePos.x,
+                mousePos.y);
 
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                 gun.shoot(owner);

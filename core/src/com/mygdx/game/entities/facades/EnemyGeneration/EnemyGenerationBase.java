@@ -3,16 +3,26 @@ package com.mygdx.game.entities.facades.EnemyGeneration;
 
 import com.mygdx.game.utils.NumberUtils;
 
-/** A helper class used to hold values that are logically related */
+/**
+ * A helper class used to hold values that are logically related
+ */
 public class EnemyGenerationBase {
-    /** A value from 0 to 1 that represents the generated enemy's toughness (health)*/
+    /**
+     * A value from 0 to 1 that represents the generated enemy's toughness (health)
+     */
     public float toughness;
-    /** A value from 0 to 1 that represents the generated enemy's speed. May result in additional (dashing, teleporting)*/
+    /**
+     * A value from 0 to 1 that represents the generated enemy's speed. May result in additional (dashing, teleporting)
+     */
     public float mobility;
-    /** A value from 0 to 1 that represents the generated enemy's threat. High threat enemies might generate with ranged attacks.*/
+    /**
+     * A value from 0 to 1 that represents the generated enemy's threat. High threat enemies might generate with ranged attacks.
+     */
     public float threat;
 
-    /** The difficulty value of the place where the enemy appears. Value from 1 to infinity */
+    /**
+     * The difficulty value of the place where the enemy appears. Value from 1 to infinity
+     */
     public float placeDifficulty;
 
     public EnemyGenerationBase(float toughness, float mobility, float threat, float placeDifficulty) {

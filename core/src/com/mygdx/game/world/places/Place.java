@@ -34,7 +34,7 @@ public class Place {
         this.enemyRoster = EnemyGeneratorFacade.generateEnemyRoster(2, 1f);
 
         rooms.add(
-                new PlaceRoom(RoomType.SPAWN, enemyRoster)
+            new PlaceRoom(RoomType.SPAWN, enemyRoster)
         );
 
         for (int i = 0; i < 2; i++) {

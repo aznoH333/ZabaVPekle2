@@ -16,15 +16,15 @@ public class StatModifierAugmentInstance extends EntityComponent {
     protected HashMap<FieldName, Float> augmentMap;
 
     public StatModifierAugmentInstance(
-            String effectDescription
+        String effectDescription
     ) {
         super.effectDescription = effectDescription;
         augmentMap = new HashMap<>();
     }
 
     private StatModifierAugmentInstance(
-            String effectDescription,
-            HashMap<FieldName, Float> augmentMap
+        String effectDescription,
+        HashMap<FieldName, Float> augmentMap
     ) {
         super.effectDescription = effectDescription;
         this.augmentMap = augmentMap;
@@ -40,8 +40,8 @@ public class StatModifierAugmentInstance extends EntityComponent {
     @Override
     public EntityComponent copy() {
         return new StatModifierAugmentInstance(
-                effectDescription,
-                augmentMap
+            effectDescription,
+            augmentMap
         );
     }
 }

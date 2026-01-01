@@ -60,14 +60,14 @@ public class NumberUtils {
     }
 
     public static boolean checkCollisions(
-            float x1,
-            float y1,
-            float w1,
-            float h1,
-            float x2,
-            float y2,
-            float w2,
-            float h2
+        float x1,
+        float y1,
+        float w1,
+        float h1,
+        float x2,
+        float y2,
+        float w2,
+        float h2
     ) {
         float width = w1 / 2.0f;
         float height = h1 / 2.0f;
@@ -76,9 +76,9 @@ public class NumberUtils {
         float otherHeight = h2 / 2.0f;
 
         return x1 - width < x2 + otherWidth &&
-                x1 + width > x2 - otherWidth &&
-                y1 - height < y2 + otherHeight &&
-                y1 + height > y2 - otherHeight;
+            x1 + width > x2 - otherWidth &&
+            y1 - height < y2 + otherHeight &&
+            y1 + height > y2 - otherHeight;
     }
 
     public static float clampValue(float value, float min, float max) {

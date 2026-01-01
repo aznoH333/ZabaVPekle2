@@ -1,7 +1,5 @@
 package com.mygdx.game.entities.components.behaviour;
 
-import com.mygdx.game.Managers;
-import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;

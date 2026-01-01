@@ -11,17 +11,17 @@ import java.util.Optional;
 public class DoubleHank extends SimpleOnApplyModifierAugmentInstance {
     public DoubleHank() {
         super(
-                "gives another hand",
-                (owner)->{
-                    Gun gun = (Gun) owner.getComponentByName(ComponentName.GUN);
+            "gives another hand",
+            (owner) -> {
+                Gun gun = (Gun) owner.getComponentByName(ComponentName.GUN);
 
-                    Optional<BulletOrigin> firstOrigin = gun.bulletOrigins.stream().filter((it)->it.aimOffset == 0f).findFirst();
-                    firstOrigin.ifPresent(bulletOrigin -> bulletOrigin.aimOffset = -0.15f);
+                Optional<BulletOrigin> firstOrigin = gun.bulletOrigins.stream().filter((it) -> it.aimOffset == 0f).findFirst();
+                firstOrigin.ifPresent(bulletOrigin -> bulletOrigin.aimOffset = -0.15f);
 
-                    gun.addBulletOrigin(
-                            new BulletOrigin(0.15f, true)
-                    );
-                });
+                gun.addBulletOrigin(
+                    new BulletOrigin(0.15f, true)
+                );
+            });
 
         super.augmentMap.put(FieldName.FireRateMultiplier, 0.25f);
 

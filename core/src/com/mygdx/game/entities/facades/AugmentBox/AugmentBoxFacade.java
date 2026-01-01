@@ -18,12 +18,12 @@ public class AugmentBoxFacade {
 
     public static void createNewBox(float x, float y, Quality boxRarity) {
         Managers.entityManager.addEntity(
-                new Entity()
-                        .addComponent(new AugmentBox(boxRarity))
-                        .setX(x)
-                        .setY(y)
-                        .setDrawingLayer(DrawingLayer.WALLS)
-                        .setSprite(boxRarity.boxSprite)
+            new Entity()
+                .addComponent(new AugmentBox(boxRarity))
+                .setX(x)
+                .setY(y)
+                .setDrawingLayer(DrawingLayer.WALLS)
+                .setSprite(boxRarity.boxSprite)
         );
     }
 
@@ -56,8 +56,6 @@ public class AugmentBoxFacade {
     }
 
 
-
-
     private static Augment generateAugment(Quality targetQuality) {
         ArrayList<EntityComponent> playerComponents = new ArrayList<>();
 
@@ -77,8 +75,8 @@ public class AugmentBoxFacade {
         }
 
         Augment augment = new Augment(
-                targetQuality,
-                playerComponents
+            targetQuality,
+            playerComponents
         );
 
         return augment;

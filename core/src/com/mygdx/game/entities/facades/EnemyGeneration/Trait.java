@@ -6,9 +6,9 @@ public class Trait<T> {
     public final T trait;
 
     public Trait(
-            float chanceToBePicked,
-            float cost,
-            T trait
+        float chanceToBePicked,
+        float cost,
+        T trait
     ) {
         this.chanceToBePicked = chanceToBePicked;
         this.cost = cost;

@@ -81,18 +81,18 @@ public class Entity implements Copyable {
         if (sprite != null) {
             // draw
             Managers.drawingManager.drawSprite(
-                    new DrawingCommand(sprite, x + spriteOffsetX, y + spriteOffsetY)
-                            .setWidth(scaleX)
-                            .setHeight(scaleY)
-                            .setFlipHorizontally(flipX)
-                            .setFlipVertically(flipY)
-                            .setRotationRad(spriteRotation)
-                            .setR(r)
-                            .setG(g)
-                            .setB(b)
-                            .setA(a),
-                    drawingLayer,
-                    drawAsStatic
+                new DrawingCommand(sprite, x + spriteOffsetX, y + spriteOffsetY)
+                    .setWidth(scaleX)
+                    .setHeight(scaleY)
+                    .setFlipHorizontally(flipX)
+                    .setFlipVertically(flipY)
+                    .setRotationRad(spriteRotation)
+                    .setR(r)
+                    .setG(g)
+                    .setB(b)
+                    .setA(a),
+                drawingLayer,
+                drawAsStatic
             );
         }
 
@@ -190,7 +190,6 @@ public class Entity implements Copyable {
     }
 
 
-
     public void walk(float x, float y) {
         if (shouldApplyKnockBack()) {
             return;
@@ -240,8 +239,8 @@ public class Entity implements Copyable {
     public boolean collidesWithEntity(Entity other) {
 
         return NumberUtils.checkCollisions(
-                x, y, width, height,
-                other.x, other.y, other.width, other.height
+            x, y, width, height,
+            other.x, other.y, other.width, other.height
         );
 
     }
@@ -362,14 +361,14 @@ public class Entity implements Copyable {
 
     public Entity copy() {
         Entity clone = new Entity()
-                .setSprite(sprite)
-                .setX(x)
-                .setY(y)
-                .setScaleX(scaleX)
-                .setScaleY(scaleY)
-                .setTeam(team)
-                .setDrawingLayer(drawingLayer)
-                .setTriggerInvincibility(triggerInvincibility);
+            .setSprite(sprite)
+            .setX(x)
+            .setY(y)
+            .setScaleX(scaleX)
+            .setScaleY(scaleY)
+            .setTeam(team)
+            .setDrawingLayer(drawingLayer)
+            .setTriggerInvincibility(triggerInvincibility);
         // components
         for (EntityComponent c : components) {
             clone.addComponent(c.copy());

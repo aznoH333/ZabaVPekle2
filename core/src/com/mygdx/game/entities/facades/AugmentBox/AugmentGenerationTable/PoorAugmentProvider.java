@@ -1,6 +1,6 @@
 package com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationTable;
 
-import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.*;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.StatBoostAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.MachineGunAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.ShotGunAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.DoubleHank;
@@ -15,7 +15,7 @@ import com.mygdx.game.entities.items.Quality;
 
 import java.util.ArrayList;
 
-public class PoorAugmentProvider implements AugmentGenerationProvider{
+public class PoorAugmentProvider implements AugmentGenerationProvider {
 
     @Override
     public void fillWithAugments(ArrayList<AugmentGenerationSpecifier> target) {

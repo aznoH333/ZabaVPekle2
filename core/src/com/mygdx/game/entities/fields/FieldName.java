@@ -16,12 +16,18 @@ public enum FieldName {
     MaxHealth(null, 1f, null),
 
     // projectile stuff
-    /** How many frames will the projectile live for. */
+    /**
+     * How many frames will the projectile live for.
+     */
     RemainingProjectileLifeTime,
-    /** Used as default RemainingProjectileLifeTime when spawning a new projectile */
+    /**
+     * Used as default RemainingProjectileLifeTime when spawning a new projectile
+     */
     ProjectileLifeTime(120f, 30f, 1000f),
 
-    /** number of times the projectile can bounce */
+    /**
+     * number of times the projectile can bounce
+     */
     BounceCount(1f, null, null),
     ProjectileDamage,
     ProjectileSpeed(0.1f, 0f, 10f),
@@ -34,16 +40,20 @@ public enum FieldName {
     ProjectilesPerShot(1f, 1f, null),
     ProjectileSprite,
 
-    /** an arraylist containing a list of projectile origins */
+    /**
+     * an arraylist containing a list of projectile origins
+     */
     Guns,
-    /** an arraylist containing a list of components assigned to each projectile */
+    /**
+     * an arraylist containing a list of components assigned to each projectile
+     */
     ProjectileComponents;
-
 
 
     public final Float defaultValue;
     public final Float minValue;
     public final Float maxValue;
+
     FieldName() {
         this.defaultValue = null;
         this.maxValue = null;

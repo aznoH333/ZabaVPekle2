@@ -87,22 +87,22 @@ public class DrawingManager {
 
         batch.setColor(r, g, b, a);
         batch.draw(
-                sprite,
-                x - w,
-                y - h,
-                w,
-                h,
-                (float) sprite.getWidth(),
-                (float) sprite.getHeight(),
-                width,
-                height,
-                rotation,
-                0,
-                0,
-                sprite.getWidth(),
-                sprite.getHeight(),
-                flipHorizontally,
-                flipVertically
+            sprite,
+            x - w,
+            y - h,
+            w,
+            h,
+            (float) sprite.getWidth(),
+            (float) sprite.getHeight(),
+            width,
+            height,
+            rotation,
+            0,
+            0,
+            sprite.getWidth(),
+            sprite.getHeight(),
+            flipHorizontally,
+            flipVertically
         );
     }
 
@@ -158,19 +158,19 @@ public class DrawingManager {
         for (ArrayList<DrawingCommand> layer : drawingQueue) {
             for (DrawingCommand command : layer) {
                 drawSprite(
-                        batch,
-                        command.spriteName,
-                        command.x,
-                        command.y,
-                        command.width,
-                        command.height,
-                        command.flipHorizontally,
-                        command.flipVertically,
-                        command.rotationRad,
-                        command.r,
-                        command.g,
-                        command.b,
-                        command.a
+                    batch,
+                    command.spriteName,
+                    command.x,
+                    command.y,
+                    command.width,
+                    command.height,
+                    command.flipHorizontally,
+                    command.flipVertically,
+                    command.rotationRad,
+                    command.r,
+                    command.g,
+                    command.b,
+                    command.a
                 );
             }
             layer.clear();
@@ -185,19 +185,19 @@ public class DrawingManager {
         for (ArrayList<DrawingCommand> layer : staticDrawingQueue) {
             for (DrawingCommand command : layer) {
                 drawSprite(
-                        staticBatch,
-                        command.spriteName,
-                        command.x,
-                        command.y,
-                        command.width,
-                        command.height,
-                        command.flipHorizontally,
-                        command.flipVertically,
-                        command.rotationRad,
-                        command.r,
-                        command.g,
-                        command.b,
-                        command.a
+                    staticBatch,
+                    command.spriteName,
+                    command.x,
+                    command.y,
+                    command.width,
+                    command.height,
+                    command.flipHorizontally,
+                    command.flipVertically,
+                    command.rotationRad,
+                    command.r,
+                    command.g,
+                    command.b,
+                    command.a
                 );
             }
             layer.clear();
@@ -237,16 +237,16 @@ public class DrawingManager {
 
     public Vector2 getMousePosition() {
         return new Vector2(
-                camera.position.x + Gdx.input.getX() - (Gdx.graphics.getWidth() / 2f),
-                camera.position.y - Gdx.input.getY() + (Gdx.graphics.getHeight() / 2f)
+            camera.position.x + Gdx.input.getX() - (Gdx.graphics.getWidth() / 2f),
+            camera.position.y - Gdx.input.getY() + (Gdx.graphics.getHeight() / 2f)
         );
     }
 
     public Vector2 getScreenMousePosition() {
 
         return new Vector2(
-                ((float) Gdx.input.getX() / Gdx.graphics.getWidth() - 0.5f) * (staticViewPort.getWorldWidth() * staticCamera.zoom),
-                (-(float) Gdx.input.getY() / Gdx.graphics.getHeight() + 0.5f) * (staticViewPort.getWorldHeight() * staticCamera.zoom)
+            ((float) Gdx.input.getX() / Gdx.graphics.getWidth() - 0.5f) * (staticViewPort.getWorldWidth() * staticCamera.zoom),
+            (-(float) Gdx.input.getY() / Gdx.graphics.getHeight() + 0.5f) * (staticViewPort.getWorldHeight() * staticCamera.zoom)
         );
     }
 

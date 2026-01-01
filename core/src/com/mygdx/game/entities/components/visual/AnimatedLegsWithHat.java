@@ -19,7 +19,7 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
 
     public AnimatedLegsWithHat(Color bodyColor, Color hurtColor, String hatSprite) {
         super(
-                "legs", 1, 2, 8, 9, 3
+            "legs", 1, 2, 8, 9, 3
         );
         super.name = ComponentName.LEGS;
 
@@ -35,11 +35,11 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
         float xOffset = HAT_OFFSET_X * (NumberUtils.boolToInt(owner.flipX) * 2 - 1);
 
         Managers.drawingManager.drawSprite(
-                new DrawingCommand(hatSprite, owner.x + xOffset, owner.y + (HAT_OFFSET_Y * owner.scaleY))
-                        .setFlipHorizontally(owner.flipX)
-                        .setWidth(owner.scaleX)
-                        .setHeight(owner.scaleY),
-                owner.drawingLayer
+            new DrawingCommand(hatSprite, owner.x + xOffset, owner.y + (HAT_OFFSET_Y * owner.scaleY))
+                .setFlipHorizontally(owner.flipX)
+                .setWidth(owner.scaleX)
+                .setHeight(owner.scaleY),
+            owner.drawingLayer
         );
 
         super.onUpdate(owner);
@@ -58,9 +58,9 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
     @Override
     public EntityComponent copy() {
         return new AnimatedLegsWithHat(
-                this.bodyColor,
-                this.hurtColor,
-                this.hatSprite
+            this.bodyColor,
+            this.hurtColor,
+            this.hatSprite
         );
     }
 

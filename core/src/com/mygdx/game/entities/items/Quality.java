@@ -10,9 +10,13 @@ public enum Quality {
     public final String textName;
     public final String augmentSprite;
 
-    /** The index of the quality (0 for lowest quality N-1 for highest). Useful when generating augment stats based on quality, or sorting by quality */
+    /**
+     * The index of the quality (0 for lowest quality N-1 for highest). Useful when generating augment stats based on quality, or sorting by quality
+     */
     public final int numericValue;
-    /** How good is the quality. Rates the quality on a 1-10 scale. Useful when generating augment stats based on quality*/
+    /**
+     * How good is the quality. Rates the quality on a 1-10 scale. Useful when generating augment stats based on quality
+     */
     public final int rarityAdjustedNumericValue;
 
     public final int averageAugmentCount;
@@ -41,8 +45,6 @@ public enum Quality {
         }
         return Quality.values()[numericValue];
     }
-
-
 
 
 }

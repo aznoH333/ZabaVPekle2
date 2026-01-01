@@ -20,11 +20,11 @@ public class PlaceRoom {
 
 
         ArrayList<Integer> indexesToExclude = new ArrayList<>();
-        for (int i = Math.min( enemyRoster.size(), NumberUtils.randomInt(1, 3)); i > 0; i--) {
+        for (int i = Math.min(enemyRoster.size(), NumberUtils.randomInt(1, 3)); i > 0; i--) {
             int pickedIndex;
             do {
                 pickedIndex = NumberUtils.randomInt(0, enemyRoster.size() - 1);
-            }while (indexesToExclude.contains(pickedIndex));
+            } while (indexesToExclude.contains(pickedIndex));
 
             indexesToExclude.add(pickedIndex);
             roomEnemies.add(enemyRoster.get(pickedIndex));

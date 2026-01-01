@@ -11,15 +11,15 @@ import com.mygdx.game.utils.NumberUtils;
 public class TripleHank extends SimpleOnApplyModifierAugmentInstance {
 
     public TripleHank() {
-        super("gives 2 extra hands", (owner)->{
+        super("gives 2 extra hands", (owner) -> {
             Gun gun = (Gun) owner.getComponentByName(ComponentName.GUN);
 
 
             gun.addBulletOrigin(
-                    new BulletOrigin(0.30f, true)
+                new BulletOrigin(0.30f, true)
             );
             gun.addBulletOrigin(
-                    new BulletOrigin(NumberUtils.TWO_PI - 0.30f, true)
+                new BulletOrigin(NumberUtils.TWO_PI - 0.30f, true)
             );
         });
 
