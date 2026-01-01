@@ -336,6 +336,11 @@ public class Entity implements Copyable {
         return this;
     }
 
+    public Entity setCanBeDamaged(boolean canBeDamaged) {
+        this.canBeDamaged = canBeDamaged;
+        return this;
+    }
+
     public Entity setTriggerInvincibility(boolean triggerInvincibility) {
         this.triggerInvincibility = triggerInvincibility;
         return this;

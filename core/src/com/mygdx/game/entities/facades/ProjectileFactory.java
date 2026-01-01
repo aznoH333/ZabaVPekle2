@@ -29,17 +29,18 @@ public class ProjectileFactory {
 
 
         Entity bullet = new Entity()
-                .setSprite(sprite)
-                .setX(x)
-                .setY(y)
-                .setNumericStat(FieldName.Damage, damage)
-                .setNumericStat(FieldName.Speed, speed)
-                .setNumericStat(FieldName.RemainingProjectileLifeTime, lifeTime)
-                .setNumericStat(FieldName.BounceCount, bounceCount)
-                .setTriggerInvincibility(false)
-                .setTeam(team)
-                .setDrawingLayer(DrawingLayer.PROJECTILES)
-                .addComponent(new Bullet(direction, lifeTime));
+            .setSprite(sprite)
+            .setX(x)
+            .setY(y)
+            .setNumericStat(FieldName.Damage, damage)
+            .setNumericStat(FieldName.Speed, speed)
+            .setNumericStat(FieldName.RemainingProjectileLifeTime, lifeTime)
+            .setNumericStat(FieldName.BounceCount, bounceCount)
+            .setTriggerInvincibility(false)
+            .setTeam(team)
+            .setDrawingLayer(DrawingLayer.PROJECTILES)
+            .setCanBeDamaged(false)
+            .addComponent(new Bullet(direction, lifeTime));
 
         if (components != null) {
             for (EntityComponent c : components) {

@@ -81,4 +81,8 @@ public class NumberUtils {
                 y1 + height > y2 - otherHeight;
     }
 
+    public static float clampValue(float value, float min, float max) {
+        return Math.max(Math.min(max, value), min);
+    }
+
 }

@@ -60,32 +60,47 @@ public class EnemyGeneratorFacade {
 
         // small fodder
         enemyRoster.add(
-                generateEnemyType(
-                        NumberUtils.randomFloat(0f, 0.2f),
-                        NumberUtils.randomFloat(0.4f, 0.9f),
-                        0.2f,
-                        placeDifficulty
+            generateEnemyType(
+                new EnemyGenerationBase(
+                    NumberUtils.randomFloat(0f, 0.2f),
+                    NumberUtils.randomFloat(0.4f, 0.9f),
+                    0.2f,
+                    placeDifficulty
                 )
+            )
         );
 
-
+        // generic fodder enemy
         enemyRoster.add(
-                generateEnemyType(
-                        NumberUtils.randomFloat(0.2f, 0.4f),
-                        NumberUtils.randomFloat(0.4f, 0.6f),
-                        0.3f,
-                        placeDifficulty
+            generateEnemyType(
+                new EnemyGenerationBase(
+                    NumberUtils.randomFloat(0.2f, 0.4f),
+                    NumberUtils.randomFloat(0.4f, 0.6f),
+                    placeDifficulty > 3.2f ? 0.45f : 0.3f, // this code is here to make sure that basic ranged enemies don't generate on first 2 floors
+                    placeDifficulty
                 )
+
+            )
         );
 
         for (int i = 0; i < specializedEnemyCount; i++) {
+
+            EnemyGenerationBase base = new EnemyGenerationBase(0f, 0f, 0f, placeDifficulty);
+
+            float perksBudget = placeDifficulty > 4.5 ? 1.75f : 1f;
+
+            TraitPicker<EnemyGenerationRunnable> generationBasePicker = new TraitPicker<>(EnemyTraitPicker.traits, perksBudget);
+
+            while (generationBasePicker.hasBudget()) {
+                Trait<EnemyGenerationRunnable> trait = generationBasePicker.pickTrait();
+
+                trait.trait.run(base);
+                base.normalize();
+            }
             enemyRoster.add(
-                    generateEnemyType(
-                            NumberUtils.randomFloat(0.2f, 0.4f),
-                            NumberUtils.randomFloat(0.4f, 0.6f),
-                            0.9f,
-                            placeDifficulty
-                    )
+                generateEnemyType(
+                    base
+                )
             );
         }
 
@@ -97,7 +112,7 @@ public class EnemyGeneratorFacade {
 
 
 
-    private static Entity generateEnemyType(float toughness, float mobility, float threat, float targetDifficulty) {
+    private static Entity generateEnemyType(EnemyGenerationBase base) {
 
         boolean isTurret = false;
         boolean hasRangedAttack = false;
@@ -110,50 +125,50 @@ public class EnemyGeneratorFacade {
 
 
         // decide if ranged
-        if (threat > 0.35f && NumberUtils.randomChance(0.6f)) {
+        if (base.threat > 0.35f && NumberUtils.randomChance(0.6f)) {
             hasRangedAttack = true;
         }
 
         // return new Entity();
 
         // generate speed
-        if (mobility < 0.2f && NumberUtils.randomChance(0.75f)) {
+        if (base.mobility < 0.2f && NumberUtils.randomChance(0.75f)) {
             // immobile enemy (turret)
             speed = 0f;
             isTurret = true;
             hasRangedAttack = true;
         }else {
-            speed = 0.5f + (mobility * 2.2f);
+            speed = 0.5f + (base.mobility * 2.2f);
 
-            if (!hasRangedAttack && threat > 0.5f) {
-                speed += threat * 1.2f;
+            if (!hasRangedAttack && base.threat > 0.5f) {
+                speed += base.threat * 1.2f;
             }
 
-            if (toughness > 0.8f && mobility > 0.9f) {
+            if (base.toughness > 0.8f && base.mobility > 0.9f) {
                 speed *= 0.85f; // nerf enemies that would be too tanky and mobile
             }
         }
 
 
         // generate health
-        health = targetDifficulty * (3f + (toughness * 2f));
+        health = base.placeDifficulty * (3f + (base.toughness * 2f));
 
         // size
-        if (toughness < 0.35f) {
+        if (base.toughness < 0.35f) {
             size -= 0.2f;
         }
-        if (toughness < 0.2f) {
+        if (base.toughness < 0.2f) {
             size -= 0.2f;
         }
-        if (toughness > 0.6f) {
-            size += (toughness - 0.6f) * 2f;
+        if (base.toughness > 0.6f) {
+            size += (base.toughness - 0.6f) * 2f;
         }
         // width height
-        if (toughness > 0.6f) {
-            additionalWidth += (toughness - 0.6f) * 2f;
+        if (base.toughness > 0.6f) {
+            additionalWidth += (base.toughness - 0.6f) * 2f;
         }
-        if (threat > 0.6f) {
-            additionalHeight += (threat - 0.6f) * 2f;
+        if (base.threat > 0.6f) {
+            additionalHeight += (base.threat - 0.6f) * 2f;
         }
 
 
@@ -171,7 +186,7 @@ public class EnemyGeneratorFacade {
 
 
         if (hasRangedAttack) {
-            float rangedAttackPowerScale = (1f + threat) * targetDifficulty;
+            float rangedAttackPowerScale = (1f + base.threat) * base.placeDifficulty;
 
 
             TraitPicker<EntityRunnable> rangedAttackTraitPicker = new TraitPicker<>(RangedEnemyTraits.traits, rangedAttackPowerScale);

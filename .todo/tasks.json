@@ -1194,5 +1194,29 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_1651",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Add mobility related abilities to enemies",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2025,
+        "month": 12,
+        "day": 31
+      },
+      "time": {
+        "hour": 12,
+        "minute": 5,
+        "second": 40,
+        "nano": 600940058
+      }
+    },
+    "isImported": false
   }
 ]
