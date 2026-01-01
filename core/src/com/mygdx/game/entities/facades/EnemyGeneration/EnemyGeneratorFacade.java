@@ -64,7 +64,7 @@ public class EnemyGeneratorFacade {
             generateEnemyType(
                 new EnemyGenerationBase(
                     NumberUtils.randomFloat(0f, 0.2f),
-                    NumberUtils.randomFloat(0.4f, 0.9f),
+                    NumberUtils.randomFloat(0.4f, 0.6f),
                     0.2f,
                     placeDifficulty
                 )
@@ -76,7 +76,7 @@ public class EnemyGeneratorFacade {
             generateEnemyType(
                 new EnemyGenerationBase(
                     NumberUtils.randomFloat(0.2f, 0.4f),
-                    NumberUtils.randomFloat(0.4f, 0.6f),
+                    NumberUtils.randomFloat(0.3f, 0.5f),
                     placeDifficulty > 3.2f ? 0.45f : 0.3f, // this code is here to make sure that basic ranged enemies don't generate on first 2 floors
                     placeDifficulty
                 )
@@ -149,13 +149,13 @@ public class EnemyGeneratorFacade {
 
 
         // generate health
-        health = base.placeDifficulty * (3f + (base.toughness * 2f));
+        health = base.placeDifficulty * (2f + (base.toughness * 10f));
 
         // size
         if (base.toughness < 0.35f) {
             size -= 0.2f;
         }
-        if (base.toughness < 0.2f) {
+        if (base.toughness < 0.2f && base.threat < 0.3f) {
             size -= 0.2f;
         }
         if (base.toughness > 0.6f) {
@@ -180,6 +180,7 @@ public class EnemyGeneratorFacade {
             .addComponent(new GameEntityBleed())
             .setScaleX(size * additionalWidth)
             .setScaleY(size * additionalHeight)
+            .setNumericStat(FieldName.Damage, 1f)
             .setDrawingLayer(DrawingLayer.ENEMIES);
 
 

@@ -13,7 +13,9 @@ public enum WorldPlaceDefinition {
         new Color(0.8f, 0.8f, 0.8f, 1f),
         Quality.POOR,
         Quality.POOR,
-        Quality.COMMON),
+        Quality.COMMON,
+        1f
+        ),
     BLUE(
         "blue",
         new Color(0.2f, 0.2f, 0.2f, 1f),
@@ -22,7 +24,9 @@ public enum WorldPlaceDefinition {
         new Color(0.8f, 0.8f, 0.8f, 1f),
         Quality.COMMON,
         Quality.POOR,
-        Quality.COMMON),
+        Quality.COMMON,
+        3.1f
+    ),
     BLACK("black",
         new Color(0.2f, 0.2f, 0.2f, 1f),
         new Color(0.1f, 0.1f, 0.1f, 1f),
@@ -30,7 +34,8 @@ public enum WorldPlaceDefinition {
         new Color(0.4f, 0.4f, 0.4f, 1f),
         Quality.COMMON,
         Quality.COMMON,
-        Quality.REFINED);
+        Quality.REFINED,
+        16f);
 
 
     public final Color floorColor;
@@ -41,6 +46,7 @@ public enum WorldPlaceDefinition {
     public final Quality lootRoomBoxQuality;
     public final Quality combatRoomDropQuality;
     public final Quality bossRoomDropQuality;
+    public final float placeDifficulty;
 
 
     WorldPlaceDefinition(
@@ -51,7 +57,8 @@ public enum WorldPlaceDefinition {
         Color doorColor,
         Quality lootRoomBoxQuality,
         Quality combatRoomDropQuality,
-        Quality bossRoomDropQuality
+        Quality bossRoomDropQuality,
+        float placeDifficulty
     ) {
         this.placeName = placeName;
         this.floorColor = floorColor;
@@ -61,6 +68,7 @@ public enum WorldPlaceDefinition {
         this.lootRoomBoxQuality = lootRoomBoxQuality;
         this.combatRoomDropQuality = combatRoomDropQuality;
         this.bossRoomDropQuality = bossRoomDropQuality;
+        this.placeDifficulty = placeDifficulty;
     }
 
     public Place generatePlace() {

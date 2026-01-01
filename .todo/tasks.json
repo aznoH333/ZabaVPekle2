@@ -227,7 +227,7 @@
     ],
     "title": "boxes",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -239,6 +239,19 @@
         "minute": 45,
         "second": 41,
         "nano": 556162767
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "time": {
+        "hour": 12,
+        "minute": 5,
+        "second": 19,
+        "nano": 379097722
       }
     },
     "isImported": false
@@ -275,7 +288,7 @@
     ],
     "title": "augments",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -289,6 +302,19 @@
         "nano": 844816614
       }
     },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "time": {
+        "hour": 12,
+        "minute": 5,
+        "second": 28,
+        "nano": 78257014
+      }
+    },
     "isImported": false
   },
   {
@@ -299,7 +325,7 @@
     ],
     "title": "enemy variations",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2025,
@@ -311,6 +337,19 @@
         "minute": 46,
         "second": 31,
         "nano": 555367002
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "time": {
+        "hour": 12,
+        "minute": 5,
+        "second": 24,
+        "nano": 467825476
       }
     },
     "isImported": false
@@ -1215,6 +1254,126 @@
         "minute": 5,
         "second": 40,
         "nano": 600940058
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1692",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "re add all the shot augments",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "time": {
+        "hour": 12,
+        "minute": 4,
+        "second": 55,
+        "nano": 241861985
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1734",
+    "priority": "LOW",
+    "tags": [
+      "🤔clarify"
+    ],
+    "title": "Music",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "time": {
+        "hour": 12,
+        "minute": 5,
+        "second": 14,
+        "nano": 574684170
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1903",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Enemy movement variations",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "time": {
+        "hour": 12,
+        "minute": 5,
+        "second": 39,
+        "nano": 532792095
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1947",
+    "priority": "LOW",
+    "tags": [
+      "🤔clarify"
+    ],
+    "title": "Special enemy abilities",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "time": {
+        "hour": 12,
+        "minute": 5,
+        "second": 52,
+        "nano": 100033641
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_1992",
+    "priority": "LOW",
+    "tags": [
+      "🤔clarify"
+    ],
+    "title": "Enemy \"support\" abilities",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 1
+      },
+      "time": {
+        "hour": 12,
+        "minute": 6,
+        "second": 3,
+        "nano": 282919070
       }
     },
     "isImported": false

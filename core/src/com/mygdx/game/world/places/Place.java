@@ -31,7 +31,7 @@ public class Place {
         this.doorColor = type.doorColor;
         this.placeName = type.placeName;
 
-        this.enemyRoster = EnemyGeneratorFacade.generateEnemyRoster(2, 1f);
+        this.enemyRoster = EnemyGeneratorFacade.generateEnemyRoster(2, type.placeDifficulty);
 
         rooms.add(
             new PlaceRoom(RoomType.SPAWN, enemyRoster)

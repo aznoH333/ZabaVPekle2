@@ -46,8 +46,6 @@ public class EnemyBehaviour extends EntityComponent {
     @Override
     public void onTakeDamage(Entity owner, float amount) {
         Managers.soundManager.playSound("enemy_hit", 1f, 0.1f);
-        System.out.println("took damage " + amount + ", remaining health " + owner.getNumericStat(FieldName.Health));
-
     }
 
     @Override
