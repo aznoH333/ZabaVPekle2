@@ -53,7 +53,7 @@ public class Bullet extends EntityComponent {
 
     @Override
     public void onCollide(Entity owner, Entity other) {
-        if (other.team.isAggressiveAgainst(owner.team)) {
+        if (other.team.isAggressiveAgainst(owner.team) && !other.hasComponent(ComponentName.BULLET)) {
             owner.commitSudoku();
         }
     }

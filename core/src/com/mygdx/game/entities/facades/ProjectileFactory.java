@@ -26,8 +26,6 @@ public class ProjectileFactory {
             ArrayList<EntityComponent> components,
             float bounceCount
     ) {
-
-
         Entity bullet = new Entity()
             .setSprite(sprite)
             .setX(x)
