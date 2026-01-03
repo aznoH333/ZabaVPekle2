@@ -3,6 +3,7 @@ package com.mygdx.game.world.places;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.facades.EnemyGeneration.EnemyGeneratorFacade;
+import com.mygdx.game.utils.Trait;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class Place {
 
     private int currentProgress = 0;
 
-    private ArrayList<Entity> enemyRoster;
+    private ArrayList<Trait<Entity>> enemyRoster;
 
 
     public Place(WorldPlaceDefinition type) {

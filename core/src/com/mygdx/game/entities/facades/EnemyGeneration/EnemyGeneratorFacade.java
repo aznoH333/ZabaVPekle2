@@ -58,12 +58,15 @@ public class EnemyGeneratorFacade {
      * @param placeDifficulty
      * @return
      */
-    public static ArrayList<Entity> generateEnemyRoster(int specializedEnemyCount, float placeDifficulty) {
-        ArrayList<Entity> enemyRoster = new ArrayList<>();
+    public static ArrayList<Trait<Entity>> generateEnemyRoster(int specializedEnemyCount, float placeDifficulty) {
+        ArrayList<Trait<Entity>> enemyRoster = new ArrayList<>();
 
 
         // small fodder
         enemyRoster.add(
+            new Trait<>(
+                1f,
+            0.5f,
             generateEnemyType(
                 new EnemyGenerationBase(
                     NumberUtils.randomFloat(0f, 0.2f),
@@ -71,20 +74,26 @@ public class EnemyGeneratorFacade {
                     0.2f,
                     placeDifficulty
                 )
-            )
+            ))
         );
 
         // generic fodder enemy
         enemyRoster.add(
-            generateEnemyType(
-                new EnemyGenerationBase(
-                    NumberUtils.randomFloat(0.2f, 0.4f),
-                    NumberUtils.randomFloat(0.3f, 0.5f),
-                    placeDifficulty > 3.2f ? 0.45f : 0.3f, // this code is here to make sure that basic ranged enemies don't generate on first 2 floors
-                    placeDifficulty
-                )
+            new Trait<>(
 
+                1f,
+                0.75f,
+                generateEnemyType(
+                    new EnemyGenerationBase(
+                        NumberUtils.randomFloat(0.2f, 0.4f),
+                        NumberUtils.randomFloat(0.3f, 0.5f),
+                        placeDifficulty > 3.2f ? 0.45f : 0.3f, // this code is here to make sure that basic ranged enemies don't generate on first 2 floors
+                        placeDifficulty
+                    )
+
+                )
             )
+
         );
 
         for (int i = 0; i < specializedEnemyCount; i++) {
@@ -102,9 +111,14 @@ public class EnemyGeneratorFacade {
                 base.normalize();
             }
             enemyRoster.add(
-                generateEnemyType(
-                    base
+                new Trait<>(
+                    1f,
+                    (base.threat * 0.65f) + (base.mobility * 0.5f) + (base.toughness * 0.15f),
+                    generateEnemyType(
+                        base
+                    )
                 )
+
             );
         }
 

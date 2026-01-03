@@ -8,7 +8,7 @@ import com.mygdx.game.utils.types.NumberUtils;
 public class EnemyCarMovement extends EntityComponent {
 
     private float speed = 0f;
-    private float direction = 0f;
+    private float direction = NumberUtils.randomFloat(0f, NumberUtils.TWO_PI);
 
     @Override
     public void onUpdate(Entity owner) {
@@ -26,9 +26,9 @@ public class EnemyCarMovement extends EntityComponent {
 
 
         if (diff < Math.PI) {
-            direction += 1.75f * (1f - speed);
+            direction += 4.75f * (1f - speed);
         } else {
-            direction -= 1.75f * (1f - speed);
+            direction -= 4.75f * (1f - speed);
         }
 
         direction = NumberUtils.constrictRotationToRad(direction);
