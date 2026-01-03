@@ -15,11 +15,7 @@ public class EnemyPingPongMovement extends EntityComponent {
 
     @Override
     public void onUpdate(Entity owner) {
-        if (speed < 1f) {
-            speed += 0.01f;
-        } else {
-            speed = 1f;
-        }
+        speed = NumberUtils.gravitateNumber(speed, 2f, 0.1f);
 
 
         owner.walk(xDir * speed, yDir * speed);

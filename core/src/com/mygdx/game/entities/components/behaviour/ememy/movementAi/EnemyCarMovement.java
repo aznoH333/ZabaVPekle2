@@ -26,9 +26,9 @@ public class EnemyCarMovement extends EntityComponent {
 
 
         if (diff < Math.PI) {
-            direction += 0.05f;
+            direction += 0.75f * (1f - speed);
         }else {
-            direction -= 0.05f;
+            direction -= 0.75f * (1f - speed);
         }
 
         direction = NumberUtils.constrictRotationToRad(direction);

@@ -1425,5 +1425,77 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_2133",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Add a delay before enemies can fire after spawning",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 3
+      },
+      "time": {
+        "hour": 18,
+        "minute": 40,
+        "second": 48,
+        "nano": 110344305
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2182",
+    "priority": "LOW",
+    "tags": [
+      "🤔clarify"
+    ],
+    "title": "Reroll enemies that are too generic",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 3
+      },
+      "time": {
+        "hour": 18,
+        "minute": 41,
+        "second": 0,
+        "nano": 255401248
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2232",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Scale enemy spawn rates based on thret",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 3
+      },
+      "time": {
+        "hour": 18,
+        "minute": 41,
+        "second": 42,
+        "nano": 319823100
+      }
+    },
+    "isImported": false
   }
 ]

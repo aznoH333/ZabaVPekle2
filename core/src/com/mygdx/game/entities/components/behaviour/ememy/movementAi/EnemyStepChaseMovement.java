@@ -7,7 +7,7 @@ import com.mygdx.game.entities.components.behaviour.ememy.Coordinate;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
-public class EnemyWanderMovement extends EntityComponent {
+public class EnemyStepChaseMovement extends EntityComponent {
 
     private Coordinate movementTarget = null;
     private int moveTimer = 0;
@@ -27,7 +27,18 @@ public class EnemyWanderMovement extends EntityComponent {
 
 
             if (target != null && NumberUtils.pythagoras(owner.x, owner.y, target.x, target.y) < 1000f && NumberUtils.randomChance(0.80f)) {
-                movementTarget = new Coordinate(target.x, target.y);
+                float distanceToTarget = NumberUtils.pythagoras(owner.x, owner.y, target.x, target.y);
+                float directionToTarget = NumberUtils.directionToward(owner.x, owner.y, target.x, target.y);
+
+
+                if (distanceToTarget < 200f) {
+                    movementTarget = new Coordinate(target.x, target.y);
+                }else {
+                    movementTarget = new Coordinate(
+                        owner.x + ((float) Math.cos(directionToTarget) * 200f),
+                        owner.y + ((float) Math.sin(directionToTarget) * 200f));
+                }
+
             }else {
                 float pickedX;
                 float pickedY;
@@ -62,6 +73,6 @@ public class EnemyWanderMovement extends EntityComponent {
 
     @Override
     public EntityComponent copy() {
-        return new EnemyWanderMovement();
+        return new EnemyStepChaseMovement();
     }
 }

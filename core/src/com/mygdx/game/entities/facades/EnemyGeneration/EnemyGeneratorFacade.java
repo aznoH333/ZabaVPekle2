@@ -3,10 +3,9 @@ package com.mygdx.game.entities.facades.EnemyGeneration;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.ememy.EnemyBaseBehaviour;
-import com.mygdx.game.entities.components.behaviour.ememy.movementAi.EnemyCarMovement;
-import com.mygdx.game.entities.components.behaviour.ememy.movementAi.EnemyPingPongMovement;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.gui.EntityRunnable;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
@@ -97,7 +96,7 @@ public class EnemyGeneratorFacade {
             while (generationBasePicker.hasBudget()) {
                 Trait<EnemyGenerationRunnable> trait = generationBasePicker.pickTrait();
 
-                trait.trait.run(base);
+                trait.traitValue.run(base);
                 base.normalize();
             }
             enemyRoster.add(
@@ -171,6 +170,9 @@ public class EnemyGeneratorFacade {
             additionalHeight += (base.threat - 0.6f) * 2f;
         }
 
+        // pick movement
+        TraitPicker<EntityComponent> movementPicker = new TraitPicker<>(EnemyMovementTraits.movementTraits, base.mobility);
+        EntityComponent movementAi = movementPicker.pickValue().copy();
 
         Entity entity = new Entity()
             .setSprite("enemy_1")
@@ -180,10 +182,7 @@ public class EnemyGeneratorFacade {
             .addComponent(new EnemyBaseBehaviour())
             .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
             .addComponent(new GameEntityBleed())
-            // .addComponent(new EnemyChaseMovement())
-            // .addComponent(new EnemyWanderMovement())
-            // .addComponent(new EnemyPingPongMovement())
-            .addComponent(new EnemyCarMovement())
+            .addComponent(movementAi)
             .setScaleX(size * additionalWidth)
             .setScaleY(size * additionalHeight)
             .setNumericStat(FieldName.Damage, 1f)
@@ -208,7 +207,7 @@ public class EnemyGeneratorFacade {
 
             while (rangedAttackTraitPicker.hasBudget()) {
                 Trait<EntityRunnable> trait = rangedAttackTraitPicker.pickTrait();
-                trait.trait.run(entity);
+                trait.traitValue.run(entity);
             }
         }
 

@@ -26,7 +26,7 @@ public class TraitPicker<T> {
     }
 
     private List<Trait<T>> getTraitsInBudget() {
-        return traits.stream().filter((it) -> it.cost <= this.budget).toList();
+        return traits.stream().filter((it) -> it.cost <= this.budget && (it.budgetCeiling == 0f || it.budgetCeiling > this.budget)).toList();
     }
 
     /**
@@ -68,5 +68,14 @@ public class TraitPicker<T> {
         }
 
         throw new NullPointerException();
+    }
+
+    /**
+     * Same as pickTrait but returns the trait value instead of the trait instance.
+     * @return the picked trait value
+     * @see #pickTrait()
+     */
+    public T pickValue() {
+        return pickTrait().traitValue;
     }
 }
