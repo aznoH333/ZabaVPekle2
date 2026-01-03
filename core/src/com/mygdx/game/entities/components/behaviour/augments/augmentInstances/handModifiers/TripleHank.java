@@ -23,7 +23,7 @@ public class TripleHank extends SimpleOnApplyModifierAugmentInstance {
             );
         });
 
-        super.augmentMap.put(FieldName.FireRateMultiplier, 0.75f);
+        super.augmentMap.put(FieldName.FireRateMultiplier, 0.25f);
         super.augmentMap.put(FieldName.FireRate, 10f);
 
     }

@@ -13,6 +13,7 @@ public class EnemyBaseBehaviour extends EntityComponent {
 
     private Entity target = null;
     private Gun gun = null;
+    private int initialCeaseFire = NumberUtils.randomInt(90, 180);
 
     public EnemyBaseBehaviour() {
         super.name = ComponentName.ENEMY;
@@ -30,7 +31,11 @@ public class EnemyBaseBehaviour extends EntityComponent {
 
             if (gun != null) {
                 gun.direction = direction;
-                gun.shoot(owner);
+                if (initialCeaseFire == 0) {
+                    gun.shoot(owner);
+                }else {
+                    initialCeaseFire--;
+                }
             }
 
         }
