@@ -47,8 +47,13 @@ public enum FieldName {
     /**
      * an arraylist containing a list of components assigned to each projectile
      */
-    ProjectileComponents;
+    ProjectileComponents,
 
+
+    /**
+     * The entity's target entity. (The thing that enemies chase. Will most often be a reference to the player)
+     */
+    Target;
 
     public final Float defaultValue;
     public final Float minValue;

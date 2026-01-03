@@ -1377,5 +1377,53 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_2038",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Add misc augment upgrades. (movement speed, max hp)",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 2
+      },
+      "time": {
+        "hour": 11,
+        "minute": 25,
+        "second": 37,
+        "nano": 507890467
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2085",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Put all of the utility data classes to a single folder",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 3
+      },
+      "time": {
+        "hour": 15,
+        "minute": 30,
+        "second": 55,
+        "nano": 336726807
+      }
+    },
+    "isImported": false
   }
 ]

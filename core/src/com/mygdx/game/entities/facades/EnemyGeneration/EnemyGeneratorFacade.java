@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityTeam;
-import com.mygdx.game.entities.components.behaviour.EnemyBehaviour;
+import com.mygdx.game.entities.components.behaviour.ememy.EnemyBaseBehaviour;
+import com.mygdx.game.entities.components.behaviour.ememy.movementAi.EnemyCarMovement;
+import com.mygdx.game.entities.components.behaviour.ememy.movementAi.EnemyPingPongMovement;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.gui.EntityRunnable;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
@@ -175,9 +177,13 @@ public class EnemyGeneratorFacade {
             .setTeam(EntityTeam.DEMON)
             .setNumericStat(FieldName.Health, health)
             .setNumericStat(FieldName.Speed, speed)
-            .addComponent(new EnemyBehaviour())
+            .addComponent(new EnemyBaseBehaviour())
             .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
             .addComponent(new GameEntityBleed())
+            // .addComponent(new EnemyChaseMovement())
+            // .addComponent(new EnemyWanderMovement())
+            // .addComponent(new EnemyPingPongMovement())
+            .addComponent(new EnemyCarMovement())
             .setScaleX(size * additionalWidth)
             .setScaleY(size * additionalHeight)
             .setNumericStat(FieldName.Damage, 1f)

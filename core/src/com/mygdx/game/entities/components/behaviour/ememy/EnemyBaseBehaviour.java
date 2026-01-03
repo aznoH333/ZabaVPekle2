@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.components.behaviour;
+package com.mygdx.game.entities.components.behaviour.ememy;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.ComponentName;
@@ -8,13 +8,13 @@ import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.NumberUtils;
 
-public class EnemyBehaviour extends EntityComponent {
+public class EnemyBaseBehaviour extends EntityComponent {
 
 
     private Entity target = null;
     private Gun gun = null;
 
-    public EnemyBehaviour() {
+    public EnemyBaseBehaviour() {
         super.name = ComponentName.ENEMY;
     }
 
@@ -33,8 +33,9 @@ public class EnemyBehaviour extends EntityComponent {
                 gun.shoot(owner);
             }
 
-            owner.goInDirection(direction, 1f);
         }
+
+        owner.setField(FieldName.Target, target);
     }
 
     @Override
@@ -59,6 +60,7 @@ public class EnemyBehaviour extends EntityComponent {
         owner.knockBackMultiplier = 8f;
         owner.flipWithMoveDirection = true;
         owner.canBeDamaged = true;
+        owner.initializeField(FieldName.Target, null);
     }
 
     @Override
@@ -71,6 +73,6 @@ public class EnemyBehaviour extends EntityComponent {
 
     @Override
     public EntityComponent copy() {
-        return new EnemyBehaviour();
+        return new EnemyBaseBehaviour();
     }
 }

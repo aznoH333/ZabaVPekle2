@@ -21,6 +21,10 @@ public class NumberUtils {
         return boolToInt(value);
     }
 
+    public static float boolToSign(boolean value) {
+        return boolToInt(value) * 2 - 1;
+    }
+
     public static float directionToward(float startX, float startY, float endX, float endY) {
         return (float) Math.atan2(endY - startY, endX - startX);
     }
@@ -56,6 +60,11 @@ public class NumberUtils {
     }
 
     public static float constrictRotationToRad(float rotation) {
+        if (rotation < 0) {
+            return (TWO_PI - Math.abs(rotation)) % TWO_PI;
+        }
+
+
         return rotation % TWO_PI;
     }
 
@@ -83,6 +92,16 @@ public class NumberUtils {
 
     public static float clampValue(float value, float min, float max) {
         return Math.max(Math.min(max, value), min);
+    }
+
+    public static float gravitateNumber(float value, float target, float stepSize) {
+        if (Math.abs(value - target) <= stepSize + 0.01f) {
+            return target;
+        }else if (value < target) {
+            return value + stepSize;
+        }else {
+            return value - stepSize;
+        }
     }
 
 }
