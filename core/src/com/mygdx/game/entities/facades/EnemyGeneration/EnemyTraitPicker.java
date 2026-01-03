@@ -1,5 +1,7 @@
 package com.mygdx.game.entities.facades.EnemyGeneration;
 
+import com.mygdx.game.utils.Trait;
+
 import java.util.ArrayList;
 
 public class EnemyTraitPicker {

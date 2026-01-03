@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.components.behaviour.ememy;
+package com.mygdx.game.utils.types;
 
 import java.util.Objects;
 

@@ -1,7 +1,7 @@
 package com.mygdx.game.entities.facades.EnemyGeneration;
 
 
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 /**
  * A helper class used to hold values that are logically related

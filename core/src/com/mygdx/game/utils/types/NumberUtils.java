@@ -1,4 +1,4 @@
-package com.mygdx.game.utils;
+package com.mygdx.game.utils.types;
 
 public class NumberUtils {
     public final static float HALF_PI = (float) (Math.PI / 2f);
@@ -97,9 +97,9 @@ public class NumberUtils {
     public static float gravitateNumber(float value, float target, float stepSize) {
         if (Math.abs(value - target) <= stepSize + 0.01f) {
             return target;
-        }else if (value < target) {
+        } else if (value < target) {
             return value + stepSize;
-        }else {
+        } else {
             return value - stepSize;
         }
     }

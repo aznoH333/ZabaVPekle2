@@ -3,7 +3,7 @@ package com.mygdx.game.entities.components.behaviour.ememy.movementAi;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.fields.FieldName;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public class EnemyCarMovement extends EntityComponent {
 
@@ -27,7 +27,7 @@ public class EnemyCarMovement extends EntityComponent {
 
         if (diff < Math.PI) {
             direction += 1.75f * (1f - speed);
-        }else {
+        } else {
             direction -= 1.75f * (1f - speed);
         }
 
@@ -36,7 +36,7 @@ public class EnemyCarMovement extends EntityComponent {
 
         if (NumberUtils.constrictRotationToRad(NumberUtils.constrictRotationToRad(direction - directionTowardsTarget + NumberUtils.HALF_PI)) < NumberUtils.PI) {
             speed = NumberUtils.gravitateNumber(speed, 1f, 0.05f);
-        }else {
+        } else {
             speed = NumberUtils.gravitateNumber(speed, 0.1f, 0.05f);
         }
 

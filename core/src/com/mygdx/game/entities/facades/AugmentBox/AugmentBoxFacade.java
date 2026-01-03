@@ -9,7 +9,7 @@ import com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationTable.Augment
 import com.mygdx.game.entities.facades.GUIFacade;
 import com.mygdx.game.entities.items.Augment;
 import com.mygdx.game.entities.items.Quality;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 

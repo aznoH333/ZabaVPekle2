@@ -3,8 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
-import com.mygdx.game.utils.FileUtils;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.FileUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

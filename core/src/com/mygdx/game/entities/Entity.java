@@ -7,7 +7,7 @@ import com.mygdx.game.entities.fields.Copyable;
 import com.mygdx.game.entities.fields.EntityFields;
 import com.mygdx.game.entities.fields.EntityNumericFields;
 import com.mygdx.game.entities.fields.FieldName;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.Objects;

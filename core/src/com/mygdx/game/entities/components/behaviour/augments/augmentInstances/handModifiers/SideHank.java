@@ -4,7 +4,7 @@ import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.components.behaviour.augments.SimpleOnApplyModifierAugmentInstance;
 import com.mygdx.game.entities.components.behaviour.gun.BulletOrigin;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 

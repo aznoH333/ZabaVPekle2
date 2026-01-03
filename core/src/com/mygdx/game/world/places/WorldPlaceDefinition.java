@@ -15,7 +15,7 @@ public enum WorldPlaceDefinition {
         Quality.POOR,
         Quality.COMMON,
         1f
-        ),
+    ),
     BLUE(
         "blue",
         new Color(0.2f, 0.2f, 0.2f, 1f),

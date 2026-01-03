@@ -1,6 +1,6 @@
-package com.mygdx.game.entities.facades.EnemyGeneration;
+package com.mygdx.game.utils;
 
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +72,7 @@ public class TraitPicker<T> {
 
     /**
      * Same as pickTrait but returns the trait value instead of the trait instance.
+     *
      * @return the picked trait value
      * @see #pickTrait()
      */

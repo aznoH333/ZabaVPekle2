@@ -8,8 +8,8 @@ public class ShotGunAugment extends StatModifierAugmentInstance {
     public ShotGunAugment(Quality quality) {
         super(quality.textName + " shotgun");
 
-        super.augmentMap.put(FieldName.FireRateMultiplier, 0.60f - (0.15f * quality.numericValue));
-        super.augmentMap.put(FieldName.FireRate, 30f);
+        super.augmentMap.put(FieldName.FireRateMultiplier, 0.25f - (0.15f * quality.numericValue));
+        super.augmentMap.put(FieldName.FireRate, 45f);
         super.augmentMap.put(FieldName.DamageMultiplier, -0.25f);
         super.augmentMap.put(FieldName.Damage, -(0.75f - (0.075f * quality.numericValue)));
         super.augmentMap.put(FieldName.ProjectilesPerShot, 3f + quality.numericValue);

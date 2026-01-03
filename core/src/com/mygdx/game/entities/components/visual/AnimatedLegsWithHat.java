@@ -6,7 +6,7 @@ import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public class AnimatedLegsWithHat extends GameEntityAnimator {
     private static final float HAT_OFFSET_Y = 7f;

@@ -11,7 +11,7 @@ import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.facades.ProjectileFactory;
 import com.mygdx.game.entities.fields.FieldName;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 

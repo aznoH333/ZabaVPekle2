@@ -3,7 +3,7 @@ package com.mygdx.game.world;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.items.Quality;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 import com.mygdx.game.world.places.Place;
 import com.mygdx.game.world.places.PlaceRoom;
 import com.mygdx.game.world.places.WorldPlaceDefinition;

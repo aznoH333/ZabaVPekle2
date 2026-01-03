@@ -2,7 +2,7 @@ package com.mygdx.game.entities.components.behaviour.ememy.movementAi;
 
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public class EnemyAimlessWanderMovement extends EntityComponent {
     float directionChange = 0f;
@@ -22,7 +22,7 @@ public class EnemyAimlessWanderMovement extends EntityComponent {
 
         if (directionChangeTimer > 0) {
             directionChangeTimer--;
-        }else {
+        } else {
             directionChange = NumberUtils.randomFloat(0, NumberUtils.PI);
             directionChangeSign = NumberUtils.boolToSign(NumberUtils.randomChance(0.5f));
             directionChangeTimer = NumberUtils.randomInt(60, 200);

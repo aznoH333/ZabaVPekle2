@@ -1,6 +1,6 @@
 package com.mygdx.game.entities;
 
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 

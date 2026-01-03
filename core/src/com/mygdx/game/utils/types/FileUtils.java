@@ -1,4 +1,4 @@
-package com.mygdx.game.utils;
+package com.mygdx.game.utils.types;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;

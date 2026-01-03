@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.facades.EnemyGeneration;
+package com.mygdx.game.utils;
 
 public class Trait<T> {
     public final float chanceToBePicked;

@@ -1,6 +1,6 @@
 package com.mygdx.game.entities.fields;
 
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public enum FieldName {
     // speed

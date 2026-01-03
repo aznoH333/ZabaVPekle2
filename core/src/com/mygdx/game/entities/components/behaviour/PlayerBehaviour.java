@@ -9,7 +9,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.fields.FieldName;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public class PlayerBehaviour extends EntityComponent {
 

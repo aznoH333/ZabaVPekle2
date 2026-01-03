@@ -11,7 +11,9 @@ import com.mygdx.game.entities.components.gui.EntityRunnable;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.fields.FieldName;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.Trait;
+import com.mygdx.game.utils.TraitPicker;
+import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 

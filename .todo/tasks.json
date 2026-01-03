@@ -1410,7 +1410,7 @@
     ],
     "title": "Put all of the utility data classes to a single folder",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1424,6 +1424,19 @@
         "nano": 336726807
       }
     },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 3
+      },
+      "time": {
+        "hour": 19,
+        "minute": 4,
+        "second": 47,
+        "nano": 447271240
+      }
+    },
     "isImported": false
   },
   {
@@ -1434,7 +1447,7 @@
     ],
     "title": "Add a delay before enemies can fire after spawning",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1446,6 +1459,19 @@
         "minute": 40,
         "second": 48,
         "nano": 110344305
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 3
+      },
+      "time": {
+        "hour": 18,
+        "minute": 59,
+        "second": 8,
+        "nano": 995487205
       }
     },
     "isImported": false
@@ -1494,6 +1520,54 @@
         "minute": 41,
         "second": 42,
         "nano": 319823100
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2333",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "make the players bullets a different color from the enemies",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 3
+      },
+      "time": {
+        "hour": 18,
+        "minute": 59,
+        "second": 38,
+        "nano": 718715669
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2385",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "rework how multiple stacked hands behave/look",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 3
+      },
+      "time": {
+        "hour": 19,
+        "minute": 0,
+        "second": 42,
+        "nano": 863202309
       }
     },
     "isImported": false

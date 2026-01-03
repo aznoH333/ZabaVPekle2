@@ -1,7 +1,7 @@
 package com.mygdx.game.world.places;
 
 import com.mygdx.game.entities.Entity;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 

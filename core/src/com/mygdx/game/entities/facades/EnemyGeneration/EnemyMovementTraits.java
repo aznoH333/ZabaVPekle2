@@ -2,6 +2,7 @@ package com.mygdx.game.entities.facades.EnemyGeneration;
 
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.ememy.movementAi.*;
+import com.mygdx.game.utils.Trait;
 
 import java.util.ArrayList;
 

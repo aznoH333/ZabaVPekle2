@@ -3,9 +3,9 @@ package com.mygdx.game.entities.components.behaviour.ememy.movementAi;
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.components.behaviour.ememy.Coordinate;
 import com.mygdx.game.entities.fields.FieldName;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.Coordinate;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public class EnemyStepChaseMovement extends EntityComponent {
 
@@ -14,7 +14,6 @@ public class EnemyStepChaseMovement extends EntityComponent {
 
     @Override
     public void onUpdate(Entity owner) {
-
 
 
         if (moveTimer > 0) {
@@ -33,20 +32,20 @@ public class EnemyStepChaseMovement extends EntityComponent {
 
                 if (distanceToTarget < 200f) {
                     movementTarget = new Coordinate(target.x, target.y);
-                }else {
+                } else {
                     movementTarget = new Coordinate(
                         owner.x + ((float) Math.cos(directionToTarget) * 200f),
                         owner.y + ((float) Math.sin(directionToTarget) * 200f));
                 }
 
-            }else {
+            } else {
                 float pickedX;
                 float pickedY;
 
                 do {
                     pickedX = owner.x + (NumberUtils.randomFloat(32f, 128f) * NumberUtils.boolToSign(NumberUtils.randomChance(0.5f)));
                     pickedY = owner.y + (NumberUtils.randomFloat(32f, 128f) * NumberUtils.boolToSign(NumberUtils.randomChance(0.5f)));
-                }while (!Managers.worldManager.isSpaceEmpty(pickedX, pickedY, owner.width, owner.height));
+                } while (!Managers.worldManager.isSpaceEmpty(pickedX, pickedY, owner.width, owner.height));
 
                 movementTarget = new Coordinate(pickedX, pickedY);
             }
@@ -57,7 +56,6 @@ public class EnemyStepChaseMovement extends EntityComponent {
             return;
 
         }
-
 
 
         float direction = NumberUtils.directionToward(owner.x, owner.y, movementTarget.x(), movementTarget.y());

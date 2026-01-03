@@ -2,7 +2,7 @@ package com.mygdx.game.entities.components.behaviour.ememy.movementAi;
 
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public class EnemyPingPongMovement extends EntityComponent {
 
@@ -10,7 +10,6 @@ public class EnemyPingPongMovement extends EntityComponent {
     public float xDir = NumberUtils.boolToSign(NumberUtils.randomChance(0.5f));
     public float yDir = NumberUtils.boolToSign(NumberUtils.randomChance(0.5f));
     public float speed = 0f;
-
 
 
     @Override
@@ -25,7 +24,7 @@ public class EnemyPingPongMovement extends EntityComponent {
     public void onWorldCollide(Entity owner) {
         if (owner.collidedWithWorldOnX) {
             xDir *= -1f;
-        }else {
+        } else {
             yDir *= -1f;
         }
 

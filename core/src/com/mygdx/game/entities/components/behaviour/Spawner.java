@@ -6,7 +6,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.visual.particles.FadeParticle;
 import com.mygdx.game.entities.components.visual.particles.FireParticle;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public class Spawner extends EntityComponent {
 

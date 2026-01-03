@@ -5,7 +5,7 @@ import com.mygdx.game.entities.components.behaviour.augments.SimpleOnApplyModifi
 import com.mygdx.game.entities.components.behaviour.gun.BulletOrigin;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.fields.FieldName;
-import com.mygdx.game.utils.NumberUtils;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public class OctoHank extends SimpleOnApplyModifierAugmentInstance {
     public OctoHank() {
