@@ -1508,7 +1508,7 @@
     ],
     "title": "Scale enemy spawn rates based on thret",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1520,6 +1520,19 @@
         "minute": 41,
         "second": 42,
         "nano": 319823100
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 3
+      },
+      "time": {
+        "hour": 19,
+        "minute": 30,
+        "second": 38,
+        "nano": 810155544
       }
     },
     "isImported": false

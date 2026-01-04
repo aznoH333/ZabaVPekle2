@@ -32,11 +32,7 @@ public class EnemyAimlessWanderMovement extends EntityComponent {
         owner.goInDirection(direction, speed);
     }
 
-    @Override
-    public void onWorldCollide(Entity owner) {
-        speed = 0.1f;
-        directionChangeTimer -= 10;
-    }
+
 
     @Override
     public EntityComponent copy() {

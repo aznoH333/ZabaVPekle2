@@ -113,7 +113,7 @@ public class EnemyGeneratorFacade {
             enemyRoster.add(
                 new Trait<>(
                     1f,
-                    (base.threat * 0.65f) + (base.mobility * 0.5f) + (base.toughness * 0.15f),
+                    (base.threat * 0.75f) + (base.mobility * 0.75f) + (base.toughness * 0.75f),
                     generateEnemyType(
                         base
                     )

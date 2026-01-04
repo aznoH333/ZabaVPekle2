@@ -12,6 +12,8 @@ public class EnemyStepChaseMovement extends EntityComponent {
     private Coordinate movementTarget = null;
     private int moveTimer = 0;
 
+    private static final float STEP_DISTANCE = 128f;
+
     @Override
     public void onUpdate(Entity owner) {
 
@@ -30,12 +32,12 @@ public class EnemyStepChaseMovement extends EntityComponent {
                 float directionToTarget = NumberUtils.directionToward(owner.x, owner.y, target.x, target.y);
 
 
-                if (distanceToTarget < 200f) {
+                if (distanceToTarget < STEP_DISTANCE) {
                     movementTarget = new Coordinate(target.x, target.y);
                 } else {
                     movementTarget = new Coordinate(
-                        owner.x + ((float) Math.cos(directionToTarget) * 200f),
-                        owner.y + ((float) Math.sin(directionToTarget) * 200f));
+                        owner.x + ((float) Math.cos(directionToTarget) * STEP_DISTANCE),
+                        owner.y + ((float) Math.sin(directionToTarget) * STEP_DISTANCE));
                 }
 
             } else {
@@ -43,8 +45,8 @@ public class EnemyStepChaseMovement extends EntityComponent {
                 float pickedY;
 
                 do {
-                    pickedX = owner.x + (NumberUtils.randomFloat(32f, 128f) * NumberUtils.boolToSign(NumberUtils.randomChance(0.5f)));
-                    pickedY = owner.y + (NumberUtils.randomFloat(32f, 128f) * NumberUtils.boolToSign(NumberUtils.randomChance(0.5f)));
+                    pickedX = owner.x + (NumberUtils.randomFloat(32f, STEP_DISTANCE) * NumberUtils.boolToSign(NumberUtils.randomChance(0.5f)));
+                    pickedY = owner.y + (NumberUtils.randomFloat(32f, STEP_DISTANCE) * NumberUtils.boolToSign(NumberUtils.randomChance(0.5f)));
                 } while (!Managers.worldManager.isSpaceEmpty(pickedX, pickedY, owner.width, owner.height));
 
                 movementTarget = new Coordinate(pickedX, pickedY);
