@@ -29,7 +29,7 @@ public class EnemyAimlessWanderMovement extends EntityComponent {
             speed = 0.1f;
         }
 
-        owner.goInDirection(direction, speed);
+        owner.goInDirection(direction, speed * 2.5f);
     }
 
 
