@@ -10,6 +10,7 @@ import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.gui.EntityRunnable;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
+import com.mygdx.game.entities.components.visual.LegsWithHatType;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.Trait;
 import com.mygdx.game.utils.TraitPicker;
@@ -196,7 +197,7 @@ public class EnemyGeneratorFacade {
             .setNumericStat(FieldName.Health, health)
             .setNumericStat(FieldName.Speed, speed)
             .addComponent(new EnemyBaseBehaviour())
-            .addComponent(new AnimatedLegsWithHat(new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
+            .addComponent(new AnimatedLegsWithHat(LegsWithHatType.DEBUG, new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
             .addComponent(new GameEntityBleed())
             .addComponent(movementAi)
             .setScaleX(size * additionalWidth)

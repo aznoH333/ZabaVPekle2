@@ -94,8 +94,8 @@ public class Gun extends EntityComponent {
 
                 Managers.drawingManager.drawSprite(
                     new DrawingCommand(sprite,
-                        (float) Math.cos(handDir) * (((1f - gunScale) * 5f + 10f) * owner.scaleX) + owner.x,
-                        (float) Math.sin(handDir) * (((1f - gunScale) * 5f + 10f) * owner.scaleY) + owner.y
+                        (float) Math.cos(handDir) * (((1f - gunScale) * 5f + 5f) * owner.scaleX) + owner.x,
+                        (float) Math.sin(handDir) * (((1f - gunScale) * 5f + 5f) * owner.scaleY) + owner.y
                     )
                         .setRotationRad(handDir)
                         .setFlipVertically(owner.flipX)
@@ -133,8 +133,8 @@ public class Gun extends EntityComponent {
 
 
                 Entity bullet = ProjectileFactory.buildBullet(
-                    owner.x,
-                    owner.y,
+                    (float) Math.cos(bulletDirection) * (5f * owner.scaleX) + owner.x,
+                    (float) Math.sin(bulletDirection) * (5f * owner.scaleY) + owner.y,
                     owner.getField(FieldName.ProjectileSprite),
                     owner.getNumericStat(FieldName.ProjectileDamage) * owner.getNumericStat(FieldName.DamageMultiplier),
                     owner.getNumericStat(FieldName.ProjectileSpeed),

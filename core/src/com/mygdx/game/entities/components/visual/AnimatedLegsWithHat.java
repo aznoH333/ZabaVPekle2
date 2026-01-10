@@ -16,14 +16,16 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
     public final Color hurtColor;
     public final String hatSprite;
     public Color currentColor;
+    public final LegsWithHatType type;
 
-    public AnimatedLegsWithHat(Color bodyColor, Color hurtColor, String hatSprite) {
+    public AnimatedLegsWithHat(LegsWithHatType type, Color bodyColor, Color hurtColor, String hatSprite) {
         super(
-            "legs", 1, 2, 8, 9, 3
+            type.bodyBaseSprite, type.idleIndex, type.walkStartIndex, type.walkEndIndex, type.hurtIndex, 3
         );
+
         super.name = ComponentName.LEGS;
 
-
+        this.type = type;
         this.bodyColor = bodyColor;
         this.hurtColor = hurtColor;
         this.hatSprite = hatSprite;
@@ -34,13 +36,17 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
         // draw hat
         float xOffset = HAT_OFFSET_X * (NumberUtils.boolToInt(owner.flipX) * 2 - 1);
 
-        Managers.drawingManager.drawSprite(
-            new DrawingCommand(hatSprite, owner.x + xOffset, owner.y + (HAT_OFFSET_Y * owner.scaleY))
-                .setFlipHorizontally(owner.flipX)
-                .setWidth(owner.scaleX)
-                .setHeight(owner.scaleY),
-            owner.drawingLayer
-        );
+
+        if (hatSprite != null) {
+            Managers.drawingManager.drawSprite(
+                new DrawingCommand(hatSprite, owner.x + xOffset, owner.y + (HAT_OFFSET_Y * owner.scaleY))
+                    .setFlipHorizontally(owner.flipX)
+                    .setWidth(owner.scaleX)
+                    .setHeight(owner.scaleY),
+                owner.drawingLayer
+            );
+        }
+
 
         super.onUpdate(owner);
 
@@ -58,6 +64,7 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
     @Override
     public EntityComponent copy() {
         return new AnimatedLegsWithHat(
+            type,
             this.bodyColor,
             this.hurtColor,
             this.hatSprite

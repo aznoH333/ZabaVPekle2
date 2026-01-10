@@ -7,9 +7,9 @@ public enum WorldPlaceDefinition {
 
     START(
         "start",
-        new Color(0.2f, 0.2f, 0.2f, 1f),
-        new Color(0.95f, 0.25f, 0.1f, 1f),
-        new Color(0.95f, 0.25f, 0.1f, 1f),
+        new Color(0.0f, 0.0f, 0.0f, 1f),
+        new Color(0.5f, 0.15f, 0.01f, 1f),
+        new Color(0.7f, 0.15f, 0.01f, 1f),
         new Color(0.8f, 0.8f, 0.8f, 1f),
         Quality.POOR,
         Quality.POOR,
@@ -18,7 +18,7 @@ public enum WorldPlaceDefinition {
     ),
     BLUE(
         "blue",
-        new Color(0.2f, 0.2f, 0.2f, 1f),
+        new Color(0.05f, 0.05f, 0.05f, 1f),
         new Color(0.1f, 0.25f, 0.95f, 1f),
         new Color(0.1f, 0.25f, 0.95f, 1f),
         new Color(0.8f, 0.8f, 0.8f, 1f),
