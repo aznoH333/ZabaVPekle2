@@ -8,6 +8,7 @@ import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.PlayerBehaviour;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
+import com.mygdx.game.entities.components.visual.EyeCursor;
 import com.mygdx.game.entities.components.visual.LegsWithHatType;
 import com.mygdx.game.entities.facades.AugmentBox.AugmentBoxFacade;
 import com.mygdx.game.entities.fields.FieldName;
@@ -33,6 +34,7 @@ public class Game extends GameState {
             .setDrawingLayer(DrawingLayer.PLAYER)
             .addComponent(new AnimatedLegsWithHat(LegsWithHatType.PLAYER, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.8f, 0.8f, 1f), null))
             .addComponent(new Gun("guns_0001"))
+                .addComponent(new EyeCursor(4.5f, 2f))
             .setNumericStat(FieldName.ProjectileSpeed, 0.75f)
             .setNumericStat(FieldName.FireRate, 25f)
             .setNumericStat(FieldName.ProjectileDamage, 2f)

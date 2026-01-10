@@ -39,15 +39,15 @@ public class DrawingManager {
     private final OrthographicCamera camera = new OrthographicCamera();
     private final OrthographicCamera staticCamera = new OrthographicCamera();
 
-    private final Viewport viewPort = new FitViewport(320f, 320f, camera);
+    private final Viewport viewPort = new FitViewport(568f, 320f, camera);
     private final Viewport staticViewPort = new ExtendViewport(960f, 640f, staticCamera);
 
     BitmapFont font = new BitmapFont();
 
     private DrawingManager() {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.zoom = 1f;
-        staticCamera.zoom = 1f;
+        camera.zoom = 1.2f;
+        staticCamera.zoom = 1.2f;
     }
 
 

@@ -1608,5 +1608,101 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_2492",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Proportional player eye movement",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 10
+      },
+      "time": {
+        "hour": 15,
+        "minute": 40,
+        "second": 51,
+        "nano": 821510389
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2547",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Player eyes change based on player state",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 10
+      },
+      "time": {
+        "hour": 15,
+        "minute": 41,
+        "second": 2,
+        "nano": 55917696
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2603",
+    "priority": "LOW",
+    "tags": [
+      "👀art"
+    ],
+    "title": "Add new enemy art",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 10
+      },
+      "time": {
+        "hour": 15,
+        "minute": 41,
+        "second": 9,
+        "nano": 875652689
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2660",
+    "priority": "LOW",
+    "tags": [
+      "👀art"
+    ],
+    "title": "Add new bullet art",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 10
+      },
+      "time": {
+        "hour": 15,
+        "minute": 41,
+        "second": 20,
+        "nano": 387291202
+      }
+    },
+    "isImported": false
   }
 ]

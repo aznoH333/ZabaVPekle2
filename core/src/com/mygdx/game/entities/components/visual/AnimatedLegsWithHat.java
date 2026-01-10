@@ -20,7 +20,7 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
 
     public AnimatedLegsWithHat(LegsWithHatType type, Color bodyColor, Color hurtColor, String hatSprite) {
         super(
-            type.bodyBaseSprite, type.idleIndex, type.walkStartIndex, type.walkEndIndex, type.hurtIndex, 3
+            type.bodyBaseSprite, type.idleIndex, type.walkStartIndex, type.walkEndIndex, type.hurtIndex, 4
         );
 
         super.name = ComponentName.LEGS;
