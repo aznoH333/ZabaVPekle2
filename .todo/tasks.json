@@ -1713,7 +1713,7 @@
     ],
     "title": "CRT shader",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1727,6 +1727,19 @@
         "nano": 45872249
       }
     },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 11
+      },
+      "time": {
+        "hour": 16,
+        "minute": 41,
+        "second": 48,
+        "nano": 933086070
+      }
+    },
     "isImported": false
   },
   {
@@ -1737,7 +1750,7 @@
     ],
     "title": "Vignette shader",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1749,6 +1762,19 @@
         "minute": 13,
         "second": 19,
         "nano": 96913785
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 11
+      },
+      "time": {
+        "hour": 16,
+        "minute": 41,
+        "second": 45,
+        "nano": 755018444
       }
     },
     "isImported": false
