@@ -154,7 +154,7 @@ public class EnemyGeneratorFacade {
             isTurret = true;
             hasRangedAttack = true;
         } else {
-            speed = 0.5f + (base.mobility * 1.5f);
+            speed = 0.5f + (base.mobility);
 
             if (!hasRangedAttack && base.threat > 0.5f) {
                 speed += base.threat * 1.2f;

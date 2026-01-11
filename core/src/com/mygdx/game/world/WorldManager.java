@@ -201,7 +201,7 @@ public class WorldManager {
         do {
             x = NumberUtils.randomInt(-progress.innerWorldSize, progress.innerWorldSize) * 32;
             y = NumberUtils.randomInt(-progress.innerWorldSize, progress.innerWorldSize) * 32;
-        } while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, player.x, player.y) < 128f);
+        } while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, player.x, player.y) < 64f);
 
         Managers.entityManager.addEntity(
             new Entity()
