@@ -8,5 +8,8 @@ uniform sampler2D u_texture;
 uniform mat4 u_projTrans;
 
 void main() {
-    gl_FragColor = texture2D(u_texture, v_texCoords) * v_color;
+
+
+
+    gl_FragColor = texture2D(u_texture, vec2(v_texCoords.x, v_texCoords.y)) * v_color;
 }

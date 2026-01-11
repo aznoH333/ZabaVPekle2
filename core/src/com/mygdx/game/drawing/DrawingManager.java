@@ -3,10 +3,13 @@ package com.mygdx.game.drawing;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -27,12 +30,20 @@ public class DrawingManager {
         return instance;
     }
 
+
+    public static final float SCREEN_WIDTH = 568f;
+    public static final float SCREEN_HEIGHT = 320f;
+
     private static DrawingManager instance;
 
 
     private final HashMap<String, Texture> spriteMap = new HashMap<>();
+    /** Sprite batch. Renders to fbo. Uses camera */
     private final SpriteBatch batch = new SpriteBatch();
+    /** Sprite batch. Renders to fbo. Doesn't use the camera*/
     private final SpriteBatch staticBatch = new SpriteBatch();
+    /** Output sprite batch. Renders fbo to screen */
+    private final SpriteBatch outputBatch = new SpriteBatch();
     private final ArrayList<ArrayList<DrawingCommand>> drawingQueue = new ArrayList<>();
     private final ArrayList<ArrayList<DrawingCommand>> staticDrawingQueue = new ArrayList<>();
     private final ArrayList<TextDrawingCommand> fontDrawingQueue = new ArrayList<>();
@@ -40,12 +51,13 @@ public class DrawingManager {
     private final OrthographicCamera camera = new OrthographicCamera();
     private final OrthographicCamera staticCamera = new OrthographicCamera();
 
-    private final Viewport viewPort = new FitViewport(568f, 320f, camera);
+    private final Viewport viewPort = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, camera);
     private final Viewport staticViewPort = new ExtendViewport(960f, 640f, staticCamera);
 
     BitmapFont font = new BitmapFont();
 
     ShaderProgram shader;
+    private FrameBuffer frameBuffer;
 
     private DrawingManager() {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -61,7 +73,15 @@ public class DrawingManager {
             fragmentShader
         );
 
-        batch.setShader(shader);
+        outputBatch.setShader(shader);
+
+        frameBuffer = createFrameBuffer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
+    private FrameBuffer createFrameBuffer(float width, float height) {
+        return new FrameBuffer(
+            Pixmap.Format.RGBA8888, (int) width, (int) height, false
+        );
     }
 
 
@@ -160,16 +180,8 @@ public class DrawingManager {
         font.draw(staticBatch, command.text, command.x - (layout.width / 2f), command.y);
     }
 
-
-    public void render() {
-        ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
-
-        viewPort.apply();
-        batch.setProjectionMatrix(camera.combined);
-
-        batch.begin();
-        // sprites
-        for (ArrayList<DrawingCommand> layer : drawingQueue) {
+    private void renderBatch(SpriteBatch batch, ArrayList<ArrayList<DrawingCommand>> queue) {
+        for (ArrayList<DrawingCommand> layer : queue) {
             for (DrawingCommand command : layer) {
                 drawSprite(
                     batch,
@@ -189,33 +201,24 @@ public class DrawingManager {
             }
             layer.clear();
         }
+    }
+
+    public void render() {
+        frameBuffer.begin();
+
+        ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
+        //viewPort.apply();
+
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        renderBatch(batch, drawingQueue);
         batch.end();
 
 
         staticBatch.setProjectionMatrix(staticCamera.combined);
-        staticViewPort.apply();
+        //staticViewPort.apply();
         staticBatch.begin();
-
-        for (ArrayList<DrawingCommand> layer : staticDrawingQueue) {
-            for (DrawingCommand command : layer) {
-                drawSprite(
-                    staticBatch,
-                    command.spriteName,
-                    command.x,
-                    command.y,
-                    command.width,
-                    command.height,
-                    command.flipHorizontally,
-                    command.flipVertically,
-                    command.rotationRad,
-                    command.r,
-                    command.g,
-                    command.b,
-                    command.a
-                );
-            }
-            layer.clear();
-        }
+        renderBatch(staticBatch, staticDrawingQueue);
 
         // font
         for (TextDrawingCommand textDrawingCommand : fontDrawingQueue) {
@@ -223,6 +226,14 @@ public class DrawingManager {
         }
         fontDrawingQueue.clear();
         staticBatch.end();
+
+        frameBuffer.end();
+
+        Texture frameBufferTexture = frameBuffer.getColorBufferTexture();
+        outputBatch.begin();
+        outputBatch.draw(frameBuffer.getColorBufferTexture(), 0f, 0f, frameBufferTexture.getWidth(), frameBufferTexture.getHeight(), 0, 0, 1, 1);
+        outputBatch.end();
+
     }
 
     public void dispose() {
@@ -236,11 +247,16 @@ public class DrawingManager {
         staticBatch.dispose();
         batch.dispose();
         shader.dispose();
+        frameBuffer.dispose();
+        outputBatch.dispose();
     }
 
     public void resizedWindow(int width, int height) {
         viewPort.update(width, height);
         staticViewPort.update(width, height);
+
+        frameBuffer.dispose();
+        frameBuffer = createFrameBuffer(width, height);
     }
 
     public void setCameraPosition(float x, float y) {
