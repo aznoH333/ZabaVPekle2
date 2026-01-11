@@ -1665,7 +1665,7 @@
     ],
     "title": "Add new enemy art",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1701,6 +1701,54 @@
         "minute": 41,
         "second": 20,
         "nano": 387291202
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2775",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "CRT shader",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 11
+      },
+      "time": {
+        "hour": 15,
+        "minute": 12,
+        "second": 56,
+        "nano": 45872249
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2834",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Vignette shader",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 11
+      },
+      "time": {
+        "hour": 15,
+        "minute": 13,
+        "second": 19,
+        "nano": 96913785
       }
     },
     "isImported": false

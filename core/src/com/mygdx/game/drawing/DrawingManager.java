@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -44,10 +45,23 @@ public class DrawingManager {
 
     BitmapFont font = new BitmapFont();
 
+    ShaderProgram shader;
+
     private DrawingManager() {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 1f;
         staticCamera.zoom = 1f;
+
+
+        String vertexShader = Gdx.files.internal("shaders/vertex.glsl").readString();
+        String fragmentShader = Gdx.files.internal("shaders/fragment.glsl").readString();
+
+        shader = new ShaderProgram(
+            vertexShader,
+            fragmentShader
+        );
+
+        batch.setShader(shader);
     }
 
 
@@ -221,6 +235,7 @@ public class DrawingManager {
         spriteMap.clear();
         staticBatch.dispose();
         batch.dispose();
+        shader.dispose();
     }
 
     public void resizedWindow(int width, int height) {
