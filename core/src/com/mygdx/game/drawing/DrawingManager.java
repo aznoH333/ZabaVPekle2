@@ -46,8 +46,8 @@ public class DrawingManager {
 
     private DrawingManager() {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.zoom = 1.2f;
-        staticCamera.zoom = 1.2f;
+        camera.zoom = 1f;
+        staticCamera.zoom = 1f;
     }
 
 

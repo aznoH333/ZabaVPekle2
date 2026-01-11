@@ -154,7 +154,7 @@ public class EnemyGeneratorFacade {
             isTurret = true;
             hasRangedAttack = true;
         } else {
-            speed = 0.5f + (base.mobility * 2.2f);
+            speed = 0.5f + (base.mobility * 1.5f);
 
             if (!hasRangedAttack && base.threat > 0.5f) {
                 speed += base.threat * 1.2f;
@@ -171,10 +171,10 @@ public class EnemyGeneratorFacade {
 
         // size
         if (base.toughness < 0.35f) {
-            size -= 0.2f;
+            size -= 0.05f;
         }
         if (base.toughness < 0.2f && base.threat < 0.3f) {
-            size -= 0.2f;
+            size -= 0.05f;
         }
         if (base.toughness > 0.6f) {
             size += (base.toughness - 0.6f) * 2f;
@@ -197,7 +197,7 @@ public class EnemyGeneratorFacade {
             .setNumericStat(FieldName.Health, health)
             .setNumericStat(FieldName.Speed, speed)
             .addComponent(new EnemyBaseBehaviour())
-            .addComponent(new AnimatedLegsWithHat(LegsWithHatType.DEBUG, new Color(0.75f, 0.25f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "hats_" + NumberUtils.randomInt(2, 11)))
+            .addComponent(new AnimatedLegsWithHat(LegsWithHatType.ENEMY_MEDIUM, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "small_enemy_heads_" + NumberUtils.randomInt(1, 9)))
             .addComponent(new GameEntityBleed())
             .addComponent(movementAi)
             .setScaleX(size * additionalWidth)
@@ -219,7 +219,7 @@ public class EnemyGeneratorFacade {
             entity.setNumericStat(FieldName.FireRateMultiplier, 1.5f);
 
             entity.addComponent(
-                new Gun("hands_0002")
+                new Gun(null)
             );
 
             while (rangedAttackTraitPicker.hasBudget()) {

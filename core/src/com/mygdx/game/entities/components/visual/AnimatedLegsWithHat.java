@@ -10,7 +10,7 @@ import com.mygdx.game.utils.types.NumberUtils;
 
 public class AnimatedLegsWithHat extends GameEntityAnimator {
     private static final float HAT_OFFSET_Y = 7f;
-    private static final float HAT_OFFSET_X = 1f;
+    private static final float HAT_OFFSET_X = -1f;
 
     public final Color bodyColor;
     public final Color hurtColor;

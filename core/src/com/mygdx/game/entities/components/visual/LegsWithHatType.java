@@ -2,7 +2,8 @@ package com.mygdx.game.entities.components.visual;
 
 public enum LegsWithHatType {
     DEBUG("legs", 1, 2, 8, 9),
-    PLAYER("player", 1, 2, 7, 1);
+    PLAYER("player", 1, 2, 7, 1),
+    ENEMY_MEDIUM("enemy_body", 1, 2, 7, 1);
 
 
     public final String bodyBaseSprite;
