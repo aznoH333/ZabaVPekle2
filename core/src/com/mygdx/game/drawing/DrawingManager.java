@@ -12,12 +12,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,25 +65,33 @@ public class DrawingManager {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.zoom = 1f;
         staticCamera.zoom = 1f;
-
-
-        String vertexShader = Gdx.files.internal("shaders/vertex.glsl").readString();
-        String fragmentShader = Gdx.files.internal("shaders/fragment.glsl").readString();
-
-        shader = new ShaderProgram(
-            vertexShader,
-            fragmentShader
-        );
-
-        outputBatch.setShader(shader);
-
         frameBuffer = createFrameBuffer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+
+        shader = buildShader();
+        outputBatch.setShader(shader);
     }
 
     private FrameBuffer createFrameBuffer(float width, float height) {
         return new FrameBuffer(
             Pixmap.Format.RGBA8888, (int) width, (int) height, false
         );
+    }
+
+    private ShaderProgram buildShader() {
+        String vertexShader = Gdx.files.internal("shaders/vertex.glsl").readString();
+        String fragmentShader = Gdx.files.internal("shaders/fragment.glsl").readString();
+
+        ShaderProgram shader = new ShaderProgram(
+            vertexShader,
+            fragmentShader
+        );
+
+
+        if (!shader.isCompiled()) {
+            throw new GdxRuntimeException(shader.getLog());
+        }
+        return shader;
     }
 
 
@@ -91,7 +101,6 @@ public class DrawingManager {
         if (!handle.exists()) {
             System.exit(1);
         }
-        System.out.println(handle.isDirectory());
         for (FileHandle f : handle.list()) {
             if (!f.isDirectory()) {
                 loadSprite(f.path(), f.nameWithoutExtension());
@@ -181,6 +190,9 @@ public class DrawingManager {
     }
 
     private void renderBatch(SpriteBatch batch, ArrayList<ArrayList<DrawingCommand>> queue) {
+
+
+
         for (ArrayList<DrawingCommand> layer : queue) {
             for (DrawingCommand command : layer) {
                 drawSprite(
@@ -204,6 +216,16 @@ public class DrawingManager {
     }
 
     public void render() {
+
+        shader.bind();
+
+
+        System.out.println(shader.hasUniform("u_lightsUsed"));
+        System.out.println(Arrays.toString(shader.getUniforms()));
+        System.out.println(shader.getUniforms());
+        // shader.setUniform3fv("lights", new float[]{0f,0f, 1f}, 0, 3);
+        // shader.setUniformi("lightsUsed", 1);
+
         frameBuffer.begin();
 
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);

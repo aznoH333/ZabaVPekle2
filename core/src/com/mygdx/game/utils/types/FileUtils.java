@@ -14,7 +14,6 @@ public class FileUtils {
         if (!handle.exists()) {
             System.exit(1);
         }
-        System.out.println(handle.isDirectory());
         for (FileHandle f : handle.list()) {
             if (!f.isDirectory()) {
                 output.add(f.path());
