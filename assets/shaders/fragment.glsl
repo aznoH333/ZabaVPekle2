@@ -20,7 +20,7 @@ struct Light {
 
 // uniform Light[MAX_LIGHTS] lights;
 
-const Light debugLight = Light(vec2(0.0, 0.0), 0.75);
+const Light debugLight = Light(vec2(0.0, 0.0), 1.0);
 
 Light getStrongestLight(vec2 uv) {
     // temp logic

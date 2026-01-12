@@ -1,6 +1,7 @@
 package com.mygdx.game.drawing;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.loaders.ShaderProgramLoader;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
@@ -81,11 +82,11 @@ public class DrawingManager {
     private ShaderProgram buildShader() {
         String vertexShader = Gdx.files.internal("shaders/vertex.glsl").readString();
         String fragmentShader = Gdx.files.internal("shaders/fragment.glsl").readString();
-
         ShaderProgram shader = new ShaderProgram(
             vertexShader,
             fragmentShader
         );
+
 
 
         if (!shader.isCompiled()) {
@@ -217,12 +218,11 @@ public class DrawingManager {
 
     public void render() {
 
-        shader.bind();
 
 
-        System.out.println(shader.hasUniform("u_lightsUsed"));
-        System.out.println(Arrays.toString(shader.getUniforms()));
-        System.out.println(shader.getUniforms());
+        // System.out.println(shader.hasUniform("u_lightsUsed"));
+        // System.out.println(Arrays.toString(shader.getAttributes()));
+        // System.out.println(Arrays.toString(shader.getUniforms()));
         // shader.setUniform3fv("lights", new float[]{0f,0f, 1f}, 0, 3);
         // shader.setUniformi("lightsUsed", 1);
 
