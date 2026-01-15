@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,6 +62,7 @@ public class DrawingManager {
 
     ShaderProgram shader;
     private FrameBuffer frameBuffer;
+    private float loopedTimeValue = 0f;
 
     private DrawingManager() {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -74,7 +76,7 @@ public class DrawingManager {
         outputBatch.setShader(shader);
 
 
-        float[] a = new float[] {0.0f, 0.0f, 1f, -0.25f, 0.0f, 0.3f};
+        float[] a = new float[] {0.0f, 0.0f, 0.5f, -0.25f, 0.0f, 0.3f};
         shader.setUniform1fv("lights", a, 0, 6);
         shader.setUniformi("usedLights", 1);
     }
@@ -223,7 +225,12 @@ public class DrawingManager {
     }
 
     public void render() {
+        //shader.setUniformf("loopedTimeValue", loopedTimeValue);
+        loopedTimeValue += 0.001f;
 
+        if (loopedTimeValue > NumberUtils.TWO_PI) {
+            loopedTimeValue = 0f;
+        }
 
 
 

@@ -40,6 +40,15 @@ public class Game extends GameState {
             .setNumericStat(FieldName.ProjectileDamage, 2f)
         );
 
+
+        Managers.entityManager.addEntity(new Entity()
+            .setTeam(EntityTeam.FROG)
+            .setDrawingLayer(DrawingLayer.PLAYER)
+            .setX(64)
+            .addComponent(new AnimatedLegsWithHat(LegsWithHatType.ENEMY_MEDIUM, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.8f, 0.8f, 1f), "small_enemy_heads_1"))
+        );
+
+
         AugmentBoxFacade.createNewBox(0f, 64f, Quality.POOR);
 
     }

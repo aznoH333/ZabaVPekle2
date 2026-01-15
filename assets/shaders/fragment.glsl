@@ -8,6 +8,7 @@ uniform sampler2D u_texture;
 uniform mat4 u_projTrans;
 
 
+uniform float loopedTimeValue;
 
 
 /*
@@ -50,9 +51,18 @@ Light getStrongestLight(vec2 position) {
     return closesestLight;
 }
 
+float lightScatter(vec2 position) {
+    return min(
+        cos((position.x + loopedTimeValue) * 10.0) + cos((position.y - loopedTimeValue) * 10.0),
+        sin((position.x - loopedTimeValue) * 5.0) + sin((position.y + loopedTimeValue) * 5.0)
+    );
+}
+
+
 float calculateLightStrength(Light light, vec2 position) {
 
     float distanceFactor = calculateLightValue(light, position);
+    // distanceFactor *= 1.0 - (lightScatter(position) * distanceFactor) * 0.15;
 
 
     return 1.0 - smoothstep(0.0, 1.0, distanceFactor);
@@ -72,8 +82,8 @@ CRT
 ===========================================================
 */
 
-vec4 applyCrt(vec2 position, vec4 color) {
-    float scanline = 0.8 + (0.2 * sin(position.y * 1000.0));
+vec4 applyCrt(vec2 position, vec4 color, float scanLineIntensity, float numberOfScanLines) {
+    float scanline = (1.0 - scanLineIntensity) + (scanLineIntensity * sin(position.y * numberOfScanLines));
     color.rgb *= scanline;
     return color;
 }
@@ -121,28 +131,30 @@ Main
 ===========================================================
 */
 void main() {
-    vec2 uv = v_texCoords;
-    vec2 normalized_uv = uv - 0.5;
-    normalized_uv.x *= 1.777777;
+    vec2 centerredPosition = v_texCoords - 0.5;
+    centerredPosition.x *= 1.777777;
 
 
 
     // Sample the texture with adjusted UVs
-    vec4 texColor = texture2D(u_texture, uv);
+    vec4 texColor = texture2D(u_texture, v_texCoords);
 
 
-    texColor = applyVignette(normalized_uv, texColor);
+    texColor = applyVignette(centerredPosition, texColor);
 
 
 
     // light
-    texColor = applyLights(normalized_uv, texColor);
+    texColor = applyLights(centerredPosition, texColor);
 
 
 
-    texColor = restrictColorResolution(texColor, 0.033);
+    // texColor = restrictColorResolution(texColor, 0.033);
+    texColor = restrictColorResolution(texColor, 0.01);
 
-    texColor = applyCrt(normalized_uv, texColor);
+
+
+    texColor = applyCrt(centerredPosition, texColor, 0.20, 1000.0);
 
 
     // Set final color
