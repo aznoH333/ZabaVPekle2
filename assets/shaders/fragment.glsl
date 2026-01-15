@@ -18,13 +18,24 @@ struct Light {
 };
 
 
-// uniform Light[MAX_LIGHTS] lights;
-
-const Light debugLight = Light(vec2(0.0, 0.0), 1.0);
+uniform float[MAX_LIGHTS] lights;
+uniform int usedLights;
 
 Light getStrongestLight(vec2 uv) {
-    // temp logic
-    return debugLight;
+    float closestDistance = 99.0;
+    Light closesestLight;
+
+    for (int i = 0; i < usedLights; i++) {
+        Light light = Light(vec2(lights[i * 3], lights[(i*3)+1]), lights[(i*3)+2]);
+
+        if (length(light.screenPosition - uv) < closestDistance) {
+            closestDistance = length(light.screenPosition - uv);
+            closesestLight = light;
+        }
+
+    }
+
+    return closesestLight;
 }
 
 float calculateLightStrength(Light light, vec2 uv) {

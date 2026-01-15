@@ -69,8 +69,14 @@ public class DrawingManager {
         frameBuffer = createFrameBuffer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 
+
         shader = buildShader();
         outputBatch.setShader(shader);
+
+
+        float[] a = new float[] {0.25f, 0.0f, 1f, -0.25f, 0.0f, 1f};
+        shader.setUniform1fv("lights", a, 0, 6);
+        shader.setUniformi("usedLights", 2);
     }
 
     private FrameBuffer createFrameBuffer(float width, float height) {
@@ -92,6 +98,8 @@ public class DrawingManager {
         if (!shader.isCompiled()) {
             throw new GdxRuntimeException(shader.getLog());
         }
+
+        shader.bind();
         return shader;
     }
 
@@ -192,8 +200,6 @@ public class DrawingManager {
 
     private void renderBatch(SpriteBatch batch, ArrayList<ArrayList<DrawingCommand>> queue) {
 
-
-
         for (ArrayList<DrawingCommand> layer : queue) {
             for (DrawingCommand command : layer) {
                 drawSprite(
@@ -220,11 +226,6 @@ public class DrawingManager {
 
 
 
-        // System.out.println(shader.hasUniform("u_lightsUsed"));
-        // System.out.println(Arrays.toString(shader.getAttributes()));
-        // System.out.println(Arrays.toString(shader.getUniforms()));
-        // shader.setUniform3fv("lights", new float[]{0f,0f, 1f}, 0, 3);
-        // shader.setUniformi("lightsUsed", 1);
 
         frameBuffer.begin();
 
