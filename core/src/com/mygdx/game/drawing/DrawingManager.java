@@ -74,9 +74,9 @@ public class DrawingManager {
         outputBatch.setShader(shader);
 
 
-        float[] a = new float[] {0.25f, 0.0f, 1f, -0.25f, 0.0f, 1f};
+        float[] a = new float[] {0.0f, 0.0f, 1f, -0.25f, 0.0f, 0.3f};
         shader.setUniform1fv("lights", a, 0, 6);
-        shader.setUniformi("usedLights", 2);
+        shader.setUniformi("usedLights", 1);
     }
 
     private FrameBuffer createFrameBuffer(float width, float height) {

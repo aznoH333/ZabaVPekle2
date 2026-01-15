@@ -7,9 +7,14 @@ varying vec2 v_texCoords;
 uniform sampler2D u_texture;
 uniform mat4 u_projTrans;
 
-uniform float dir;
 
 
+
+/*
+===========================================================
+LIGHTS
+===========================================================
+*/
 const int MAX_LIGHTS = 10;
 
 struct Light {
@@ -21,15 +26,22 @@ struct Light {
 uniform float[MAX_LIGHTS] lights;
 uniform int usedLights;
 
-Light getStrongestLight(vec2 uv) {
+
+float calculateLightValue(Light light, vec2 position) {
+    return length(light.screenPosition - position) / light.intensityMultiplier;
+}
+
+
+Light getStrongestLight(vec2 position) {
     float closestDistance = 99.0;
     Light closesestLight;
 
     for (int i = 0; i < usedLights; i++) {
         Light light = Light(vec2(lights[i * 3], lights[(i*3)+1]), lights[(i*3)+2]);
+        float lightValue = calculateLightValue(light, position);
 
-        if (length(light.screenPosition - uv) < closestDistance) {
-            closestDistance = length(light.screenPosition - uv);
+        if (lightValue < closestDistance) {
+            closestDistance = lightValue;
             closesestLight = light;
         }
 
@@ -38,47 +50,99 @@ Light getStrongestLight(vec2 uv) {
     return closesestLight;
 }
 
-float calculateLightStrength(Light light, vec2 uv) {
+float calculateLightStrength(Light light, vec2 position) {
 
-    float distanceFactor = (length(uv-light.screenPosition) / light.intensityMultiplier);
+    float distanceFactor = calculateLightValue(light, position);
 
 
     return 1.0 - smoothstep(0.0, 1.0, distanceFactor);
 }
 
+vec4 applyLights(vec2 position, vec4 color) {
+    Light light = getStrongestLight(position);
+    float lightValue = calculateLightStrength(light, position);
+    color.rgb *= lightValue;
+
+    return color;
+}
+
+/*
+===========================================================
+CRT
+===========================================================
+*/
+
+vec4 applyCrt(vec2 position, vec4 color) {
+    float scanline = 0.8 + (0.2 * sin(position.y * 1000.0));
+    color.rgb *= scanline;
+    return color;
+}
+
+/*
+===========================================================
+Vignette
+===========================================================
+*/
+vec4 applyVignette(vec2 position, vec4 color) {
+    // Apply vignette effect
+    float vignette = 1.0 - smoothstep(0.4, 0.7, length(position));
+    color.rgb *= vignette;
+    return color;
+}
+
+
+/*
+===========================================================
+Color resolution
+===========================================================
+*/
+
+float calculateRestrictedColorValue(float color, float resolution) {
+
+
+    return color - mod(color, resolution);
+}
+
+vec4 restrictColorResolution(vec4 color, float resolution) {
+
+
+    color.r = calculateRestrictedColorValue(color.r, resolution);
+    color.g = calculateRestrictedColorValue(color.g, resolution);
+    color.b = calculateRestrictedColorValue(color.b, resolution);
+
+
+    return color;
+}
+
+
+/*
+===========================================================
+Main
+===========================================================
+*/
 void main() {
     vec2 uv = v_texCoords;
     vec2 normalized_uv = uv - 0.5;
     normalized_uv.x *= 1.777777;
 
-    // Add curvature for the CRT effect
-    float curvature = 0.05;
-    vec2 centeredUV = uv - 0.5;
-    centeredUV *= 1.0 + curvature * length(centeredUV);
-    centeredUV += 0.5;
+
 
     // Sample the texture with adjusted UVs
-    vec4 texColor = texture2D(u_texture, centeredUV);
+    vec4 texColor = texture2D(u_texture, uv);
 
-    // Apply a basic scanline effect
-    float scanline = 0.8 + (0.2 * sin(uv.y * 1000.0));
-    texColor.rgb *= scanline;
 
-    // Apply vignette effect
-    float vignette = 1.0 - smoothstep(0.4, 0.7, length(uv - 0.5));
-    texColor.rgb *= vignette;
+    texColor = applyVignette(normalized_uv, texColor);
 
 
 
     // light
-    Light light = getStrongestLight(normalized_uv);
-    float lightValue = calculateLightStrength(light, normalized_uv);
-    texColor.rgb *= lightValue;
+    texColor = applyLights(normalized_uv, texColor);
 
-    // make pitch black if too dark
-    if (texColor.r + texColor.g + texColor.b < 0.1) {
-        texColor.rgb = vec3(0.0, 0.0, 0.0);
-    }
+
+
+    texColor = restrictColorResolution(texColor, 0.033);
+
+    texColor = applyCrt(normalized_uv, texColor);
 
 
     // Set final color
