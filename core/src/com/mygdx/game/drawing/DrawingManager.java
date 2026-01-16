@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -31,8 +32,8 @@ public class DrawingManager {
     }
 
 
-    public static final float SCREEN_WIDTH = 568f;
-    public static final float SCREEN_HEIGHT = 320f;
+    public static final float SCREEN_WIDTH = 640f;
+    public static final float SCREEN_HEIGHT = 360f;
     public static final int MAX_LIGHTS = 32;
 
     private static DrawingManager instance;
@@ -53,7 +54,7 @@ public class DrawingManager {
     private final OrthographicCamera staticCamera = new OrthographicCamera();
 
     private final Viewport viewPort = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, camera);
-    private final Viewport staticViewPort = new ExtendViewport(960f, 640f, staticCamera);
+    private final Viewport staticViewPort = new ExtendViewport(SCREEN_WIDTH, SCREEN_HEIGHT, staticCamera);
 
     BitmapFont font = new BitmapFont();
 
@@ -65,11 +66,10 @@ public class DrawingManager {
     private float aspectRatio = 0;
 
     private DrawingManager() {
-        viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewPort.update((int) SCREEN_WIDTH, (int) SCREEN_HEIGHT);
         camera.zoom = 1f;
         staticCamera.zoom = 1f;
-        frameBuffer = createFrameBuffer(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
+        frameBuffer = createFrameBuffer(SCREEN_WIDTH * 4, SCREEN_HEIGHT * 4);
 
 
         shader = buildShader();
@@ -229,17 +229,19 @@ public class DrawingManager {
         frameBuffer.begin();
 
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
-        viewPort.apply();
+
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
+        viewPort.apply();
         renderBatch(batch, drawingQueue);
         batch.end();
 
 
         staticBatch.setProjectionMatrix(staticCamera.combined);
-        staticViewPort.apply();
         staticBatch.begin();
+        staticViewPort.apply();
+
         renderBatch(staticBatch, staticDrawingQueue);
 
         // font
@@ -253,7 +255,9 @@ public class DrawingManager {
 
         Texture frameBufferTexture = frameBuffer.getColorBufferTexture();
         outputBatch.begin();
-        outputBatch.draw(frameBuffer.getColorBufferTexture(), 0f, 0f, frameBufferTexture.getWidth(), frameBufferTexture.getHeight(), 0, 0, 1, 1);
+        viewPort.apply();
+
+        outputBatch.draw(frameBufferTexture, 0f, 0f, viewPort.getWorldWidth(), viewPort.getWorldHeight() * 1.33333f, 0, 0, 1, 1);
         outputBatch.end();
 
     }
@@ -283,10 +287,10 @@ public class DrawingManager {
         viewPort.update(width, height);
         staticViewPort.update(width, height);
 
-        // frameBuffer.dispose();
-        // frameBuffer = createFrameBuffer(width, height);
+        frameBuffer.dispose();
+        frameBuffer = createFrameBuffer(width, height);
 
-        shader.setUniformf("aspectRatio", aspectRatio);
+        // shader.setUniformf("aspectRatio", aspectRatio);
     }
 
     public void setCameraPosition(float x, float y) {
