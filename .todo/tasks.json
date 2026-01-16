@@ -1835,7 +1835,7 @@
     ],
     "title": "Light handles",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1847,6 +1847,19 @@
         "minute": 8,
         "second": 36,
         "nano": 541978795
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 16
+      },
+      "time": {
+        "hour": 11,
+        "minute": 58,
+        "second": 59,
+        "nano": 803752002
       }
     },
     "isImported": false

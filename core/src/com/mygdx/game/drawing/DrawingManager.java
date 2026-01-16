@@ -59,7 +59,10 @@ public class DrawingManager {
 
     ShaderProgram shader;
     private FrameBuffer frameBuffer;
+
+    /* shader values*/
     private float loopedTimeValue = 0f;
+    private float aspectRatio = 0;
 
     private DrawingManager() {
         viewPort.update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -226,7 +229,7 @@ public class DrawingManager {
         frameBuffer.begin();
 
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
-        //viewPort.apply();
+        viewPort.apply();
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
@@ -235,7 +238,7 @@ public class DrawingManager {
 
 
         staticBatch.setProjectionMatrix(staticCamera.combined);
-        //staticViewPort.apply();
+        staticViewPort.apply();
         staticBatch.begin();
         renderBatch(staticBatch, staticDrawingQueue);
 
@@ -271,11 +274,19 @@ public class DrawingManager {
     }
 
     public void resizedWindow(int width, int height) {
+        if (width == 0 || height == 0) {
+            return;
+        }
+
+        aspectRatio = (float) width / height;
+
         viewPort.update(width, height);
         staticViewPort.update(width, height);
 
-        frameBuffer.dispose();
-        frameBuffer = createFrameBuffer(width, height);
+        // frameBuffer.dispose();
+        // frameBuffer = createFrameBuffer(width, height);
+
+        shader.setUniformf("aspectRatio", aspectRatio);
     }
 
     public void setCameraPosition(float x, float y) {
@@ -340,7 +351,7 @@ public class DrawingManager {
         float[] parametrisedLights = new float[lights.size() * 3];
 
         for (int i = 0; i < lights.size(); i++) {
-            Float[] params = lights.get(i).convertToShaderParams(camera);
+            Float[] params = lights.get(i).convertToShaderParams(camera, aspectRatio);
 
             parametrisedLights[i * 3] = params[0];
             parametrisedLights[i * 3 + 1] = params[1];

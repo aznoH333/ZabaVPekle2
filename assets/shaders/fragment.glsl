@@ -9,6 +9,8 @@ uniform mat4 u_projTrans;
 
 
 uniform float loopedTimeValue;
+/** a value representing the screen width / height */
+uniform float aspectRatio;
 
 
 /*
@@ -133,7 +135,7 @@ Main
 */
 void main() {
     vec2 centerredPosition = v_texCoords - 0.5;
-    centerredPosition.x *= 1.777777;
+    centerredPosition.x *= aspectRatio;
 
 
 

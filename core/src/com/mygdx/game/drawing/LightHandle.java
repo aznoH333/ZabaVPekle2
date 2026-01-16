@@ -34,9 +34,9 @@ public class LightHandle {
      * output [0] and [1] are the lights x and y converted to screen coordinates (-1 to 1)
      * output [2] is the lights intensity
      * */
-    public Float[] convertToShaderParams(OrthographicCamera activeCamera) {
+    public Float[] convertToShaderParams(OrthographicCamera activeCamera, float aspectRatio) {
         return new Float[] {
-            (x - activeCamera.position.x) * 1.77777f * activeCamera.zoom / DrawingManager.SCREEN_WIDTH,
+            (x - activeCamera.position.x) * aspectRatio * activeCamera.zoom / DrawingManager.SCREEN_WIDTH,
             (y - activeCamera.position.y) * activeCamera.zoom / DrawingManager.SCREEN_HEIGHT,
             intensity
         };
