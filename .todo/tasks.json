@@ -1778,5 +1778,173 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_2894",
+    "priority": "LOW",
+    "tags": [
+      "🪲Bug"
+    ],
+    "title": "Fix viewports",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 16
+      },
+      "time": {
+        "hour": 11,
+        "minute": 6,
+        "second": 55,
+        "nano": 486413953
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_2955",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Shader screen resolution scaling",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 16
+      },
+      "time": {
+        "hour": 11,
+        "minute": 7,
+        "second": 11,
+        "nano": 663395944
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_3017",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Light handles",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 16
+      },
+      "time": {
+        "hour": 11,
+        "minute": 8,
+        "second": 36,
+        "nano": 541978795
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_3204",
+    "priority": "LOW",
+    "tags": [
+      "🪲Bug"
+    ],
+    "title": "Spawn room not scaled properly",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 16
+      },
+      "time": {
+        "hour": 11,
+        "minute": 9,
+        "second": 39,
+        "nano": 739674815
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_3268",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Refactor drawing manager to be less clutered",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 16
+      },
+      "time": {
+        "hour": 11,
+        "minute": 13,
+        "second": 43,
+        "nano": 878089492
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_3333",
+    "priority": "LOW",
+    "tags": [
+      "🤔clarify"
+    ],
+    "title": "Decide if looped time (shader) is worth keeping",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 16
+      },
+      "time": {
+        "hour": 11,
+        "minute": 35,
+        "second": 4,
+        "nano": 703370394
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_3399",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Clean up step for entities (clean up light handles)",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 16
+      },
+      "time": {
+        "hour": 11,
+        "minute": 58,
+        "second": 0,
+        "nano": 472297488
+      }
+    },
+    "isImported": false
   }
 ]

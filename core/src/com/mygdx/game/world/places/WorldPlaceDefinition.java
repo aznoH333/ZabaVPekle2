@@ -7,7 +7,7 @@ public enum WorldPlaceDefinition {
 
     START(
         "start",
-        new Color(0.05f, 0.05f, 0.05f, 1f),
+        new Color(0.1f, 0.1f, 0.1f, 1f),
         new Color(0.20f, 0.20f, 0.20f, 1f),
         new Color(0.4f, 0.4f, 0.4f, 1f),
         new Color(0.8f, 0.8f, 0.8f, 1f),

@@ -1,14 +1,12 @@
 package com.mygdx.game.drawing;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.ShaderProgramLoader;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
@@ -18,10 +16,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +33,7 @@ public class DrawingManager {
 
     public static final float SCREEN_WIDTH = 568f;
     public static final float SCREEN_HEIGHT = 320f;
+    public static final int MAX_LIGHTS = 32;
 
     private static DrawingManager instance;
 
@@ -75,10 +72,6 @@ public class DrawingManager {
         shader = buildShader();
         outputBatch.setShader(shader);
 
-
-        float[] a = new float[] {0.0f, 0.0f, 0.5f, -0.25f, 0.0f, 0.3f};
-        shader.setUniform1fv("lights", a, 0, 6);
-        shader.setUniformi("usedLights", 1);
     }
 
     private FrameBuffer createFrameBuffer(float width, float height) {
@@ -225,14 +218,10 @@ public class DrawingManager {
     }
 
     public void render() {
-        //shader.setUniformf("loopedTimeValue", loopedTimeValue);
-        loopedTimeValue += 0.001f;
-
-        if (loopedTimeValue > NumberUtils.TWO_PI) {
-            loopedTimeValue = 0f;
-        }
 
 
+
+        applyLights();
 
         frameBuffer.begin();
 
@@ -315,4 +304,51 @@ public class DrawingManager {
         return new GlyphLayout(font, text).width;
     }
 
+
+    private ArrayList<LightHandle> lights = new ArrayList<>();
+
+    public LightHandle getNewLight(float x, float y, float intensity) {
+        if (lights.size() >= MAX_LIGHTS) {
+            System.out.println("Warning : failed to instantiate light (exceeded light limit of " + MAX_LIGHTS + ")");
+            return new LightHandle(x, y, intensity, -1);
+        }
+
+        LightHandle handle = new LightHandle(x, y, intensity, lights.size());
+
+        lights.add(handle);
+
+        return handle;
+    }
+
+
+    private void applyLights() {
+
+        /*
+        // time?
+        shader.setUniformf("loopedTimeValue", loopedTimeValue);
+        loopedTimeValue += 0.001f;
+
+        if (loopedTimeValue > NumberUtils.TWO_PI) {
+            loopedTimeValue = 0f;
+        }*/
+
+
+        lights.removeIf(lightHandle -> !lightHandle.isActive());
+
+
+        // lights
+        float[] parametrisedLights = new float[lights.size() * 3];
+
+        for (int i = 0; i < lights.size(); i++) {
+            Float[] params = lights.get(i).convertToShaderParams(camera);
+
+            parametrisedLights[i * 3] = params[0];
+            parametrisedLights[i * 3 + 1] = params[1];
+            parametrisedLights[i * 3 + 2] = params[2];
+        }
+
+
+        shader.setUniform1fv("lights", parametrisedLights, 0, parametrisedLights.length);
+        shader.setUniformi("usedLights", lights.size());
+    }
 }

@@ -16,7 +16,7 @@ uniform float loopedTimeValue;
 LIGHTS
 ===========================================================
 */
-const int MAX_LIGHTS = 10;
+const int MAX_LIGHTS = 32;
 
 struct Light {
     vec2 screenPosition;
@@ -62,7 +62,7 @@ float lightScatter(vec2 position) {
 float calculateLightStrength(Light light, vec2 position) {
 
     float distanceFactor = calculateLightValue(light, position);
-    // distanceFactor *= 1.0 - (lightScatter(position) * distanceFactor) * 0.15;
+    // distanceFactor *= 1.0 - ((lightScatter(position) * distanceFactor) * 0.15);
 
 
     return 1.0 - smoothstep(0.0, 1.0, distanceFactor);
@@ -95,7 +95,7 @@ Vignette
 */
 vec4 applyVignette(vec2 position, vec4 color) {
     // Apply vignette effect
-    float vignette = 1.0 - smoothstep(0.4, 0.7, length(position));
+    float vignette = 1.0 - smoothstep(0.2, 0.5, length(position));
     color.rgb *= vignette;
     return color;
 }
@@ -125,6 +125,7 @@ vec4 restrictColorResolution(vec4 color, float resolution) {
 }
 
 
+
 /*
 ===========================================================
 Main
@@ -140,7 +141,7 @@ void main() {
     vec4 texColor = texture2D(u_texture, v_texCoords);
 
 
-    texColor = applyVignette(centerredPosition, texColor);
+    // texColor = applyVignette(centerredPosition, texColor);
 
 
 
@@ -150,7 +151,7 @@ void main() {
 
 
     // texColor = restrictColorResolution(texColor, 0.033);
-    texColor = restrictColorResolution(texColor, 0.01);
+    texColor = restrictColorResolution(texColor, 0.0099);
 
 
 
