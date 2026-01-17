@@ -28,7 +28,7 @@ struct Light {
 };
 
 
-uniform float[MAX_LIGHTS] lights;
+uniform float[MAX_LIGHTS * LIGHT_COMPONENT_COUNT] lights;
 uniform int usedLights;
 
 
@@ -54,29 +54,33 @@ float calculateLightStrength(Light light, vec2 position) {
 }
 
 
-Light getStrongestLight(vec2 position) {
-    float closestDistance = 99.0;
-    Light closesestLight;
+
+float getLightValueForPosition(vec2 position) {
+    float heighestValue = 0.0;
 
     for (int i = 0; i < usedLights; i++) {
-        Light light = Light(vec2(lights[i * LIGHT_COMPONENT_COUNT], lights[(i*LIGHT_COMPONENT_COUNT)+1]), lights[(i*LIGHT_COMPONENT_COUNT)+2], lights[(i*LIGHT_COMPONENT_COUNT)+3]);
+        Light light = Light(
+        vec2(
+        lights[i * LIGHT_COMPONENT_COUNT],
+        lights[(i * LIGHT_COMPONENT_COUNT)+1]
+        ),
+        lights[(i*LIGHT_COMPONENT_COUNT)+2],
+        lights[(i*LIGHT_COMPONENT_COUNT)+3]);
+
         float lightValue = calculateLightStrength(light, position);
 
-        if (lightValue < closestDistance) {
-            closestDistance = lightValue;
-            closesestLight = light;
+        if (lightValue > heighestValue) {
+            heighestValue = lightValue;
         }
 
     }
 
-    return closesestLight;
+    return heighestValue;
 }
 
 
-
 vec4 applyLights(vec2 position, vec4 color) {
-    Light light = getStrongestLight(position);
-    float lightValue = calculateLightStrength(light, position);
+    float lightValue = getLightValueForPosition(position);
     color.rgb *= lightValue;
 
     return color;
@@ -101,7 +105,7 @@ Vignette
 */
 vec4 applyVignette(vec2 position, vec4 color) {
     // Apply vignette effect
-    float vignette = 1.0 - smoothstep(0.2, 0.5, length(position));
+    float vignette = 1.0 - smoothstep(0.0, 1.0, length(position) - 0.1);
     color.rgb *= vignette;
     return color;
 }
@@ -147,7 +151,7 @@ void main() {
     vec4 texColor = texture2D(u_texture, v_texCoords);
 
 
-    // texColor = applyVignette(centerredPosition, texColor);
+    texColor = applyVignette(centerredPosition, texColor);
 
 
 

@@ -2,6 +2,8 @@ package com.mygdx.game.gameStates.implementations;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Managers;
+import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.components.visual.AttachedLight;
 import com.mygdx.game.entities.facades.GUIFacade;
 import com.mygdx.game.gameStates.GameState;
 
@@ -28,6 +30,11 @@ public class MainMenu extends GameState {
             0f,
             -25f,
             owner -> Gdx.app.exit()
+        );
+
+        Managers.entityManager.addEntity(
+            new Entity()
+                .addComponent(new AttachedLight(1.0f, 1f))
         );
 
     }

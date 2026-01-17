@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -376,5 +377,8 @@ public class DrawingManager {
 
         shader.setUniform1fv("lights", parametrisedLights, 0, parametrisedLights.length);
         shader.setUniformi("usedLights", lights.size());
+
     }
+
+
 }
