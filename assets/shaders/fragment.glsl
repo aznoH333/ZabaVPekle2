@@ -105,9 +105,28 @@ Vignette
 */
 vec4 applyVignette(vec2 position, vec4 color) {
     // Apply vignette effect
-    float vignette = 1.0 - smoothstep(0.0, 1.0, length(position) - 0.1);
+    float vignette = 1.0 - smoothstep(0.0, 1.0, length(position) - 0.5);
     color.rgb *= vignette;
     return color;
+}
+
+
+/*
+===========================================================
+Chromatic Aberration
+===========================================================
+*/
+vec4 applyChromaticAberration(vec2 position, vec4 color) {
+    // Define the offset for RGB channels
+    float offset = 0.010 * smoothstep(0.0, 1.0, length(position - 0.5) - 0.1); // Adjust offset based on distance from center
+
+    // Sample the color with offsets
+    vec4 rColor = texture2D(u_texture, position + vec2(-offset, 0.0)); // Red channel
+    vec4 gColor = texture2D(u_texture, position);                        // Green channel
+    vec4 bColor = texture2D(u_texture, position + vec2(offset, 0.0));  // Blue channel
+
+    // Combine colors with equal weight
+    return vec4(rColor.r, gColor.g, bColor.b, color.a);
 }
 
 
@@ -142,32 +161,33 @@ Main
 ===========================================================
 */
 void main() {
-    vec2 centerredPosition = v_texCoords - 0.5;
-    centerredPosition.x *= 1.77777;
+    vec2 centeredPosition = v_texCoords - 0.5;
+    centeredPosition.x *= 1.77777;
 
 
 
     // Sample the texture with adjusted UVs
-    vec4 texColor = texture2D(u_texture, v_texCoords);
+    vec4 texelColor = texture2D(u_texture, v_texCoords);
+
+    texelColor = applyChromaticAberration(v_texCoords, texelColor);
 
 
-    texColor = applyVignette(centerredPosition, texColor);
 
 
 
     // light
-    texColor = applyLights(centerredPosition, texColor);
+    texelColor = applyLights(centeredPosition, texelColor);
 
+    texelColor = applyVignette(centeredPosition, texelColor);
 
 
     // texColor = restrictColorResolution(texColor, 0.033);
-    texColor = restrictColorResolution(texColor, 0.0099);
+    texelColor = restrictColorResolution(texelColor, 0.0099);
 
 
-
-    texColor = applyCrt(centerredPosition, texColor, 0.20, 1000.0);
+    texelColor = applyCrt(centeredPosition, texelColor, 0.20, 1000.0);
 
 
     // Set final color
-    gl_FragColor = texColor * v_color;
+    gl_FragColor = texelColor * v_color;
 }
