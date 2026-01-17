@@ -329,14 +329,15 @@ public class DrawingManager {
 
 
     private ArrayList<LightHandle> lights = new ArrayList<>();
+    private static final int LIGHT_COMPONENT_COUNT = 4;
 
-    public LightHandle getNewLight(float x, float y, float intensity) {
+    public LightHandle getNewLight(float x, float y, float intensity, float brightness) {
         if (lights.size() >= MAX_LIGHTS) {
             System.out.println("Warning : failed to instantiate light (exceeded light limit of " + MAX_LIGHTS + ")");
-            return new LightHandle(x, y, intensity, -1);
+            return new LightHandle(x, y, intensity, brightness, -1);
         }
 
-        LightHandle handle = new LightHandle(x, y, intensity, lights.size());
+        LightHandle handle = new LightHandle(x, y, intensity, brightness, lights.size());
 
         lights.add(handle);
 
@@ -360,14 +361,16 @@ public class DrawingManager {
 
 
         // lights
-        float[] parametrisedLights = new float[lights.size() * 3];
+        float[] parametrisedLights = new float[lights.size() * LIGHT_COMPONENT_COUNT];
 
         for (int i = 0; i < lights.size(); i++) {
             Float[] params = lights.get(i).convertToShaderParams(camera, aspectRatio);
 
-            parametrisedLights[i * 3] = params[0];
-            parametrisedLights[i * 3 + 1] = params[1];
-            parametrisedLights[i * 3 + 2] = params[2];
+
+            for (int j = 0; j < LIGHT_COMPONENT_COUNT; j++) {
+                parametrisedLights[i * LIGHT_COMPONENT_COUNT + j] = params[j];
+            }
+
         }
 
 

@@ -9,23 +9,26 @@ public class AttachedLight extends EntityComponent {
 
 
     private LightHandle handle;
-    public float intensity;
+    public float radius;
+    public float brightness;
 
-    public AttachedLight(float intensity) {
-        this.intensity = intensity;
+    public AttachedLight(float radius, float brightness) {
+        this.radius = radius;
+        this.brightness = brightness;
     }
 
     @Override
     public void onUpdate(Entity owner) {
         handle.x = owner.x;
         handle.y = owner.y;
+        handle.radius = radius;
+        handle.brightness = brightness;
     }
 
     @Override
     public void onSudoku(Entity owner) {
         handle.destroy();
     }
-
 
 
     @Override
@@ -35,11 +38,11 @@ public class AttachedLight extends EntityComponent {
 
     @Override
     public void onPlacedInWorld(Entity owner) {
-        this.handle = Managers.drawingManager.getNewLight(owner.x, owner.y, intensity);
+        this.handle = Managers.drawingManager.getNewLight(owner.x, owner.y, radius, brightness);
     }
 
     @Override
     public EntityComponent copy() {
-        return new AttachedLight(handle.intensity);
+        return new AttachedLight(handle.radius, brightness);
     }
 }

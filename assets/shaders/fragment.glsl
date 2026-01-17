@@ -19,10 +19,12 @@ LIGHTS
 ===========================================================
 */
 const int MAX_LIGHTS = 32;
+const int LIGHT_COMPONENT_COUNT = 4;
 
 struct Light {
     vec2 screenPosition;
     float intensityMultiplier;
+    float lightBrightness;
 };
 
 
@@ -32,25 +34,6 @@ uniform int usedLights;
 
 float calculateLightValue(Light light, vec2 position) {
     return length(light.screenPosition - position) / light.intensityMultiplier;
-}
-
-
-Light getStrongestLight(vec2 position) {
-    float closestDistance = 99.0;
-    Light closesestLight;
-
-    for (int i = 0; i < usedLights; i++) {
-        Light light = Light(vec2(lights[i * 3], lights[(i*3)+1]), lights[(i*3)+2]);
-        float lightValue = calculateLightValue(light, position);
-
-        if (lightValue < closestDistance) {
-            closestDistance = lightValue;
-            closesestLight = light;
-        }
-
-    }
-
-    return closesestLight;
 }
 
 float lightScatter(vec2 position) {
@@ -67,8 +50,29 @@ float calculateLightStrength(Light light, vec2 position) {
     // distanceFactor *= 1.0 - ((lightScatter(position) * distanceFactor) * 0.15);
 
 
-    return 1.0 - smoothstep(0.0, 1.0, distanceFactor);
+    return light.lightBrightness - smoothstep(0.0, 1.0, distanceFactor);
 }
+
+
+Light getStrongestLight(vec2 position) {
+    float closestDistance = 99.0;
+    Light closesestLight;
+
+    for (int i = 0; i < usedLights; i++) {
+        Light light = Light(vec2(lights[i * LIGHT_COMPONENT_COUNT], lights[(i*LIGHT_COMPONENT_COUNT)+1]), lights[(i*LIGHT_COMPONENT_COUNT)+2], lights[(i*LIGHT_COMPONENT_COUNT)+3]);
+        float lightValue = calculateLightStrength(light, position);
+
+        if (lightValue < closestDistance) {
+            closestDistance = lightValue;
+            closesestLight = light;
+        }
+
+    }
+
+    return closesestLight;
+}
+
+
 
 vec4 applyLights(vec2 position, vec4 color) {
     Light light = getStrongestLight(position);

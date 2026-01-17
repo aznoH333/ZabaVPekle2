@@ -40,7 +40,7 @@ public class ProjectileFactory {
             .setDrawingLayer(DrawingLayer.PROJECTILES)
             .setCanBeDamaged(false)
             .addComponent(new Bullet(direction, lifeTime))
-            .addComponent(new AttachedLight(0.15f));
+            .addComponent(new AttachedLight(0.15f, 0.25f));
 
 
         if (components != null) {
