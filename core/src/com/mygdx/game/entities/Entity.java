@@ -359,6 +359,18 @@ public class Entity implements Copyable {
         }
     }
 
+    public void removedFromWorld() {
+        for (EntityComponent c : components) {
+            c.onCleanUp(this);
+        }
+    }
+
+    public void placedInWorld() {
+        for (EntityComponent c : components) {
+            c.onPlacedInWorld(this);
+        }
+    }
+
     public Entity copy() {
         Entity clone = new Entity()
             .setSprite(sprite)

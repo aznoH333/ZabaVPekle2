@@ -37,6 +37,12 @@ public class EntityComponent {
     public void onSudoku(Entity owner) {
     }
 
+    public void onCleanUp(Entity owner) {
+    }
+
+    public void onPlacedInWorld(Entity owner) {
+    }
+
     public EntityComponent copy() {
         throw new RuntimeException("Copy not supported for " + getClass().getName());
     }

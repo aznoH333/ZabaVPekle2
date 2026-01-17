@@ -8,10 +8,11 @@ import com.mygdx.game.entities.EntityComponent;
 public class AttachedLight extends EntityComponent {
 
 
-    private final LightHandle handle;
+    private LightHandle handle;
+    public float intensity;
 
     public AttachedLight(float intensity) {
-        this.handle = Managers.drawingManager.getNewLight(0f, 0f, intensity);
+        this.intensity = intensity;
     }
 
     @Override
@@ -25,10 +26,16 @@ public class AttachedLight extends EntityComponent {
         handle.destroy();
     }
 
+
+
     @Override
-    public void onFirstAttached(Entity owner) {
-        handle.x = owner.x;
-        handle.y = owner.y;
+    public void onCleanUp(Entity owner) {
+        handle.destroy();
+    }
+
+    @Override
+    public void onPlacedInWorld(Entity owner) {
+        this.handle = Managers.drawingManager.getNewLight(owner.x, owner.y, intensity);
     }
 
     @Override

@@ -5,6 +5,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.Bullet;
+import com.mygdx.game.entities.components.visual.AttachedLight;
 import com.mygdx.game.entities.fields.FieldName;
 
 import java.util.ArrayList;
@@ -38,7 +39,9 @@ public class ProjectileFactory {
             .setTeam(team)
             .setDrawingLayer(DrawingLayer.PROJECTILES)
             .setCanBeDamaged(false)
-            .addComponent(new Bullet(direction, lifeTime));
+            .addComponent(new Bullet(direction, lifeTime))
+            .addComponent(new AttachedLight(0.15f));
+
 
         if (components != null) {
             for (EntityComponent c : components) {

@@ -77,7 +77,7 @@ public class DrawingManager {
         // Retrieved 2026-01-17, License - CC BY-SA 3.0
         // Thanks libgdx very cool. spent 2 days trying to figure this shit out
         Matrix4 matrix = new Matrix4();
-        matrix.setToOrtho2D(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT); // here is the actual size you want
+        matrix.setToOrtho2D(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT);
         outputBatch.setProjectionMatrix(matrix);
 
 
@@ -290,7 +290,7 @@ public class DrawingManager {
             return;
         }
 
-        aspectRatio = (float) SCREEN_WIDTH / SCREEN_HEIGHT;
+        aspectRatio = SCREEN_WIDTH / SCREEN_HEIGHT;
 
         viewPort.update(width, height);
         staticViewPort.update(width, height);

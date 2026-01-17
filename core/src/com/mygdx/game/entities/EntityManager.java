@@ -35,8 +35,6 @@ public class EntityManager {
         // update loop
         for (Entity e : entities) {
             e.update();
-
-
         }
         // collide loop
         for (Entity e : entities) {
@@ -51,13 +49,21 @@ public class EntityManager {
             if (!it.wantsToLive) {
                 it.invokeSudoku();
             }
-            return !it.wantsToLive || clearAllEntitiesOnCycleEnd;
+
+            boolean returnValue = !it.wantsToLive || clearAllEntitiesOnCycleEnd;
+
+            if (returnValue) {
+                it.removedFromWorld();
+            }
+
+            return returnValue;
         });
 
 
         clearAllEntitiesOnCycleEnd = false;
 
 
+        waitingRoom.forEach(Entity::placedInWorld);
         entities.addAll(waitingRoom);
         waitingRoom.clear();
     }

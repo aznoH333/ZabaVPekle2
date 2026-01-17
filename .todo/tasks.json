@@ -1787,7 +1787,7 @@
     ],
     "title": "Fix viewports",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1811,7 +1811,7 @@
     ],
     "title": "Shader screen resolution scaling",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1823,6 +1823,19 @@
         "minute": 7,
         "second": 11,
         "nano": 663395944
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 17
+      },
+      "time": {
+        "hour": 12,
+        "minute": 0,
+        "second": 28,
+        "nano": 700561814
       }
     },
     "isImported": false
