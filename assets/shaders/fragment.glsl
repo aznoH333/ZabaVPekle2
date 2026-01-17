@@ -143,7 +143,7 @@ void main() {
     vec4 texColor = texture2D(u_texture, v_texCoords);
 
 
-    // texColor = applyVignette(centerredPosition, texColor);
+    texColor = applyVignette(centerredPosition, texColor);
 
 
 

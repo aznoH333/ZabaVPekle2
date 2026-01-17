@@ -39,7 +39,7 @@ public class Game extends GameState {
             .setNumericStat(FieldName.ProjectileSpeed, 0.75f)
             .setNumericStat(FieldName.FireRate, 25f)
             .setNumericStat(FieldName.ProjectileDamage, 2f)
-            .addComponent(new AttachedLight(1.5f))
+            .addComponent(new AttachedLight(0.5f))
         );
 
 
@@ -48,7 +48,13 @@ public class Game extends GameState {
             .setDrawingLayer(DrawingLayer.PLAYER)
             .setX(64)
             .addComponent(new AnimatedLegsWithHat(LegsWithHatType.ENEMY_MEDIUM, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.8f, 0.8f, 1f), "small_enemy_heads_1"))
+        );
 
+        Managers.entityManager.addEntity(new Entity()
+            .setTeam(EntityTeam.FROG)
+            .setDrawingLayer(DrawingLayer.PLAYER)
+            .setX(-64)
+            .setSprite("world_0011")
         );
 
 

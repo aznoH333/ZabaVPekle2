@@ -10,11 +10,11 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
@@ -70,6 +70,16 @@ public class DrawingManager {
         camera.zoom = 1f;
         staticCamera.zoom = 1f;
         frameBuffer = createFrameBuffer(SCREEN_WIDTH * 4, SCREEN_HEIGHT * 4);
+
+
+        // Source - https://stackoverflow.com/a
+        // Posted by moreofles
+        // Retrieved 2026-01-17, License - CC BY-SA 3.0
+        // Thanks libgdx very cool. spent 2 days trying to figure this shit out
+        Matrix4 matrix = new Matrix4();
+        matrix.setToOrtho2D(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT); // here is the actual size you want
+        outputBatch.setProjectionMatrix(matrix);
+
 
 
         shader = buildShader();
@@ -227,10 +237,7 @@ public class DrawingManager {
         applyLights();
 
         frameBuffer.begin();
-
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
-
-
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         viewPort.apply();
@@ -254,10 +261,11 @@ public class DrawingManager {
         frameBuffer.end();
 
         Texture frameBufferTexture = frameBuffer.getColorBufferTexture();
-        outputBatch.begin();
-        viewPort.apply();
 
-        outputBatch.draw(frameBufferTexture, 0f, 0f, viewPort.getWorldWidth(), viewPort.getWorldHeight() * 1.33333f, 0, 0, 1, 1);
+        ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
+
+        outputBatch.begin();
+        outputBatch.draw(frameBufferTexture, 0f, 0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0, 1, 1);
         outputBatch.end();
 
     }

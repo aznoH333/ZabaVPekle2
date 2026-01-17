@@ -14,7 +14,7 @@ public class FrogGame extends ApplicationAdapter {
         Managers.drawingManager.loadSpritesInDirectory("assets/sprites");
 
 
-        // Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayModes()[0]);
+        Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayModes()[0]);
 
 
         // game states
