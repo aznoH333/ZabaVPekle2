@@ -290,7 +290,7 @@ public class DrawingManager {
             return;
         }
 
-        aspectRatio = (float) width / height;
+        aspectRatio = (float) SCREEN_WIDTH / SCREEN_HEIGHT;
 
         viewPort.update(width, height);
         staticViewPort.update(width, height);

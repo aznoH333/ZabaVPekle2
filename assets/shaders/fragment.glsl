@@ -135,7 +135,7 @@ Main
 */
 void main() {
     vec2 centerredPosition = v_texCoords - 0.5;
-    centerredPosition.x *= aspectRatio;
+    centerredPosition.x *= 1.77777;
 
 
 
@@ -143,7 +143,7 @@ void main() {
     vec4 texColor = texture2D(u_texture, v_texCoords);
 
 
-    texColor = applyVignette(centerredPosition, texColor);
+    // texColor = applyVignette(centerredPosition, texColor);
 
 
 

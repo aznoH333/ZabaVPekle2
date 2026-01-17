@@ -15,8 +15,6 @@ public class LightHandle {
         this.intensity = intensity;
         this.lightIndex = lightIndex;
 
-
-
         this.active = lightIndex != -1;
     }
 
@@ -36,7 +34,7 @@ public class LightHandle {
      * */
     public Float[] convertToShaderParams(OrthographicCamera activeCamera, float aspectRatio) {
         return new Float[] {
-            (x - activeCamera.position.x) * aspectRatio * activeCamera.zoom / DrawingManager.SCREEN_WIDTH,
+            (x - activeCamera.position.x) * activeCamera.zoom / DrawingManager.SCREEN_WIDTH,
             (y - activeCamera.position.y) * activeCamera.zoom / DrawingManager.SCREEN_HEIGHT,
             intensity
         };

@@ -39,7 +39,7 @@ public class Game extends GameState {
             .setNumericStat(FieldName.ProjectileSpeed, 0.75f)
             .setNumericStat(FieldName.FireRate, 25f)
             .setNumericStat(FieldName.ProjectileDamage, 2f)
-            .addComponent(new AttachedLight(0.5f))
+            .addComponent(new AttachedLight(1f))
         );
 
 
