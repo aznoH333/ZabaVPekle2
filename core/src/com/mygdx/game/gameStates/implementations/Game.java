@@ -41,8 +41,6 @@ public class Game extends GameState {
             .setNumericStat(FieldName.ProjectileDamage, 2f)
             .setField(FieldName.ProjectileColor, new Color(0.33333f, 0.66666f, 1f, 1f))
             .setField(FieldName.ProjectileSprite, "bullets_0002")
-
-
             .addComponent(new AttachedLight(0.75f, 1.0f))
         );
 
