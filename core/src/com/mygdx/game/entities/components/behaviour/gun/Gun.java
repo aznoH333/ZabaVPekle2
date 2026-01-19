@@ -206,7 +206,7 @@ public class Gun extends EntityComponent {
         owner.initializeNumericField(FieldName.DamageMultiplier, 1f);
 
 
-        owner.initializeField(FieldName.ProjectileSprite, "fire_ball");
+        owner.initializeField(FieldName.ProjectileSprite, "bullets_0001");
 
         owner.initializeField(FieldName.ProjectileComponents, new ArrayList<EntityComponent>());
         this.bulletComponents = owner.getField(FieldName.ProjectileComponents);
@@ -218,8 +218,6 @@ public class Gun extends EntityComponent {
         // add default gun values
         addBulletOrigin(new BulletOrigin(0f, true));
 
-
-        addBulletComponent(new SpinSprite(-0.25f));
     }
 
     public void addBulletComponent(EntityComponent component) {

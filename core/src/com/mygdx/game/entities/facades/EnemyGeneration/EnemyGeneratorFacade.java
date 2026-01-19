@@ -9,6 +9,7 @@ import com.mygdx.game.entities.components.behaviour.ememy.EnemyBaseBehaviour;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.gui.EntityRunnable;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
+import com.mygdx.game.entities.components.visual.AttachedLight;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.components.visual.LegsWithHatType;
 import com.mygdx.game.entities.fields.FieldName;
@@ -204,6 +205,7 @@ public class EnemyGeneratorFacade {
             .setScaleY(size * additionalHeight)
             .setNumericStat(FieldName.Damage, 1f)
             .setDrawingLayer(DrawingLayer.ENEMIES);
+
 
 
         if (hasRangedAttack) {

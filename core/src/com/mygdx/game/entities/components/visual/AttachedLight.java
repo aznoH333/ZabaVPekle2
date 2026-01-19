@@ -43,6 +43,6 @@ public class AttachedLight extends EntityComponent {
 
     @Override
     public EntityComponent copy() {
-        return new AttachedLight(handle.radius, brightness);
+        return new AttachedLight(radius, brightness);
     }
 }
