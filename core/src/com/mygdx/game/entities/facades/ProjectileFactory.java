@@ -1,5 +1,6 @@
 package com.mygdx.game.entities.facades;
 
+import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
@@ -25,7 +26,8 @@ public class ProjectileFactory {
         float direction,
         int lifeTime,
         ArrayList<EntityComponent> components,
-        float bounceCount
+        float bounceCount,
+        Color color
     ) {
         Entity bullet = new Entity()
             .setSprite(sprite)
@@ -40,6 +42,7 @@ public class ProjectileFactory {
             .setDrawingLayer(DrawingLayer.PROJECTILES)
             .setCanBeDamaged(false)
             .addComponent(new Bullet(direction, lifeTime))
+            .setColor(color.r, color.g, color.b, color.a)
             .addComponent(new AttachedLight(0.25f, 0.5f));
 
 

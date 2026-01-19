@@ -35,28 +35,19 @@ public class Game extends GameState {
             .setDrawingLayer(DrawingLayer.PLAYER)
             .addComponent(new AnimatedLegsWithHat(LegsWithHatType.PLAYER, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.8f, 0.8f, 1f), null))
             .addComponent(new Gun("guns_0001"))
-                .addComponent(new EyeCursor(4.5f, 2f))
+            .addComponent(new EyeCursor(4.5f, 2f))
             .setNumericStat(FieldName.ProjectileSpeed, 0.75f)
             .setNumericStat(FieldName.FireRate, 25f)
             .setNumericStat(FieldName.ProjectileDamage, 2f)
+            .setField(FieldName.ProjectileColor, new Color(0.33333f, 0.66666f, 1f, 1f))
+            .setField(FieldName.ProjectileSprite, "bullets_0002")
+
+
             .addComponent(new AttachedLight(0.75f, 1.0f))
         );
 
 
-        Managers.entityManager.addEntity(new Entity()
-            .setTeam(EntityTeam.FROG)
-            .setDrawingLayer(DrawingLayer.PLAYER)
-            .setX(64)
-            .addComponent(new AnimatedLegsWithHat(LegsWithHatType.ENEMY_MEDIUM, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.8f, 0.8f, 1f), "small_enemy_heads_1"))
-            .addComponent(new AttachedLight(0.5f, 0.5f))
-        );
-
-        Managers.entityManager.addEntity(new Entity()
-            .setTeam(EntityTeam.FROG)
-            .setDrawingLayer(DrawingLayer.PLAYER)
-            .setX(-64)
-            .setSprite("world_0011")
-        );
+        
 
 
         AugmentBoxFacade.createNewBox(0f, 64f, Quality.POOR);

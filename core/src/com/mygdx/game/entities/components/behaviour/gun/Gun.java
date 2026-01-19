@@ -9,6 +9,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.SpinSprite;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
+import com.mygdx.game.entities.components.visual.SpawnFadeTrail;
 import com.mygdx.game.entities.facades.ProjectileFactory;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.types.NumberUtils;
@@ -142,7 +143,8 @@ public class Gun extends EntityComponent {
                     bulletDirection,
                     (int) owner.getNumericStat(FieldName.ProjectileLifeTime),
                     bulletComponents,
-                    owner.getNumericStat(FieldName.BounceCount)
+                    owner.getNumericStat(FieldName.BounceCount),
+                    owner.getField(FieldName.ProjectileColor)
                 );
 
                 Managers.entityManager.addEntity(bullet);
@@ -204,7 +206,7 @@ public class Gun extends EntityComponent {
         owner.initializeNumericField(FieldName.ProjectilesPerShot, 1f);
         owner.initializeNumericField(FieldName.ProjectileDamage, 1f);
         owner.initializeNumericField(FieldName.DamageMultiplier, 1f);
-
+        owner.initializeField(FieldName.ProjectileColor, new Color(1f, 1f, 1f, 1f));
 
         owner.initializeField(FieldName.ProjectileSprite, "bullets_0001");
 
@@ -217,7 +219,8 @@ public class Gun extends EntityComponent {
 
         // add default gun values
         addBulletOrigin(new BulletOrigin(0f, true));
-
+        
+        addBulletComponent(new SpawnFadeTrail(1, 10));
     }
 
     public void addBulletComponent(EntityComponent component) {
