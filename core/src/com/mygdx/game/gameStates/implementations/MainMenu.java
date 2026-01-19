@@ -22,7 +22,7 @@ public class MainMenu extends GameState {
             "Play game",
             0f,
             25f,
-            owner -> Managers.gameStateManager.switchState("game")
+            owner -> Managers.gameStateManager.switchState("world map")
         );
 
         GUIFacade.createButton(

@@ -1,6 +1,7 @@
 package com.mygdx.game.world;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.utils.types.NumberUtils;
@@ -9,6 +10,7 @@ import com.mygdx.game.world.places.PlaceRoom;
 import com.mygdx.game.world.places.WorldPlaceDefinition;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WorldProgress {
 
@@ -26,16 +28,15 @@ public class WorldProgress {
     public int innerWorldSize = 10;
 
 
-    private int currentPlaceIndex = 0;
-    private ArrayList<Place> places = new ArrayList<>();
-    private Place currentPlace;
+    public HashMap<String, Place> places = new HashMap<>();
+    public Place currentPlace;
 
     public WorldProgress() {
         // temp place generation
         for (WorldPlaceDefinition definition : WorldPlaceDefinition.values()) {
-            places.add(definition.generatePlace());
+            places.put(definition.placeName, definition.generatePlace());
         }
-        goToPlace(0);
+        goToPlace("start");
     }
 
 
@@ -45,8 +46,8 @@ public class WorldProgress {
         currentPlace.completedRoom();
 
         if (currentPlace.isComplete()) {
-            currentPlaceIndex++;
-            goToPlace(currentPlaceIndex);
+            Managers.gameStateManager.switchState("world map");
+            return;
         }
 
         PlaceRoom room = currentPlace.getCurrentRoom();
@@ -60,8 +61,8 @@ public class WorldProgress {
     }
 
 
-    private void goToPlace(int placeIndex) {
-        currentPlace = places.get(placeIndex);
+    public void goToPlace(String placeName) {
+        currentPlace = places.get(placeName);
         floorColor = currentPlace.floorColor;
         brickColor = currentPlace.brickColor;
         doorColor = currentPlace.doorColor;

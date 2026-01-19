@@ -12,6 +12,10 @@ import com.mygdx.game.entities.components.visual.particles.FadeParticle;
 import com.mygdx.game.entities.facades.AugmentBox.AugmentBoxFacade;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.utils.types.NumberUtils;
+import com.mygdx.game.world.places.Place;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class WorldManager {
 
@@ -274,6 +278,10 @@ public class WorldManager {
         Managers.entityManager.clearAllEntities();
         progress.completedLevel();
 
+        if (progress.currentPlace.isComplete()) {
+            return;
+        }
+        
         Managers.entityManager.addEntity(playerRef.setX(-16f).setY((-progress.innerWorldSize + 1) * 32f + 16f));
 
 
@@ -282,6 +290,15 @@ public class WorldManager {
 
     public void restart() {
         this.progress = new WorldProgress();
+        loadLevel();
+    }
+    
+    public HashMap<String, Place> getPlaces() {
+        return progress.places;
+    }
+    
+    public void goToPlace(String placeName) {
+        progress.goToPlace(placeName);
         loadLevel();
     }
 }

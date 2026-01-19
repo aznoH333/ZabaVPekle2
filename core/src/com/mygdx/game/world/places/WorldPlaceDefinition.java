@@ -14,28 +14,38 @@ public enum WorldPlaceDefinition {
         Quality.POOR,
         Quality.POOR,
         Quality.COMMON,
-        1f
+        1f,
+        new Color(1f, 1f, 1f, 1f),
+        0.0f,
+        0.0f
     ),
     BLUE(
         "blue",
-        new Color(0.05f, 0.05f, 0.05f, 1f),
-        new Color(0.1f, 0.25f, 0.95f, 1f),
-        new Color(0.1f, 0.25f, 0.95f, 1f),
+        new Color(0.05f, 0.05f, 0.1f, 1f),
+        new Color(0.1f, 0.25f, 0.666f, 1f),
+        new Color(0.1f, 0.25f, 0.666f, 1f),
         new Color(0.8f, 0.8f, 0.8f, 1f),
         Quality.COMMON,
         Quality.POOR,
         Quality.COMMON,
-        3.1f
+        3.1f,
+        new Color(0f, 0f, 0.302f, 1f),
+        128f,
+        128f
     ),
-    BLACK("black",
+    RED("red",
         new Color(0.2f, 0.2f, 0.2f, 1f),
-        new Color(0.1f, 0.1f, 0.1f, 1f),
-        new Color(0.1f, 0.1f, 0.1f, 1f),
+        new Color(0.666f, 0.0f, 0.0f, 1f),
+        new Color(0.666f, 0.0f, 0.0f, 1f),
         new Color(0.4f, 0.4f, 0.4f, 1f),
         Quality.COMMON,
         Quality.COMMON,
         Quality.REFINED,
-        16f);
+        16f,
+        new Color(0.667f, 0.0f, 0.0f, 1f),
+        -128f,
+        64f
+    );
 
 
     public final Color floorColor;
@@ -47,6 +57,9 @@ public enum WorldPlaceDefinition {
     public final Quality combatRoomDropQuality;
     public final Quality bossRoomDropQuality;
     public final float placeDifficulty;
+    public final Color worldMapColor;
+    public final float worldMapX;
+    public final float worldMapY;
 
 
     WorldPlaceDefinition(
@@ -58,7 +71,10 @@ public enum WorldPlaceDefinition {
         Quality lootRoomBoxQuality,
         Quality combatRoomDropQuality,
         Quality bossRoomDropQuality,
-        float placeDifficulty
+        float placeDifficulty,
+        Color worldMapColor,
+        float worldMapX,
+        float worldMapY
     ) {
         this.placeName = placeName;
         this.floorColor = floorColor;
@@ -69,6 +85,9 @@ public enum WorldPlaceDefinition {
         this.combatRoomDropQuality = combatRoomDropQuality;
         this.bossRoomDropQuality = bossRoomDropQuality;
         this.placeDifficulty = placeDifficulty;
+        this.worldMapColor = worldMapColor;
+        this.worldMapX = worldMapX;
+        this.worldMapY = worldMapY;
     }
 
     public Place generatePlace() {

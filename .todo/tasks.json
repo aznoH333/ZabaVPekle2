@@ -1545,7 +1545,7 @@
     ],
     "title": "make the players bullets a different color from the enemies",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1557,6 +1557,19 @@
         "minute": 59,
         "second": 38,
         "nano": 718715669
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 19
+      },
+      "time": {
+        "hour": 19,
+        "minute": 48,
+        "second": 17,
+        "nano": 502548138
       }
     },
     "isImported": false
@@ -1689,7 +1702,7 @@
     ],
     "title": "Add new bullet art",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1701,6 +1714,19 @@
         "minute": 41,
         "second": 20,
         "nano": 387291202
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 19
+      },
+      "time": {
+        "hour": 19,
+        "minute": 48,
+        "second": 3,
+        "nano": 650550141
       }
     },
     "isImported": false
@@ -1957,7 +1983,7 @@
     ],
     "title": "Clean up step for entities (clean up light handles)",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1969,6 +1995,54 @@
         "minute": 58,
         "second": 0,
         "nano": 472297488
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_3664",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Randomize world map positions",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 19
+      },
+      "time": {
+        "hour": 20,
+        "minute": 0,
+        "second": 59,
+        "nano": 985478274
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_3732",
+    "priority": "LOW",
+    "tags": [
+      "🪲Bug"
+    ],
+    "title": "Player gets reset after completing a place",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 19
+      },
+      "time": {
+        "hour": 20,
+        "minute": 53,
+        "second": 22,
+        "nano": 741524088
       }
     },
     "isImported": false

@@ -27,7 +27,7 @@ public class Game extends GameState {
     @Override
     public void initializeState() {
 
-        Managers.worldManager.restart();
+        // Managers.worldManager.restart();
 
         Managers.entityManager.addEntity(new Entity()
             .setTeam(EntityTeam.FROG)
