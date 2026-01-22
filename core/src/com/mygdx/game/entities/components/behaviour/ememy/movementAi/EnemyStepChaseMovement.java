@@ -47,7 +47,7 @@ public class EnemyStepChaseMovement extends EntityComponent {
                 do {
                     pickedX = owner.x + (NumberUtils.randomFloat(32f, STEP_DISTANCE) * NumberUtils.boolToSign(NumberUtils.randomChance(0.5f)));
                     pickedY = owner.y + (NumberUtils.randomFloat(32f, STEP_DISTANCE) * NumberUtils.boolToSign(NumberUtils.randomChance(0.5f)));
-                } while (!Managers.worldManager.isSpaceEmpty(pickedX, pickedY, owner.width, owner.height));
+                } while (!Managers.levelManager.isSpaceEmpty(pickedX, pickedY, owner.width, owner.height));
 
                 movementTarget = new Coordinate(pickedX, pickedY);
             }

@@ -6,9 +6,8 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.components.visual.AttachedLight;
 import com.mygdx.game.entities.facades.GUIFacade;
 import com.mygdx.game.gameStates.GameState;
-import com.mygdx.game.world.places.Place;
+import com.mygdx.game.playState.world.WorldZone;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class WorldMap extends GameState {
@@ -20,9 +19,11 @@ public class WorldMap extends GameState {
     
     @Override
     public void initializeState() {
-        HashMap<String, Place> places = Managers.worldManager.getPlaces();
         
-        for (Place place : places.values()) {
+        /*
+        HashMap<String, WorldZone> places = Managers.levelManager.getPlaces();
+        
+        for (WorldZone place : places.values()) {
             Managers.entityManager.addEntity(
                 new Entity()
                     .setX(place.mapX)
@@ -34,10 +35,10 @@ public class WorldMap extends GameState {
             );
             
             GUIFacade.createButton("Go to " + place.placeName, place.mapX, place.mapY, (e)->{
-                Managers.worldManager.goToPlace(place.placeName);
+                Managers.levelManager.goToPlace(place.placeName);
                 Managers.gameStateManager.switchState("game");
             });
-        }
+        } */
     }
     
     @Override

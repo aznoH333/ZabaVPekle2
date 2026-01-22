@@ -12,7 +12,7 @@ public class Door extends EntityComponent {
     public void onCollide(Entity owner, Entity other) {
 
         if (other.hasComponent(ComponentName.PLAYER)) {
-            Managers.worldManager.moveToNewLevel(other);
+            Managers.levelManager.moveToNewLevel(other);
         }
     }
 }

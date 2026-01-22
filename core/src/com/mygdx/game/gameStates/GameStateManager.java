@@ -47,8 +47,8 @@ public class GameStateManager {
     public void update() {
         Managers.drawingManager.drawText(new TextDrawingCommand(currentState.name, 0f, 200f));
         if (currentState.drawWorld) {
-            Managers.worldManager.draw();
-            Managers.worldManager.update();
+            Managers.levelManager.draw();
+            Managers.levelManager.update();
         }
         Managers.entityManager.update();
         Managers.drawingManager.render();

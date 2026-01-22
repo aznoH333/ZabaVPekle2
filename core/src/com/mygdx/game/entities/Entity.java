@@ -112,7 +112,7 @@ public class Entity implements Copyable {
         // move
         collidedWithWorldOnX = false;
         collidedWithWorldOnY = false;
-        if (Managers.worldManager.isSpaceEmpty(x + xVelocity, y, width, height)) {
+        if (Managers.levelManager.isSpaceEmpty(x + xVelocity, y, width, height)) {
             x += xVelocity;
             lastFrameXVelocity = xVelocity;
         } else {
@@ -120,7 +120,7 @@ public class Entity implements Copyable {
             lastFrameXVelocity = 0f;
         }
 
-        if (Managers.worldManager.isSpaceEmpty(x, y + yVelocity, width, height)) {
+        if (Managers.levelManager.isSpaceEmpty(x, y + yVelocity, width, height)) {
             y += yVelocity;
             lastFrameYVelocity = yVelocity;
         } else {

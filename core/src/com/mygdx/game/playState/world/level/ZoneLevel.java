@@ -1,4 +1,4 @@
-package com.mygdx.game.world.places;
+package com.mygdx.game.playState.world.level;
 
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.utils.Trait;
@@ -7,17 +7,19 @@ import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 
-public class PlaceRoom {
+public class ZoneLevel {
     public final int roomSize;
     public final int enemiesToSpawn;
     public final int enemySpawnSpeed;
-    public final RoomType type;
+    public final LevelTheme theme;
+    public final LevelType type;
     private final ArrayList<Entity> enemyQueue = new ArrayList<>();
 
-    public PlaceRoom(RoomType roomType, ArrayList<Trait<Entity>> enemyRoster) {
-        this.type = roomType;
+    public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster) {
+        this.type = levelType;
         this.roomSize = type.roomSize;
-        this.enemySpawnSpeed = roomType.spawnSpeed;
+        this.enemySpawnSpeed = levelType.spawnSpeed;
+        this.theme = theme;
 
 
         ArrayList<Integer> indexesToExclude = new ArrayList<>();
@@ -33,7 +35,7 @@ public class PlaceRoom {
         }
 
         // build queue
-        TraitPicker<Entity> enemyPicker = new TraitPicker<>(roomEnemies, NumberUtils.randomFloat(roomType.minEnemies, roomType.maxEnemies));
+        TraitPicker<Entity> enemyPicker = new TraitPicker<>(roomEnemies, NumberUtils.randomFloat(levelType.minEnemies, levelType.maxEnemies));
         while (enemyPicker.hasBudget()) {
             enemyQueue.add(enemyPicker.pickValue());
         }
@@ -45,4 +47,13 @@ public class PlaceRoom {
         return enemyQueue.removeFirst();
     }
 
+    /** returns the size of the play area (inner world size)*/
+    public int getRoomSize() {
+        return roomSize;
+    }
+    
+    /** returns the total size of the world area (includes unplayable borders)*/
+    public int getOuterRoomSize() {
+        return roomSize + 5;
+    }
 }

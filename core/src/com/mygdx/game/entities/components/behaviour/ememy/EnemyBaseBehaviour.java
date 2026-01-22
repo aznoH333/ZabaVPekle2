@@ -46,7 +46,7 @@ public class EnemyBaseBehaviour extends EntityComponent {
     @Override
     public void onSudoku(Entity owner) {
         Managers.soundManager.playSound("enemy_death", 1f, 0.1f);
-        Managers.worldManager.killedEnemy();
+        Managers.levelManager.killedEnemy();
     }
 
     @Override

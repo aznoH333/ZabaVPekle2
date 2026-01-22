@@ -1,16 +1,14 @@
-package com.mygdx.game.world.places;
+package com.mygdx.game.playState.world;
 
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.entities.items.Quality;
+import com.mygdx.game.playState.world.level.LevelTheme;
 
-public enum WorldPlaceDefinition {
+public enum WorldZoneDefinition {
 
     START(
         "start",
-        new Color(0.1f, 0.1f, 0.1f, 1f),
-        new Color(0.20f, 0.20f, 0.20f, 1f),
-        new Color(0.4f, 0.4f, 0.4f, 1f),
-        new Color(0.8f, 0.8f, 0.8f, 1f),
+        LevelTheme.HANGAR_PLATING,
         Quality.POOR,
         Quality.POOR,
         Quality.COMMON,
@@ -21,10 +19,7 @@ public enum WorldPlaceDefinition {
     ),
     BLUE(
         "blue",
-        new Color(0.05f, 0.05f, 0.1f, 1f),
-        new Color(0.1f, 0.25f, 0.666f, 1f),
-        new Color(0.1f, 0.25f, 0.666f, 1f),
-        new Color(0.8f, 0.8f, 0.8f, 1f),
+        LevelTheme.BLUE_DUNGEON,
         Quality.COMMON,
         Quality.POOR,
         Quality.COMMON,
@@ -34,10 +29,7 @@ public enum WorldPlaceDefinition {
         128f
     ),
     RED("red",
-        new Color(0.2f, 0.2f, 0.2f, 1f),
-        new Color(0.666f, 0.0f, 0.0f, 1f),
-        new Color(0.666f, 0.0f, 0.0f, 1f),
-        new Color(0.4f, 0.4f, 0.4f, 1f),
+        LevelTheme.RED_PLACEHOLDER,
         Quality.COMMON,
         Quality.COMMON,
         Quality.REFINED,
@@ -47,12 +39,9 @@ public enum WorldPlaceDefinition {
         64f
     );
 
-
-    public final Color floorColor;
-    public final Color brickColor;
-    public final Color worldTopColor;
-    public final Color doorColor;
+    
     public final String placeName;
+    public final LevelTheme theme;
     public final Quality lootRoomBoxQuality;
     public final Quality combatRoomDropQuality;
     public final Quality bossRoomDropQuality;
@@ -62,12 +51,9 @@ public enum WorldPlaceDefinition {
     public final float worldMapY;
 
 
-    WorldPlaceDefinition(
+    WorldZoneDefinition(
         String placeName,
-        Color floorColor,
-        Color brickColor,
-        Color worldTopColor,
-        Color doorColor,
+        LevelTheme theme,
         Quality lootRoomBoxQuality,
         Quality combatRoomDropQuality,
         Quality bossRoomDropQuality,
@@ -77,10 +63,7 @@ public enum WorldPlaceDefinition {
         float worldMapY
     ) {
         this.placeName = placeName;
-        this.floorColor = floorColor;
-        this.doorColor = doorColor;
-        this.brickColor = brickColor;
-        this.worldTopColor = worldTopColor;
+        this.theme = theme;
         this.lootRoomBoxQuality = lootRoomBoxQuality;
         this.combatRoomDropQuality = combatRoomDropQuality;
         this.bossRoomDropQuality = bossRoomDropQuality;
@@ -90,8 +73,8 @@ public enum WorldPlaceDefinition {
         this.worldMapY = worldMapY;
     }
 
-    public Place generatePlace() {
-        Place place = new Place(
+    public WorldZone generatePlace() {
+        WorldZone place = new WorldZone(
             this
         );
 

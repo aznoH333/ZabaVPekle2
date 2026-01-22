@@ -1,6 +1,6 @@
-package com.mygdx.game.world.places;
+package com.mygdx.game.playState.world.level;
 
-public enum RoomType {
+public enum LevelType {
     SPAWN(4, 0, 0, 0, false),
     MAJOR_COMBAT(7, 10, 20, 10, true),
     FILLER(5, 3, 7, 20, true),
@@ -13,7 +13,7 @@ public enum RoomType {
     public final int spawnSpeed;
     public final boolean locksWhenEntered;
 
-    RoomType(int size, int minEnemies, int maxEnemies, int spawnSpeed, boolean locksWhenEntered) {
+    LevelType(int size, int minEnemies, int maxEnemies, int spawnSpeed, boolean locksWhenEntered) {
         this.roomSize = size;
         this.minEnemies = minEnemies;
         this.maxEnemies = maxEnemies;
