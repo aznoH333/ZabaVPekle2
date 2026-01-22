@@ -40,7 +40,7 @@ public enum WorldZoneDefinition {
     );
 
     
-    public final String placeName;
+    public final String zoneName;
     public final LevelTheme theme;
     public final Quality lootRoomBoxQuality;
     public final Quality combatRoomDropQuality;
@@ -52,7 +52,7 @@ public enum WorldZoneDefinition {
 
 
     WorldZoneDefinition(
-        String placeName,
+        String zoneName,
         LevelTheme theme,
         Quality lootRoomBoxQuality,
         Quality combatRoomDropQuality,
@@ -62,7 +62,7 @@ public enum WorldZoneDefinition {
         float worldMapX,
         float worldMapY
     ) {
-        this.placeName = placeName;
+        this.zoneName = zoneName;
         this.theme = theme;
         this.lootRoomBoxQuality = lootRoomBoxQuality;
         this.combatRoomDropQuality = combatRoomDropQuality;
@@ -73,11 +73,4 @@ public enum WorldZoneDefinition {
         this.worldMapY = worldMapY;
     }
 
-    public WorldZone generatePlace() {
-        WorldZone place = new WorldZone(
-            this
-        );
-
-        return place;
-    }
 }

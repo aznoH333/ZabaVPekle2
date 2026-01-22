@@ -2,7 +2,8 @@ package com.mygdx.game.playState;
 
 
 import com.mygdx.game.entities.Entity;
-import com.mygdx.game.playState.world.WorldMap;
+import com.mygdx.game.playState.world.World;
+import com.mygdx.game.playState.world.WorldZone;
 
 /**
  * Responsible for holding information relating to a SINGLE playthrough.
@@ -21,6 +22,22 @@ public class PlayStateManager {
     
     
     public Entity playerReference = null;
-    public WorldMap worldMap = new WorldMap();
+    public World world = new World();
+    public WorldZone currentZone = null;
+    public ZoneCoordinates playerZoneCoordinates = null;
     
+    
+    
+    public void goToZone(String zoneName) {
+        this.currentZone = world.zones.get(zoneName);
+    }
+    
+    
+    public ZoneCoordinates getPlayerZoneCoordinates() {
+        return this.playerZoneCoordinates;
+    }
+    
+    public void setPlayerZoneCoordinates(int x, int y) {
+        this.playerZoneCoordinates = new ZoneCoordinates(x, y);
+    }
 }

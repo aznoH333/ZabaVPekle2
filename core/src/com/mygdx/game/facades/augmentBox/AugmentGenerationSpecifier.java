@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.facades.AugmentBox;
+package com.mygdx.game.facades.augmentBox;
 
 import com.mygdx.game.entities.EntityComponent;
 

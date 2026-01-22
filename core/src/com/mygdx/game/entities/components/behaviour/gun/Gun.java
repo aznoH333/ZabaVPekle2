@@ -7,10 +7,9 @@ import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.entities.components.behaviour.augments.projectileModifiers.SpinSprite;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.SpawnFadeTrail;
-import com.mygdx.game.entities.facades.ProjectileFactory;
+import com.mygdx.game.facades.entities.ProjectileFactory;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.types.NumberUtils;
 

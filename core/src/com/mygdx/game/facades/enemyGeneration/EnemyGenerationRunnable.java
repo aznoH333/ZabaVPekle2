@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.facades.EnemyGeneration;
+package com.mygdx.game.facades.enemyGeneration;
 
 public interface EnemyGenerationRunnable {
     void run(EnemyGenerationBase base);

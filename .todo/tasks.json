@@ -2046,5 +2046,29 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_3801",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Clean up facades and make them consistent",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 1,
+        "day": 22
+      },
+      "time": {
+        "hour": 18,
+        "minute": 49,
+        "second": 47,
+        "nano": 875136905
+      }
+    },
+    "isImported": false
   }
 ]

@@ -4,7 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.components.visual.AttachedLight;
-import com.mygdx.game.entities.facades.GUIFacade;
+import com.mygdx.game.facades.gui.GUIFacade;
+import com.mygdx.game.facades.world.WorldFacade;
 import com.mygdx.game.gameStates.GameState;
 
 public class MainMenu extends GameState {
@@ -22,7 +23,10 @@ public class MainMenu extends GameState {
             "Play game",
             0f,
             25f,
-            owner -> Managers.gameStateManager.switchState("world map")
+            owner -> {
+                WorldFacade.initializeNewGame();
+                Managers.gameStateManager.switchState("world map");
+            }
         );
 
         GUIFacade.createButton(

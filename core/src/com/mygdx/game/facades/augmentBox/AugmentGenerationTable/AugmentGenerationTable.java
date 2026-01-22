@@ -1,6 +1,6 @@
-package com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationTable;
+package com.mygdx.game.facades.augmentBox.AugmentGenerationTable;
 
-import com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationSpecifier;
+import com.mygdx.game.facades.augmentBox.AugmentGenerationSpecifier;
 import com.mygdx.game.entities.items.Quality;
 
 import java.util.ArrayList;

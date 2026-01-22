@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.facades;
+package com.mygdx.game.facades.entities;
 
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.drawing.DrawingLayer;

@@ -1,12 +1,12 @@
-package com.mygdx.game.entities.facades.AugmentBox;
+package com.mygdx.game.facades.augmentBox;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.AugmentBox;
-import com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationTable.AugmentGenerationTable;
-import com.mygdx.game.entities.facades.GUIFacade;
+import com.mygdx.game.facades.augmentBox.AugmentGenerationTable.AugmentGenerationTable;
+import com.mygdx.game.facades.gui.GUIFacade;
 import com.mygdx.game.entities.items.Augment;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.utils.types.NumberUtils;

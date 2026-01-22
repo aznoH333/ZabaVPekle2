@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.facades;
+package com.mygdx.game.facades.gui;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;

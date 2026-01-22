@@ -4,8 +4,10 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.components.visual.AttachedLight;
-import com.mygdx.game.entities.facades.GUIFacade;
+import com.mygdx.game.facades.gui.GUIFacade;
+import com.mygdx.game.facades.world.WorldFacade;
 import com.mygdx.game.gameStates.GameState;
+import com.mygdx.game.playState.ZoneCoordinates;
 import com.mygdx.game.playState.world.WorldZone;
 
 import java.util.HashMap;
@@ -20,8 +22,8 @@ public class WorldMap extends GameState {
     @Override
     public void initializeState() {
         
-        /*
-        HashMap<String, WorldZone> places = Managers.levelManager.getPlaces();
+        
+        HashMap<String, WorldZone> places = Managers.playStateManager.world.zones;
         
         for (WorldZone place : places.values()) {
             Managers.entityManager.addEntity(
@@ -35,10 +37,9 @@ public class WorldMap extends GameState {
             );
             
             GUIFacade.createButton("Go to " + place.placeName, place.mapX, place.mapY, (e)->{
-                Managers.levelManager.goToPlace(place.placeName);
-                Managers.gameStateManager.switchState("game");
+                WorldFacade.teleportPlayerToZone(place.placeName, new ZoneCoordinates(0, 0), 0f, 0f);
             });
-        } */
+        }
     }
     
     @Override

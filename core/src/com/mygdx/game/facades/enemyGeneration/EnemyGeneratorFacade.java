@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.facades.EnemyGeneration;
+package com.mygdx.game.facades.enemyGeneration;
 
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.drawing.DrawingLayer;
@@ -9,7 +9,6 @@ import com.mygdx.game.entities.components.behaviour.ememy.EnemyBaseBehaviour;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.gui.EntityRunnable;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
-import com.mygdx.game.entities.components.visual.AttachedLight;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.components.visual.LegsWithHatType;
 import com.mygdx.game.entities.fields.FieldName;

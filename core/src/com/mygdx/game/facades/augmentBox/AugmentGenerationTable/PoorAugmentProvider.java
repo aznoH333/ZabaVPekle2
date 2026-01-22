@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationTable;
+package com.mygdx.game.facades.augmentBox.AugmentGenerationTable;
 
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.StatBoostAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.MachineGunAugment;
@@ -9,7 +9,7 @@ import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.ha
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.TripleHank;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.BoomerangShotAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.ShrapnelShotAugment;
-import com.mygdx.game.entities.facades.AugmentBox.AugmentGenerationSpecifier;
+import com.mygdx.game.facades.augmentBox.AugmentGenerationSpecifier;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Quality;
 

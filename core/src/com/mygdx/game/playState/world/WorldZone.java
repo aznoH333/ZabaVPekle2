@@ -2,7 +2,7 @@ package com.mygdx.game.playState.world;
 
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.entities.Entity;
-import com.mygdx.game.entities.facades.EnemyGeneration.EnemyGeneratorFacade;
+import com.mygdx.game.facades.enemyGeneration.EnemyGeneratorFacade;
 import com.mygdx.game.utils.Trait;
 import com.mygdx.game.playState.world.level.ZoneLevel;
 import com.mygdx.game.playState.world.level.LevelType;
@@ -29,7 +29,7 @@ public class WorldZone {
     public WorldZone(WorldZoneDefinition type) {
         this.type = type;
 
-        this.placeName = type.placeName;
+        this.placeName = type.zoneName;
         this.mapColor = type.worldMapColor;
         
         this.mapX = type.worldMapX;

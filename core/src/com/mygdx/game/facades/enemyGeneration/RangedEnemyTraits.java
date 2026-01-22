@@ -1,4 +1,4 @@
-package com.mygdx.game.entities.facades.EnemyGeneration;
+package com.mygdx.game.facades.enemyGeneration;
 
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.StatBoostAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.MachineGunAugment;
