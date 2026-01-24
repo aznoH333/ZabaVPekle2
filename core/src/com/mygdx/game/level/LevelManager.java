@@ -238,8 +238,8 @@ public class LevelManager {
             // spawn door object
             Managers.entityManager.addEntity(
                 new Entity()
-                    .setX(((currentLevel.getRoomSize() - 1) * 32f * exit.getKey().x - Math.abs(16 * exit.getKey().y)))
-                    .setY(((currentLevel.getRoomSize() - 1) * 32f * exit.getKey().y - Math.abs(16 * exit.getKey().x)))
+                    .setX(((currentLevel.getRoomSize() - 1) * 32f * exit.getKey().x - (16 * Math.abs(exit.getKey().y))))
+                    .setY(((currentLevel.getRoomSize() - 1) * 32f * exit.getKey().y - (16 * exit.getKey().x)))
                     .setSprite("player_1")
                     .addComponent(new Door(exit.getValue().zoneName, exit.getValue().zoneCoordinates, exit.getKey()))
             );
@@ -274,6 +274,8 @@ public class LevelManager {
     public void loadLevel(ZoneLevel room) {
         this.currentLevel = room;
         this.currentLevelExits = WorldFacade.getLevelExits(currentLevel);
+        
+        openDoors();
     }
 
 }

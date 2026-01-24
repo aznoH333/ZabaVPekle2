@@ -86,7 +86,7 @@ public class WorldZone {
         rooms.put(new ZoneCoordinates(0, 0), new ZoneLevel(LevelType.SPAWN, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new ZoneCoordinates(0, 0), type.zoneName));
         
         for (ZoneCoordinates importantCoordinate: importantCoordinates) {
-            rooms.put(importantCoordinate, new ZoneLevel(LevelType.LOOT, LevelTheme.SPECIAL_PLACEHOLDER,  enemyRoster, importantCoordinate, type.zoneName));
+            rooms.put(importantCoordinate, new ZoneLevel(LevelType.LOOT, LevelTheme.RED_PLACEHOLDER,  enemyRoster, importantCoordinate, type.zoneName));
         }
         
         for (ZoneCoordinates roomCoordinate : mapCoordinates) {
@@ -107,7 +107,7 @@ public class WorldZone {
                 if (rooms.get(new ZoneCoordinates(x, y)) != null) {
                     System.out.print("[ ]");
                 }else {
-                    System.out.print("  ");
+                    System.out.print("   ");
                 }
             }
             System.out.print("\n");

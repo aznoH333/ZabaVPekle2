@@ -21,9 +21,12 @@ public class WorldFacade {
      * @param y - in room y
      */
     public static void teleportPlayerToZone(String zoneName, ZoneCoordinates coordinates, float x, float y) {
+        Managers.entityManager.clearAllEntities();
+        
         Managers.playStateManager.goToZone(zoneName);
         Managers.playStateManager.setPlayerZoneCoordinates(coordinates.x, coordinates.y);
         Managers.playStateManager.playerReference.setX(x).setY(y);
+        Managers.entityManager.addEntity(Managers.playStateManager.playerReference);
         Managers.levelManager.loadLevel(getLevelByZoneCoordinates(zoneName, coordinates));
     }
     
