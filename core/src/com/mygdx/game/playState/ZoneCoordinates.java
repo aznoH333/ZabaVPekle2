@@ -1,12 +1,16 @@
 package com.mygdx.game.playState;
 
+import java.util.Objects;
+
 public class ZoneCoordinates {
     public final int x;
     public final int y;
+    private final int hashCode;
     
     public ZoneCoordinates(int x, int y) {
         this.x = x;
         this.y = y;
+        this.hashCode = Objects.hash(x, y);
     }
     
     @Override
@@ -16,6 +20,12 @@ public class ZoneCoordinates {
         }
         
         return this.x == ((ZoneCoordinates)other).x && this.y == ((ZoneCoordinates)other).y;
+    }
+    
+    
+    @Override
+    public int hashCode() {
+        return hashCode;
     }
     
 }

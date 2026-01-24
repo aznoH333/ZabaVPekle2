@@ -23,6 +23,12 @@ public enum LevelTheme {
         new Color(0.666f, 0.0f, 0.0f, 1f),
         new Color(0.666f, 0.0f, 0.0f, 1f),
         new Color(0.4f, 0.4f, 0.4f, 1f)
+    ),
+    SPECIAL_PLACEHOLDER(
+        new Color(0.2f, 0.2f, 0.2f, 1f),
+        new Color(0.666f, 0.555f, 0.0f, 1f),
+        new Color(0.666f, 0.555f, 0.0f, 1f),
+        new Color(0.4f, 0.4f, 0.4f, 1f)
     );
     
     

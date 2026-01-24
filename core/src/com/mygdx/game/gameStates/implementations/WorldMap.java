@@ -38,6 +38,7 @@ public class WorldMap extends GameState {
             
             GUIFacade.createButton("Go to " + place.placeName, place.mapX, place.mapY, (e)->{
                 WorldFacade.teleportPlayerToZone(place.placeName, new ZoneCoordinates(0, 0), 0f, 0f);
+                Managers.gameStateManager.switchState("game");
             });
         }
     }

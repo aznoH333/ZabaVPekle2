@@ -1,6 +1,7 @@
 package com.mygdx.game.playState.world.level;
 
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.playState.ZoneCoordinates;
 import com.mygdx.game.utils.Trait;
 import com.mygdx.game.utils.TraitPicker;
 import com.mygdx.game.utils.types.NumberUtils;
@@ -14,13 +15,16 @@ public class ZoneLevel {
     public final LevelTheme theme;
     public final LevelType type;
     private final ArrayList<Entity> enemyQueue = new ArrayList<>();
+    public final ZoneCoordinates coordinates;
+    public final String zoneName;
 
-    public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster) {
+    public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster, ZoneCoordinates coordinates, String zoneName) {
         this.type = levelType;
         this.roomSize = type.roomSize;
         this.enemySpawnSpeed = levelType.spawnSpeed;
         this.theme = theme;
-
+        this.coordinates = coordinates;
+        this.zoneName = zoneName;
 
         ArrayList<Integer> indexesToExclude = new ArrayList<>();
         ArrayList<Trait<Entity>> roomEnemies = new ArrayList<>();

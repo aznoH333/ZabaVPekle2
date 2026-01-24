@@ -6,8 +6,13 @@ import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.components.control.Door;
+import com.mygdx.game.facades.world.WorldFacade;
+import com.mygdx.game.playState.WorldCoordinates;
 import com.mygdx.game.utils.types.NumberUtils;
 import com.mygdx.game.playState.world.level.ZoneLevel;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -31,6 +36,7 @@ public class LevelManager {
     private int nextEnemySpawnCooldown = 0;
     private boolean doorsOpen = false;
     private ZoneLevel currentLevel = null;
+    private HashMap<LevelExitDirection, WorldCoordinates> currentLevelExits = null;
 
     private LevelManager() {
     }
@@ -226,14 +232,20 @@ public class LevelManager {
     private void openDoors() {
         doorsOpen = true;
 
-
-        // spawn door object
-        Managers.entityManager.addEntity(
-            new Entity()
-                .setX(-16f)
-                .setY((currentLevel.getRoomSize() - 1) * 32f)
-                .addComponent(new Door())
-        );
+        
+        
+        for (Map.Entry<LevelExitDirection, WorldCoordinates> exit: currentLevelExits.entrySet()) {
+            // spawn door object
+            Managers.entityManager.addEntity(
+                new Entity()
+                    .setX(((currentLevel.getRoomSize() - 1) * 32f * exit.getKey().x - Math.abs(16 * exit.getKey().y)))
+                    .setY(((currentLevel.getRoomSize() - 1) * 32f * exit.getKey().y - Math.abs(16 * exit.getKey().x)))
+                    .setSprite("player_1")
+                    .addComponent(new Door(exit.getValue().zoneName, exit.getValue().zoneCoordinates, exit.getKey()))
+            );
+        }
+        
+        
 
 
         // spawn loot
@@ -245,6 +257,10 @@ public class LevelManager {
 
 
     public boolean isSpaceEmpty(float x, float y, float width, float height) {
+        if (currentLevel == null) {
+            return true;
+        }
+        
         // placehodler logic
         float widthValue = width / 2f;
         float heightValue = height / 2f;
@@ -257,6 +273,7 @@ public class LevelManager {
     
     public void loadLevel(ZoneLevel room) {
         this.currentLevel = room;
+        this.currentLevelExits = WorldFacade.getLevelExits(currentLevel);
     }
 
 }
