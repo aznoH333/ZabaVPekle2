@@ -238,8 +238,8 @@ public class LevelManager {
             // spawn door object
             Managers.entityManager.addEntity(
                 new Entity()
-                    .setX(((currentLevel.getRoomSize() - 1) * 32f * exit.getKey().x - (16 * Math.abs(exit.getKey().y))))
-                    .setY(((currentLevel.getRoomSize() - 1) * 32f * exit.getKey().y - (16 * exit.getKey().x)))
+                    .setX((currentLevel.getRoomSize() - 0.5f) * 32f * exit.getKey().x - 16f)
+                    .setY((currentLevel.getRoomSize() - 0.5f) * 32f * exit.getKey().y - 16f)
                     .setSprite("player_1")
                     .addComponent(new Door(exit.getValue().zoneName, exit.getValue().zoneCoordinates, exit.getKey()))
             );
