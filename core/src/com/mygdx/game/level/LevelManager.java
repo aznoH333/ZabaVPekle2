@@ -237,8 +237,8 @@ public class LevelManager {
             // spawn door object
             Managers.entityManager.addEntity(
                 new Entity()
-                    .setX((currentLevel.getRoomSize() - 0.5f) * 32f * exit.getKey().x - 16f)
-                    .setY((currentLevel.getRoomSize() - 0.5f) * 32f * exit.getKey().y - 16f)
+                    .setX((currentLevel.getRoomSize() - 0.45f) * 32f * exit.getKey().x - 16f)
+                    .setY((currentLevel.getRoomSize() - 0.45f) * 32f * exit.getKey().y - 16f)
                     .addComponent(new Door(exit.getValue().zoneName, exit.getValue().zoneCoordinates, exit.getKey()))
             );
         }
