@@ -28,7 +28,7 @@ public class Game extends GameState {
     @Override
     public void initializeState() {
 
-        Managers.entityManager.addEntity(PlayerFacade.createNewPlayer(0f, 0f));
+        // Managers.entityManager.addEntity(PlayerFacade.createNewPlayer(0f, 0f));
 
         AugmentBoxFacade.createNewBox(0f, 64f, Quality.POOR);
 
