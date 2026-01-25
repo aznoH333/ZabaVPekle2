@@ -35,8 +35,8 @@ public class WorldFacade {
         ZoneLevel targetLevel = getLevelByZoneCoordinates(zoneName, coordinates);
         
         // calculate entry point location
-        float entryX = (targetLevel.getRoomSize() - 1) * direction.x;
-        float entryY = (targetLevel.getRoomSize() - 1) * direction.y;
+        float entryX = (((targetLevel.getRoomSize() - 1.1f) * 32f) * -direction.x) - 16f;
+        float entryY = (((targetLevel.getRoomSize() - 1.1f) * 32f) * -direction.y) - 16f;
         
         teleportPlayerToZone(zoneName, coordinates, entryX, entryY);
     }
@@ -48,7 +48,6 @@ public class WorldFacade {
     public static void initializeNewGame() {
         Managers.playStateManager.restartGame();
         Managers.playStateManager.playerReference = PlayerFacade.createNewPlayer(0f, 0f);
-        // teleportPlayerToZone("start", new ZoneCoordinates(0, 0), 0f, 0f);
     }
     
     
