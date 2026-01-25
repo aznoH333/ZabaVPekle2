@@ -39,6 +39,7 @@ public class GameStateManager {
         currentState = states.get(newState);
         Managers.entityManager.clearAllEntities();
         Managers.drawingManager.setCameraPosition(0f, 0f);
+        Managers.drawingManager.clearAllLights();
 
         currentState.initializeState();
     }

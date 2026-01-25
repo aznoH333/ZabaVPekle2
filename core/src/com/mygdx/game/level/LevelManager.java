@@ -87,7 +87,7 @@ public class LevelManager {
         }
     }
 
-
+    // TODO : this is dogshit slow code thats hard to maintain
     public LevelTileType getTileType(int x, int y) {
         int absX = Math.abs(x);
         int absY = Math.abs(y);
@@ -96,15 +96,14 @@ public class LevelManager {
 
 
         // doors
-        if (x == 0 && y == currentLevel.getRoomSize()) {
-            if (doorsOpen) {
-                return LevelTileType.DOOR_TOP_OPEN;
-            } else {
-                return LevelTileType.DOOR_TOP_CLOSED;
+        for (LevelExitDirection direction: currentLevelExits.keySet()) {
+            if (x == direction.x * currentLevel.getRoomSize() && y == direction.y * currentLevel.getRoomSize()) {
+                if (doorsOpen) {
+                    return direction.openDoorTile;
+                }else {
+                    return direction.closedDoorTile;
+                }
             }
-        }
-        if (x == 0 && y == -currentLevel.getRoomSize()) {
-            return LevelTileType.DOOR_BOTTOM_CLOSED;
         }
 
 
@@ -240,7 +239,6 @@ public class LevelManager {
                 new Entity()
                     .setX((currentLevel.getRoomSize() - 0.5f) * 32f * exit.getKey().x - 16f)
                     .setY((currentLevel.getRoomSize() - 0.5f) * 32f * exit.getKey().y - 16f)
-                    .setSprite("player_1")
                     .addComponent(new Door(exit.getValue().zoneName, exit.getValue().zoneCoordinates, exit.getKey()))
             );
         }

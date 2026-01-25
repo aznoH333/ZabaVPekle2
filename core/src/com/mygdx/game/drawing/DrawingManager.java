@@ -379,6 +379,10 @@ public class DrawingManager {
         shader.setUniformi("usedLights", lights.size());
 
     }
+    
+    public void clearAllLights() {
+        this.lights.clear();
+    }
 
 
 }

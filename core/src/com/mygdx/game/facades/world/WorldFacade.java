@@ -22,7 +22,7 @@ public class WorldFacade {
      */
     public static void teleportPlayerToZone(String zoneName, ZoneCoordinates coordinates, float x, float y) {
         Managers.entityManager.clearAllEntities();
-        
+        Managers.drawingManager.clearAllLights();
         Managers.playStateManager.goToZone(zoneName);
         Managers.playStateManager.setPlayerZoneCoordinates(coordinates.x, coordinates.y);
         Managers.playStateManager.playerReference.setX(x).setY(y);

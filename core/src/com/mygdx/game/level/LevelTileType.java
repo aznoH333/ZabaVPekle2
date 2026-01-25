@@ -15,7 +15,13 @@ public enum LevelTileType {
     DOOR_TOP_CLOSED("world_0009", LevelTileColorGroup.BRICKS, "world_0019", LevelTileColorGroup.DOORS, true),
     DOOR_TOP_OPEN("world_0009", LevelTileColorGroup.BRICKS, "world_0020", LevelTileColorGroup.DOORS, true),
     DOOR_BOTTOM_CLOSED("world_0012", LevelTileColorGroup.BRICKS, "world_0021", LevelTileColorGroup.DOORS, true),
+    DOOR_BOTTOM_OPEN("world_0012", LevelTileColorGroup.BRICKS, "world_0022", LevelTileColorGroup.DOORS, true),
+    DOOR_LEFT_CLOSED("world_0010", LevelTileColorGroup.BRICKS, "world_0023", LevelTileColorGroup.DOORS, true),
+    DOOR_LEFT_OPEN("world_0010", LevelTileColorGroup.BRICKS, "world_0024", LevelTileColorGroup.DOORS, true),
+    DOOR_RIGHT_CLOSED("world_0011", LevelTileColorGroup.BRICKS, "world_0025", LevelTileColorGroup.DOORS, true),
+    DOOR_RIGHT_OPEN("world_0011", LevelTileColorGroup.BRICKS, "world_0026", LevelTileColorGroup.DOORS, true),
 
+    
     BRICK_WALL_TOP("world_0009", LevelTileColorGroup.BRICKS, true),
     BRICK_WALL_RIGHT("world_0010", LevelTileColorGroup.BRICKS, true),
     BRICK_WALL_BOTTOM("world_0012", LevelTileColorGroup.BRICKS, true),
