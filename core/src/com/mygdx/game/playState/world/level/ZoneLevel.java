@@ -1,6 +1,11 @@
 package com.mygdx.game.playState.world.level;
 
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.EntityTeam;
+import com.mygdx.game.entities.items.Quality;
+import com.mygdx.game.facades.augmentBox.AugmentBoxFacade;
+import com.mygdx.game.level.LevelExitDirection;
 import com.mygdx.game.playState.ZoneCoordinates;
 import com.mygdx.game.utils.Trait;
 import com.mygdx.game.utils.TraitPicker;
@@ -10,13 +15,12 @@ import java.util.ArrayList;
 
 public class ZoneLevel {
     public final int roomSize;
-    public final int enemiesToSpawn;
     public final int enemySpawnSpeed;
     public final LevelTheme theme;
     public final LevelType type;
-    private final ArrayList<Entity> enemyQueue = new ArrayList<>();
     public final ZoneCoordinates coordinates;
     public final String zoneName;
+    public final ArrayList<Entity> roomContents = new ArrayList<>();
 
     public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster, ZoneCoordinates coordinates, String zoneName) {
         this.type = levelType;
@@ -41,14 +45,46 @@ public class ZoneLevel {
         // build queue
         TraitPicker<Entity> enemyPicker = new TraitPicker<>(roomEnemies, NumberUtils.randomFloat(levelType.minEnemies, levelType.maxEnemies));
         while (enemyPicker.hasBudget()) {
-            enemyQueue.add(enemyPicker.pickValue());
+            int enemyX;
+            int enemyY;
+            boolean isSpawnValid;
+            
+            do {
+                enemyX = NumberUtils.randomInt(-roomSize + 1, roomSize - 1) * 32;
+                enemyY = NumberUtils.randomInt(-roomSize + 1, roomSize - 1) * 32;
+                
+                isSpawnValid = true;
+                
+                /** TODO: make this reflect the actual level exits */
+                for (LevelExitDirection direction : LevelExitDirection.values()) {
+                    if (NumberUtils.pythagoras(
+                        direction.x * roomSize * 32f,
+                        direction.y * roomSize * 32f,
+                        enemyX,
+                        enemyY
+                    ) < 64f) {
+                        isSpawnValid = false;
+                    }
+                }
+                
+                
+            }while (!isSpawnValid);
+            
+            roomContents.add(
+                enemyPicker
+                    .pickValue()
+                    .copy()
+                    .setX(enemyX - 16f)
+                    .setY(enemyY - 16f)
+            );
         }
-        enemiesToSpawn = enemyQueue.size();
-
-    }
-
-    public Entity getReferenceEnemyFromRoster() {
-        return enemyQueue.removeFirst();
+        
+        if (type == LevelType.LOOT) {
+            roomContents.add(
+                AugmentBoxFacade.createNewBox(-16f, -16f, Quality.POOR)
+            );
+        }
+        
     }
 
     /** returns the size of the play area (inner world size)*/
@@ -59,5 +95,20 @@ public class ZoneLevel {
     /** returns the total size of the world area (includes unplayable borders)*/
     public int getOuterRoomSize() {
         return roomSize + 5;
+    }
+    
+    public ArrayList<Entity> getRoomContents() {
+        return roomContents;
+    }
+    
+    /** Saves all entities in a room. */
+    public void updateRoomContents() {
+        roomContents.clear();
+        
+        for (Entity entity : Managers.entityManager.getAllEntities()) {
+            if (entity.team.savedAsRoomContent) {
+                roomContents.add(entity);
+            }
+        }
     }
 }

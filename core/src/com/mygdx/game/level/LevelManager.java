@@ -30,10 +30,6 @@ public class LevelManager {
         return instance;
     }
 
-    private int enemiesToSpawn = 10;
-    private int enemiesToKill = enemiesToSpawn;
-    private int enemySpawnCooldown = 10;
-    private int nextEnemySpawnCooldown = 0;
     private boolean doorsOpen = false;
     private ZoneLevel currentLevel = null;
     private HashMap<LevelExitDirection, WorldCoordinates> currentLevelExits = null;
@@ -183,17 +179,6 @@ public class LevelManager {
             return;
         }
 
-        // spawn enemies
-        if (enemiesToSpawn > 0) {
-
-            if (nextEnemySpawnCooldown == 0) {
-                nextEnemySpawnCooldown = enemySpawnCooldown;
-                spawnEnemy();
-                enemiesToSpawn--;
-            } else {
-                nextEnemySpawnCooldown--;
-            }
-        }
     }
 
     private void spawnEnemy() {
@@ -221,17 +206,11 @@ public class LevelManager {
     }
 
     public void killedEnemy() {
-        this.enemiesToKill--;
-
-        if (enemiesToKill == 0) {
-            openDoors();
-        }
+    
     }
 
     private void openDoors() {
         doorsOpen = true;
-
-        
         
         for (Map.Entry<LevelExitDirection, WorldCoordinates> exit: currentLevelExits.entrySet()) {
             // spawn door object
@@ -243,16 +222,14 @@ public class LevelManager {
             );
         }
         
-        
-
-
-        // spawn loot
-        // Quality loot = progress.shouldSpawnBox();
-        /* if (loot != null) {
-            AugmentBoxFacade.createNewBox(-16f, -16f, loot);
-        } */
     }
 
+    public void saveCurrentRoomContents() {
+        if (currentLevel == null) {
+            return;
+        }
+        this.currentLevel.updateRoomContents();
+    }
 
     public boolean isSpaceEmpty(float x, float y, float width, float height) {
         if (currentLevel == null) {
@@ -272,6 +249,10 @@ public class LevelManager {
     public void loadLevel(ZoneLevel room) {
         this.currentLevel = room;
         this.currentLevelExits = WorldFacade.getLevelExits(currentLevel);
+        
+        for (Entity e : room.roomContents) {
+            Managers.entityManager.addEntity(e);
+        }
         
         openDoors();
     }

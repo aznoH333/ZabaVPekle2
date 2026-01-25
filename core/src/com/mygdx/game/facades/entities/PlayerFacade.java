@@ -16,7 +16,7 @@ public class PlayerFacade {
     /** creates a new player blank entity*/
     public static Entity createNewPlayer(float x, float y) {
         return new Entity()
-            .setTeam(EntityTeam.FROG)
+            .setTeam(EntityTeam.PLAYER)
             .addComponent(new PlayerBehaviour())
             .setDrawingLayer(DrawingLayer.PLAYER)
             .addComponent(new AnimatedLegsWithHat(LegsWithHatType.PLAYER, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.8f, 0.8f, 1f), null))

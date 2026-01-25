@@ -4,6 +4,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.AugmentBox;
 import com.mygdx.game.facades.augmentBox.AugmentGenerationTable.AugmentGenerationTable;
 import com.mygdx.game.facades.gui.GUIFacade;
@@ -16,17 +17,19 @@ import java.util.ArrayList;
 public class AugmentBoxFacade {
 
 
-    public static void createNewBox(float x, float y, Quality boxRarity) {
-        Managers.entityManager.addEntity(
+    public static Entity createNewBox(float x, float y, Quality boxRarity) {
+        return
             new Entity()
                 .addComponent(new AugmentBox(boxRarity))
                 .setX(x)
                 .setY(y)
+                .setTeam(EntityTeam.NEUTRAL_OBJECT)
                 .setDrawingLayer(DrawingLayer.WALLS)
-                .setSprite(boxRarity.boxSprite)
-        );
+                .setSprite(boxRarity.boxSprite);
     }
 
+    
+    
     public static void openNewBox(Entity player, Quality targetQuality) {
 
         Entity guiOwner = new Entity();

@@ -107,4 +107,8 @@ public class EntityManager {
     public void clearAllEntities() {
         clearAllEntitiesOnCycleEnd = true;
     }
+    
+    public ArrayList<Entity> getAllEntities() {
+        return entities;
+    }
 }

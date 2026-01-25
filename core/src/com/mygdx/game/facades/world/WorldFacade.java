@@ -8,7 +8,6 @@ import com.mygdx.game.playState.ZoneCoordinates;
 import com.mygdx.game.playState.world.WorldZone;
 import com.mygdx.game.playState.world.level.ZoneLevel;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class WorldFacade {
@@ -21,6 +20,7 @@ public class WorldFacade {
      * @param y - in room y
      */
     public static void teleportPlayerToZone(String zoneName, ZoneCoordinates coordinates, float x, float y) {
+        Managers.levelManager.saveCurrentRoomContents();
         Managers.entityManager.clearAllEntities();
         Managers.drawingManager.clearAllLights();
         Managers.playStateManager.goToZone(zoneName);

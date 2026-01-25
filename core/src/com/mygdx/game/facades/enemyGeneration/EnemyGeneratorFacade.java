@@ -193,7 +193,7 @@ public class EnemyGeneratorFacade {
 
         Entity entity = new Entity()
             .setSprite("enemy_1")
-            .setTeam(EntityTeam.DEMON)
+            .setTeam(EntityTeam.ENEMY)
             .setNumericStat(FieldName.Health, health)
             .setNumericStat(FieldName.Speed, speed)
             .addComponent(new EnemyBaseBehaviour())
