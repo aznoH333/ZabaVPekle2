@@ -37,10 +37,15 @@ public class EntityManager {
             e.update();
         }
         // collide loop
+        colliedLoop:
         for (Entity e : entities) {
             for (Entity other : entities) {
                 if (other != e && e.collidesWithEntity(other)) {
                     e.onCollide(other);
+                }
+                
+                if (clearAllEntitiesOnCycleEnd) {
+                    break colliedLoop;
                 }
             }
         }

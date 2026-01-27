@@ -38,4 +38,9 @@ public class Game extends GameState {
     public void cleanUpState() {
 
     }
+    
+    @Override
+    public void update() {
+        Managers.playStateManager.gameTime++;
+    }
 }

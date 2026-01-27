@@ -25,6 +25,7 @@ public class Entity implements Copyable {
     private final ArrayList<EntityComponent> components = new ArrayList<>();
     public DrawingLayer drawingLayer = DrawingLayer.FLOOR;
     public boolean triggerInvincibility = true;
+    public boolean freezeMovement = false;
 
     private final EntityFields genericFields = new EntityFields();
     private final EntityNumericFields numericFields = new EntityNumericFields();

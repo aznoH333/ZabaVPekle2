@@ -13,6 +13,8 @@ import com.mygdx.game.playState.world.level.ZoneLevel;
  */
 public class PlayStateManager {
     private static PlayStateManager instance;
+    /// Number of ticks since game start
+    public long gameTime = 0;
     
     public static PlayStateManager getInstance() {
         if (instance == null) {

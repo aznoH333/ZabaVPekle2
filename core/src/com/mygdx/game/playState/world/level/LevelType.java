@@ -2,7 +2,7 @@ package com.mygdx.game.playState.world.level;
 
 public enum LevelType {
     SPAWN(4, 0, 0, 0, false),
-    MAJOR_COMBAT(7, 10, 20, 10, true),
+    MAJOR_COMBAT(7, 7, 12, 10, true),
     FILLER(5, 3, 7, 20, true),
     LOOT(3, 0, 0, 1, false),
     BOSS(7, 0, 0, 0, true);
