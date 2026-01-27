@@ -109,6 +109,10 @@ public class EntityManager {
     }
     
     public ArrayList<Entity> getAllEntities() {
-        return entities;
+        ArrayList<Entity> entitiesCombined = new ArrayList<>();
+        entitiesCombined.addAll(entities);
+        entitiesCombined.addAll(waitingRoom);
+        
+        return entitiesCombined;
     }
 }

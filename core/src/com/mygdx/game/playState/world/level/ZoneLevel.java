@@ -55,7 +55,7 @@ public class ZoneLevel {
                 
                 isSpawnValid = true;
                 
-                /** TODO: make this reflect the actual level exits */
+                /* TODO: make this reflect the actual level exits */
                 for (LevelExitDirection direction : LevelExitDirection.values()) {
                     if (NumberUtils.pythagoras(
                         direction.x * roomSize * 32f,

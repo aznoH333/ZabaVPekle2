@@ -5,6 +5,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.control.Door;
 import com.mygdx.game.facades.world.WorldFacade;
 import com.mygdx.game.playState.WorldCoordinates;
@@ -206,7 +207,7 @@ public class LevelManager {
     }
 
     public void killedEnemy() {
-    
+        checkIfDoorsShouldOpen();
     }
 
     private void openDoors() {
@@ -249,9 +250,20 @@ public class LevelManager {
     public void loadLevel(ZoneLevel room) {
         this.currentLevel = room;
         this.currentLevelExits = WorldFacade.getLevelExits(currentLevel);
+        this.doorsOpen = false;
         
         for (Entity e : room.roomContents) {
             Managers.entityManager.addEntity(e);
+        }
+
+        checkIfDoorsShouldOpen();
+    }
+    
+    private void checkIfDoorsShouldOpen() {
+        for (Entity e : Managers.entityManager.getAllEntities()) {
+            if (e.team == EntityTeam.ENEMY && e.canBeDamaged && e.wantsToLive) {
+                return;
+            }
         }
         
         openDoors();
