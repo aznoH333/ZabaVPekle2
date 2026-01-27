@@ -76,9 +76,8 @@ public class Entity implements Copyable {
         setNumericStat(FieldName.Damage, 0f);
     }
 
-
-    public void update() {
-
+    
+    public void draw() {
         if (sprite != null) {
             // draw
             Managers.drawingManager.drawSprite(
@@ -96,6 +95,17 @@ public class Entity implements Copyable {
                 drawAsStatic
             );
         }
+        
+        for (EntityComponent component : this.components) {
+            component.onDraw(this);
+        }
+        
+        for (Entity child : children) {
+            child.draw();
+        }
+    }
+
+    public void update() {
 
 
         for (EntityComponent component : this.components) {

@@ -27,6 +27,12 @@ public class PlayerBehaviour extends EntityComponent {
     }
 
     @Override
+    public void onDraw(Entity owner) {
+        // set camera
+        Managers.drawingManager.setCameraPosition(owner.x, owner.y);
+    }
+    
+    @Override
     public void onUpdate(Entity owner) {
 
 
@@ -46,8 +52,7 @@ public class PlayerBehaviour extends EntityComponent {
             owner.walk(0f, -1f);
         }
 
-        // set camera
-        Managers.drawingManager.setCameraPosition(owner.x, owner.y);
+        
 
 
         if (gun != null) {

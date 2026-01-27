@@ -12,6 +12,7 @@ public class EyeCursor extends EntityComponent {
 
     public final float yOffset;
     public final float maxRadius;
+    
 
     public EyeCursor(float yOffset, float maxRadius) {
         this.yOffset = yOffset;
@@ -20,7 +21,7 @@ public class EyeCursor extends EntityComponent {
 
 
     @Override
-    public void onUpdate(Entity owner) {
+    public void onDraw(Entity owner) {
 
         Vector2 mousePos = Managers.drawingManager.getMousePosition();
 

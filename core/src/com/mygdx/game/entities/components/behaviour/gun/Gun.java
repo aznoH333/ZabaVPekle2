@@ -81,17 +81,23 @@ public class Gun extends EntityComponent {
         }
 
 
+        
+
+    }
+
+    @Override
+    public void onDraw(Entity owner) {
         // draw
         if (sprite != null) {
             for (BulletOrigin origin : bulletOrigins) {
-
+                
                 if (origin.scaleTimer > 0) {
                     origin.scaleTimer--;
                 }
-
+                
                 float gunScale = (float) origin.scaleTimer / getFireRate();
                 float handDir = direction + origin.aimOffset;
-
+                
                 Managers.drawingManager.drawSprite(
                     new DrawingCommand(sprite,
                         (float) Math.cos(handDir) * (((1f - gunScale) * 5f + 5f) * owner.scaleX) + owner.x,
@@ -105,9 +111,8 @@ public class Gun extends EntityComponent {
                     DrawingLayer.HAND);
             }
         }
-
     }
-
+    
     public void shoot(Entity owner) {
 
         int projectilesPerShot = (int) owner.getNumericStat(FieldName.ProjectilesPerShot);

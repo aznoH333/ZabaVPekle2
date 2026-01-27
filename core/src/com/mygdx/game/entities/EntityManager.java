@@ -1,5 +1,6 @@
 package com.mygdx.game.entities;
 
+import com.mygdx.game.Managers;
 import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
@@ -20,6 +21,16 @@ public class EntityManager {
     private final ArrayList<Entity> entities = new ArrayList<>();
     private final ArrayList<Entity> waitingRoom = new ArrayList<>();
     private boolean clearAllEntitiesOnCycleEnd = false;
+    
+    
+    private long freezeUntil = 0;
+    public boolean areEntitiesFrozen() {
+        return this.freezeUntil > Managers.playStateManager.gameTime;
+    }
+    
+    public void freezeEntities(long duration) {
+        freezeUntil = Managers.playStateManager.gameTime + duration;
+    }
 
     private EntityManager() {
 
@@ -34,18 +45,23 @@ public class EntityManager {
 
         // update loop
         for (Entity e : entities) {
-            e.update();
+            e.draw();
+            if (!areEntitiesFrozen()) {
+                e.update();
+            }
         }
         // collide loop
-        colliedLoop:
-        for (Entity e : entities) {
-            for (Entity other : entities) {
-                if (other != e && e.collidesWithEntity(other)) {
-                    e.onCollide(other);
-                }
-                
-                if (clearAllEntitiesOnCycleEnd) {
-                    break colliedLoop;
+        if (!areEntitiesFrozen()) {
+            colliedLoop:
+            for (Entity e : entities) {
+                for (Entity other : entities) {
+                    if (other != e && e.collidesWithEntity(other)) {
+                        e.onCollide(other);
+                    }
+                    
+                    if (clearAllEntitiesOnCycleEnd || areEntitiesFrozen()) {
+                        break colliedLoop;
+                    }
                 }
             }
         }

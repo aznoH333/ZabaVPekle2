@@ -32,7 +32,7 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
     }
 
     @Override
-    public void onUpdate(Entity owner) {
+    public void onDraw(Entity owner) {
         // draw hat
         float xOffset = HAT_OFFSET_X * (NumberUtils.boolToInt(owner.flipX) * 2 - 1);
 

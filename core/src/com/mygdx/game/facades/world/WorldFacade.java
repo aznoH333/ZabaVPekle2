@@ -20,7 +20,7 @@ public class WorldFacade {
      * @param y - in room y
      */
     public static void teleportPlayerToZone(String zoneName, ZoneCoordinates coordinates, float x, float y) {
-        
+        Managers.entityManager.freezeEntities(20);
         Managers.levelManager.saveCurrentRoomContents();
         Managers.entityManager.clearAllEntities();
         Managers.drawingManager.clearAllLights();
@@ -37,8 +37,8 @@ public class WorldFacade {
         ZoneLevel targetLevel = getLevelByZoneCoordinates(zoneName, coordinates);
         
         // calculate entry point location
-        float entryX = (((targetLevel.getRoomSize() - 1.5f) * 32f) * -direction.x) - 16f;
-        float entryY = (((targetLevel.getRoomSize() - 1.5f) * 32f) * -direction.y) - 16f;
+        float entryX = (((targetLevel.getRoomSize() - 1.2f) * 32f) * -direction.x) - 16f;
+        float entryY = (((targetLevel.getRoomSize() - 1.2f) * 32f) * -direction.y) - 16f;
         
         teleportPlayerToZone(zoneName, coordinates, entryX, entryY);
     }
