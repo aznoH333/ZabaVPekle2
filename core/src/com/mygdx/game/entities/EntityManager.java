@@ -65,23 +65,36 @@ public class EntityManager {
                 }
             }
         }
-
+        
+     
+        
+        
         entities.removeIf((it) -> {
             if (!it.wantsToLive) {
                 it.invokeSudoku();
             }
 
-            boolean returnValue = !it.wantsToLive || clearAllEntitiesOnCycleEnd;
-
+            boolean returnValue = !it.wantsToLive;
+            
+            
             if (returnValue) {
                 it.removedFromWorld();
             }
 
             return returnValue;
         });
-
-
-        clearAllEntitiesOnCycleEnd = false;
+        
+        if (clearAllEntitiesOnCycleEnd) {
+            for (Entity e : entities) {
+                e.removedFromWorld();
+            }
+            
+            entities.clear();
+            clearAllEntitiesOnCycleEnd = false;
+            
+        }
+        
+        
 
 
         waitingRoom.forEach(Entity::placedInWorld);

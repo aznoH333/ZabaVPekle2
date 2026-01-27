@@ -192,7 +192,6 @@ public class EnemyGeneratorFacade {
         EntityComponent movementAi = movementPicker.pickValue().copy();
 
         Entity entity = new Entity()
-            .setSprite("enemy_1")
             .setTeam(EntityTeam.ENEMY)
             .setNumericStat(FieldName.Health, health)
             .setNumericStat(FieldName.Speed, speed)

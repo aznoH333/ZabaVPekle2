@@ -28,4 +28,9 @@ public class ZoneCoordinates {
         return hashCode;
     }
     
+    
+    @Override
+    public String toString() {
+        return "[ " + x + ", " + y + " ]";
+    }
 }

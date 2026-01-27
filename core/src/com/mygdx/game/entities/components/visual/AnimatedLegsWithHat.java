@@ -48,7 +48,6 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
         }
 
 
-        super.onUpdate(owner);
 
         // color
         if (owner.isStunned()) {
@@ -57,9 +56,8 @@ public class AnimatedLegsWithHat extends GameEntityAnimator {
             currentColor = bodyColor;
         }
         owner.setColor(currentColor.r, currentColor.g, currentColor.b, currentColor.a);
-
-
     }
+
 
     @Override
     public EntityComponent copy() {

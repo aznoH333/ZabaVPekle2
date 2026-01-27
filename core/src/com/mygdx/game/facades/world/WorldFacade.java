@@ -1,6 +1,8 @@
 package com.mygdx.game.facades.world;
 
 import com.mygdx.game.Managers;
+import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.components.control.DelayedEvent;
 import com.mygdx.game.facades.entities.PlayerFacade;
 import com.mygdx.game.level.LevelExitDirection;
 import com.mygdx.game.playState.WorldCoordinates;
@@ -20,9 +22,10 @@ public class WorldFacade {
      * @param y - in room y
      */
     public static void teleportPlayerToZone(String zoneName, ZoneCoordinates coordinates, float x, float y) {
-        Managers.entityManager.freezeEntities(20);
+        System.out.println("moving player");
         Managers.levelManager.saveCurrentRoomContents();
         Managers.entityManager.clearAllEntities();
+        
         Managers.drawingManager.clearAllLights();
         Managers.playStateManager.goToZone(zoneName);
         Managers.playStateManager.setPlayerZoneCoordinates(coordinates.x, coordinates.y);
@@ -34,13 +37,28 @@ public class WorldFacade {
     
     
     public static void enterARoomThroughADoor(String zoneName, ZoneCoordinates coordinates, LevelExitDirection direction) {
-        ZoneLevel targetLevel = getLevelByZoneCoordinates(zoneName, coordinates);
+        System.out.println("moving from " + Managers.playStateManager.playerZoneCoordinates + " to " + coordinates);
         
-        // calculate entry point location
-        float entryX = (((targetLevel.getRoomSize() - 1.2f) * 32f) * -direction.x) - 16f;
-        float entryY = (((targetLevel.getRoomSize() - 1.2f) * 32f) * -direction.y) - 16f;
         
-        teleportPlayerToZone(zoneName, coordinates, entryX, entryY);
+        Managers.entityManager.freezeEntities(90);
+        
+        Managers.entityManager.addEntity(
+            new Entity()
+                .addComponent(new DelayedEvent(
+                    ()-> {
+                        ZoneLevel targetLevel = getLevelByZoneCoordinates(zoneName, coordinates);
+                        
+                        // calculate entry point location
+                        float entryX = (((targetLevel.getRoomSize() - 1.2f) * 32f) * -direction.x) - 16f;
+                        float entryY = (((targetLevel.getRoomSize() - 1.2f) * 32f) * -direction.y) - 16f;
+                        
+                        teleportPlayerToZone(zoneName, coordinates, entryX, entryY);
+                    },
+                    45
+                ))
+        );
+        
+        
     }
     
     /**

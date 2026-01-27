@@ -22,10 +22,11 @@ public class GameEntityAnimator extends EntityComponent {
         this.hurtIndex = hurtIndex;
         this.framesPerWalkFrame = framesPerWalkFrame;
     }
+    
 
     @Override
     public void onUpdate(Entity owner) {
-
+        
 
         // hurt
         if (owner.knockBackTimer != 0) {
@@ -46,7 +47,11 @@ public class GameEntityAnimator extends EntityComponent {
 
         walkTimer = 0;
         owner.sprite = baseSprite + "_" + idleIndex;
-        return;
 
+    }
+    
+    @Override
+    public void onFirstAttached(Entity owner) {
+        owner.setSprite(baseSprite + "_" + idleIndex);
     }
 }
