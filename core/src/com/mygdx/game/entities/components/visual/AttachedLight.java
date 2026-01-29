@@ -4,6 +4,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.LightHandle;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.facades.sceen.VisualEffectsFacade;
 
 public class AttachedLight extends EntityComponent {
 
@@ -38,7 +39,7 @@ public class AttachedLight extends EntityComponent {
 
     @Override
     public void onPlacedInWorld(Entity owner) {
-        this.handle = Managers.drawingManager.getNewLight(owner.x, owner.y, radius, brightness);
+        this.handle = VisualEffectsFacade.getNewLight(owner.x, owner.y, radius, brightness);
     }
 
     @Override

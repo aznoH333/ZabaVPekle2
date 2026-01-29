@@ -4,7 +4,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.components.visual.AttachedLight;
-import com.mygdx.game.facades.gui.GUIFacade;
+import com.mygdx.game.facades.sceen.GUIFacade;
 import com.mygdx.game.facades.world.WorldFacade;
 import com.mygdx.game.gameStates.GameState;
 import com.mygdx.game.playState.ZoneCoordinates;

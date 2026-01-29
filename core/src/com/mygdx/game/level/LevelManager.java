@@ -219,8 +219,6 @@ public class LevelManager {
                 new Entity()
                     .setX((currentLevel.getRoomSize() - 0.45f) * 32f * exit.getKey().x - 16f)
                     .setY((currentLevel.getRoomSize() - 0.45f) * 32f * exit.getKey().y - 16f)
-                    .setSprite("world_0001")
-                    .setDrawingLayer(DrawingLayer.PLAYER)
                     .addComponent(new Door(exit.getValue().zoneName, exit.getValue().zoneCoordinates, exit.getKey()))
             );
         }

@@ -7,7 +7,7 @@ import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.AugmentBox;
 import com.mygdx.game.facades.augmentBox.AugmentGenerationTable.AugmentGenerationTable;
-import com.mygdx.game.facades.gui.GUIFacade;
+import com.mygdx.game.facades.sceen.GUIFacade;
 import com.mygdx.game.entities.items.Augment;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.utils.types.NumberUtils;

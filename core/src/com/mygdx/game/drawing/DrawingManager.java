@@ -35,7 +35,6 @@ public class DrawingManager {
 
     public static final float SCREEN_WIDTH = 640f;
     public static final float SCREEN_HEIGHT = 360f;
-    public static final int MAX_LIGHTS = 32;
 
     private static DrawingManager instance;
 
@@ -56,6 +55,8 @@ public class DrawingManager {
 
     private final Viewport viewPort = new FitViewport(SCREEN_WIDTH, SCREEN_HEIGHT, camera);
     private final Viewport staticViewPort = new ExtendViewport(SCREEN_WIDTH, SCREEN_HEIGHT, staticCamera);
+    
+    public final LightingShaderHandler lightingShaderHandler;
 
     BitmapFont font = new BitmapFont();
 
@@ -86,6 +87,8 @@ public class DrawingManager {
         shader = buildShader();
         outputBatch.setShader(shader);
 
+        
+        lightingShaderHandler = new LightingShaderHandler(shader, camera);
     }
 
     private FrameBuffer createFrameBuffer(float width, float height) {
@@ -235,7 +238,7 @@ public class DrawingManager {
 
 
 
-        applyLights();
+        lightingShaderHandler.applyLights(aspectRatio);
 
         frameBuffer.begin();
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
@@ -329,60 +332,7 @@ public class DrawingManager {
     }
 
 
-    private ArrayList<LightHandle> lights = new ArrayList<>();
-    private static final int LIGHT_COMPONENT_COUNT = 4;
-
-    public LightHandle getNewLight(float x, float y, float intensity, float brightness) {
-        if (lights.size() >= MAX_LIGHTS) {
-            System.out.println("Warning : failed to instantiate light (exceeded light limit of " + MAX_LIGHTS + ")");
-            return new LightHandle(x, y, intensity, brightness, -1);
-        }
-
-        LightHandle handle = new LightHandle(x, y, intensity, brightness, lights.size());
-
-        lights.add(handle);
-
-        return handle;
-    }
-
-
-    private void applyLights() {
-
-        /*
-        // time?
-        shader.setUniformf("loopedTimeValue", loopedTimeValue);
-        loopedTimeValue += 0.001f;
-
-        if (loopedTimeValue > NumberUtils.TWO_PI) {
-            loopedTimeValue = 0f;
-        }*/
-
-
-        lights.removeIf(lightHandle -> !lightHandle.isActive());
-
-
-        // lights
-        float[] parametrisedLights = new float[lights.size() * LIGHT_COMPONENT_COUNT];
-
-        for (int i = 0; i < lights.size(); i++) {
-            Float[] params = lights.get(i).convertToShaderParams(camera, aspectRatio);
-
-
-            for (int j = 0; j < LIGHT_COMPONENT_COUNT; j++) {
-                parametrisedLights[i * LIGHT_COMPONENT_COUNT + j] = params[j];
-            }
-
-        }
-
-
-        shader.setUniform1fv("lights", parametrisedLights, 0, parametrisedLights.length);
-        shader.setUniformi("usedLights", lights.size());
-
-    }
     
-    public void clearAllLights() {
-        this.lights.clear();
-    }
 
 
 }

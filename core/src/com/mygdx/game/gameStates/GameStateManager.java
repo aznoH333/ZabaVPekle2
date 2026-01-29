@@ -2,6 +2,7 @@ package com.mygdx.game.gameStates;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.TextDrawingCommand;
+import com.mygdx.game.facades.sceen.VisualEffectsFacade;
 
 import java.util.HashMap;
 
@@ -39,7 +40,7 @@ public class GameStateManager {
         currentState = states.get(newState);
         Managers.entityManager.clearAllEntities();
         Managers.drawingManager.setCameraPosition(0f, 0f);
-        Managers.drawingManager.clearAllLights();
+        VisualEffectsFacade.clearAllLights();
 
         currentState.initializeState();
     }

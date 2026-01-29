@@ -4,6 +4,7 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.components.control.DelayedEvent;
 import com.mygdx.game.facades.entities.PlayerFacade;
+import com.mygdx.game.facades.sceen.VisualEffectsFacade;
 import com.mygdx.game.level.LevelExitDirection;
 import com.mygdx.game.playState.WorldCoordinates;
 import com.mygdx.game.playState.ZoneCoordinates;
@@ -26,7 +27,7 @@ public class WorldFacade {
         Managers.levelManager.saveCurrentRoomContents();
         Managers.entityManager.clearAllEntities();
         
-        Managers.drawingManager.clearAllLights();
+        VisualEffectsFacade.clearAllLights();
         Managers.playStateManager.goToZone(zoneName);
         Managers.playStateManager.setPlayerZoneCoordinates(coordinates.x, coordinates.y);
         Managers.playStateManager.playerReference.setX(x).setY(y);
