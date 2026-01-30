@@ -26,7 +26,6 @@ public class WorldFacade {
         System.out.println("moving player");
         Managers.levelManager.saveCurrentRoomContents();
         Managers.entityManager.clearAllEntities();
-        
         VisualEffectsFacade.clearAllLights();
         Managers.playStateManager.goToZone(zoneName);
         Managers.playStateManager.setPlayerZoneCoordinates(coordinates.x, coordinates.y);
@@ -40,8 +39,8 @@ public class WorldFacade {
     public static void enterARoomThroughADoor(String zoneName, ZoneCoordinates coordinates, LevelExitDirection direction) {
         System.out.println("moving from " + Managers.playStateManager.playerZoneCoordinates + " to " + coordinates);
         
-        
-        Managers.entityManager.freezeEntities(90);
+        Managers.drawingManager.screenEffectShaderHandler.dimScreen(50);
+        Managers.entityManager.freezeEntities(60);
         
         Managers.entityManager.addEntity(
             new Entity()
@@ -55,7 +54,7 @@ public class WorldFacade {
                         
                         teleportPlayerToZone(zoneName, coordinates, entryX, entryY);
                     },
-                    45
+                    25
                 ))
         );
         

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
 import java.util.ArrayList;
 
+/// Handles logic related to lights and lighting
 public class LightingShaderHandler {
     
     public static final int MAX_LIGHTS = 32;

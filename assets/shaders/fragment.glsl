@@ -154,6 +154,21 @@ vec4 restrictColorResolution(vec4 color, float resolution) {
 }
 
 
+/*
+===========================================================
+Screen brigness
+===========================================================
+*/
+uniform float screenBrightness;
+
+
+vec4 applyScreenBrightness(vec4 color) {
+    color.r *= screenBrightness;
+    color.g *= screenBrightness;
+    color.b *= screenBrightness;
+
+    return color;
+}
 
 /*
 ===========================================================
@@ -177,9 +192,8 @@ void main() {
 
     // light
     texelColor = applyLights(centeredPosition, texelColor);
-
     texelColor = applyVignette(centeredPosition, texelColor);
-
+    texelColor = applyScreenBrightness(texelColor);
 
     // texColor = restrictColorResolution(texColor, 0.033);
     texelColor = restrictColorResolution(texelColor, 0.0099);

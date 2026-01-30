@@ -19,7 +19,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +56,7 @@ public class DrawingManager {
     private final Viewport staticViewPort = new ExtendViewport(SCREEN_WIDTH, SCREEN_HEIGHT, staticCamera);
     
     public final LightingShaderHandler lightingShaderHandler;
+    public final ScreenEffectShaderHandler screenEffectShaderHandler;
 
     BitmapFont font = new BitmapFont();
 
@@ -89,6 +89,7 @@ public class DrawingManager {
 
         
         lightingShaderHandler = new LightingShaderHandler(shader, camera);
+        screenEffectShaderHandler = new ScreenEffectShaderHandler(shader);
     }
 
     private FrameBuffer createFrameBuffer(float width, float height) {
@@ -239,6 +240,7 @@ public class DrawingManager {
 
 
         lightingShaderHandler.applyLights(aspectRatio);
+        screenEffectShaderHandler.apply();
 
         frameBuffer.begin();
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
