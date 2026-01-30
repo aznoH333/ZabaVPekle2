@@ -55,6 +55,6 @@ public class GameStateManager {
             Managers.levelManager.update();
         }
         Managers.entityManager.update();
-        Managers.drawingManager.render();
+        Managers.drawingManager.mainRenderLoop();
     }
 }

@@ -19,6 +19,7 @@ public class LightingShaderHandler {
     public LightingShaderHandler(ShaderProgram shader, OrthographicCamera camera) {
         this.shader = shader;
         this.camera = camera;
+        System.out.println(shader.getFragmentShaderSource());
     }
     
     public LightHandle getNewLight(float x, float y, float intensity, float brightness) {
@@ -36,7 +37,7 @@ public class LightingShaderHandler {
     
     
     public void applyLights(float aspectRatio) {
-        
+        shader.bind();
         
         lights.removeIf(lightHandle -> !lightHandle.isActive());
         
@@ -53,7 +54,6 @@ public class LightingShaderHandler {
             }
             
         }
-        
         
         shader.setUniform1fv("lights", parametrisedLights, 0, parametrisedLights.length);
         shader.setUniformi("usedLights", lights.size());

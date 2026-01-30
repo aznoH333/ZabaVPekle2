@@ -43,6 +43,7 @@ public class DrawingManager {
     private final SpriteBatch batch = new SpriteBatch();
     /** Sprite batch. Renders to fbo. Doesn't use the camera*/
     private final SpriteBatch staticBatch = new SpriteBatch();
+    private final SpriteBatch staticOutputBatch = new SpriteBatch();
     /** Output sprite batch. Renders fbo to screen */
     private final SpriteBatch outputBatch = new SpriteBatch();
     private final ArrayList<ArrayList<DrawingCommand>> drawingQueue = new ArrayList<>();
@@ -60,8 +61,10 @@ public class DrawingManager {
 
     BitmapFont font = new BitmapFont();
 
-    ShaderProgram shader;
-    private FrameBuffer frameBuffer;
+    ShaderProgram gameShader;
+    ShaderProgram screenShader;
+    private FrameBuffer gameFrameBuffer;
+    private FrameBuffer staticFrameBuffer;
 
     /* shader values*/
     private float loopedTimeValue = 0f;
@@ -71,7 +74,8 @@ public class DrawingManager {
         viewPort.update((int) SCREEN_WIDTH, (int) SCREEN_HEIGHT);
         camera.zoom = 1f;
         staticCamera.zoom = 1f;
-        frameBuffer = createFrameBuffer(SCREEN_WIDTH * 4, SCREEN_HEIGHT * 4);
+        gameFrameBuffer = createFrameBuffer(SCREEN_WIDTH * 4, SCREEN_HEIGHT * 4);
+        staticFrameBuffer = createFrameBuffer(SCREEN_WIDTH * 4, SCREEN_HEIGHT * 4);
 
 
         // Source - https://stackoverflow.com/a
@@ -81,15 +85,18 @@ public class DrawingManager {
         Matrix4 matrix = new Matrix4();
         matrix.setToOrtho2D(0, 0, SCREEN_WIDTH,SCREEN_HEIGHT);
         outputBatch.setProjectionMatrix(matrix);
+        staticOutputBatch.setProjectionMatrix(matrix);
 
 
 
-        shader = buildShader();
-        outputBatch.setShader(shader);
+        gameShader = buildShader("shaders/game/vertex.glsl", "shaders/game/fragment.glsl");
+        screenShader = buildShader("shaders/screen/vertex.glsl", "shaders/screen/fragment.glsl");
+        outputBatch.setShader(gameShader);
+        staticOutputBatch.setShader(screenShader);
 
         
-        lightingShaderHandler = new LightingShaderHandler(shader, camera);
-        screenEffectShaderHandler = new ScreenEffectShaderHandler(shader);
+        lightingShaderHandler = new LightingShaderHandler(gameShader, camera);
+        screenEffectShaderHandler = new ScreenEffectShaderHandler(screenShader);
     }
 
     private FrameBuffer createFrameBuffer(float width, float height) {
@@ -98,15 +105,13 @@ public class DrawingManager {
         );
     }
 
-    private ShaderProgram buildShader() {
-        String vertexShader = Gdx.files.internal("shaders/vertex.glsl").readString();
-        String fragmentShader = Gdx.files.internal("shaders/fragment.glsl").readString();
+    private ShaderProgram buildShader(String vertexPath, String fragmentPath) {
+        String vertexShader = Gdx.files.internal(vertexPath).readString();
+        String fragmentShader = Gdx.files.internal(fragmentPath).readString();
         ShaderProgram shader = new ShaderProgram(
             vertexShader,
             fragmentShader
         );
-
-
 
         if (!shader.isCompiled()) {
             throw new GdxRuntimeException(shader.getLog());
@@ -235,44 +240,54 @@ public class DrawingManager {
         }
     }
 
-    public void render() {
+    public void mainRenderLoop() {
 
 
 
         lightingShaderHandler.applyLights(aspectRatio);
         screenEffectShaderHandler.apply();
 
-        frameBuffer.begin();
-        ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
-        batch.setProjectionMatrix(camera.combined);
-        batch.begin();
-        viewPort.apply();
-        renderBatch(batch, drawingQueue);
-        batch.end();
+        gameFrameBuffer.begin();
+            ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
+            batch.setProjectionMatrix(camera.combined);
+            batch.begin();
+            viewPort.apply();
+            renderBatch(batch, drawingQueue);
+            batch.end();
+        gameFrameBuffer.end();
+        
+        staticFrameBuffer.begin();
+            ScreenUtils.clear(0.0f, 0.0f, 0.0f, 0f);
+        
+            staticBatch.begin();
+            staticBatch.setProjectionMatrix(staticCamera.combined);
+            
+            
+            staticViewPort.apply();
+            renderBatch(staticBatch, staticDrawingQueue);
+    
+            // font
+            for (TextDrawingCommand textDrawingCommand : fontDrawingQueue) {
+                renderText(textDrawingCommand);
+            }
+            fontDrawingQueue.clear();
+            staticBatch.end();
+        staticFrameBuffer.end();
 
-
-        staticBatch.setProjectionMatrix(staticCamera.combined);
-        staticBatch.begin();
-        staticViewPort.apply();
-
-        renderBatch(staticBatch, staticDrawingQueue);
-
-        // font
-        for (TextDrawingCommand textDrawingCommand : fontDrawingQueue) {
-            renderText(textDrawingCommand);
-        }
-        fontDrawingQueue.clear();
-        staticBatch.end();
-
-        frameBuffer.end();
-
-        Texture frameBufferTexture = frameBuffer.getColorBufferTexture();
+        Texture staticFrameBufferTexture = staticFrameBuffer.getColorBufferTexture();
 
         ScreenUtils.clear(0.0f, 0.0f, 0.0f, 1);
 
         outputBatch.begin();
-        outputBatch.draw(frameBufferTexture, 0f, 0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0, 1, 1);
+        Texture frameBufferTexture = gameFrameBuffer.getColorBufferTexture();
+        outputBatch.draw(frameBufferTexture, 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0, 1, 1);
+        
         outputBatch.end();
+        
+        staticOutputBatch.begin();
+        staticOutputBatch.draw(staticFrameBufferTexture, 0f, 0f, SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0, 1, 1);
+        
+        staticOutputBatch.end();
 
     }
 
@@ -286,9 +301,12 @@ public class DrawingManager {
         spriteMap.clear();
         staticBatch.dispose();
         batch.dispose();
-        shader.dispose();
-        frameBuffer.dispose();
+        gameShader.dispose();
+        screenShader.dispose();
+        gameFrameBuffer.dispose();
+        staticFrameBuffer.dispose();
         outputBatch.dispose();
+        staticOutputBatch.dispose();
     }
 
     public void resizedWindow(int width, int height) {
@@ -301,8 +319,11 @@ public class DrawingManager {
         viewPort.update(width, height);
         staticViewPort.update(width, height);
 
-        frameBuffer.dispose();
-        frameBuffer = createFrameBuffer(width, height);
+        gameFrameBuffer.dispose();
+        gameFrameBuffer = createFrameBuffer(width, height);
+        
+        staticFrameBuffer.dispose();
+        staticFrameBuffer = createFrameBuffer(width, height);
 
         // shader.setUniformf("aspectRatio", aspectRatio);
     }

@@ -12,80 +12,6 @@ uniform float loopedTimeValue;
 /** a value representing the screen width / height */
 uniform float aspectRatio;
 
-
-/*
-===========================================================
-LIGHTS
-===========================================================
-*/
-const int MAX_LIGHTS = 32;
-const int LIGHT_COMPONENT_COUNT = 4;
-
-struct Light {
-    vec2 screenPosition;
-    float intensityMultiplier;
-    float lightBrightness;
-};
-
-
-uniform float[MAX_LIGHTS * LIGHT_COMPONENT_COUNT] lights;
-uniform int usedLights;
-
-
-float calculateLightValue(Light light, vec2 position) {
-    return length(light.screenPosition - position) / light.intensityMultiplier;
-}
-
-float lightScatter(vec2 position) {
-    return min(
-        cos((position.x + loopedTimeValue) * 10.0) + cos((position.y - loopedTimeValue) * 10.0),
-        sin((position.x - loopedTimeValue) * 5.0) + sin((position.y + loopedTimeValue) * 5.0)
-    );
-}
-
-
-float calculateLightStrength(Light light, vec2 position) {
-
-    float distanceFactor = calculateLightValue(light, position);
-    // distanceFactor *= 1.0 - ((lightScatter(position) * distanceFactor) * 0.15);
-
-
-    return light.lightBrightness - smoothstep(0.0, 1.0, distanceFactor);
-}
-
-
-
-float getLightValueForPosition(vec2 position) {
-    float heighestValue = 0.0;
-
-    for (int i = 0; i < usedLights; i++) {
-        Light light = Light(
-        vec2(
-        lights[i * LIGHT_COMPONENT_COUNT],
-        lights[(i * LIGHT_COMPONENT_COUNT)+1]
-        ),
-        lights[(i*LIGHT_COMPONENT_COUNT)+2],
-        lights[(i*LIGHT_COMPONENT_COUNT)+3]);
-
-        float lightValue = calculateLightStrength(light, position);
-
-        if (lightValue > heighestValue) {
-            heighestValue = lightValue;
-        }
-
-    }
-
-    return heighestValue;
-}
-
-
-vec4 applyLights(vec2 position, vec4 color) {
-    float lightValue = getLightValueForPosition(position);
-    color.rgb *= lightValue;
-
-    return color;
-}
-
 /*
 ===========================================================
 CRT
@@ -184,19 +110,16 @@ void main() {
     // Sample the texture with adjusted UVs
     vec4 texelColor = texture2D(u_texture, v_texCoords);
 
-    texelColor = applyChromaticAberration(v_texCoords, texelColor);
+    // texelColor = applyChromaticAberration(v_texCoords, texelColor);
 
 
 
 
-
-    // light
-    texelColor = applyLights(centeredPosition, texelColor);
-    texelColor = applyVignette(centeredPosition, texelColor);
+    // texelColor = applyVignette(centeredPosition, texelColor);
     texelColor = applyScreenBrightness(texelColor);
 
     // texColor = restrictColorResolution(texColor, 0.033);
-    texelColor = restrictColorResolution(texelColor, 0.0099);
+    // texelColor = restrictColorResolution(texelColor, 0.0099);
 
 
     texelColor = applyCrt(centeredPosition, texelColor, 0.20, 1000.0);

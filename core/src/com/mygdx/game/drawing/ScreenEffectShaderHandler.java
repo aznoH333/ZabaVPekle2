@@ -26,7 +26,7 @@ public class ScreenEffectShaderHandler {
     
     public void apply() {
         
-        
+        shader.bind();
         if (screenEffectDimTimer > 0) {
             screenEffectDimTimer--;
         }
