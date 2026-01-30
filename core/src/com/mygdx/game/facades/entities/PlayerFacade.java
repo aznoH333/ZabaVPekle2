@@ -1,7 +1,9 @@
 package com.mygdx.game.facades.entities;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.PlayerBehaviour;
@@ -27,6 +29,19 @@ public class PlayerFacade {
             .setNumericStat(FieldName.ProjectileDamage, 2f)
             .setField(FieldName.ProjectileColor, new Color(0.33333f, 0.66666f, 1f, 1f))
             .setField(FieldName.ProjectileSprite, "bullets_0002")
-            .addComponent(new AttachedLight(0.75f, 1.0f));
+            .addComponent(new AttachedLight(0.75f, 1.0f))
+            .addChild(createHealthBar())
+            ;
+    }
+    
+    
+    
+    public static Entity createHealthBar() {
+        return new Entity()
+            .setSprite("hud_health_0001")
+            .setX(-DrawingManager.SCREEN_HEIGHT / 2)
+            .setY(-DrawingManager.SCREEN_HEIGHT / 2 + 26)
+            .setDrawingLayer(DrawingLayer.GUI)
+            .makeStatic();
     }
 }
