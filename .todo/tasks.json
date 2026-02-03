@@ -2127,7 +2127,7 @@
     ],
     "title": "Design map",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -2175,7 +2175,7 @@
     ],
     "title": "Map screen",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -2189,6 +2189,19 @@
         "nano": 732910225
       }
     },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 3
+      },
+      "time": {
+        "hour": 21,
+        "minute": 2,
+        "second": 22,
+        "nano": 125609456
+      }
+    },
     "isImported": false
   },
   {
@@ -2199,7 +2212,7 @@
     ],
     "title": "Minimap",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -2211,6 +2224,67 @@
         "minute": 33,
         "second": 34,
         "nano": 834155575
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 3
+      },
+      "time": {
+        "hour": 21,
+        "minute": 2,
+        "second": 26,
+        "nano": 480443661
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_4611",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Fog of war on minimap",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 3
+      },
+      "time": {
+        "hour": 21,
+        "minute": 2,
+        "second": 43,
+        "nano": 895452645
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_4688",
+    "priority": "LOW",
+    "tags": [
+      "🔧code"
+    ],
+    "title": "Ambient light",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 3
+      },
+      "time": {
+        "hour": 21,
+        "minute": 2,
+        "second": 59,
+        "nano": 621120372
       }
     },
     "isImported": false
