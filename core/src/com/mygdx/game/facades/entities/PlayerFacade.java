@@ -9,6 +9,7 @@ import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.PlayerBehaviour;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.gui.hudElements.HealthBar;
+import com.mygdx.game.entities.components.gui.hudElements.Minimap;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.AttachedLight;
 import com.mygdx.game.entities.components.visual.EyeCursor;
@@ -37,19 +38,31 @@ public class PlayerFacade {
             
             
             .addComponent(new AttachedLight(0.75f, 1.0f))
+            // add hud
             .addChild(createHealthBar())
+            .addChild(createMinimap())
             ;
     }
     
-    
-    
+    private final static float HEALTH_BAR_OFFSET_Y = 26;
     public static Entity createHealthBar() {
         return new Entity()
             .setSprite("hud_health_0001")
             .setX(-DrawingManager.SCREEN_HEIGHT / 2)
-            .setY(-DrawingManager.SCREEN_HEIGHT / 2 + 26)
+            .setY(-DrawingManager.SCREEN_HEIGHT / 2 + HEALTH_BAR_OFFSET_Y)
             .setDrawingLayer(DrawingLayer.GUI)
             .addComponent(new HealthBar())
             .makeStatic();
+    }
+    
+    private final static float MINIMAP_OFFSET_Y = 37;
+    public static Entity createMinimap() {
+        return new Entity()
+            .setSprite("hud_map_0002")
+            .setX(DrawingManager.SCREEN_HEIGHT / 2)
+            .setY(-DrawingManager.SCREEN_HEIGHT / 2 + MINIMAP_OFFSET_Y)
+            .setDrawingLayer(DrawingLayer.GUI)
+            .makeStatic()
+            .addComponent(new Minimap());
     }
 }
