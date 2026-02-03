@@ -86,6 +86,33 @@ vec4 applyLights(vec2 position, vec4 color) {
     return color;
 }
 
+
+
+/*
+===========================================================
+CRT
+===========================================================
+*/
+
+vec4 applyCrt(vec2 position, vec4 color, float scanLineIntensity, float numberOfScanLines) {
+    float scanline = (1.0 - scanLineIntensity) + (scanLineIntensity * sin(position.y * numberOfScanLines));
+    color.rgb *= scanline;
+    return color;
+}
+
+/*
+===========================================================
+Vignette
+===========================================================
+*/
+vec4 applyVignette(vec2 position, vec4 color) {
+    // Apply vignette effect
+    float vignette = 1.0 - smoothstep(0.0, 1.0, length(position) - 0.5);
+    color.rgb *= vignette;
+    return color;
+}
+
+
 /*
 ===========================================================
 Chromatic Aberration
@@ -105,7 +132,45 @@ vec4 applyChromaticAberration(vec2 position, vec4 color) {
 }
 
 
+/*
+===========================================================
+Color resolution
+===========================================================
+*/
 
+float calculateRestrictedColorValue(float color, float resolution) {
+
+
+    return color - mod(color, resolution);
+}
+
+vec4 restrictColorResolution(vec4 color, float resolution) {
+
+
+    color.r = calculateRestrictedColorValue(color.r, resolution);
+    color.g = calculateRestrictedColorValue(color.g, resolution);
+    color.b = calculateRestrictedColorValue(color.b, resolution);
+
+
+    return color;
+}
+
+
+/*
+===========================================================
+Screen brigness
+===========================================================
+*/
+uniform float screenBrightness;
+
+
+vec4 applyScreenBrightness(vec4 color) {
+    color.r *= screenBrightness;
+    color.g *= screenBrightness;
+    color.b *= screenBrightness;
+
+    return color;
+}
 
 /*
 ===========================================================
@@ -124,6 +189,14 @@ void main() {
     texelColor = applyChromaticAberration(v_texCoords, texelColor);
 
 
+    texelColor = applyVignette(centeredPosition, texelColor);
+    texelColor = applyScreenBrightness(texelColor);
+
+    //texColor = restrictColorResolution(texColor, 0.033);
+    texelColor = restrictColorResolution(texelColor, 0.0099);
+
+
+    texelColor = applyCrt(centeredPosition, texelColor, 0.20, 1000.0);
     // light
     texelColor = applyLights(centeredPosition, texelColor);
 

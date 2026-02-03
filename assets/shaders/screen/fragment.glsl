@@ -106,20 +106,17 @@ void main() {
     centeredPosition.x *= 1.77777;
 
 
-
     // Sample the texture with adjusted UVs
     vec4 texelColor = texture2D(u_texture, v_texCoords);
 
     // texelColor = applyChromaticAberration(v_texCoords, texelColor);
 
 
-
-
     // texelColor = applyVignette(centeredPosition, texelColor);
     texelColor = applyScreenBrightness(texelColor);
 
     // texColor = restrictColorResolution(texColor, 0.033);
-    // texelColor = restrictColorResolution(texelColor, 0.0099);
+    texelColor = restrictColorResolution(texelColor, 0.0099);
 
 
     texelColor = applyCrt(centeredPosition, texelColor, 0.20, 1000.0);

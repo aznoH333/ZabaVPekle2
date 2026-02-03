@@ -13,28 +13,31 @@ import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 public class ScreenEffectShaderHandler {
     
     
-    private final ShaderProgram shader;
+    private final ShaderProgram screenShader;
+    private final ShaderProgram gameShader;
     
     private float screenBrightness = 1f;
     private int screenEffectDimTimer = 0;
     private int screenEffectDimTimerLenght = 1;
     
     
-    public ScreenEffectShaderHandler(ShaderProgram shader) {
-        this.shader = shader;
+    public ScreenEffectShaderHandler(ShaderProgram screenShader, ShaderProgram gameShader) {
+        this.screenShader = screenShader;
+        this.gameShader = gameShader;
     }
     
     public void apply() {
         
-        shader.bind();
         if (screenEffectDimTimer > 0) {
             screenEffectDimTimer--;
         }
         
         
         screenBrightness = (Math.abs(0.5f - ((float)screenEffectDimTimer / screenEffectDimTimerLenght)) * 2f);
-        
-        this.shader.setUniformf("screenBrightness", screenBrightness);
+        screenShader.bind();
+        this.screenShader.setUniformf("screenBrightness", screenBrightness);
+        gameShader.bind();
+        this.gameShader.setUniformf("screenBrightness", screenBrightness);
     }
     
     

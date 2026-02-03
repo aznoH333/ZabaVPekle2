@@ -96,7 +96,7 @@ public class DrawingManager {
 
         
         lightingShaderHandler = new LightingShaderHandler(gameShader, camera);
-        screenEffectShaderHandler = new ScreenEffectShaderHandler(screenShader);
+        screenEffectShaderHandler = new ScreenEffectShaderHandler(screenShader, gameShader);
     }
 
     private FrameBuffer createFrameBuffer(float width, float height) {
