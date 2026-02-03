@@ -103,5 +103,17 @@ public class NumberUtils {
             return value - stepSize;
         }
     }
+    
+    public static float interpolate(float min, float max, float value) {
+        if (max < min) {
+            return interpolate(max, min, 1 - value);
+        }
+        
+        return (max - min) * value + min;
+    }
+    
+    public static float smoothStep(float min, float max, float value) {
+        return interpolate(min, max, (float) Math.pow(Math.pow(-value + 1.0f, 2f) - 1f, 2f));
+    }
 
 }

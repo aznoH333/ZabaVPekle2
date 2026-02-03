@@ -24,7 +24,6 @@ public class EntityNumericFields {
     }
 
     public float getField(FieldName fieldName) {
-
         return fields.get(fieldName);
     }
 
