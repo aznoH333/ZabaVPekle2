@@ -2303,5 +2303,42 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_5306",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "stabilize player eyes",
+    "description": "",
+    "status": "DONE",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 5
+      },
+      "time": {
+        "hour": 21,
+        "minute": 13,
+        "second": 2,
+        "nano": 758236544
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 5
+      },
+      "time": {
+        "hour": 21,
+        "minute": 16,
+        "second": 26,
+        "nano": 424408493
+      }
+    },
+    "isImported": false
   }
 ]
