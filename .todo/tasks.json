@@ -257,30 +257,6 @@
     "isImported": false
   },
   {
-    "id": "TASK_436",
-    "priority": "LOW",
-    "tags": [
-      "🤔clarify"
-    ],
-    "title": "perks",
-    "description": "",
-    "status": "TODO",
-    "date": {
-      "date": {
-        "year": 2025,
-        "month": 12,
-        "day": 19
-      },
-      "time": {
-        "hour": 12,
-        "minute": 45,
-        "second": 49,
-        "nano": 109064707
-      }
-    },
-    "isImported": false
-  },
-  {
     "id": "TASK_446",
     "priority": "LOW",
     "tags": [
@@ -1314,7 +1290,7 @@
     ],
     "title": "Enemy movement variations",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1326,6 +1302,19 @@
         "minute": 5,
         "second": 39,
         "nano": 532792095
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 5
+      },
+      "time": {
+        "hour": 19,
+        "minute": 53,
+        "second": 16,
+        "nano": 219438160
       }
     },
     "isImported": false
@@ -1594,30 +1583,6 @@
         "minute": 0,
         "second": 42,
         "nano": 863202309
-      }
-    },
-    "isImported": false
-  },
-  {
-    "id": "TASK_2438",
-    "priority": "LOW",
-    "tags": [
-      "🔧code"
-    ],
-    "title": "Make first two rooms very easy",
-    "description": "",
-    "status": "TODO",
-    "date": {
-      "date": {
-        "year": 2026,
-        "month": 1,
-        "day": 4
-      },
-      "time": {
-        "hour": 10,
-        "minute": 42,
-        "second": 40,
-        "nano": 96442063
       }
     },
     "isImported": false
@@ -1911,7 +1876,7 @@
     ],
     "title": "Spawn room not scaled properly",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1923,6 +1888,19 @@
         "minute": 9,
         "second": 39,
         "nano": 739674815
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 5
+      },
+      "time": {
+        "hour": 19,
+        "minute": 53,
+        "second": 43,
+        "nano": 642009640
       }
     },
     "isImported": false
@@ -1959,7 +1937,7 @@
     ],
     "title": "Decide if looped time (shader) is worth keeping",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -1971,6 +1949,19 @@
         "minute": 35,
         "second": 4,
         "nano": 703370394
+      }
+    },
+    "finishDate": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 5
+      },
+      "time": {
+        "hour": 19,
+        "minute": 53,
+        "second": 35,
+        "nano": 404391964
       }
     },
     "isImported": false
@@ -2285,6 +2276,30 @@
         "minute": 2,
         "second": 59,
         "nano": 621120372
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_4843",
+    "priority": "LOW",
+    "tags": [
+      "🤔clarify"
+    ],
+    "title": "think more",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 5
+      },
+      "time": {
+        "hour": 19,
+        "minute": 51,
+        "second": 36,
+        "nano": 688071030
       }
     },
     "isImported": false

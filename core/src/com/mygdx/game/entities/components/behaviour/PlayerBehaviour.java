@@ -67,6 +67,8 @@ public class PlayerBehaviour extends EntityComponent {
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                 gun.shoot(owner);
             }
+            
+            owner.flipX = mousePos.x < owner.x;
         }
 
 
@@ -75,7 +77,6 @@ public class PlayerBehaviour extends EntityComponent {
     @Override
     public void onFirstAttached(Entity owner) {
         owner.setNumericStat(FieldName.Speed, 2.5f);
-        owner.flipWithMoveDirection = true;
         owner.setNumericStat(FieldName.MaxHealth, 6f);
         owner.setNumericStat(FieldName.Health, 6f);
         owner.canBeDamaged = true;

@@ -11,11 +11,13 @@ import com.mygdx.game.utils.types.NumberUtils;
 public class EyeCursor extends EntityComponent {
 
     public final float yOffset;
+    public final float xOffset;
     public final float maxRadius;
     
 
-    public EyeCursor(float yOffset, float maxRadius) {
+    public EyeCursor(float xOffset, float yOffset, float maxRadius) {
         this.yOffset = yOffset;
+        this.xOffset = xOffset;
         this.maxRadius = maxRadius;
     }
 
@@ -37,7 +39,7 @@ public class EyeCursor extends EntityComponent {
         Managers.drawingManager.drawSprite(
             new DrawingCommand(
                 "faces_0002",
-                (float) (owner.x + (Math.cos(direction) * maxRadius)),
+                (float) (owner.x + (xOffset * NumberUtils.boolToSign(!owner.flipX)) +(Math.cos(direction) * maxRadius)),
                 (float) (owner.y + yOffset + (Math.sin(direction) * maxRadius))
             ),
             DrawingLayer.PLAYER

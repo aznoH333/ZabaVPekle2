@@ -100,8 +100,8 @@ public class Gun extends EntityComponent {
                 
                 Managers.drawingManager.drawSprite(
                     new DrawingCommand(sprite,
-                        (float) Math.cos(handDir) * (((1f - gunScale) * 5f + 5f) * owner.scaleX) + owner.x,
-                        (float) Math.sin(handDir) * (((1f - gunScale) * 5f + 5f) * owner.scaleY) + owner.y
+                        (float) Math.cos(handDir) * (((1f - gunScale) * 3.3f + 9f) * owner.scaleX) + owner.x,
+                        (float) Math.sin(handDir) * (((1f - gunScale) * 3.3f + 9f) * owner.scaleY) + owner.y
                     )
                         .setRotationRad(handDir)
                         .setFlipVertically(owner.flipX)

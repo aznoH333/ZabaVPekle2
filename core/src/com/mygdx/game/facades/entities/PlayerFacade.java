@@ -25,7 +25,7 @@ public class PlayerFacade {
             .setDrawingLayer(DrawingLayer.PLAYER)
             .addComponent(new AnimatedLegsWithHat(LegsWithHatType.PLAYER, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.8f, 0.8f, 1f), null))
             .addComponent(new Gun("guns_0001"))
-            .addComponent(new EyeCursor(4.5f, 2f))
+            .addComponent(new EyeCursor(2f, 6.5f, 2f))
             
             
             .setNumericStat(FieldName.ProjectileSpeed, 0.75f)
