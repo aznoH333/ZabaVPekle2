@@ -15,7 +15,8 @@ public enum WorldZoneDefinition {
         1f,
         new Color(1f, 1f, 1f, 1f),
         0.0f,
-        0.0f
+        0.0f,
+        new Color(0.25f, 0.25f, 0.25f, 1f)
     ),
     BLUE(
         "blue",
@@ -26,7 +27,9 @@ public enum WorldZoneDefinition {
         3.1f,
         new Color(0f, 0f, 0.302f, 1f),
         128f,
-        128f
+        128f,
+        new Color(0.0f, 0.0f, 0.0f, 1f)
+        
     ),
     RED("red",
         LevelTheme.RED_PLACEHOLDER,
@@ -36,7 +39,8 @@ public enum WorldZoneDefinition {
         16f,
         new Color(0.667f, 0.0f, 0.0f, 1f),
         -128f,
-        64f
+        64f,
+        new Color(0.50f, 0.15f, 0.15f, 1f)
     );
 
     
@@ -49,6 +53,8 @@ public enum WorldZoneDefinition {
     public final Color worldMapColor;
     public final float worldMapX;
     public final float worldMapY;
+    public final Color ambientLight;
+    
 
 
     WorldZoneDefinition(
@@ -60,7 +66,8 @@ public enum WorldZoneDefinition {
         float placeDifficulty,
         Color worldMapColor,
         float worldMapX,
-        float worldMapY
+        float worldMapY,
+        Color ambientLight
     ) {
         this.zoneName = zoneName;
         this.theme = theme;
@@ -71,6 +78,7 @@ public enum WorldZoneDefinition {
         this.worldMapColor = worldMapColor;
         this.worldMapX = worldMapX;
         this.worldMapY = worldMapY;
+        this.ambientLight = ambientLight;
     }
 
 }

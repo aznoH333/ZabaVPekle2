@@ -30,6 +30,7 @@ struct Light {
 
 uniform float[MAX_LIGHTS * LIGHT_COMPONENT_COUNT] lights;
 uniform int usedLights;
+uniform vec3 ambientLight;
 
 
 float calculateLightValue(Light light, vec2 position) {
@@ -81,7 +82,7 @@ float getLightValueForPosition(vec2 position) {
 
 vec4 applyLights(vec2 position, vec4 color) {
     float lightValue = getLightValueForPosition(position);
-    color.rgb *= lightValue;
+    color.rgb *= vec3(lightValue, lightValue, lightValue) + ambientLight;
 
     return color;
 }
@@ -186,8 +187,13 @@ void main() {
     // Sample the texture with adjusted UVs
     vec4 texelColor = texture2D(u_texture, v_texCoords);
 
+
+
+
     texelColor = applyChromaticAberration(v_texCoords, texelColor);
 
+    // light
+    texelColor = applyLights(centeredPosition, texelColor);
 
     texelColor = applyVignette(centeredPosition, texelColor);
     texelColor = applyScreenBrightness(texelColor);
@@ -197,8 +203,6 @@ void main() {
 
 
     texelColor = applyCrt(centeredPosition, texelColor, 0.20, 1000.0);
-    // light
-    texelColor = applyLights(centeredPosition, texelColor);
 
     // Set final color
     gl_FragColor = texelColor * v_color;

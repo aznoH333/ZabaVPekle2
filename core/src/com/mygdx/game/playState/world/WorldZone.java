@@ -28,6 +28,8 @@ public class WorldZone {
 
     public float mapX;
     public float mapY;
+    
+    public Color ambientLight;
 
     public WorldZone(WorldZoneDefinition type) {
         this.type = type;
@@ -37,6 +39,8 @@ public class WorldZone {
         
         this.mapX = type.worldMapX;
         this.mapY = type.worldMapY;
+        
+        this.ambientLight = type.ambientLight;
 
         this.enemyRoster = EnemyGeneratorFacade.generateEnemyRoster(2, type.placeDifficulty);
         

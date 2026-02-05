@@ -1,5 +1,6 @@
 package com.mygdx.game.drawing;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
@@ -15,6 +16,7 @@ public class LightingShaderHandler {
     
     private final ShaderProgram shader;
     private final OrthographicCamera camera;
+    private float[] ambientLight = new float[]{0f, 0f, 0f};
     
     public LightingShaderHandler(ShaderProgram shader, OrthographicCamera camera) {
         this.shader = shader;
@@ -57,7 +59,14 @@ public class LightingShaderHandler {
         
         shader.setUniform1fv("lights", parametrisedLights, 0, parametrisedLights.length);
         shader.setUniformi("usedLights", lights.size());
+        shader.setUniform3fv("ambientLight", ambientLight, 0, 3);
         
+    }
+    
+    public void setAmbientLight(Color color) {
+        this.ambientLight[0] = color.r;
+        this.ambientLight[1] = color.g;
+        this.ambientLight[2] = color.b;
     }
     
     public void clearAllLights() {

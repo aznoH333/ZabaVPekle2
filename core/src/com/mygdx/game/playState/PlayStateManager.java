@@ -1,6 +1,7 @@
 package com.mygdx.game.playState;
 
 
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.playState.world.World;
 import com.mygdx.game.playState.world.WorldZone;
@@ -33,6 +34,7 @@ public class PlayStateManager {
     
     public void goToZone(String zoneName) {
         this.currentZone = world.zones.get(zoneName);
+        Managers.drawingManager.lightingShaderHandler.setAmbientLight(currentZone.ambientLight);
     }
     
     

@@ -31,7 +31,7 @@ public class Game extends GameState {
         // Managers.entityManager.addEntity(PlayerFacade.createNewPlayer(0f, 0f));
 
         AugmentBoxFacade.createNewBox(0f, 64f, Quality.POOR);
-
+        Managers.drawingManager.lightingShaderHandler.setAmbientLight(new Color(0.25f, 0.25f, 0.25f, 1f));
     }
 
     @Override
