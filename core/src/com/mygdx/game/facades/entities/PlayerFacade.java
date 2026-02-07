@@ -1,10 +1,10 @@
 package com.mygdx.game.facades.entities;
 
 import com.badlogic.gdx.graphics.Color;
-import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.drawing.DrawingManager;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.EntityIdentifier;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.PlayerBehaviour;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
@@ -26,6 +26,9 @@ public class PlayerFacade {
             .addComponent(new AnimatedLegsWithHat(LegsWithHatType.PLAYER, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.8f, 0.8f, 1f), null))
             .addComponent(new Gun("guns_0001"))
             .addComponent(new EyeCursor(2f, 7f, 1.75f))
+            .setX(x)
+            .setY(y)
+            .setIdentifier(EntityIdentifier.PLAYER)
             
             
             .setNumericStat(FieldName.ProjectileSpeed, 0.75f)

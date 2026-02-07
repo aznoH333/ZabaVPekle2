@@ -9,6 +9,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.fields.FieldName;
+import com.mygdx.game.facades.inventory.InventoryFacade;
 import com.mygdx.game.utils.types.NumberUtils;
 
 public class PlayerBehaviour extends EntityComponent {
@@ -69,6 +70,11 @@ public class PlayerBehaviour extends EntityComponent {
             }
             
             owner.flipX = mousePos.x < owner.x;
+        }
+        
+        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+            // inventory
+            InventoryFacade.toggleInventory();
         }
 
 

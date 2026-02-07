@@ -2340,5 +2340,29 @@
       }
     },
     "isImported": false
+  },
+  {
+    "id": "TASK_5384",
+    "priority": "LOW",
+    "tags": [
+      "♿Chore"
+    ],
+    "title": "Offset player hitbox from sprite",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 7
+      },
+      "time": {
+        "hour": 15,
+        "minute": 46,
+        "second": 42,
+        "nano": 488371063
+      }
+    },
+    "isImported": false
   }
 ]

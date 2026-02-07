@@ -29,6 +29,7 @@ public class Entity implements Copyable {
 
     private final EntityFields genericFields = new EntityFields();
     private final EntityNumericFields numericFields = new EntityNumericFields();
+    public EntityIdentifier identifier = EntityIdentifier.UNDEFINED;
 
 
     public int invincibilityTimer = 0;
@@ -164,6 +165,8 @@ public class Entity implements Copyable {
         for (Entity child : children) {
             child.update();
         }
+        
+        children.removeIf((child)->!child.wantsToLive);
     }
 
 
@@ -441,6 +444,11 @@ public class Entity implements Copyable {
     public Entity initializeNumericField(FieldName fieldName, float value) {
         this.numericFields.initializeValue(fieldName, value);
         return this;
+    }
+    
+    public Entity setIdentifier(EntityIdentifier identifier) {
+        this.identifier = identifier;
+        return  this;
     }
 
 }
