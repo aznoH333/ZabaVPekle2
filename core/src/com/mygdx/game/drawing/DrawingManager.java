@@ -105,7 +105,7 @@ public class DrawingManager {
     private BitmapFont loadFont(String fontPath) {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 20;
+        parameter.size = 12;
         BitmapFont font = generator.generateFont(parameter);
         
         generator.dispose();
@@ -226,7 +226,8 @@ public class DrawingManager {
 
 
         GlyphLayout layout = new GlyphLayout(font, command.text);
-
+        
+        
         font.draw(staticBatch, command.text, command.x - (layout.width / 2f), command.y);
     }
 

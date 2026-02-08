@@ -3,6 +3,7 @@ package com.mygdx.game.entities.components.gui.hudElements;
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.playState.inventory.Inventory;
@@ -19,6 +20,8 @@ public class InventoryGUI extends EntityComponent {
     private static final int SLOT_SIZE = 24;
     private static final float OFFSET_X = (-SLOT_SIZE * 2) + (-1.5f * SPACE_BETWEEN_SLOTS);
     private static final float OFFSET_Y = (-SLOT_SIZE * 2) + (-1.5f * SPACE_BETWEEN_SLOTS) - 12f;
+    private static final float QUANTITY_OFFSET_X = 6f;
+    private static final float QUANTITY_OFFSET_Y = -2f;
     
     @Override
     public void onDraw(Entity owner) {
@@ -58,6 +61,7 @@ public class InventoryGUI extends EntityComponent {
             return;
         }
         
+        // item sprite
         Managers.drawingManager.drawSpriteStatic(
             new DrawingCommand(
                 item.sprite,
@@ -66,6 +70,17 @@ public class InventoryGUI extends EntityComponent {
             ),
             DrawingLayer.GUI
         );
+        
+        // item number
+        if (item.stackable) {
+            Managers.drawingManager.drawText(
+                new TextDrawingCommand(
+                    item.quantity + "",
+                    x + OFFSET_X + QUANTITY_OFFSET_X,
+                    y + OFFSET_Y + QUANTITY_OFFSET_Y // TODO : font sizes
+                )
+            );
+        }
     }
     
 }

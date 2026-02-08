@@ -35,11 +35,11 @@ public class Game extends GameState {
         AugmentBoxFacade.createNewBox(0f, 64f, Quality.POOR);
         // Managers.drawingManager.lightingShaderHandler.setAmbientLight(new Color(0.25f, 0.25f, 0.25f, 1f));
         Managers.playStateManager.inventory.addItem(
-            new InventoryItem("inventory_items_0001", "plate", Quality.COMMON, 1, true, InventoryItemType.PLATE)
+            new InventoryItem("inventory_items_0001", "plate", Quality.COMMON, 3, true, InventoryItemType.PLATE)
         );
         
         Managers.playStateManager.inventory.addItem(
-            new InventoryItem("inventory_items_0005", "gear", Quality.COMMON, 1, true, InventoryItemType.GEAR)
+            new InventoryItem("inventory_items_0005", "gear", Quality.COMMON, 5, true, InventoryItemType.GEAR)
         );
     }
 
