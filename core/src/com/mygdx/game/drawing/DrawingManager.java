@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.Matrix4;
@@ -59,7 +60,7 @@ public class DrawingManager {
     public final LightingShaderHandler lightingShaderHandler;
     public final ScreenEffectShaderHandler screenEffectShaderHandler;
 
-    BitmapFont font = new BitmapFont();
+    BitmapFont font;
 
     ShaderProgram gameShader;
     ShaderProgram screenShader;
@@ -97,6 +98,19 @@ public class DrawingManager {
         
         lightingShaderHandler = new LightingShaderHandler(gameShader, camera);
         screenEffectShaderHandler = new ScreenEffectShaderHandler(screenShader, gameShader);
+        
+        font = loadFont("fonts/3270/3270NerdFont-Regular.ttf");
+    }
+    
+    private BitmapFont loadFont(String fontPath) {
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 20;
+        BitmapFont font = generator.generateFont(parameter);
+        
+        generator.dispose();
+        
+        return font;
     }
 
     private FrameBuffer createFrameBuffer(float width, float height) {
