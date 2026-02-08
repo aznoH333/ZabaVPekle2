@@ -16,6 +16,8 @@ import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.entities.PlayerFacade;
 import com.mygdx.game.gameStates.GameState;
+import com.mygdx.game.playState.inventory.InventoryItem;
+import com.mygdx.game.playState.inventory.InventoryItemType;
 
 public class Game extends GameState {
 
@@ -31,7 +33,14 @@ public class Game extends GameState {
         // Managers.entityManager.addEntity(PlayerFacade.createNewPlayer(0f, 0f));
 
         AugmentBoxFacade.createNewBox(0f, 64f, Quality.POOR);
-        Managers.drawingManager.lightingShaderHandler.setAmbientLight(new Color(0.25f, 0.25f, 0.25f, 1f));
+        // Managers.drawingManager.lightingShaderHandler.setAmbientLight(new Color(0.25f, 0.25f, 0.25f, 1f));
+        Managers.playStateManager.inventory.addItem(
+            new InventoryItem("inventory_items_0001", "plate", Quality.COMMON, 1, true, InventoryItemType.PLATE)
+        );
+        
+        Managers.playStateManager.inventory.addItem(
+            new InventoryItem("inventory_items_0005", "gear", Quality.COMMON, 1, true, InventoryItemType.GEAR)
+        );
     }
 
     @Override
