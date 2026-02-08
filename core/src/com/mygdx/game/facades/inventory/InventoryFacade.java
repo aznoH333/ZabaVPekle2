@@ -2,12 +2,9 @@ package com.mygdx.game.facades.inventory;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
-import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityIdentifier;
-import com.mygdx.game.entities.components.behaviour.ememy.movementAi.EnemyChaseMovement;
-import com.mygdx.game.entities.components.gui.hudElements.Minimap;
-import com.mygdx.game.entities.fields.FieldName;
+import com.mygdx.game.entities.components.gui.hudElements.InventoryGUI;
 
 import java.util.Optional;
 
@@ -29,7 +26,7 @@ public class InventoryFacade {
             .setIdentifier(EntityIdentifier.INVENTORY)
             .setDrawingLayer(DrawingLayer.GUI)
             .makeStatic()
-            .addChild(new Entity().makeStatic().setDrawingLayer(DrawingLayer.GUI).setSprite("inventory_0004"))
+            .addComponent(new InventoryGUI())
             ;
     }
     

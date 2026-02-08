@@ -3,6 +3,7 @@ package com.mygdx.game.playState;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.playState.inventory.Inventory;
 import com.mygdx.game.playState.world.World;
 import com.mygdx.game.playState.world.WorldZone;
 import com.mygdx.game.playState.world.level.ZoneLevel;
@@ -29,6 +30,7 @@ public class PlayStateManager {
     public World world = new World();
     public WorldZone currentZone = null;
     public ZoneCoordinates playerZoneCoordinates = null;
+    public Inventory inventory = new Inventory();
     
     
     
@@ -48,9 +50,11 @@ public class PlayStateManager {
     
     public void restartGame() {
         this.world = new World();
+        this.inventory = new Inventory();
         this.playerReference = null;
         this.currentZone = null;
         this.playerZoneCoordinates = null;
+        
     }
     
     public WorldZone getZoneByName(String zoneName) {
