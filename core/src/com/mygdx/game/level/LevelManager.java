@@ -189,7 +189,7 @@ public class LevelManager {
         do {
             x = NumberUtils.randomInt(-currentLevel.getRoomSize(), currentLevel.getRoomSize()) * 32;
             y = NumberUtils.randomInt(-currentLevel.getRoomSize(), currentLevel.getRoomSize()) * 32;
-        } while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.pythagoras(x, y, Managers.playStateManager.playerReference.x, Managers.playStateManager.playerReference.y) < 64f);
+        } while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.distance(x, y, Managers.playStateManager.playerReference.x, Managers.playStateManager.playerReference.y) < 64f);
 
         /*
         Managers.entityManager.addEntity(

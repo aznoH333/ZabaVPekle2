@@ -70,7 +70,7 @@ public class EnemyBaseBehaviour extends EntityComponent {
 
     @Override
     public void onCollide(Entity owner, Entity other) {
-        if (NumberUtils.pythagoras(owner.x, owner.y, other.x, other.y) < 16f && other.hasComponent(ComponentName.ENEMY)) {
+        if (NumberUtils.distance(owner.x, owner.y, other.x, other.y) < 16f && other.hasComponent(ComponentName.ENEMY)) {
             // bump away from each other
             owner.goInDirection(NumberUtils.directionToward(other.x, other.y, owner.x, owner.y), 0.25f);
         }

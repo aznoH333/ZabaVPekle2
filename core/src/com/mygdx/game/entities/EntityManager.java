@@ -108,7 +108,7 @@ public class EntityManager {
 
         for (Entity e : entities) {
             if (e.hasComponent(componentName)) {
-                float distance = NumberUtils.pythagoras(x, y, e.x, e.y);
+                float distance = NumberUtils.distance(x, y, e.x, e.y);
 
                 if (closestEntity == null || distance < closestDistance) {
                     closestEntity = e;
@@ -126,7 +126,7 @@ public class EntityManager {
 
         for (Entity e : entities) {
             if (e != caller && e.hasComponent(componentName)) {
-                float distance = NumberUtils.pythagoras(caller.x, caller.y, e.x, e.y);
+                float distance = NumberUtils.distance(caller.x, caller.y, e.x, e.y);
 
                 if (closestEntity == null || distance < closestDistance) {
                     closestEntity = e;

@@ -4,10 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Managers;
+import com.mygdx.game.drawing.DrawingCommand;
+import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
+import com.mygdx.game.entities.components.control.Interactable;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.facades.inventory.InventoryFacade;
 import com.mygdx.game.utils.types.NumberUtils;
@@ -72,12 +76,25 @@ public class PlayerBehaviour extends EntityComponent {
             owner.flipX = mousePos.x < owner.x;
         }
         
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
             // inventory
             InventoryFacade.toggleInventory();
         }
 
-
+        // interacting
+        Entity interactable = Managers.entityManager.findClosestEntityWithComponent(owner, ComponentName.INTERACTABLE);
+        
+        if (interactable != null) {
+            float distance = NumberUtils.distanceBetweenEntities(owner, interactable);
+            
+            if (distance < 32f) {
+                // Managers.drawingManager.drawText(new TextDrawingCommand("E", interactable.x, interactable.y - 16f));
+                
+                if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+                    ((Interactable)interactable.getComponentByName(ComponentName.INTERACTABLE)).interact();
+                }
+            }
+        }
     }
 
     @Override

@@ -27,8 +27,8 @@ public class EnemyStepChaseMovement extends EntityComponent {
             Entity target = owner.getField(FieldName.Target);
 
 
-            if (target != null && NumberUtils.pythagoras(owner.x, owner.y, target.x, target.y) < 1000f && NumberUtils.randomChance(0.80f)) {
-                float distanceToTarget = NumberUtils.pythagoras(owner.x, owner.y, target.x, target.y);
+            if (target != null && NumberUtils.distance(owner.x, owner.y, target.x, target.y) < 1000f && NumberUtils.randomChance(0.80f)) {
+                float distanceToTarget = NumberUtils.distance(owner.x, owner.y, target.x, target.y);
                 float directionToTarget = NumberUtils.directionToward(owner.x, owner.y, target.x, target.y);
 
 
@@ -64,7 +64,7 @@ public class EnemyStepChaseMovement extends EntityComponent {
 
         owner.goInDirection(direction, 2f);
 
-        if (NumberUtils.pythagoras(owner.x, owner.y, movementTarget.x(), movementTarget.y()) < 10f) {
+        if (NumberUtils.distance(owner.x, owner.y, movementTarget.x(), movementTarget.y()) < 10f) {
             movementTarget = null;
             moveTimer = 20;
         }

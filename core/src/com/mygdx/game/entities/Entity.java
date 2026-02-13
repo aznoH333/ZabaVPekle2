@@ -64,6 +64,7 @@ public class Entity implements Copyable {
     public boolean flipY = false;
     public boolean flipWithMoveDirection = false;
     public boolean drawAsStatic = false;
+    
 
 
     public ArrayList<Entity> children = new ArrayList<>();

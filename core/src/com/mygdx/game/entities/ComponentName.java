@@ -7,6 +7,8 @@ public enum ComponentName {
     LEGS,
     TEXT,
     BULLET,
+    INTERACTABLE,
+    INVENTORY_ITEM,
     GUN;
 
 }

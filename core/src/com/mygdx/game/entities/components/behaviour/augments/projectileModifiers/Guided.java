@@ -22,7 +22,7 @@ public class Guided extends EntityComponent {
     public void onUpdate(Entity owner) {
         if (target == null || !target.wantsToLive) {
             target = Managers.entityManager.findClosestEntityWithComponent(owner, targetComponent);
-        } else if (NumberUtils.pythagoras(owner.x, owner.y, target.x, target.y) < 96f) {
+        } else if (NumberUtils.distance(owner.x, owner.y, target.x, target.y) < 96f) {
 
 
             float direction = NumberUtils.constrictRotationToRad(NumberUtils.directionToward(owner.x, owner.y, target.x, target.y) + NumberUtils.TWO_PI);

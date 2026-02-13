@@ -2,7 +2,6 @@ package com.mygdx.game.playState.world.level;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
-import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.augmentBox.AugmentBoxFacade;
 import com.mygdx.game.level.LevelExitDirection;
@@ -57,7 +56,7 @@ public class ZoneLevel {
                 
                 /* TODO: make this reflect the actual level exits */
                 for (LevelExitDirection direction : LevelExitDirection.values()) {
-                    if (NumberUtils.pythagoras(
+                    if (NumberUtils.distance(
                         direction.x * roomSize * 32f,
                         direction.y * roomSize * 32f,
                         enemyX,

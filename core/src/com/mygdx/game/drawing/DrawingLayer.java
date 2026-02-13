@@ -5,12 +5,13 @@ public enum DrawingLayer {
     BLOOD(1),
     WALLS(2),
     DOOR(3),
-    ENEMIES(4),
-    PROJECTILES(5),
-    EFFECTS(6),
-    PLAYER(7),
-    HAND(8),
-    GUI(9);
+    ITEMS(4),
+    ENEMIES(5),
+    PROJECTILES(6),
+    EFFECTS(7),
+    PLAYER(8),
+    HAND(9),
+    GUI(10);
 
     public final int value;
 

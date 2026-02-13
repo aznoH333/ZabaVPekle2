@@ -7,5 +7,6 @@ package com.mygdx.game.entities;
 public enum EntityIdentifier {
     PLAYER,
     INVENTORY,
+    ITEM,
     UNDEFINED;
 }

@@ -1,5 +1,7 @@
 package com.mygdx.game.utils.types;
 
+import com.mygdx.game.entities.Entity;
+
 public class NumberUtils {
     public final static float HALF_PI = (float) (Math.PI / 2f);
     public final static float TWO_PI = (float) (Math.PI * 2f);
@@ -29,8 +31,17 @@ public class NumberUtils {
         return (float) Math.atan2(endY - startY, endX - startX);
     }
 
-    public static float pythagoras(float x, float y, float x2, float y2) {
+    public static float distance(float x, float y, float x2, float y2) {
         return (float) Math.sqrt(Math.pow(x2 - x, 2) + Math.pow(y2 - y, 2));
+    }
+    
+    public static float distanceBetweenEntities(Entity first, Entity second) {
+        return distance(
+            first.x,
+            first.y,
+            second.x,
+            second.y
+        );
     }
 
     public static int randomInt(int min, int max) {
