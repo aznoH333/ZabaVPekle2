@@ -1,7 +1,6 @@
 package com.mygdx.game.entities.components.visual;
 
-import com.mygdx.game.Managers;
-import com.mygdx.game.drawing.LightHandle;
+import com.mygdx.game.drawing.shaders.LightHandle;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.facades.sceen.VisualEffectsFacade;

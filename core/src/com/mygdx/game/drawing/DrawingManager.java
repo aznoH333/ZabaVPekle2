@@ -18,6 +18,9 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.drawing.shaders.LightingShaderHandler;
+import com.mygdx.game.drawing.shaders.ScreenEdgeShaderHandler;
+import com.mygdx.game.drawing.shaders.ScreenEffectShaderHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +62,7 @@ public class DrawingManager {
     
     public final LightingShaderHandler lightingShaderHandler;
     public final ScreenEffectShaderHandler screenEffectShaderHandler;
+    public final ScreenEdgeShaderHandler screenEdgeShaderHandler;
 
     BitmapFont font;
 
@@ -98,6 +102,7 @@ public class DrawingManager {
         
         lightingShaderHandler = new LightingShaderHandler(gameShader, camera);
         screenEffectShaderHandler = new ScreenEffectShaderHandler(screenShader, gameShader);
+        screenEdgeShaderHandler = new ScreenEdgeShaderHandler(gameShader, camera);
         
         font = loadFont("fonts/3270/3270NerdFont-Regular.ttf");
     }
@@ -260,6 +265,7 @@ public class DrawingManager {
 
 
         lightingShaderHandler.applyLights(aspectRatio);
+        screenEdgeShaderHandler.apply();
         screenEffectShaderHandler.apply();
 
         gameFrameBuffer.begin();

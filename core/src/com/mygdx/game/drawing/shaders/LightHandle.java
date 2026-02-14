@@ -1,6 +1,7 @@
-package com.mygdx.game.drawing;
+package com.mygdx.game.drawing.shaders;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.mygdx.game.drawing.DrawingManager;
 
 public class LightHandle {
     public float x;

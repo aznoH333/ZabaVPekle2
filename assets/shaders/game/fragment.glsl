@@ -180,11 +180,24 @@ Faded world edges
 ===========================================================
 */
 
-uniform float worldWidth;
-uniform float worldHeight;
+uniform float levelSize;
+uniform vec2 worldOffset;
+uniform vec2 screenSize;
 
-vec4 applyFadedWorldEdges(vec4 color, vec2 worldCoordinates) {
+const float FADE_DISTANCE = 64.0;
+
+vec4 applyFadedWorldEdges(vec4 color, vec2 screenCoordinates) {
     float factor = 1.0;
+
+
+    vec2 normalizedScreenCoordinates = (screenCoordinates - 0.5);
+    vec2 worldCoordinates = (normalizedScreenCoordinates * screenSize + worldOffset) * 0.5;
+
+    float closer = max(abs(worldCoordinates.x), abs(worldCoordinates.y));
+
+    if (closer > (levelSize * 0.5) - FADE_DISTANCE) {
+        factor = ((levelSize * 0.5) - closer) / FADE_DISTANCE;
+    }
 
 
     return vec4(color.rgb * factor, color.a);
@@ -199,7 +212,6 @@ Main
 void main() {
     vec2 centeredPosition = v_texCoords - 0.5;
     centeredPosition.x *= 1.77777;
-
 
 
     // Sample the texture with adjusted UVs
@@ -217,13 +229,13 @@ void main() {
     texelColor = applyScreenBrightness(texelColor);
 
     //texColor = restrictColorResolution(texColor, 0.033);
-    texelColor = applyFadedWorldEdges(texelColor, centeredPosition);
+    texelColor = applyFadedWorldEdges(texelColor, v_texCoords);
 
 
-    texelColor = restrictColorResolution(texelColor, 0.0099);
+    // texelColor = restrictColorResolution(texelColor, 0.0099);
 
 
-    texelColor = applyCrt(centeredPosition, texelColor, 0.20, 1000.0);
+    // texelColor = applyCrt(centeredPosition, texelColor, 0.20, 1000.0);
 
     // Set final color
     gl_FragColor = texelColor * v_color;

@@ -1,4 +1,4 @@
-package com.mygdx.game.drawing;
+package com.mygdx.game.drawing.shaders;
 
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 
@@ -19,6 +19,7 @@ public class ScreenEffectShaderHandler {
     private float screenBrightness = 1f;
     private int screenEffectDimTimer = 0;
     private int screenEffectDimTimerLenght = 1;
+    
     
     
     public ScreenEffectShaderHandler(ShaderProgram screenShader, ShaderProgram gameShader) {

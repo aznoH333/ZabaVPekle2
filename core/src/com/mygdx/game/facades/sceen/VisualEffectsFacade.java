@@ -1,7 +1,7 @@
 package com.mygdx.game.facades.sceen;
 
 import com.mygdx.game.Managers;
-import com.mygdx.game.drawing.LightHandle;
+import com.mygdx.game.drawing.shaders.LightHandle;
 
 /**
  * A facade that controls the various shader related and vfx systems

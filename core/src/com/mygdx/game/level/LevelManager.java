@@ -23,6 +23,7 @@ import java.util.Map;
 public class LevelManager {
 
     private static LevelManager instance = null;
+    public final static float TILE_SIZE = 32f;
 
     public static LevelManager getInstance() {
         if (instance == null) {
@@ -54,7 +55,7 @@ public class LevelManager {
                 Color tileColor = getColorForTile(tileType.color);
 
                 Managers.drawingManager.drawSprite(
-                    new DrawingCommand(tileType.textureName, x * 32f - 16f, y * 32f - 16f).setColor(tileColor),
+                    new DrawingCommand(tileType.textureName, x * TILE_SIZE - 16f, y * TILE_SIZE - 16f).setColor(tileColor),
                     layer);
 
                 if (tileType.decorationTextureName != null) {
@@ -62,7 +63,7 @@ public class LevelManager {
                     Color decorationColor = getColorForTile(tileType.decorationColor);
 
                     Managers.drawingManager.drawSprite(
-                        new DrawingCommand(tileType.decorationTextureName, x * 32f - 16f, y * 32f - 16f).setColor(decorationColor),
+                        new DrawingCommand(tileType.decorationTextureName, x * TILE_SIZE - 16f, y * TILE_SIZE - 16f).setColor(decorationColor),
                         DrawingLayer.DOOR);
                 }
 
@@ -189,7 +190,7 @@ public class LevelManager {
         do {
             x = NumberUtils.randomInt(-currentLevel.getRoomSize(), currentLevel.getRoomSize()) * 32;
             y = NumberUtils.randomInt(-currentLevel.getRoomSize(), currentLevel.getRoomSize()) * 32;
-        } while (!isSpaceEmpty(x, y, 32f, 32f) || NumberUtils.distance(x, y, Managers.playStateManager.playerReference.x, Managers.playStateManager.playerReference.y) < 64f);
+        } while (!isSpaceEmpty(x, y, TILE_SIZE, TILE_SIZE) || NumberUtils.distance(x, y, Managers.playStateManager.playerReference.x, Managers.playStateManager.playerReference.y) < 64f);
 
         /*
         Managers.entityManager.addEntity(
@@ -217,8 +218,8 @@ public class LevelManager {
             // spawn door object
             Managers.entityManager.addEntity(
                 new Entity()
-                    .setX((currentLevel.getRoomSize() - 0.45f) * 32f * exit.getKey().x - 16f)
-                    .setY((currentLevel.getRoomSize() - 0.45f) * 32f * exit.getKey().y - 16f)
+                    .setX((currentLevel.getRoomSize() - 0.45f) * TILE_SIZE * exit.getKey().x - 16f)
+                    .setY((currentLevel.getRoomSize() - 0.45f) * TILE_SIZE * exit.getKey().y - 16f)
                     .addComponent(new Door(exit.getValue().zoneName, exit.getValue().zoneCoordinates, exit.getKey()))
             );
         }
@@ -241,16 +242,18 @@ public class LevelManager {
         float widthValue = width / 2f;
         float heightValue = height / 2f;
 
-        return x - widthValue > -currentLevel.getRoomSize() * 32f &&
-            x + widthValue < (currentLevel.getRoomSize() - 1) * 32f &&
-            y - heightValue > -currentLevel.getRoomSize() * 32f &&
-            y + heightValue < (currentLevel.getRoomSize() - 1) * 32f;
+        return x - widthValue > -currentLevel.getRoomSize() * TILE_SIZE &&
+            x + widthValue < (currentLevel.getRoomSize() - 1) * TILE_SIZE &&
+            y - heightValue > -currentLevel.getRoomSize() * TILE_SIZE &&
+            y + heightValue < (currentLevel.getRoomSize() - 1) * TILE_SIZE;
     }
     
     public void loadLevel(ZoneLevel room) {
         this.currentLevel = room;
         this.currentLevelExits = WorldFacade.getLevelExits(currentLevel);
         this.doorsOpen = false;
+        Managers.drawingManager.screenEdgeShaderHandler.levelSize = currentLevel.getOuterRoomSize() * TILE_SIZE;
+        System.out.println(currentLevel.getOuterRoomSize() * TILE_SIZE);
         
         for (Entity e : room.roomContents) {
             Managers.entityManager.addEntity(e);
