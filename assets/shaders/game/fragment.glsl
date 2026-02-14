@@ -173,6 +173,24 @@ vec4 applyScreenBrightness(vec4 color) {
     return color;
 }
 
+
+/*
+===========================================================
+Faded world edges
+===========================================================
+*/
+
+uniform float worldWidth;
+uniform float worldHeight;
+
+vec4 applyFadedWorldEdges(vec4 color, vec2 worldCoordinates) {
+    float factor = 1.0;
+
+
+    return vec4(color.rgb * factor, color.a);
+}
+
+
 /*
 ===========================================================
 Main
@@ -199,6 +217,9 @@ void main() {
     texelColor = applyScreenBrightness(texelColor);
 
     //texColor = restrictColorResolution(texColor, 0.033);
+    texelColor = applyFadedWorldEdges(texelColor, centeredPosition);
+
+
     texelColor = restrictColorResolution(texelColor, 0.0099);
 
 
