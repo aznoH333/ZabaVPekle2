@@ -9,8 +9,11 @@ import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.ItemDrop;
 import com.mygdx.game.entities.components.control.Interactable;
 import com.mygdx.game.entities.components.gui.hudElements.InventoryGUI;
+import com.mygdx.game.entities.components.visual.particles.FadeParticle;
 import com.mygdx.game.entities.fields.FieldName;
+import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.playState.inventory.InventoryItem;
+import com.mygdx.game.playState.inventory.InventoryItemType;
 
 import java.util.Optional;
 
@@ -51,7 +54,7 @@ public class InventoryFacade {
     }
     
     
-    public static Entity createdItemDrop(InventoryItem item, float x, float y) {
+    public static Entity createItemDrop(InventoryItem item, float x, float y) {
         return new Entity()
             .setSprite(item.sprite)
             .setX(x)
@@ -73,5 +76,43 @@ public class InventoryFacade {
             ));
     }
     
+    public static Entity createItemBox(float x, float y) {
+        return new Entity()
+            .setSprite("item_boxes_0001")
+            .setX(x)
+            .setY(y)
+            .setTeam(EntityTeam.NEUTRAL_OBJECT)
+            .setDrawingLayer(DrawingLayer.ITEMS)
+            .addComponent(
+                new Interactable((entity)->{
+                    for (int i = 0; i < 6; i++) {
+                        Managers.entityManager.addEntity(
+                            InventoryFacade.createItemDrop(
+                                new InventoryItem("inventory_items_0005", "gear", Quality.COMMON, 5, true, InventoryItemType.GEAR),
+                                entity.x,
+                                entity.y
+                            )
+                        );
+                    }
+                    entity.commitSudoku();
+                    
+                    // spawn giblet
+                    Managers.entityManager.addEntity(
+                        new Entity()
+                            .setX(entity.x)
+                            .setY(entity.y)
+                            .setSprite("item_boxes_0002")
+                            .setDrawingLayer(DrawingLayer.DOOR)
+                            .addComponent(new FadeParticle(60, false, 0.5f))
+                    );
+                })
+            );
+    }
     
+    public static Entity createCraftingStation(float x, float y) {
+        return new Entity()
+            .setX(x)
+            .setY(y);
+            
+    }
 }

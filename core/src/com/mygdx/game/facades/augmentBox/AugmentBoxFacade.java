@@ -6,6 +6,8 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.AugmentBox;
+import com.mygdx.game.entities.components.control.Interactable;
+import com.mygdx.game.entities.components.visual.particles.FadeParticle;
 import com.mygdx.game.facades.augmentBox.AugmentGenerationTable.AugmentGenerationTable;
 import com.mygdx.game.facades.sceen.GUIFacade;
 import com.mygdx.game.entities.items.Augment;
@@ -20,12 +22,25 @@ public class AugmentBoxFacade {
     public static Entity createNewBox(float x, float y, Quality boxRarity) {
         return
             new Entity()
-                .addComponent(new AugmentBox(boxRarity))
                 .setX(x)
                 .setY(y)
                 .setTeam(EntityTeam.NEUTRAL_OBJECT)
                 .setDrawingLayer(DrawingLayer.WALLS)
-                .setSprite(boxRarity.boxSprite);
+                .setSprite("item_boxes_0003")
+                .addComponent(new Interactable((box)->{
+                    AugmentBoxFacade.openNewBox(Managers.playStateManager.playerReference, boxRarity);
+                    box.commitSudoku();
+                    // spawn giblet
+                    Managers.entityManager.addEntity(
+                        new Entity()
+                            .setX(box.x)
+                            .setY(box.y)
+                            .setSprite("item_boxes_0004")
+                            .setDrawingLayer(DrawingLayer.DOOR)
+                            .addComponent(new FadeParticle(60, false, 0.5f))
+                    );
+                }))
+            ;
     }
 
     
