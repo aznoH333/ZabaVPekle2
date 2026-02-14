@@ -8,6 +8,7 @@ public class Inventory {
     
     private ArrayList<InventoryItem> equippedItems;
     private ArrayList<InventoryItem> items;
+    private ArrayList<InventoryItem> inputSlots;
     public final static int ITEMS_PER_INVENTORY_ROW = 5;
     public final static int MAX_EQUIPMENT = 5;
     public final static int INVENTORY_ROWS = 4;
@@ -16,6 +17,7 @@ public class Inventory {
     public Inventory(){
         this.items = new ArrayList<>();
         this.equippedItems = new ArrayList<>();
+        this.inputSlots = new ArrayList<>();
     }
     
     public void addItem(InventoryItem item) {
@@ -80,5 +82,27 @@ public class Inventory {
         return items.get(itemIndex);
     }
     
+    public boolean canAddInput() {
+        return this.inputSlots.size() < ITEMS_PER_INVENTORY_ROW;
+    }
     
+    public void addInput(InventoryItem item) {
+        this.inputSlots.add(item);
+    }
+    
+    public void removeInput(int index) {
+        this.inputSlots.remove(index);
+    }
+    
+    public InventoryItem getInputItem(int index) {
+        if (index >= inputSlots.size()) {
+            return null;
+        }
+        
+        return inputSlots.get(index);
+    }
+    
+    public void clearInputs() {
+        this.inputSlots.clear();
+    }
 }

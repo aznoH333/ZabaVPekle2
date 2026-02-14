@@ -39,48 +39,24 @@ public class PlayerBehaviour extends EntityComponent {
     
     @Override
     public void onUpdate(Entity owner) {
-
-
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            owner.walk(-1f, 0f);
+        boolean isInventoryOpen = InventoryFacade.isInventoryOpen();
+    
+        if (!isInventoryOpen) {
+            handlePlayerWorldActions();
         }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            owner.walk(1f, 0f);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            owner.walk(0f, 1f);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            owner.walk(0f, -1f);
-        }
-
         
-
-
-        if (gun != null) {
-            Vector2 mousePos = Managers.drawingManager.getMousePosition();
-
-            gun.direction = NumberUtils.directionToward(
-                owner.x,
-                owner.y,
-                mousePos.x,
-                mousePos.y);
-
-            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                gun.shoot(owner);
-            }
-            
-            owner.flipX = mousePos.x < owner.x;
-        }
         
         if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)) {
             // inventory
             InventoryFacade.toggleInventory();
         }
-
+        
+        if (!isInventoryOpen) {
+            handleInteractables(owner);
+        }
+    }
+    
+    private static void handleInteractables(Entity owner) {
         // interacting
         Entity interactable = Managers.entityManager.findClosestEntityWithComponent(owner, ComponentName.INTERACTABLE);
         
@@ -96,6 +72,42 @@ public class PlayerBehaviour extends EntityComponent {
             }
         }
     }
+    
+    private void handlePlayerWorldActions() {
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            owner.walk(-1f, 0f);
+        }
+        
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            owner.walk(1f, 0f);
+        }
+        
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            owner.walk(0f, 1f);
+        }
+        
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            owner.walk(0f, -1f);
+        }
+        
+        if (gun != null) {
+            Vector2 mousePos = Managers.drawingManager.getMousePosition();
+            
+            gun.direction = NumberUtils.directionToward(
+                owner.x,
+                owner.y,
+                mousePos.x,
+                mousePos.y);
+            
+            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                gun.shoot(owner);
+            }
+            
+            owner.flipX = mousePos.x < owner.x;
+        }
+    }
+    
+    
 
     @Override
     public void onFirstAttached(Entity owner) {

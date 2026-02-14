@@ -14,6 +14,7 @@ import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.augmentBox.AugmentBoxFacade;
 import com.mygdx.game.playState.inventory.InventoryItem;
 import com.mygdx.game.playState.inventory.InventoryItemType;
+import com.mygdx.game.playState.inventory.InventoryMenuType;
 
 public class WorldInteractableFacade {
     public static Entity createItemDrop(InventoryItem item, float x, float y) {
@@ -56,6 +57,13 @@ public class WorldInteractableFacade {
                                 entity.y
                             )
                         );
+                        Managers.entityManager.addEntity(
+                            WorldInteractableFacade.createItemDrop(
+                                new InventoryItem("inventory_items_0001", "plate", Quality.COMMON, 5, true, InventoryItemType.PLATE),
+                                entity.x,
+                                entity.y
+                            )
+                        );
                     }
                     entity.commitSudoku();
                     
@@ -77,7 +85,10 @@ public class WorldInteractableFacade {
             .setX(x)
             .setY(y)
             .setSprite("machines_0001")
-            .setDrawingLayer(DrawingLayer.ITEMS);
+            .setDrawingLayer(DrawingLayer.ITEMS)
+            .addComponent(new Interactable((entity) -> {
+                InventoryFacade.openInventoryMenu(InventoryMenuType.CRAFTING);
+            }));
         
     }
     

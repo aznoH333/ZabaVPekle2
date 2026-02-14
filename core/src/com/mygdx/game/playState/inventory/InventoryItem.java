@@ -19,7 +19,20 @@ public class InventoryItem {
         this.type = type;
     }
     
+    
+    
     public boolean canStackWith(InventoryItem other) {
         return this.quality == other.quality && this.type == other.type && this.stackable && other.stackable;
+    }
+    
+    public InventoryItem copy() {
+        return new InventoryItem(
+            sprite,
+            name,
+            quality,
+            quantity,
+            stackable,
+            type
+        );
     }
 }

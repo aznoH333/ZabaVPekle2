@@ -1,5 +1,8 @@
 package com.mygdx.game.entities.components.gui.hudElements;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
@@ -8,12 +11,17 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.playState.inventory.Inventory;
 import com.mygdx.game.playState.inventory.InventoryItem;
+import com.mygdx.game.playState.inventory.InventoryMenuType;
+import com.mygdx.game.playState.inventory.InventorySlotType;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public class InventoryGUI extends EntityComponent {
     
     
-    public InventoryGUI() {
-    
+    private final InventoryMenuType type;
+    public InventoryGUI(InventoryMenuType type) {
+        this.type = type;
+        System.out.println(type.name());
     }
     
     private static final int SPACE_BETWEEN_SLOTS = 5;
@@ -23,29 +31,93 @@ public class InventoryGUI extends EntityComponent {
     private static final float QUANTITY_OFFSET_X = 6f;
     private static final float QUANTITY_OFFSET_Y = -2f;
     
+    private static final float INPUT_ROW_OFFSET_Y = 128f;
+    private InventoryItem hoveredItem = null;
+    private InventorySlotType hoveredSlotType;
+    private int hoveredIndex = -1;
+    
+    
     @Override
     public void onDraw(Entity owner) {
         
         Inventory inventory = Managers.playStateManager.inventory;
         
+        hoveredItem = null;
+        hoveredIndex = -1;
+        hoveredSlotType = InventorySlotType.NONE;
+        
         for (int i = 0; i < Inventory.INVENTORY_ROWS; i++) {
             for (int j = 0; j < Inventory.ITEMS_PER_INVENTORY_ROW; j++) {
-                drawInventorySlot(
+                handleInventorySlot(
                     j * (SLOT_SIZE + SPACE_BETWEEN_SLOTS),
                     (Inventory.INVENTORY_ROWS - i - 1) * (SLOT_SIZE + SPACE_BETWEEN_SLOTS),
-                    inventory.getItem((i*Inventory.ITEMS_PER_INVENTORY_ROW)+j));
+                    inventory.getItem((i*Inventory.ITEMS_PER_INVENTORY_ROW)+j),
+                    InventorySlotType.NORMAL,
+                    (i*Inventory.ITEMS_PER_INVENTORY_ROW)+j
+                    );
+            }
+        }
+        
+        if (type.hasInput) {
+            for (int i = 0; i < Inventory.ITEMS_PER_INVENTORY_ROW; i++) {
+                handleInventorySlot(
+                    i * (SLOT_SIZE + SPACE_BETWEEN_SLOTS),
+                    owner.y + INPUT_ROW_OFFSET_Y,
+                    inventory.getInputItem(i),
+                    InventorySlotType.INPUT,
+                    i
+                );
             }
         }
     }
     
-    private void drawInventorySlot(float x, float y, InventoryItem item) {
+    
+    @Override
+    public void onUpdate(Entity owner) {
+        if (!type.hasInput || hoveredSlotType == InventorySlotType.NONE) {
+            return;
+        }
         
+        Inventory inventory = Managers.playStateManager.inventory;
+        
+        
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            if (hoveredSlotType == InventorySlotType.NORMAL && inventory.canAddInput()) {
+                inventory.removeItem(hoveredIndex, 1);
+                
+                
+                InventoryItem itemToAdd = hoveredItem.copy();
+                itemToAdd.quantity = 1;
+                inventory.addInput(itemToAdd);
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    
+    private void handleInventorySlot(float x, float y, InventoryItem item, InventorySlotType slotType, int slotIndex) {
         String slotSprite = "inventory_slot_0001";
         
         if (item == null) {
             slotSprite = "inventory_slot_0004";
         }
         
+        // hovering
+        Vector2 mousePos = Managers.drawingManager.getScreenMousePosition();
+        boolean hovered = NumberUtils.checkCollisions(
+            x + OFFSET_X, y + OFFSET_Y, SLOT_SIZE, SLOT_SIZE, mousePos.x, mousePos.y, 1f, 1f
+        );
+        
+        
+        if (hovered && item != null) {
+            slotSprite = "inventory_slot_0002";
+            hoveredIndex = slotIndex;
+            hoveredSlotType = slotType;
+            hoveredItem = item;
+        }
         
         Managers.drawingManager.drawSpriteStatic(
             new DrawingCommand(
@@ -55,7 +127,6 @@ public class InventoryGUI extends EntityComponent {
             ),
             DrawingLayer.GUI
         );
-        
         
         if (item == null) {
             return;
@@ -72,7 +143,7 @@ public class InventoryGUI extends EntityComponent {
         );
         
         // item number
-        if (item.stackable) {
+        if (item.stackable && item.quantity > 1) {
             Managers.drawingManager.drawText(
                 new TextDrawingCommand(
                     item.quantity + "",
