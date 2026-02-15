@@ -11,16 +11,20 @@ public class Text extends EntityComponent {
 
     public String text;
     public Color color;
-
-    public Text(String text) {
+    public final float xOffset;
+    public final float yOffset;
+    
+    public Text(String text, float xOffset, float yOffset) {
         super.name = ComponentName.TEXT;
         this.text = text;
         this.color = new Color(1f, 1f, 1f, 1f);
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
     }
 
     @Override
     public void onUpdate(Entity owner) {
-        Managers.drawingManager.drawText(new TextDrawingCommand(text, owner.x, owner.y).setColor(color.r, color.b, color.g, color.a));
+        Managers.drawingManager.drawText(new TextDrawingCommand(text, owner.x + xOffset, owner.y + yOffset).setColor(color.r, color.b, color.g, color.a));
     }
 
 }

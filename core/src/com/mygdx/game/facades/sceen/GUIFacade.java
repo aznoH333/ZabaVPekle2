@@ -23,18 +23,22 @@ public class GUIFacade {
             .setX(x)
             .setY(y)
             .addComponent(
-                new Text(text)
+                new Text(text, 0f, 3f)
             )
+            .setSprite("button")
+            .setColor(0.25f, 0.25f, 0.25f, 1f)
             .addComponent(new Button(action))
             .addComponent(new Hover(
                 (owner) -> {
                     Text textComponent = (Text) owner.getComponentByName(ComponentName.TEXT);
                     textComponent.color.b = 0f;
                     Managers.soundManager.playSound("click", 1f, 0.1f);
+                    owner.setColor(0.35f, 0.35f, 0.35f, 1f);
                 },
                 owner -> {
                     Text textComponent = (Text) owner.getComponentByName(ComponentName.TEXT);
                     textComponent.color.b = 1f;
+                    owner.setColor(0.25f, 0.25f, 0.25f, 1f);
                 }
             ))
             .setWidth(Managers.drawingManager.getTextWidth(text));
