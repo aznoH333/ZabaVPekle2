@@ -9,6 +9,7 @@ import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.facades.inventory.InventoryFacade;
 import com.mygdx.game.facades.inventory.WorldInteractableFacade;
 import com.mygdx.game.playState.inventory.Inventory;
 import com.mygdx.game.playState.inventory.InventoryItem;
@@ -94,6 +95,13 @@ public class InventoryGUI extends EntityComponent {
                 InventoryItem itemToAdd = hoveredItem.copy();
                 itemToAdd.quantity = 1;
                 inventory.addInput(itemToAdd);
+            }else if (hoveredSlotType == InventorySlotType.INPUT) {
+                InventoryItem item = inventory.getInputItem(hoveredIndex);
+                
+                inventory.removeInput(hoveredIndex);
+                
+                InventoryFacade.giveOrDropItem(item);
+                
             }
         }
         
@@ -107,13 +115,7 @@ public class InventoryGUI extends EntityComponent {
             Inventory inventory = Managers.playStateManager.inventory;
             
             for (InventoryItem item : inventory.inputSlots) {
-                Managers.entityManager.addEntity(
-                    WorldInteractableFacade.createItemDrop(
-                        item,
-                        originEntityReference.x,
-                        originEntityReference.y
-                    )
-                );
+                InventoryFacade.giveOrDropItem(item);
             }
             
             inventory.clearInputs();

@@ -13,6 +13,7 @@ import com.mygdx.game.entities.components.visual.particles.FadeParticle;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.sceen.GUIFacade;
+import com.mygdx.game.playState.inventory.Inventory;
 import com.mygdx.game.playState.inventory.InventoryItem;
 import com.mygdx.game.playState.inventory.InventoryItemType;
 import com.mygdx.game.playState.inventory.InventoryMenuType;
@@ -43,10 +44,6 @@ public class InventoryFacade {
     
     private static void closeInventory() {
         getInventory().commitSudoku();
-        
-        
-        
-        
     }
     
     
@@ -62,7 +59,7 @@ public class InventoryFacade {
             entity.addChild(
                 GUIFacade.buildButton("craft", 0, -128, (button)->{
                     Managers.playStateManager.inventory.clearInputs();
-                    Managers.playStateManager.inventory.addItem(new InventoryItem("inventory_items_0006", "motor", Quality.COMMON, 1, true, InventoryItemType.MOTOR));
+                    InventoryFacade.giveOrDropItem(new InventoryItem("inventory_items_0006", "motor", Quality.COMMON, 1, true, InventoryItemType.MOTOR));
                 })
             );
         }
@@ -84,6 +81,15 @@ public class InventoryFacade {
         return inventory.orElse(null);
     }
     
+    public static void giveOrDropItem(InventoryItem item) {
+        Inventory inventory = Managers.playStateManager.inventory;
+        
+        if (inventory.canStoreItem(item)) {
+            inventory.addItem(item);
+        }else {
+            WorldInteractableFacade.createItemDrop(item, Managers.playStateManager.playerReference.x, Managers.playStateManager.playerReference.y);
+        }
+    }
     
     
 }
