@@ -26,6 +26,8 @@ public class GUIFacade {
                 new Text(text, 0f, 3f)
             )
             .setSprite("button")
+            .setWidth(128f)
+            .setHeight(32f)
             .setColor(0.25f, 0.25f, 0.25f, 1f)
             .addComponent(new Button(action))
             .addComponent(new Hover(
@@ -40,8 +42,7 @@ public class GUIFacade {
                     textComponent.color.b = 1f;
                     owner.setColor(0.25f, 0.25f, 0.25f, 1f);
                 }
-            ))
-            .setWidth(Managers.drawingManager.getTextWidth(text));
+            ));
     }
 
     public static void createAugmentGUI(Augment augment, float x, float y, Entity player, Entity guiOwner) {
