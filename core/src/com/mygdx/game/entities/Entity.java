@@ -167,7 +167,14 @@ public class Entity implements Copyable {
             child.update();
         }
         
-        children.removeIf((child)->!child.wantsToLive);
+        children.removeIf((child)->{
+            if (!child.wantsToLive) {
+                child.invokeSudoku();
+                return true;
+            }
+            
+            return false;
+        });
     }
 
 

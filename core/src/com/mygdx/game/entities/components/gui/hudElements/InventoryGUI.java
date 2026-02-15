@@ -9,6 +9,7 @@ import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.facades.inventory.WorldInteractableFacade;
 import com.mygdx.game.playState.inventory.Inventory;
 import com.mygdx.game.playState.inventory.InventoryItem;
 import com.mygdx.game.playState.inventory.InventoryMenuType;
@@ -19,9 +20,13 @@ public class InventoryGUI extends EntityComponent {
     
     
     private final InventoryMenuType type;
-    public InventoryGUI(InventoryMenuType type) {
+    
+    /// Refers to the machine/world object that spawned the inventory. Null if inventory has no origin
+    private final Entity originEntityReference;
+    
+    public InventoryGUI(InventoryMenuType type, Entity originEntityReference) {
         this.type = type;
-        System.out.println(type.name());
+        this.originEntityReference = originEntityReference;
     }
     
     private static final int SPACE_BETWEEN_SLOTS = 5;
@@ -95,7 +100,26 @@ public class InventoryGUI extends EntityComponent {
         
     }
     
-    
+    @Override
+    public void onSudoku(Entity owner) {
+        if (type.hasInput && originEntityReference != null) {
+            // drop items
+            Inventory inventory = Managers.playStateManager.inventory;
+            
+            for (InventoryItem item : inventory.inputSlots) {
+                Managers.entityManager.addEntity(
+                    WorldInteractableFacade.createItemDrop(
+                        item,
+                        originEntityReference.x,
+                        originEntityReference.y
+                    )
+                );
+            }
+            
+            inventory.clearInputs();
+            
+        }
+    }
     
     
     private void handleInventorySlot(float x, float y, InventoryItem item, InventorySlotType slotType, int slotIndex) {

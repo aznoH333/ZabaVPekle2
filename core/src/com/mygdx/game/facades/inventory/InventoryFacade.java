@@ -27,33 +27,36 @@ public class InventoryFacade {
         if (isInventoryOpen()) {
             closeInventory();
         } else {
-            player.addChild(createInventoryEntity(InventoryMenuType.NORMAL));
+            player.addChild(createInventoryEntity(InventoryMenuType.NORMAL, null));
         }
     }
     
-    public static void openInventoryMenu(InventoryMenuType type) {
+    public static void openInventoryMenu(InventoryMenuType type, Entity originEntity) {
         Entity player = Managers.playStateManager.playerReference;
         
         if (isInventoryOpen()) {
             return;
         }
         
-        player.addChild(createInventoryEntity(type));
+        player.addChild(createInventoryEntity(type, originEntity));
     }
     
     private static void closeInventory() {
         getInventory().commitSudoku();
-        // TODO : drop items
+        
+        
+        
+        
     }
     
     
-    private static Entity createInventoryEntity(InventoryMenuType type) {
+    private static Entity createInventoryEntity(InventoryMenuType type, Entity originEntity) {
         Entity entity = new Entity()
             .setSprite("inventory_0001")
             .setIdentifier(EntityIdentifier.INVENTORY)
             .setDrawingLayer(DrawingLayer.GUI)
             .makeStatic()
-            .addComponent(new InventoryGUI(type));
+            .addComponent(new InventoryGUI(type, originEntity));
         
         if (type == InventoryMenuType.CRAFTING) {
             entity.addChild(

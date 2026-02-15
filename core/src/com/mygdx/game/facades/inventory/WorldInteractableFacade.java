@@ -87,7 +87,7 @@ public class WorldInteractableFacade {
             .setSprite("machines_0001")
             .setDrawingLayer(DrawingLayer.ITEMS)
             .addComponent(new Interactable((entity) -> {
-                InventoryFacade.openInventoryMenu(InventoryMenuType.CRAFTING);
+                InventoryFacade.openInventoryMenu(InventoryMenuType.CRAFTING, entity);
             }));
         
     }

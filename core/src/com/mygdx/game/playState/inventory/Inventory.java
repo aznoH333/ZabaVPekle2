@@ -8,7 +8,7 @@ public class Inventory {
     
     private ArrayList<InventoryItem> equippedItems;
     private ArrayList<InventoryItem> items;
-    private ArrayList<InventoryItem> inputSlots;
+    public ArrayList<InventoryItem> inputSlots;
     public final static int ITEMS_PER_INVENTORY_ROW = 5;
     public final static int MAX_EQUIPMENT = 5;
     public final static int INVENTORY_ROWS = 4;
