@@ -2,17 +2,12 @@ package com.mygdx.game.facades.inventory;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
-import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityIdentifier;
-import com.mygdx.game.entities.EntityTeam;
-import com.mygdx.game.entities.components.behaviour.ItemDrop;
-import com.mygdx.game.entities.components.control.Interactable;
 import com.mygdx.game.entities.components.gui.hudElements.InventoryGUI;
-import com.mygdx.game.entities.components.visual.particles.FadeParticle;
-import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.sceen.GUIFacade;
+import com.mygdx.game.facades.world.WorldInteractableFacade;
 import com.mygdx.game.playState.inventory.Inventory;
 import com.mygdx.game.playState.inventory.InventoryItem;
 import com.mygdx.game.playState.inventory.InventoryItemType;

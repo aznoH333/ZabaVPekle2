@@ -10,7 +10,6 @@ import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.facades.inventory.InventoryFacade;
-import com.mygdx.game.facades.inventory.WorldInteractableFacade;
 import com.mygdx.game.playState.inventory.Inventory;
 import com.mygdx.game.playState.inventory.InventoryItem;
 import com.mygdx.game.playState.inventory.InventoryMenuType;

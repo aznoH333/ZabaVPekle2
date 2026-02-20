@@ -3,7 +3,7 @@ package com.mygdx.game.playState.world.level;
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.items.Quality;
-import com.mygdx.game.facades.inventory.WorldInteractableFacade;
+import com.mygdx.game.facades.world.WorldInteractableFacade;
 import com.mygdx.game.level.LevelExitDirection;
 import com.mygdx.game.playState.ZoneCoordinates;
 import com.mygdx.game.utils.Trait;

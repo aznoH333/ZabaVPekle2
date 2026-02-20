@@ -1,13 +1,8 @@
 package com.mygdx.game.gameStates.implementations;
 
 import com.mygdx.game.Managers;
-import com.mygdx.game.facades.augmentBox.AugmentBoxFacade;
-import com.mygdx.game.entities.items.Quality;
-import com.mygdx.game.facades.inventory.InventoryFacade;
-import com.mygdx.game.facades.inventory.WorldInteractableFacade;
+import com.mygdx.game.facades.world.WorldInteractableFacade;
 import com.mygdx.game.gameStates.GameState;
-import com.mygdx.game.playState.inventory.InventoryItem;
-import com.mygdx.game.playState.inventory.InventoryItemType;
 
 public class Game extends GameState {
 
