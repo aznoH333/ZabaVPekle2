@@ -37,7 +37,14 @@ public class GameEntityAnimator extends EntityComponent {
         // walk
         if (Math.abs(owner.lastFrameXVelocity) + Math.abs(owner.lastFrameYVelocity) > 0.25f) {
 
-            walkTimer++;
+            if (owner.flipX == owner.lastFrameXVelocity < 0) {
+                walkTimer++;
+            }else {
+                walkTimer--;
+                if (walkTimer < 0) {
+                    walkTimer = ((walkEndIndex - walkStartIndex) * framesPerWalkFrame) - 1;
+                }
+            }
 
             int walkSprite = (int) ((double) (walkTimer / framesPerWalkFrame) % (walkEndIndex - walkStartIndex)) + walkStartIndex;
 
