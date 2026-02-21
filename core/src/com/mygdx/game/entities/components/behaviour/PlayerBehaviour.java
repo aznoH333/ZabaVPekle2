@@ -14,6 +14,7 @@ import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.control.Interactable;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.facades.inventory.InventoryFacade;
+import com.mygdx.game.input.InputManager;
 import com.mygdx.game.utils.types.NumberUtils;
 
 public class PlayerBehaviour extends EntityComponent {
@@ -64,9 +65,7 @@ public class PlayerBehaviour extends EntityComponent {
             float distance = NumberUtils.distanceBetweenEntities(owner, interactable);
             
             if (distance < 32f) {
-                // Managers.drawingManager.drawText(new TextDrawingCommand("E", interactable.x, interactable.y - 16f));
-                
-                if (Gdx.input.isKeyJustPressed(Input.Keys.E)) {
+                if (Managers.inputManager.pressedOpenInventory()) {
                     ((Interactable)interactable.getComponentByName(ComponentName.INTERACTABLE)).interact();
                 }
             }
@@ -74,36 +73,30 @@ public class PlayerBehaviour extends EntityComponent {
     }
     
     private void handlePlayerWorldActions() {
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            owner.walk(-1f, 0f);
-        }
-        
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            owner.walk(1f, 0f);
-        }
-        
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            owner.walk(0f, 1f);
-        }
-        
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            owner.walk(0f, -1f);
-        }
+        Vector2 movementInput = Managers.inputManager.getMovementInput();
+
+        owner.walk(movementInput.x, movementInput.y);
         
         if (gun != null) {
-            Vector2 mousePos = Managers.drawingManager.getMousePosition();
+
+            Vector2 shootDirection = Managers.inputManager.getShootingDirection(owner.x, owner.y);
+
+            if (shootDirection.len() > 0f) {
+                gun.direction = NumberUtils.directionToward(
+                        0f,
+                        0f,
+                        shootDirection.x,
+                        shootDirection.y);
+            }
+
+
+
             
-            gun.direction = NumberUtils.directionToward(
-                owner.x,
-                owner.y,
-                mousePos.x,
-                mousePos.y);
-            
-            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            if (Managers.inputManager.isFireButtonPressed()) {
                 gun.shoot(owner);
             }
             
-            owner.flipX = mousePos.x < owner.x;
+            owner.flipX = shootDirection.x < 0;
         }
     }
     

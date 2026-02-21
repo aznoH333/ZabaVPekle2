@@ -25,13 +25,13 @@ public class EyeCursor extends EntityComponent {
     @Override
     public void onDraw(Entity owner) {
 
-        Vector2 mousePos = Managers.drawingManager.getMousePosition();
+        Vector2 eyeDir = Managers.inputManager.getShootingDirection(owner.x, owner.y);
 
         float direction = NumberUtils.directionToward(
-            owner.x,
-            owner.y,
-            mousePos.x,
-            mousePos.y);
+            0,
+            0,
+            eyeDir.x,
+            eyeDir.y);
 
 
 
