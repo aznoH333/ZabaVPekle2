@@ -1,3 +1,4 @@
+
 #ifdef GL_ES
     precision mediump float;
 #endif
@@ -28,7 +29,7 @@ struct Light {
 };
 
 
-uniform float[MAX_LIGHTS * LIGHT_COMPONENT_COUNT] lights;
+uniform float lights[MAX_LIGHTS * LIGHT_COMPONENT_COUNT];
 uniform int usedLights;
 uniform vec3 ambientLight;
 

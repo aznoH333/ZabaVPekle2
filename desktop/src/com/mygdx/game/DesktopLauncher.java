@@ -11,7 +11,11 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
+		// use gl 20 because macos sucks dick.
+		config.setOpenGLEmulation(Lwjgl3ApplicationConfiguration.GLEmulation.GL20, 0, 0);
+
 		config.setTitle("ZabaVPekle2");
+
 		// config.setWindowedMode(1920, 1080);
 		new Lwjgl3Application(new FrogGame(), config);
 	}
