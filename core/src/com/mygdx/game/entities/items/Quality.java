@@ -2,10 +2,10 @@ package com.mygdx.game.entities.items;
 
 public enum Quality {
     POOR("poor", "augments_0001", 0, 1, 1, "boxes_0001"),
-    COMMON("common", "augments_0002", 1, 2, 1, "boxes_0002"),
-    REFINED("refined", "augments_0003", 2, 4, 2, "boxes_0003"),
-    ELITE("elite", "augments_0004", 3, 7, 3, "boxes_0004"),
-    DIVINE("divine", "augments_0005", 4, 10, 4, "boxes_0005");
+    COMMON("common", "augments_0006", 1, 2, 1, "boxes_0002"),
+    REFINED("refined", "augments_011", 2, 4, 2, "boxes_0003"),
+    ELITE("elite", "augments_0016", 3, 7, 3, "boxes_0004"),
+    DIVINE("divine", "augments_0019", 4, 10, 4, "boxes_0005");
 
     public final String textName;
     public final String augmentSprite;

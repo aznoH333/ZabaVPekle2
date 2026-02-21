@@ -149,6 +149,7 @@ public class DrawingManager {
         }
         for (FileHandle f : handle.list()) {
             if (!f.isDirectory()) {
+
                 loadSprite(f.path(), f.nameWithoutExtension());
             } else {
                 loadSpritesInDirectory(f.path());
@@ -157,6 +158,10 @@ public class DrawingManager {
     }
 
     private void loadSprite(String path, String name) {
+        if (name.isEmpty()) {
+            return;
+        }
+
         System.out.println("loading sprite " + name + " with path " + path);
         this.spriteMap.put(name, new Texture(path));
     }
