@@ -99,7 +99,7 @@ public class Gun extends EntityComponent {
                 float handDir = direction + origin.aimOffset;
                 
                 Managers.drawingManager.drawSprite(
-                    new DrawingCommand(sprite,
+                    new DrawingCommand(getOriginSprite(origin),
                         (float) Math.cos(handDir) * (((1f - gunScale) * 3.3f + 9f) * owner.scaleX) + owner.x,
                         (float) Math.sin(handDir) * (((1f - gunScale) * 3.3f + 9f) * owner.scaleY) + owner.y
                     )
@@ -222,13 +222,21 @@ public class Gun extends EntityComponent {
 
 
         // add default gun values
-        addBulletOrigin(new BulletOrigin(0f, true));
+        addBulletOrigin(new BulletOrigin(0f, true).setOverrideSprite(null));
         
         addBulletComponent(new SpawnFadeTrail(1, 10));
     }
 
     public void addBulletComponent(EntityComponent component) {
         this.bulletComponents.add(component);
+    }
+
+    private String getOriginSprite(BulletOrigin origin) {
+        if (origin.overrideSprite != null) {
+            return origin.overrideSprite;
+        }
+
+        return sprite;
     }
 
     @Override

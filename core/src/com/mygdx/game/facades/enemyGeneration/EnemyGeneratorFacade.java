@@ -219,7 +219,7 @@ public class EnemyGeneratorFacade {
             entity.setNumericStat(FieldName.FireRateMultiplier, 1.5f);
 
             entity.addComponent(
-                new Gun(null)
+                new Gun("guns_0006")
             );
 
             while (rangedAttackTraitPicker.hasBudget()) {

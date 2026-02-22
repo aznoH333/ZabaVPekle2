@@ -30,6 +30,8 @@ public class BulletOrigin {
     public int fireCooldown;
     public int scaleTimer;
 
+    public String overrideSprite = null;
+
 
     public BulletOrigin(float aimOffset, boolean asynchronousFiring) {
         this.aimOffset = aimOffset;
@@ -37,5 +39,11 @@ public class BulletOrigin {
         this.initialFireDelay = 0;
         this.fireCooldown = 0;
         this.scaleTimer = 0;
+        this.overrideSprite = "guns_0005";
+    }
+
+    public BulletOrigin setOverrideSprite(String sprite) {
+        this.overrideSprite = sprite;
+        return this;
     }
 }
