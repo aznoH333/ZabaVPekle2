@@ -32,6 +32,8 @@ public class SpawnFadeTrail extends EntityComponent {
                     .setSpriteRotation(owner.spriteRotation)
                     .setColor(owner.r, owner.g, owner.b, owner.a)
                     .setSprite(owner.sprite)
+                    .setScaleX(owner.scaleX)
+                    .setScaleY(owner.scaleY)
                     .addComponent(new FadeParticle(fadeImageLifetime, false, 1f))
             );
             
