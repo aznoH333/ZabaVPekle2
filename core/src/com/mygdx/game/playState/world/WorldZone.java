@@ -3,7 +3,7 @@ package com.mygdx.game.playState.world;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.facades.enemyGeneration.EnemyGeneratorFacade;
-import com.mygdx.game.playState.ZoneCoordinates;
+import com.mygdx.game.playState.MapCoordinates;
 import com.mygdx.game.playState.world.level.LevelTheme;
 import com.mygdx.game.utils.Trait;
 import com.mygdx.game.playState.world.level.ZoneLevel;
@@ -18,13 +18,10 @@ public class WorldZone {
 
     public final WorldZoneDefinition type;
 
-    public final HashMap<ZoneCoordinates, ZoneLevel> rooms = new HashMap<>();
+    public final HashMap<MapCoordinates, ZoneLevel> rooms = new HashMap<>();
 
     private final ArrayList<Trait<Entity>> enemyRoster;
 
-    public float mapX;
-    public float mapY;
-    
     public Color ambientLight;
 
     public WorldZone(WorldZoneDefinition type) {
@@ -41,7 +38,7 @@ public class WorldZone {
 
     }
 
-    private class PathGenerator{
+    private static class PathGenerator{
         int yOffset;
         int tilesSinceLastChange = 0;
         int distanceTraveled = 0;
@@ -94,7 +91,7 @@ public class WorldZone {
                 return LevelType.BOSS;
             }
 
-            if (isMain && endsIn == 0) {
+            if (isMain && endsIn == 1) {
                 return LevelType.SPAWN;
             }
 
@@ -179,7 +176,7 @@ public class WorldZone {
 
     private void shiftPath(PathGenerator path, int targetY, int currentX) {
         for (int i = 0; i <= Math.abs(path.yOffset - targetY); i++) {
-            generateRoom(currentX,  path.yOffset + (int)(i * Math.signum(targetY - path.yOffset)), LevelType.SPAWN);
+            generateRoom(currentX,  path.yOffset + (int)(i * Math.signum(targetY - path.yOffset)), path.getRoomType());
             path.updatePosition();
         }
 
@@ -189,22 +186,22 @@ public class WorldZone {
 
     private void generateRoom(int x, int y, LevelType levelType) {
 
-        if (this.rooms.containsKey(new ZoneCoordinates(x, y))) {
+        if (this.rooms.containsKey(new MapCoordinates(x, y))) {
             return;
         }
 
-        this.rooms.put(new ZoneCoordinates(x, y),  new ZoneLevel(levelType, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new ZoneCoordinates(x, y)));
+        this.rooms.put(new MapCoordinates(x, y),  new ZoneLevel(levelType, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new MapCoordinates(x, y)));
 
     }
 
     private void generateWorldOld(WorldZoneDefinition type) {
         // generate rooms
-        HashSet<ZoneCoordinates> mapCoordinates = new HashSet<>();
+        HashSet<MapCoordinates> mapCoordinates = new HashSet<>();
         /** important coordinates are candidates for special rooms (zone exits/shops/ect) */
-        HashSet<ZoneCoordinates> importantCoordinates = new HashSet<>();
+        HashSet<MapCoordinates> importantCoordinates = new HashSet<>();
 
 
-        mapCoordinates.add(new ZoneCoordinates(0, 0)); // 0,0 is always filled
+        mapCoordinates.add(new MapCoordinates(0, 0)); // 0,0 is always filled
 
         for (int i = 0; i < 5; i++) {
             int currentX = 0;
@@ -224,34 +221,34 @@ public class WorldZone {
                     }
 
                     attemptCount--;
-                } while (mapCoordinates.contains(new ZoneCoordinates(attemptX, attemptY)) && attemptCount > 0);
+                } while (mapCoordinates.contains(new MapCoordinates(attemptX, attemptY)) && attemptCount > 0);
 
                 currentX = attemptX;
                 currentY = attemptY;
 
-                mapCoordinates.add(new ZoneCoordinates(currentX, currentY));
+                mapCoordinates.add(new MapCoordinates(currentX, currentY));
 
 
             }
 
-            importantCoordinates.add(new ZoneCoordinates(currentX, currentY));
+            importantCoordinates.add(new MapCoordinates(currentX, currentY));
         }
 
 
         // generate rooms with types
-        rooms.put(new ZoneCoordinates(0, 0), new ZoneLevel(LevelType.SPAWN, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new ZoneCoordinates(0, 0)));
+        rooms.put(new MapCoordinates(0, 0), new ZoneLevel(LevelType.SPAWN, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new MapCoordinates(0, 0)));
 
-        for (ZoneCoordinates importantCoordinate: importantCoordinates) {
+        for (MapCoordinates importantCoordinate: importantCoordinates) {
             rooms.put(importantCoordinate, new ZoneLevel(LevelType.LOOT, LevelTheme.RED_PLACEHOLDER,  enemyRoster, importantCoordinate));
         }
 
-        for (ZoneCoordinates roomCoordinate : mapCoordinates) {
+        for (MapCoordinates roomCoordinate : mapCoordinates) {
             if (!rooms.containsKey(roomCoordinate)) {
                 LevelType levelType = LevelType.FILLER;
                 if (NumberUtils.randomChance(0.3f)) {
                     levelType = LevelType.MAJOR_COMBAT;
                 }
-                rooms.put(roomCoordinate, new ZoneLevel(levelType, type.theme, enemyRoster, roomCoordinate));
+                rooms.put(roomCoordinate, new ZoneLevel(levelType, type.levelTheme, enemyRoster, roomCoordinate));
             }
         }
 
@@ -262,7 +259,7 @@ public class WorldZone {
         // temp print
         for (int x = -5; x < 5; x++) {
             for (int y = -5; y < 5; y++) {
-                if (rooms.get(new ZoneCoordinates(x, y)) != null) {
+                if (rooms.get(new MapCoordinates(x, y)) != null) {
                     System.out.print("[ ]");
                 }else {
                     System.out.print("   ");

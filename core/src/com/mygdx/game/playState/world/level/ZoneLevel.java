@@ -5,7 +5,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.world.WorldInteractableFacade;
 import com.mygdx.game.level.LevelExitDirection;
-import com.mygdx.game.playState.ZoneCoordinates;
+import com.mygdx.game.playState.MapCoordinates;
 import com.mygdx.game.utils.Trait;
 import com.mygdx.game.utils.TraitPicker;
 import com.mygdx.game.utils.types.NumberUtils;
@@ -17,10 +17,10 @@ public class ZoneLevel {
     public final int enemySpawnSpeed;
     public final LevelTheme theme;
     public final LevelType type;
-    public final ZoneCoordinates coordinates;
+    public final MapCoordinates coordinates;
     public final ArrayList<Entity> roomContents = new ArrayList<>();
 
-    public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster, ZoneCoordinates coordinates) {
+    public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster, MapCoordinates coordinates) {
         this.type = levelType;
         this.roomSize = type.roomSize;
         this.enemySpawnSpeed = levelType.spawnSpeed;

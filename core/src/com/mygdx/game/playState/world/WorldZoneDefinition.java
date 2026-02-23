@@ -6,7 +6,7 @@ import com.mygdx.game.playState.world.level.LevelTheme;
 
 public class WorldZoneDefinition {
 
-    public final LevelTheme theme;
+    public final LevelTheme levelTheme;
     public final Quality lootRoomBoxQuality;
     public final Quality combatRoomDropQuality;
     public final Quality bossRoomDropQuality;
@@ -14,14 +14,14 @@ public class WorldZoneDefinition {
     public final Color ambientLight;
 
     public WorldZoneDefinition(
-            LevelTheme theme,
+            LevelTheme levelTheme,
             Quality lootRoomBoxQuality,
             Quality combatRoomDropQuality,
             Quality bossRoomDropQuality,
             float placeDifficulty,
             Color ambientLight
     ) {
-        this.theme = theme;
+        this.levelTheme = levelTheme;
         this.lootRoomBoxQuality = lootRoomBoxQuality;
         this.combatRoomDropQuality = combatRoomDropQuality;
         this.bossRoomDropQuality = bossRoomDropQuality;

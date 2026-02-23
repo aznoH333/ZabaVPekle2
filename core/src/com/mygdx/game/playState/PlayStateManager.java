@@ -27,7 +27,7 @@ public class PlayStateManager {
     
     public Entity playerReference = null;
     public WorldZone currentZone = null;
-    public ZoneCoordinates playerZoneCoordinates = null;
+    public MapCoordinates playerMapCoordinates = null;
     public Inventory inventory = new Inventory();
     
     
@@ -41,19 +41,19 @@ public class PlayStateManager {
     }
     
     
-    public ZoneCoordinates getPlayerZoneCoordinates() {
-        return this.playerZoneCoordinates;
+    public MapCoordinates getPlayerZoneCoordinates() {
+        return this.playerMapCoordinates;
     }
     
     public void setPlayerZoneCoordinates(int x, int y) {
-        this.playerZoneCoordinates = new ZoneCoordinates(x, y);
+        this.playerMapCoordinates = new MapCoordinates(x, y);
     }
     
     public void restartGame() {
         this.inventory = new Inventory();
         this.playerReference = null;
         this.currentZone = null;
-        this.playerZoneCoordinates = null;
+        this.playerMapCoordinates = null;
         
     }
 

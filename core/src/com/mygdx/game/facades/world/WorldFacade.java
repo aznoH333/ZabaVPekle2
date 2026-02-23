@@ -8,7 +8,7 @@ import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.entities.PlayerFacade;
 import com.mygdx.game.facades.sceen.VisualEffectsFacade;
 import com.mygdx.game.level.LevelExitDirection;
-import com.mygdx.game.playState.ZoneCoordinates;
+import com.mygdx.game.playState.MapCoordinates;
 import com.mygdx.game.playState.world.WorldZone;
 import com.mygdx.game.playState.world.WorldZoneDefinition;
 import com.mygdx.game.playState.world.level.LevelTheme;
@@ -24,7 +24,7 @@ public class WorldFacade {
      * @param x - in room x
      * @param y - in room y
      */
-    public static void teleportPlayerToZone(ZoneCoordinates coordinates, float x, float y) {
+    public static void teleportPlayerToZone(MapCoordinates coordinates, float x, float y) {
         System.out.println("moving player");
         Managers.levelManager.saveCurrentRoomContents();
         Managers.entityManager.clearAllEntities();
@@ -37,8 +37,8 @@ public class WorldFacade {
     }
     
     
-    public static void enterARoomThroughADoor(ZoneCoordinates coordinates, LevelExitDirection direction) {
-        System.out.println("moving from " + Managers.playStateManager.playerZoneCoordinates + " to " + coordinates);
+    public static void enterARoomThroughADoor(MapCoordinates coordinates, LevelExitDirection direction) {
+        System.out.println("moving from " + Managers.playStateManager.playerMapCoordinates + " to " + coordinates);
         
         Managers.drawingManager.screenEffectShaderHandler.dimScreen(50);
         Managers.entityManager.freezeEntities(60);
@@ -70,24 +70,24 @@ public class WorldFacade {
         Managers.playStateManager.restartGame();
         Managers.playStateManager.goToNextZone();
         Managers.playStateManager.playerReference = PlayerFacade.createNewPlayer(0f, 0f);
-        teleportPlayerToZone(new ZoneCoordinates(0,0), 0f, 0f);
+        teleportPlayerToZone(new MapCoordinates(0,0), 0f, 0f);
     }
     
     
-    public static ZoneLevel getLevelByZoneCoordinates(ZoneCoordinates coordinates) {
+    public static ZoneLevel getLevelByZoneCoordinates(MapCoordinates coordinates) {
         WorldZone zone = Managers.playStateManager.currentZone;
         return zone.rooms.get(coordinates);
     }
     
     
-    public static HashMap<LevelExitDirection, ZoneCoordinates> getLevelExits(ZoneLevel level) {
+    public static HashMap<LevelExitDirection, MapCoordinates> getLevelExits(ZoneLevel level) {
         // TODO : cross zone travel
         WorldZone zone = Managers.playStateManager.currentZone;
         
-        HashMap<LevelExitDirection, ZoneCoordinates> exits = new HashMap<>();
+        HashMap<LevelExitDirection, MapCoordinates> exits = new HashMap<>();
         
         for (LevelExitDirection direction : LevelExitDirection.values()) {
-            ZoneCoordinates neighborCoordinates = new ZoneCoordinates(level.coordinates.x + direction.x, level.coordinates.y + direction.y);
+            MapCoordinates neighborCoordinates = new MapCoordinates(level.coordinates.x + direction.x, level.coordinates.y + direction.y);
             
             if (zone.rooms.containsKey(neighborCoordinates)) {
                 exits.put(direction, neighborCoordinates);

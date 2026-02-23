@@ -5,14 +5,14 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.facades.world.WorldFacade;
 import com.mygdx.game.level.LevelExitDirection;
-import com.mygdx.game.playState.ZoneCoordinates;
+import com.mygdx.game.playState.MapCoordinates;
 
 public class Door extends EntityComponent {
 
-    private final ZoneCoordinates destination;
+    private final MapCoordinates destination;
     private final LevelExitDirection direction;
 
-    public Door(ZoneCoordinates destination, LevelExitDirection direction) {
+    public Door(MapCoordinates destination, LevelExitDirection direction) {
         this.destination = destination;
         this.direction = direction;
     }

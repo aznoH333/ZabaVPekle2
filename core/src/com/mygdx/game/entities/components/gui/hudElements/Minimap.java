@@ -5,7 +5,7 @@ import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
-import com.mygdx.game.playState.ZoneCoordinates;
+import com.mygdx.game.playState.MapCoordinates;
 import com.mygdx.game.playState.world.level.ZoneLevel;
 
 import java.util.HashMap;
@@ -19,7 +19,7 @@ public class Minimap extends EntityComponent {
     public void onDraw(Entity owner) {
         
         // draw cells
-        HashMap<ZoneCoordinates, ZoneLevel> rooms = Managers.playStateManager.currentZone.rooms;
+        HashMap<MapCoordinates, ZoneLevel> rooms = Managers.playStateManager.currentZone.rooms;
         
         for (int x = -CELLS_DRAWN; x < CELLS_DRAWN; x++) {
             for (int y = -CELLS_DRAWN; y < CELLS_DRAWN; y++) {
@@ -28,9 +28,9 @@ public class Minimap extends EntityComponent {
                 if (x == 0 && y == 0) {
                     mapTileSprite = "hud_map_tiles_0001";
                 } else {
-                    ZoneLevel level = rooms.get(new ZoneCoordinates(
-                        Managers.playStateManager.playerZoneCoordinates.x + x,
-                        Managers.playStateManager.playerZoneCoordinates.y + y
+                    ZoneLevel level = rooms.get(new MapCoordinates(
+                        Managers.playStateManager.playerMapCoordinates.x + x,
+                        Managers.playStateManager.playerMapCoordinates.y + y
                     ));
                     
                     if (level == null) {
