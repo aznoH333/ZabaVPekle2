@@ -25,7 +25,7 @@ public class MainMenu extends GameState {
             25f,
             owner -> {
                 WorldFacade.initializeNewGame();
-                Managers.gameStateManager.switchState("world map");
+                Managers.gameStateManager.switchState("game");
             }
         );
 

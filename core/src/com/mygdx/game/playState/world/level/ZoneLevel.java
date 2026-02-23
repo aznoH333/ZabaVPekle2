@@ -18,16 +18,14 @@ public class ZoneLevel {
     public final LevelTheme theme;
     public final LevelType type;
     public final ZoneCoordinates coordinates;
-    public final String zoneName;
     public final ArrayList<Entity> roomContents = new ArrayList<>();
 
-    public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster, ZoneCoordinates coordinates, String zoneName) {
+    public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster, ZoneCoordinates coordinates) {
         this.type = levelType;
         this.roomSize = type.roomSize;
         this.enemySpawnSpeed = levelType.spawnSpeed;
         this.theme = theme;
         this.coordinates = coordinates;
-        this.zoneName = zoneName;
 
         ArrayList<Integer> indexesToExclude = new ArrayList<>();
         ArrayList<Trait<Entity>> roomEnemies = new ArrayList<>();

@@ -17,10 +17,6 @@ import java.util.HashSet;
 public class WorldZone {
 
     public final WorldZoneDefinition type;
-    public final String placeName;
-    
-    
-    public final Color mapColor;
 
     public final HashMap<ZoneCoordinates, ZoneLevel> rooms = new HashMap<>();
 
@@ -34,12 +30,6 @@ public class WorldZone {
     public WorldZone(WorldZoneDefinition type) {
         this.type = type;
 
-        this.placeName = type.zoneName;
-        this.mapColor = type.worldMapColor;
-        
-        this.mapX = type.worldMapX;
-        this.mapY = type.worldMapY;
-        
         this.ambientLight = type.ambientLight;
 
         this.enemyRoster = EnemyGeneratorFacade.generateEnemyRoster(2, type.placeDifficulty);
@@ -203,7 +193,7 @@ public class WorldZone {
             return;
         }
 
-        this.rooms.put(new ZoneCoordinates(x, y),  new ZoneLevel(levelType, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new ZoneCoordinates(x, y), type.zoneName));
+        this.rooms.put(new ZoneCoordinates(x, y),  new ZoneLevel(levelType, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new ZoneCoordinates(x, y)));
 
     }
 
@@ -249,10 +239,10 @@ public class WorldZone {
 
 
         // generate rooms with types
-        rooms.put(new ZoneCoordinates(0, 0), new ZoneLevel(LevelType.SPAWN, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new ZoneCoordinates(0, 0), type.zoneName));
+        rooms.put(new ZoneCoordinates(0, 0), new ZoneLevel(LevelType.SPAWN, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new ZoneCoordinates(0, 0)));
 
         for (ZoneCoordinates importantCoordinate: importantCoordinates) {
-            rooms.put(importantCoordinate, new ZoneLevel(LevelType.LOOT, LevelTheme.RED_PLACEHOLDER,  enemyRoster, importantCoordinate, type.zoneName));
+            rooms.put(importantCoordinate, new ZoneLevel(LevelType.LOOT, LevelTheme.RED_PLACEHOLDER,  enemyRoster, importantCoordinate));
         }
 
         for (ZoneCoordinates roomCoordinate : mapCoordinates) {
@@ -261,7 +251,7 @@ public class WorldZone {
                 if (NumberUtils.randomChance(0.3f)) {
                     levelType = LevelType.MAJOR_COMBAT;
                 }
-                rooms.put(roomCoordinate, new ZoneLevel(levelType, type.theme, enemyRoster, roomCoordinate, type.zoneName));
+                rooms.put(roomCoordinate, new ZoneLevel(levelType, type.theme, enemyRoster, roomCoordinate));
             }
         }
 
@@ -270,7 +260,6 @@ public class WorldZone {
 
     private void printGeneratedLevel(WorldZoneDefinition type) {
         // temp print
-        System.out.println("Generated world zone " + type.zoneName);
         for (int x = -5; x < 5; x++) {
             for (int y = -5; y < 5; y++) {
                 if (rooms.get(new ZoneCoordinates(x, y)) != null) {

@@ -8,7 +8,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.control.Door;
 import com.mygdx.game.facades.world.WorldFacade;
-import com.mygdx.game.playState.WorldCoordinates;
+import com.mygdx.game.playState.ZoneCoordinates;
 import com.mygdx.game.utils.types.NumberUtils;
 import com.mygdx.game.playState.world.level.ZoneLevel;
 
@@ -34,7 +34,7 @@ public class LevelManager {
 
     private boolean doorsOpen = false;
     private ZoneLevel currentLevel = null;
-    private HashMap<LevelExitDirection, WorldCoordinates> currentLevelExits = null;
+    private HashMap<LevelExitDirection, ZoneCoordinates> currentLevelExits = null;
 
     private LevelManager() {
     }
@@ -214,13 +214,13 @@ public class LevelManager {
     private void openDoors() {
         doorsOpen = true;
         
-        for (Map.Entry<LevelExitDirection, WorldCoordinates> exit: currentLevelExits.entrySet()) {
+        for (Map.Entry<LevelExitDirection, ZoneCoordinates> exit: currentLevelExits.entrySet()) {
             // spawn door object
             Managers.entityManager.addEntity(
                 new Entity()
                     .setX((currentLevel.getRoomSize() - 0.45f) * TILE_SIZE * exit.getKey().x - 16f)
                     .setY((currentLevel.getRoomSize() - 0.45f) * TILE_SIZE * exit.getKey().y - 16f)
-                    .addComponent(new Door(exit.getValue().zoneName, exit.getValue().zoneCoordinates, exit.getKey()))
+                    .addComponent(new Door(exit.getValue(), exit.getKey()))
             );
         }
         

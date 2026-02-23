@@ -3,10 +3,9 @@ package com.mygdx.game.playState;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.facades.world.WorldFacade;
 import com.mygdx.game.playState.inventory.Inventory;
-import com.mygdx.game.playState.world.World;
 import com.mygdx.game.playState.world.WorldZone;
-import com.mygdx.game.playState.world.level.ZoneLevel;
 
 /**
  * Responsible for holding information relating to a SINGLE playthrough.
@@ -27,15 +26,17 @@ public class PlayStateManager {
     
     
     public Entity playerReference = null;
-    public World world = new World();
     public WorldZone currentZone = null;
     public ZoneCoordinates playerZoneCoordinates = null;
     public Inventory inventory = new Inventory();
     
     
     
-    public void goToZone(String zoneName) {
-        this.currentZone = world.zones.get(zoneName);
+    public void goToNextZone() {
+        this.currentZone = new WorldZone(WorldFacade.generateWorldZone());
+
+
+
         Managers.drawingManager.lightingShaderHandler.setAmbientLight(currentZone.ambientLight);
     }
     
@@ -49,15 +50,11 @@ public class PlayStateManager {
     }
     
     public void restartGame() {
-        this.world = new World();
         this.inventory = new Inventory();
         this.playerReference = null;
         this.currentZone = null;
         this.playerZoneCoordinates = null;
         
     }
-    
-    public WorldZone getZoneByName(String zoneName) {
-        return this.world.zones.get(zoneName);
-    }
+
 }

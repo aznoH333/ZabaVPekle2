@@ -9,12 +9,10 @@ import com.mygdx.game.playState.ZoneCoordinates;
 
 public class Door extends EntityComponent {
 
-    private final String zoneDestination;
     private final ZoneCoordinates destination;
     private final LevelExitDirection direction;
 
-    public Door(String zoneDestination, ZoneCoordinates destination, LevelExitDirection direction) {
-        this.zoneDestination = zoneDestination;
+    public Door(ZoneCoordinates destination, LevelExitDirection direction) {
         this.destination = destination;
         this.direction = direction;
     }
@@ -23,7 +21,7 @@ public class Door extends EntityComponent {
     public void onCollide(Entity owner, Entity other) {
 
         if (other.hasComponent(ComponentName.PLAYER)) {
-            WorldFacade.enterARoomThroughADoor(zoneDestination, destination, direction);
+            WorldFacade.enterARoomThroughADoor(destination, direction);
         }
     }
 }

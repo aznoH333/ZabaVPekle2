@@ -4,7 +4,6 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.gameStates.implementations.Game;
 import com.mygdx.game.gameStates.implementations.MainMenu;
-import com.mygdx.game.gameStates.implementations.WorldMap;
 
 public class FrogGame extends ApplicationAdapter {
 
@@ -21,7 +20,6 @@ public class FrogGame extends ApplicationAdapter {
         // game states
         Managers.gameStateManager.addGameState(new Game());
         Managers.gameStateManager.addGameState(new MainMenu());
-        Managers.gameStateManager.addGameState(new WorldMap());
         Managers.gameStateManager.switchState("main menu");
 
     }
