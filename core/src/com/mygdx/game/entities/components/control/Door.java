@@ -19,7 +19,6 @@ public class Door extends EntityComponent {
     
     @Override
     public void onCollide(Entity owner, Entity other) {
-
         if (other.hasComponent(ComponentName.PLAYER)) {
             WorldFacade.enterARoomThroughADoor(destination, direction);
         }

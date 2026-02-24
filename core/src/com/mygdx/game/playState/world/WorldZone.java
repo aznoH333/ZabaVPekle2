@@ -32,10 +32,7 @@ public class WorldZone {
         this.enemyRoster = EnemyGeneratorFacade.generateEnemyRoster(2, type.placeDifficulty);
 
         //generateWorldOld(type);
-        generateWorldNew();
-
-        printGeneratedLevel(type);
-
+        generateWorld();
     }
 
     private static class PathGenerator{
@@ -112,7 +109,7 @@ public class WorldZone {
 
     }
 
-    private void generateWorldNew() {
+    private void generateWorld() {
         int currentX = 0;
         int totalLength = NumberUtils.randomInt(10, 15);
 
@@ -190,84 +187,14 @@ public class WorldZone {
             return;
         }
 
-        this.rooms.put(new MapCoordinates(x, y),  new ZoneLevel(levelType, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new MapCoordinates(x, y)));
+        LevelTheme theme = type.levelTheme;
+
+        if (levelType.roomThemeOverride != null) {
+            theme = levelType.roomThemeOverride;
+        }
+
+        this.rooms.put(new MapCoordinates(x, y),  new ZoneLevel(levelType, theme, enemyRoster, new MapCoordinates(x, y)));
 
     }
-
-    private void generateWorldOld(WorldZoneDefinition type) {
-        // generate rooms
-        HashSet<MapCoordinates> mapCoordinates = new HashSet<>();
-        /** important coordinates are candidates for special rooms (zone exits/shops/ect) */
-        HashSet<MapCoordinates> importantCoordinates = new HashSet<>();
-
-
-        mapCoordinates.add(new MapCoordinates(0, 0)); // 0,0 is always filled
-
-        for (int i = 0; i < 5; i++) {
-            int currentX = 0;
-            int currentY = 0;
-
-            for (int lengthIterator = 0; lengthIterator < 5; lengthIterator++) {
-
-                int attemptX = currentX;
-                int attemptY = currentY;
-                int attemptCount = 3;
-
-                do {
-                    if (NumberUtils.randomChance(0.5f)) {
-                        attemptX = (int) (currentX + NumberUtils.boolToSign(NumberUtils.randomChance(0.5f)));
-                    } else {
-                        attemptY = (int) (currentY + NumberUtils.boolToSign(NumberUtils.randomChance(0.5f)));
-                    }
-
-                    attemptCount--;
-                } while (mapCoordinates.contains(new MapCoordinates(attemptX, attemptY)) && attemptCount > 0);
-
-                currentX = attemptX;
-                currentY = attemptY;
-
-                mapCoordinates.add(new MapCoordinates(currentX, currentY));
-
-
-            }
-
-            importantCoordinates.add(new MapCoordinates(currentX, currentY));
-        }
-
-
-        // generate rooms with types
-        rooms.put(new MapCoordinates(0, 0), new ZoneLevel(LevelType.SPAWN, LevelTheme.SPECIAL_PLACEHOLDER, enemyRoster, new MapCoordinates(0, 0)));
-
-        for (MapCoordinates importantCoordinate: importantCoordinates) {
-            rooms.put(importantCoordinate, new ZoneLevel(LevelType.LOOT, LevelTheme.RED_PLACEHOLDER,  enemyRoster, importantCoordinate));
-        }
-
-        for (MapCoordinates roomCoordinate : mapCoordinates) {
-            if (!rooms.containsKey(roomCoordinate)) {
-                LevelType levelType = LevelType.FILLER;
-                if (NumberUtils.randomChance(0.3f)) {
-                    levelType = LevelType.MAJOR_COMBAT;
-                }
-                rooms.put(roomCoordinate, new ZoneLevel(levelType, type.levelTheme, enemyRoster, roomCoordinate));
-            }
-        }
-
-
-    }
-
-    private void printGeneratedLevel(WorldZoneDefinition type) {
-        // temp print
-        for (int x = -5; x < 5; x++) {
-            for (int y = -5; y < 5; y++) {
-                if (rooms.get(new MapCoordinates(x, y)) != null) {
-                    System.out.print("[ ]");
-                }else {
-                    System.out.print("   ");
-                }
-            }
-            System.out.print("\n");
-        }
-    }
-
 
 }
