@@ -9,7 +9,7 @@ import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.SpawnFadeTrail;
-import com.mygdx.game.facades.entities.ProjectileFactory;
+import com.mygdx.game.facades.entities.GameEntityCreatorFacade;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.types.NumberUtils;
 
@@ -137,7 +137,7 @@ public class Gun extends EntityComponent {
                 float bulletDirection = gunDirection + NumberUtils.randomFloat(-spreadValue, spreadValue);
 
 
-                Entity bullet = ProjectileFactory.buildBullet(
+                Entity bullet = GameEntityCreatorFacade.buildBullet(
                     (float) Math.cos(bulletDirection) * (5f * owner.scaleX) + owner.x,
                     (float) Math.sin(bulletDirection) * (5f * owner.scaleY) + owner.y,
                     owner.getField(FieldName.ProjectileSprite),

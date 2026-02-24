@@ -55,7 +55,6 @@ public class PlayStateManager {
         this.currentZone = null;
         this.playerMapCoordinates = null;
         this.currentZoneIndex = 1;
-        
     }
 
 }

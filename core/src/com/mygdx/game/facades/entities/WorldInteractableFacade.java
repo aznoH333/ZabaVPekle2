@@ -1,4 +1,4 @@
-package com.mygdx.game.facades.world;
+package com.mygdx.game.facades.entities;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
@@ -13,6 +13,7 @@ import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.augmentBox.AugmentBoxFacade;
 import com.mygdx.game.facades.inventory.InventoryFacade;
+import com.mygdx.game.facades.world.WorldMovementFacade;
 import com.mygdx.game.playState.inventory.InventoryItem;
 import com.mygdx.game.playState.inventory.InventoryItemType;
 import com.mygdx.game.playState.inventory.InventoryMenuType;
@@ -101,7 +102,7 @@ public class WorldInteractableFacade {
                 .setDrawingLayer(DrawingLayer.ITEMS)
                 .setTeam(EntityTeam.NEUTRAL_OBJECT)
                 .addComponent(new Interactable((entity) -> {
-                    WorldFacade.goToNextZone();
+                    WorldMovementFacade.goToNextZone();
                 }));
     }
     

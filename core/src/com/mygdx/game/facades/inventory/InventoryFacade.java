@@ -7,7 +7,7 @@ import com.mygdx.game.entities.EntityIdentifier;
 import com.mygdx.game.entities.components.gui.hudElements.InventoryGUI;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.sceen.GUIFacade;
-import com.mygdx.game.facades.world.WorldInteractableFacade;
+import com.mygdx.game.facades.entities.WorldInteractableFacade;
 import com.mygdx.game.playState.inventory.Inventory;
 import com.mygdx.game.playState.inventory.InventoryItem;
 import com.mygdx.game.playState.inventory.InventoryItemType;

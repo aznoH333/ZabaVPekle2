@@ -1,7 +1,7 @@
 package com.mygdx.game.gameStates.implementations;
 
 import com.mygdx.game.Managers;
-import com.mygdx.game.facades.world.WorldInteractableFacade;
+import com.mygdx.game.facades.entities.WorldInteractableFacade;
 import com.mygdx.game.gameStates.GameState;
 
 public class Game extends GameState {

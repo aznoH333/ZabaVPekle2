@@ -1,4 +1,4 @@
-package com.mygdx.game.facades.world;
+package com.mygdx.game.facades.entities;
 
 public enum MachineType {
     PART_ASSEMBLER,
