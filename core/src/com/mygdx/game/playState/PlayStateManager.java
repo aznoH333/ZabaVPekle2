@@ -16,6 +16,7 @@ public class PlayStateManager {
     private static PlayStateManager instance;
     /// Number of ticks since game start
     public long gameTime = 0;
+    public int currentZoneIndex = 1;
     
     public static PlayStateManager getInstance() {
         if (instance == null) {
@@ -33,7 +34,8 @@ public class PlayStateManager {
     
     
     public void goToNextZone() {
-        this.currentZone = new WorldZone(WorldFacade.generateWorldZone());
+        currentZoneIndex++;
+        this.currentZone = new WorldZone(WorldFacade.generateWorldZone(currentZoneIndex));
 
         Managers.drawingManager.lightingShaderHandler.setAmbientLight(currentZone.ambientLight);
     }
@@ -52,6 +54,7 @@ public class PlayStateManager {
         this.playerReference = null;
         this.currentZone = null;
         this.playerMapCoordinates = null;
+        this.currentZoneIndex = 1;
         
     }
 

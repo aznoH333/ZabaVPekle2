@@ -112,13 +112,38 @@ public class WorldFacade {
     }
 
 
-    public static WorldZoneDefinition generateWorldZone() {
+    public static WorldZoneDefinition generateWorldZone(int zoneIndex) {
+
+        float difficulty = zoneIndex;
+
+
+        if (zoneIndex >= 3) {
+            difficulty += (zoneIndex - 2);
+        }
+
+        if (zoneIndex >= 6) {
+            difficulty += difficulty - 6;
+        }
+
+        if (zoneIndex >= 10) {
+            difficulty += (float) Math.pow(zoneIndex - 9, 2);
+        }
+
+        if (zoneIndex >= 20) {
+            difficulty += (float) Math.pow(2, difficulty);
+        }
+
+        if (zoneIndex >= 30) {
+            difficulty = (float) Math.pow(difficulty, difficulty);
+        }
+        System.out.println("difficulty : " + difficulty);
+
         return new WorldZoneDefinition(
                 LevelTheme.generateRandomLevelTheme(),
                 Quality.COMMON,
                 Quality.COMMON,
                 Quality.COMMON,
-                1f,
+                difficulty,
                 new Color(0.25f, 0.25f, 0.25f, 1f)
         );
     }

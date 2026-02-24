@@ -31,7 +31,6 @@ public class WorldZone {
 
         this.enemyRoster = EnemyGeneratorFacade.generateEnemyRoster(2, type.placeDifficulty);
 
-        //generateWorldOld(type);
         generateWorld();
     }
 
