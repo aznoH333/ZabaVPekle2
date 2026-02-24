@@ -4,8 +4,9 @@ public enum LevelType {
     SPAWN(4, 0, 0, 0, false, "hud_map_tiles_0002", LevelTheme.SPECIAL_PLACEHOLDER_THEME),
     MAJOR_COMBAT(7, 7, 12, 10, true, "hud_map_tiles_0002", null),
     FILLER(5, 3, 7, 20, true, "hud_map_tiles_0002", null),
-    LOOT(3, 0, 0, 1, false, "hud_map_tiles_0003", LevelTheme.SPECIAL_PLACEHOLDER_THEME),
-    BOSS(7, 0, 0, 0, true, "hud_map_tiles_0002", null);
+    LOOT(4, 0, 0, 1, false, "hud_map_tiles_0003", LevelTheme.SPECIAL_PLACEHOLDER_THEME),
+    BOSS(7, 0, 0, 0, true, "hud_map_tiles_0002", null),
+    ZONE_EXIT(5, 0, 0, 0, false, "hud_map_tiles_0002", LevelTheme.SPECIAL_PLACEHOLDER_THEME);
 
     public final int roomSize;
     public final int minEnemies;

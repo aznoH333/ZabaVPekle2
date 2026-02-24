@@ -87,12 +87,23 @@ public class WorldInteractableFacade {
             .setY(y)
             .setSprite("machines_0001")
             .setDrawingLayer(DrawingLayer.ITEMS)
+            .setTeam(EntityTeam.NEUTRAL_OBJECT)
             .addComponent(new Interactable((entity) -> {
                 InventoryFacade.openInventoryMenu(InventoryMenuType.CRAFTING, entity);
             }));
-        
     }
-    
+
+    public static Entity createLevelExit(float x, float y) {
+        return new Entity()
+                .setX(x)
+                .setY(y)
+                .setSprite("machines_0002")
+                .setDrawingLayer(DrawingLayer.ITEMS)
+                .setTeam(EntityTeam.NEUTRAL_OBJECT)
+                .addComponent(new Interactable((entity) -> {
+                    WorldFacade.goToNextZone();
+                }));
+    }
     
     public static Entity createNewAugmentBox(float x, float y, Quality boxRarity) {
         return

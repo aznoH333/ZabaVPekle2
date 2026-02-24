@@ -81,6 +81,12 @@ public class ZoneLevel {
                 WorldInteractableFacade.createNewAugmentBox(-16f, -16f, Quality.POOR)
             );
         }
+
+        if (type == LevelType.ZONE_EXIT) {
+            roomContents.add(
+                WorldInteractableFacade.createLevelExit(-16f, -16f)
+            );
+        }
         
     }
 

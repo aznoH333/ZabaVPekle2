@@ -89,7 +89,7 @@ public class WorldZone {
             }
 
             if (isMain && endsIn == 1) {
-                return LevelType.SPAWN;
+                return LevelType.ZONE_EXIT;
             }
 
             // loot

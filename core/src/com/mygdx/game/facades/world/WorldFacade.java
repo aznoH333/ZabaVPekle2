@@ -25,7 +25,6 @@ public class WorldFacade {
      * @param y - in room y
      */
     public static void teleportPlayerToZone(MapCoordinates coordinates, float x, float y) {
-        System.out.println("moving player");
         Managers.levelManager.saveCurrentRoomContents();
         Managers.entityManager.clearAllEntities();
         VisualEffectsFacade.clearAllLights();
@@ -33,19 +32,34 @@ public class WorldFacade {
         Managers.playStateManager.playerReference.setX(x).setY(y);
         Managers.entityManager.addEntity(Managers.playStateManager.playerReference);
         Managers.levelManager.loadLevel(getLevelByZoneCoordinates(coordinates));
-        
+    }
+
+    public static void goToNextZone() {
+
+        fadeTransition(()->{
+            Managers.playStateManager.goToNextZone();
+
+            teleportPlayerToZone(new MapCoordinates(0,0), 0f, 0f);
+        });
+
+    }
+
+    private static void fadeTransition(Runnable transitionFunction) {
+        Managers.drawingManager.screenEffectShaderHandler.dimScreen(50);
+        Managers.entityManager.freezeEntities(60);
+
+        Managers.entityManager.addEntity(
+                new Entity()
+                        .addComponent(new DelayedEvent(
+                                transitionFunction,
+                                25
+                        ))
+        );
     }
     
     
     public static void enterARoomThroughADoor(MapCoordinates coordinates, LevelExitDirection direction) {
-        System.out.println("moving from " + Managers.playStateManager.playerMapCoordinates + " to " + coordinates);
-        
-        Managers.drawingManager.screenEffectShaderHandler.dimScreen(50);
-        Managers.entityManager.freezeEntities(60);
-        
-        Managers.entityManager.addEntity(
-            new Entity()
-                .addComponent(new DelayedEvent(
+        fadeTransition(
                     ()-> {
                         ZoneLevel targetLevel = getLevelByZoneCoordinates(coordinates);
                         
@@ -54,11 +68,8 @@ public class WorldFacade {
                         float entryY = (((targetLevel.getRoomSize() - 1.2f) * 32f) * -direction.y) - 16f;
                         
                         teleportPlayerToZone(coordinates, entryX, entryY);
-                    },
-                    25
-                ))
+                    }
         );
-        
         
     }
     
@@ -85,7 +96,9 @@ public class WorldFacade {
         WorldZone zone = Managers.playStateManager.currentZone;
         
         HashMap<LevelExitDirection, MapCoordinates> exits = new HashMap<>();
-        
+
+
+
         for (LevelExitDirection direction : LevelExitDirection.values()) {
             MapCoordinates neighborCoordinates = new MapCoordinates(level.coordinates.x + direction.x, level.coordinates.y + direction.y);
             
@@ -93,7 +106,8 @@ public class WorldFacade {
                 exits.put(direction, neighborCoordinates);
             }
         }
-        
+
+
         return exits;
     }
 

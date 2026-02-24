@@ -35,8 +35,6 @@ public class PlayStateManager {
     public void goToNextZone() {
         this.currentZone = new WorldZone(WorldFacade.generateWorldZone());
 
-
-
         Managers.drawingManager.lightingShaderHandler.setAmbientLight(currentZone.ambientLight);
     }
     
