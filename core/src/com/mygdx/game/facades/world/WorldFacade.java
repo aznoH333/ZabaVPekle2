@@ -100,7 +100,7 @@ public class WorldFacade {
 
     public static WorldZoneDefinition generateWorldZone() {
         return new WorldZoneDefinition(
-                LevelTheme.HANGAR_PLATING, // TODO generate level themes
+                LevelTheme.generateRandomLevelTheme(),
                 Quality.COMMON,
                 Quality.COMMON,
                 Quality.COMMON,

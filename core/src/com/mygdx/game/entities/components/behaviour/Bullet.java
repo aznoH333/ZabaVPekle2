@@ -21,6 +21,7 @@ public class Bullet extends EntityComponent {
         owner.goInDirection(direction, 6f);
         owner.knockBackMultiplier = 2f;
         owner.addNumericStat(FieldName.RemainingProjectileLifeTime, -1f);
+        owner.spriteRotation = direction;
 
 
         float remainingLifetime = owner.getNumericStat(FieldName.RemainingProjectileLifeTime);
@@ -38,11 +39,6 @@ public class Bullet extends EntityComponent {
         }
     }
 
-    @Override
-    public void onFirstAttached(Entity owner) {
-        owner.spriteRotation = direction;
-
-    }
 
     @Override
     public void onWorldCollide(Entity owner) {
