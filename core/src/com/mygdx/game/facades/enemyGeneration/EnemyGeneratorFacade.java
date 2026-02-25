@@ -214,7 +214,7 @@ public class EnemyGeneratorFacade {
 
             entity.setNumericStat(FieldName.ProjectileLifeTime, 60f);
             entity.setNumericStat(FieldName.ProjectileSpread, 0f);
-            entity.setNumericStat(FieldName.ProjectileSpeed, 0.75f);
+            entity.setNumericStat(FieldName.ProjectileSpeed, 0.45f);
             entity.setNumericStat(FieldName.FireRate, 120f);
             entity.setNumericStat(FieldName.FireRateMultiplier, 1.5f);
 
