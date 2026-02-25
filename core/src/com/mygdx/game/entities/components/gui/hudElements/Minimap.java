@@ -37,7 +37,7 @@ public class Minimap extends EntityComponent {
                         continue;
                     }
                     
-                    mapTileSprite = level.type.minimapSprite;
+                    mapTileSprite = level.getMapSprite();
                 }
                 
                 
