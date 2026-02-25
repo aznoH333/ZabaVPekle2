@@ -192,7 +192,7 @@ public class WorldZone {
             theme = levelType.roomThemeOverride;
         }
 
-        this.rooms.put(new MapCoordinates(x, y),  new ZoneLevel(levelType, theme, enemyRoster, new MapCoordinates(x, y)));
+        this.rooms.put(new MapCoordinates(x, y),  new ZoneLevel(levelType, theme, enemyRoster, new MapCoordinates(x, y), this));
 
     }
 

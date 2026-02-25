@@ -7,8 +7,10 @@ import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.control.Door;
+import com.mygdx.game.facades.entities.WorldInteractableFacade;
 import com.mygdx.game.facades.world.WorldFacade;
 import com.mygdx.game.playState.MapCoordinates;
+import com.mygdx.game.playState.world.level.LevelType;
 import com.mygdx.game.utils.types.NumberUtils;
 import com.mygdx.game.playState.world.level.ZoneLevel;
 
@@ -221,6 +223,19 @@ public class LevelManager {
                     .setX((currentLevel.getRoomSize() - 0.45f) * TILE_SIZE * exit.getKey().x - 16f)
                     .setY((currentLevel.getRoomSize() - 0.45f) * TILE_SIZE * exit.getKey().y - 16f)
                     .addComponent(new Door(exit.getValue(), exit.getKey()))
+            );
+        }
+
+
+        if (currentLevel.type == LevelType.MAJOR_COMBAT && NumberUtils.randomChance(0.35f)) {
+            Managers.entityManager.addEntity(
+                    WorldInteractableFacade.createNewAugmentBox(-16f, -16f, Managers.playStateManager.currentZone.type.combatRoomDropQuality)
+            );
+        }
+
+        if (currentLevel.type == LevelType.BOSS) {
+            Managers.entityManager.addEntity(
+                    WorldInteractableFacade.createNewAugmentBox(-16f, -16f, Managers.playStateManager.currentZone.type.bossRoomDropQuality)
             );
         }
         

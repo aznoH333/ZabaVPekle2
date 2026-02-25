@@ -6,6 +6,7 @@ import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.entities.WorldInteractableFacade;
 import com.mygdx.game.level.LevelExitDirection;
 import com.mygdx.game.playState.MapCoordinates;
+import com.mygdx.game.playState.world.WorldZone;
 import com.mygdx.game.utils.Trait;
 import com.mygdx.game.utils.TraitPicker;
 import com.mygdx.game.utils.types.NumberUtils;
@@ -19,13 +20,15 @@ public class ZoneLevel {
     public final LevelType type;
     public final MapCoordinates coordinates;
     public final ArrayList<Entity> roomContents = new ArrayList<>();
+    private final WorldZone parentZone;
 
-    public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster, MapCoordinates coordinates) {
+    public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster, MapCoordinates coordinates, WorldZone parentZone) {
         this.type = levelType;
         this.roomSize = type.roomSize;
         this.enemySpawnSpeed = levelType.spawnSpeed;
         this.theme = theme;
         this.coordinates = coordinates;
+        this.parentZone = parentZone;
 
         ArrayList<Integer> indexesToExclude = new ArrayList<>();
         ArrayList<Trait<Entity>> roomEnemies = new ArrayList<>();
@@ -78,7 +81,7 @@ public class ZoneLevel {
         
         if (type == LevelType.LOOT) {
             roomContents.add(
-                WorldInteractableFacade.createNewAugmentBox(-16f, -16f, Quality.POOR)
+                WorldInteractableFacade.createNewAugmentBox(-16f, -16f, parentZone.type.lootRoomBoxQuality)
             );
         }
 

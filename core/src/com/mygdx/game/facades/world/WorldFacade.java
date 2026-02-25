@@ -56,6 +56,34 @@ public class WorldFacade {
 
     public static WorldZoneDefinition generateWorldZone(int zoneIndex) {
 
+        float difficulty = getDifficulty(zoneIndex);
+
+        Quality lootRoomQuality = getLootQuality(zoneIndex);
+        Quality combatRoomDropQuality = Quality.getFromNumeric(lootRoomQuality.numericValue - 1);
+        Quality bossRoomDropQuality = Quality.getFromNumeric(lootRoomQuality.numericValue + 1);
+
+
+        return new WorldZoneDefinition(
+                LevelTheme.generateRandomLevelTheme(),
+                lootRoomQuality,
+                combatRoomDropQuality,
+                bossRoomDropQuality,
+                difficulty,
+                new Color(0.25f, 0.25f, 0.25f, 1f)
+        );
+    }
+
+    private static Quality getLootQuality(int zoneIndex) {
+        if (zoneIndex < 3) {
+            return Quality.POOR;
+        } else if (zoneIndex < 6) {
+            return Quality.COMMON;
+        }
+
+        return Quality.REFINED;
+    }
+
+    private static float getDifficulty(int zoneIndex) {
         float difficulty = zoneIndex;
 
 
@@ -78,15 +106,8 @@ public class WorldFacade {
         if (zoneIndex >= 30) {
             difficulty = (float) Math.pow(difficulty, difficulty);
         }
-        System.out.println("difficulty : " + difficulty);
-
-        return new WorldZoneDefinition(
-                LevelTheme.generateRandomLevelTheme(),
-                Quality.COMMON,
-                Quality.COMMON,
-                Quality.COMMON,
-                difficulty,
-                new Color(0.25f, 0.25f, 0.25f, 1f)
-        );
+        return difficulty;
     }
+
+
 }
