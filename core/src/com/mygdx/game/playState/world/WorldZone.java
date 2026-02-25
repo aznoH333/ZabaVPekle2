@@ -97,6 +97,19 @@ public class WorldZone {
                 return LevelType.LOOT;
             }
 
+            // special room
+            if (NumberUtils.randomChance(0.15f)) {
+                if (NumberUtils.randomChance(0.33f)) {
+                    return LevelType.SCRAP_ROOM;
+                }
+                else if (NumberUtils.randomChance(0.2f)) {
+                    return LevelType.MINI_BOSS_ROOM;
+                }
+                return LevelType.MACHINE_ROOM;
+            }
+
+
+
             // combat
             if (timeSinceMajorCombat > 2 && NumberUtils.randomChance(0.35f)) {
                 this.timeSinceMajorCombat = 0;

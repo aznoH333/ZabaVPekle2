@@ -15,21 +15,17 @@ import java.util.ArrayList;
 
 public class ZoneLevel {
     public final int roomSize;
-    public final int enemySpawnSpeed;
     public final LevelTheme theme;
     public final LevelType type;
     public final MapCoordinates coordinates;
     public final ArrayList<Entity> roomContents = new ArrayList<>();
-    private final WorldZone parentZone;
     private boolean visited;
 
     public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster, MapCoordinates coordinates, WorldZone parentZone) {
         this.type = levelType;
         this.roomSize = type.roomSize;
-        this.enemySpawnSpeed = levelType.spawnSpeed;
         this.theme = theme;
         this.coordinates = coordinates;
-        this.parentZone = parentZone;
         this.visited = false;
 
         fillRoomContents(levelType, enemyRoster, parentZone);
@@ -53,6 +49,14 @@ public class ZoneLevel {
             roomContents.add(
                 WorldInteractableFacade.createLevelExit(-16f, -16f)
             );
+        }
+
+        if (type == LevelType.MACHINE_ROOM) {
+            roomContents.add(WorldInteractableFacade.createCraftingStation(-16f, -16f));
+        }
+
+        if (type == LevelType.SCRAP_ROOM) {
+            roomContents.add(WorldInteractableFacade.createItemBox(-16f, -16f));
         }
     }
 
@@ -148,7 +152,10 @@ public class ZoneLevel {
             return "hud_map_tiles_0005";
         }
 
-        if (type == LevelType.BOSS) {
+        if (type == LevelType.BOSS ||
+                type == LevelType.MINI_BOSS_ROOM ||
+                type == LevelType.SCRAP_ROOM ||
+                type == LevelType.MACHINE_ROOM) {
             return "hud_map_tiles_0006";
         }
 
