@@ -40,13 +40,14 @@ public class GameEntityCreatorFacade {
                 .setIdentifier(EntityIdentifier.PLAYER)
 
 
+                .setNumericStat(FieldName.Speed, 2.5f)
                 .setNumericStat(FieldName.ProjectileSpeed, 0.75f)
                 .setNumericStat(FieldName.FireRate, 25f)
                 .setNumericStat(FieldName.ProjectileDamage, 2f)
                 .setNumericStat(FieldName.Health, 6f)
                 .setNumericStat(FieldName.MaxHealth, 6f)
                 .setField(FieldName.ProjectileColor, new Color(0.33333f, 0.66666f, 1f, 1f))
-                .setField(FieldName.ProjectileSprite, "bullets_0002")
+                .setField(FieldName.ProjectileSprite, "bullets_0006")
 
 
                 .addComponent(new AttachedLight(0.75f, 1.0f))

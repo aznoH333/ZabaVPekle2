@@ -212,7 +212,7 @@ public class Gun extends EntityComponent {
         owner.initializeNumericField(FieldName.DamageMultiplier, 1f);
         owner.initializeField(FieldName.ProjectileColor, new Color(1f, 1f, 1f, 1f));
 
-        owner.initializeField(FieldName.ProjectileSprite, "bullets_0001");
+        owner.initializeField(FieldName.ProjectileSprite, "bullets_0005");
 
         owner.initializeField(FieldName.ProjectileComponents, new ArrayList<EntityComponent>());
         this.bulletComponents = owner.getField(FieldName.ProjectileComponents);
