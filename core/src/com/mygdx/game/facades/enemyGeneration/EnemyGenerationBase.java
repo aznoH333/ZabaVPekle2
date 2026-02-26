@@ -67,7 +67,7 @@ public class EnemyGenerationBase {
 
         health = 1f;
         float survivalAbilityCost = 10f;
-        size = 0.75f + survival;
+        size = 0.75f + (survival * 0.33f);
 
         if (archetype.ability == EnemyArchetypeAbility.SMALL) {
             size *= 0.75f;
@@ -114,7 +114,7 @@ public class EnemyGenerationBase {
                 // TODO : this
                 totalSpeedBudget -= movementAbilityCost;
             } else {
-                movementSpeed += 0.25f;
+                movementSpeed += 0.15f;
                 totalSpeedBudget -= 1f;
             }
         }

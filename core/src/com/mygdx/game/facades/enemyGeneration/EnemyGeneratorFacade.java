@@ -88,7 +88,7 @@ public class EnemyGeneratorFacade {
         if (base.isRanged) {
 
 
-            entity.setNumericStat(FieldName.ProjectileLifeTime, 60f);
+            entity.setNumericStat(FieldName.ProjectileLifeTime, 120f);
             entity.setNumericStat(FieldName.ProjectileSpread, 0f);
             entity.setNumericStat(FieldName.ProjectileSpeed, 0.45f);
             entity.setNumericStat(FieldName.FireRate, 120f);

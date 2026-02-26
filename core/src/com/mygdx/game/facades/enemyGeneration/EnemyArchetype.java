@@ -1,15 +1,15 @@
 package com.mygdx.game.facades.enemyGeneration;
 
 public enum EnemyArchetype {
-    TINY_GUY(0.3f, 0.3f, 0.0f, 0.0f, 0.333f, EnemyArchetypeAbility.SMALL,0f, 6f, 0.25f),
-    CHASER(0.6f, 0.5f, 0.0f, 0.0f, 0.75f, 0f,  0.333f),
-    TURRET(0f, 0.5f, 1f, 0.6f, 1f, EnemyArchetypeAbility.STATIC, 0f, -0.33f),
-    WANDERER(0.4f, 0f, 0f, 0f, 1f, EnemyArchetypeAbility.RETARDED, 0f, 2.4f, 1f),
-    RANGER(0.333f, 0.2f, 1f, 0.333f, 1f, 2f, 0.333f),
-    ANNOYING_SHITHEAD(0.5f, 1f, 0.4f, 0.2f, 1f, EnemyArchetypeAbility.INCREASED_SURVIVAL_ABILITY_BUDGET, 6f, 0.2f),
-    SNIPER(0.2f, 0f, 1f, 1f, 1.2f, EnemyArchetypeAbility.INCREASED_WEAPON_BUDGET, 10f, 0.333f),
-    TANK(0.2f, 1f, 0.1f, 0.1f, 1.2f, EnemyArchetypeAbility.MORE_HEALTH, 10f, 0.333f),
-    BERSERKER(1f, 0.5f, 0f, 0f, 1f, EnemyArchetypeAbility.INCREASED_MOVEMENT_ABILITY_BUDGET, 10f, 0.333f),
+    TINY_GUY(0.3f, 0.3f, 0.0f, 0.0f, 0.333f, EnemyArchetypeAbility.SMALL,0f, 6f, 3f),
+    CHASER(0.6f, 0.5f, 0.0f, 0.0f, 0.75f, 0f,  1f),
+    TURRET(0f, 0.5f, 1f, 0.6f, 1f, EnemyArchetypeAbility.STATIC, 0f, 0.666f),
+    WANDERER(0.4f, 0f, 0f, 0f, 1f, EnemyArchetypeAbility.RETARDED, 0f, 2.4f, 3f),
+    RANGER(0.333f, 0.2f, 1f, 0.333f, 1f, 5f, 0.1f),
+    ANNOYING_SHITHEAD(0.5f, 1f, 0.4f, 0.2f, 1f, EnemyArchetypeAbility.INCREASED_SURVIVAL_ABILITY_BUDGET, 6f, 0.5f),
+    SNIPER(0.2f, 0f, 1f, 1f, 1.2f, EnemyArchetypeAbility.INCREASED_WEAPON_BUDGET, 10f, 0.5f),
+    TANK(0.2f, 1f, 0.1f, 0.1f, 1.2f, EnemyArchetypeAbility.MORE_HEALTH, 10f, 0.5f),
+    BERSERKER(1f, 0.5f, 0f, 0f, 1f, EnemyArchetypeAbility.INCREASED_MOVEMENT_ABILITY_BUDGET, 10f, 0.1f),
     SHIT_FUCK(0.3f, 1f, 1f, 0.5f, 1.2f, EnemyArchetypeAbility.MORE_HEALTH, 30f, 0.1f);
 
 
