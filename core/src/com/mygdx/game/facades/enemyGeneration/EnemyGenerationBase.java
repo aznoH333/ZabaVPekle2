@@ -152,7 +152,7 @@ public class EnemyGenerationBase {
     }
 
     private void generateRangedAbilities() {
-        float totalRangedBudget = placeDifficulty + (rangePower * 2f);
+        float totalRangedBudget = (rangePower * placeDifficulty * 0.25f);
 
         if (archetype.ability == EnemyArchetypeAbility.INCREASED_WEAPON_BUDGET) {
             totalRangedBudget += 10f;
@@ -160,7 +160,7 @@ public class EnemyGenerationBase {
 
 
         TraitPicker<EntityRunnable> runnablePicker = new TraitPicker<>(possibleAugments, totalRangedBudget);
-
+        System.out.println(totalRangedBudget);
         while (runnablePicker.hasBudget()) {
             this.abilities.add(runnablePicker.pickValue());
         }

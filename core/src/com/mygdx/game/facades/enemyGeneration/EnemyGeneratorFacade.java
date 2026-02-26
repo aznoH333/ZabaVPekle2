@@ -45,7 +45,7 @@ public class EnemyGeneratorFacade {
         ArrayList<Trait<EnemyArchetype>> pickableArchetypes = new ArrayList<>();
 
         for (EnemyArchetype type : EnemyArchetype.values()) {
-            if (type.minGenerationDifficulty >= placeDifficulty && (type.maxGenerationDifficulty <= placeDifficulty || type.maxGenerationDifficulty == -1)) {
+            if (type.minGenerationDifficulty <= placeDifficulty && (type.maxGenerationDifficulty >= placeDifficulty || type.maxGenerationDifficulty == -1)) {
                 pickableArchetypes.add(new Trait<EnemyArchetype>(type.generationChance, 0f, type));
             }
         }
