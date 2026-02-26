@@ -65,9 +65,6 @@ public class LevelTheme {
         g = (g * scale * 0.5f) + offset;
         b = (b * scale * 0.5f) + offset;
 
-
-        System.out.println("generated color : " + r + " , " + g + " , " + b + " scale : " + scale + " offset : " + offset);
-
         return new Color(r,g,b, 1f);
     }
 

@@ -268,8 +268,7 @@ public class LevelManager {
         this.currentLevelExits = WorldFacade.getLevelExits(currentLevel);
         this.doorsOpen = false;
         Managers.drawingManager.screenEdgeShaderHandler.levelSize = currentLevel.getOuterRoomSize() * TILE_SIZE;
-        System.out.println(currentLevel.getOuterRoomSize() * TILE_SIZE);
-        
+
         for (Entity e : room.roomContents) {
             Managers.entityManager.addEntity(e);
         }

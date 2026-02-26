@@ -19,198 +19,74 @@ import com.mygdx.game.utils.types.NumberUtils;
 import java.util.ArrayList;
 
 
-/**
- * This utility class is responsible for simplifying enemy generation (The process that creates new enemy variants)
- * <p>
- * Some broader concepts behind the system:
- * When generating a new enemy type the system takes into account 3 variables
- * </p>
- * <ul>
- *     <li>
- *         Toughness (scale 0 to 1) - how much health should the final enemy have
- *     </li>
- *     <li>
- *        Mobility (scale 0 to 1) - How fast/ how often should the enemy move
- *     </li>
- *     <li>
- *         Threat (scale 0 to 1) - How dangerous are the attacks of this enemy (Number of projectiles, Projectile path, damage)
- *         may give special abilities like dashing to some enemies
- *     </li>
- * </ul>
- * Additionally the system takes into account a specified difficulty (1 to infinity) <br>
- * The system tries to generate a somewhat reasonable enemy distribution based on the input difficulty.
- * Most places will generate with
- * <ol>
- *     <li>tiny fodder enemy (low stats)</li>
- *     <li>a somewhat common generalist enemy (average stats)</li>
- * </ol>
- * <p>
- * Specified difficulty scales linearly - (diff jump from 3 to 4 is the same as from 2 to 3)
- * The system is intended to have the first place always generate with diff 1
- */
 public class EnemyGeneratorFacade {
-    /**
-     * Generates a new enemy roster (enemies to spawn in rooms).
-     * Each roster is intended to last for 1 place.
-     * Always generates a small fodder enemy
-     * And a low threat generalist enemy
-     *
-     * @param specializedEnemyCount
-     * @param placeDifficulty
-     * @return
-     */
-    public static ArrayList<Trait<Entity>> generateEnemyRoster(int specializedEnemyCount, float placeDifficulty) {
-        ArrayList<Trait<Entity>> enemyRoster = new ArrayList<>();
 
 
-        // small fodder
-        enemyRoster.add(
-            new Trait<>(
-                1f,
-            0.5f,
-            generateEnemyType(
-                new EnemyGenerationBase(
-                    NumberUtils.randomFloat(0f, 0.2f),
-                    NumberUtils.randomFloat(0.4f, 0.6f),
-                    0.2f,
-                    placeDifficulty
-                )
-            ))
-        );
+    public static EnemyRoster generateEnemyRoster(int enemyCount, float placeDifficulty) {
+        ArrayList<Trait<Entity>> generatedEnemies = new ArrayList<>();
 
-        // generic fodder enemy
-        enemyRoster.add(
-            new Trait<>(
 
-                1f,
-                0.75f,
-                generateEnemyType(
-                    new EnemyGenerationBase(
-                        NumberUtils.randomFloat(0.2f, 0.4f),
-                        NumberUtils.randomFloat(0.3f, 0.5f),
-                        placeDifficulty > 3.2f ? 0.45f : 0.3f, // this code is here to make sure that basic ranged enemies don't generate on first 2 floors
-                        placeDifficulty
-                    )
+        ArrayList<EnemyArchetype> archetypes = pickArchetypes(placeDifficulty, enemyCount);
 
-                )
-            )
 
-        );
-
-        for (int i = 0; i < specializedEnemyCount; i++) {
-
-            EnemyGenerationBase base = new EnemyGenerationBase(0f, 0f, 0f, placeDifficulty);
-
-            float perksBudget = placeDifficulty > 4.5 ? 1.75f : 1f;
-
-            TraitPicker<EnemyGenerationRunnable> generationBasePicker = new TraitPicker<>(EnemyTraitPicker.traits, perksBudget);
-
-            while (generationBasePicker.hasBudget()) {
-                Trait<EnemyGenerationRunnable> trait = generationBasePicker.pickTrait();
-
-                trait.traitValue.run(base);
-                base.normalize();
-            }
-            enemyRoster.add(
-                new Trait<>(
-                    1f,
-                    (base.threat * 0.75f) + (base.mobility * 0.75f) + (base.toughness * 0.75f),
-                    generateEnemyType(
-                        base
-                    )
-                )
-
-            );
+        for (EnemyArchetype archetype : archetypes) {
+            generatedEnemies.add(new Trait<>(1f, archetype.spawnWeight, generateEnemyFromBase(new EnemyGenerationBase(placeDifficulty, archetype))));
         }
 
-
-        return enemyRoster;
+        return new EnemyRoster(generatedEnemies);
     }
 
 
-    private static Entity generateEnemyType(EnemyGenerationBase base) {
-
-        boolean isTurret = false;
-        boolean hasRangedAttack = false;
-        float size = 1f;
-        float additionalHeight = 1f;
-        float additionalWidth = 1f;
-
-        float speed;
-        float health;
+    private static ArrayList<EnemyArchetype> pickArchetypes(float placeDifficulty, int enemyCount) {
+        ArrayList<EnemyArchetype> output = new ArrayList<>();
 
 
-        // decide if ranged
-        if (base.threat > 0.35f && NumberUtils.randomChance(0.6f)) {
-            hasRangedAttack = true;
-        }
+        // build pickable archetypes
+        ArrayList<Trait<EnemyArchetype>> pickableArchetypes = new ArrayList<>();
 
-        // return new Entity();
-
-        // generate speed
-        if (base.mobility < 0.2f && NumberUtils.randomChance(0.75f)) {
-            // immobile enemy (turret)
-            speed = 0f;
-            isTurret = true;
-            hasRangedAttack = true;
-        } else {
-            speed = 0.5f + (base.mobility);
-
-            if (!hasRangedAttack && base.threat > 0.5f) {
-                speed += base.threat * 1.2f;
-            }
-
-            if (base.toughness > 0.8f && base.mobility > 0.9f) {
-                speed *= 0.85f; // nerf enemies that would be too tanky and mobile
+        for (EnemyArchetype type : EnemyArchetype.values()) {
+            if (type.minGenerationDifficulty >= placeDifficulty && (type.maxGenerationDifficulty <= placeDifficulty || type.maxGenerationDifficulty == -1)) {
+                pickableArchetypes.add(new Trait<EnemyArchetype>(type.generationChance, 0f, type));
             }
         }
 
+        TraitPicker<EnemyArchetype> archetypePicker = new TraitPicker<>(pickableArchetypes, 0f);
 
-        // generate health
-        health = base.placeDifficulty * (2f + (base.toughness * 10f));
+        while (output.size() < enemyCount) {
+            EnemyArchetype pickedArchetype = archetypePicker.pickValue();
 
-        // size
-        if (base.toughness < 0.35f) {
-            size -= 0.05f;
-        }
-        if (base.toughness < 0.2f && base.threat < 0.3f) {
-            size -= 0.05f;
-        }
-        if (base.toughness > 0.6f) {
-            size += (base.toughness - 0.6f) * 2f;
-        }
-        // width height
-        if (base.toughness > 0.6f) {
-            additionalWidth += (base.toughness - 0.6f) * 2f;
-        }
-        if (base.threat > 0.6f) {
-            additionalHeight += (base.threat - 0.6f) * 2f;
+
+            if (output.contains(pickedArchetype) && NumberUtils.randomChance(0.75f)) {
+                continue;
+            }
+
+            output.add(pickedArchetype);
         }
 
-        // pick movement
-        TraitPicker<EntityComponent> movementPicker = new TraitPicker<>(EnemyMovementTraits.movementTraits, base.mobility);
-        EntityComponent movementAi = movementPicker.pickValue().copy();
+        return output;
+    }
 
+
+
+
+    private static Entity generateEnemyFromBase(EnemyGenerationBase base) {
         Entity entity = new Entity()
-            .setTeam(EntityTeam.ENEMY)
-            .setNumericStat(FieldName.Health, health)
-            .setNumericStat(FieldName.Speed, speed)
-            .addComponent(new EnemyBaseBehaviour())
-            .addComponent(new AnimatedLegsWithHat(LegsWithHatType.ENEMY_MEDIUM, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "small_enemy_heads_" + NumberUtils.randomInt(1, 9)))
-            .addComponent(new GameEntityBleed())
-            .addComponent(movementAi)
-            .setScaleX(size * additionalWidth)
-            .setScaleY(size * additionalHeight)
-            .setNumericStat(FieldName.Damage, 1f)
-            .setDrawingLayer(DrawingLayer.ENEMIES);
+                .setTeam(EntityTeam.ENEMY)
+                .setNumericStat(FieldName.Health, base.health)
+                .setNumericStat(FieldName.Speed, base.movementSpeed)
+                .addComponent(new EnemyBaseBehaviour())
+                .addComponent(new AnimatedLegsWithHat(LegsWithHatType.ENEMY_MEDIUM, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "small_enemy_heads_" + NumberUtils.randomInt(1, 9)))
+                .addComponent(new GameEntityBleed())
+                .addComponent(base.getMovementAiInstance())
+                .setScaleX(base.size)
+                .setScaleY(base.size)
+                .setNumericStat(FieldName.Damage, 1f)
+                .setDrawingLayer(DrawingLayer.ENEMIES);
 
 
 
-        if (hasRangedAttack) {
-            float rangedAttackPowerScale = (1f + base.threat) * base.placeDifficulty;
+        if (base.isRanged) {
 
-
-            TraitPicker<EntityRunnable> rangedAttackTraitPicker = new TraitPicker<>(RangedEnemyTraits.traits, rangedAttackPowerScale);
 
             entity.setNumericStat(FieldName.ProjectileLifeTime, 60f);
             entity.setNumericStat(FieldName.ProjectileSpread, 0f);
@@ -219,17 +95,17 @@ public class EnemyGeneratorFacade {
             entity.setNumericStat(FieldName.FireRateMultiplier, 1.5f);
 
             entity.addComponent(
-                new Gun("guns_0006")
+                    new Gun("guns_0006")
             );
 
-            while (rangedAttackTraitPicker.hasBudget()) {
-                Trait<EntityRunnable> trait = rangedAttackTraitPicker.pickTrait();
-                trait.traitValue.run(entity);
-            }
+        }
+
+        // apply abilities
+        for (EntityRunnable runnable : base.abilities) {
+            runnable.run(entity);
         }
 
         return entity;
     }
-
 
 }

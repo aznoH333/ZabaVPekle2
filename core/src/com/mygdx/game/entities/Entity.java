@@ -430,6 +430,7 @@ public class Entity implements Copyable {
         return this;
     }
 
+
     public Entity addNumericStat(FieldName fieldName, float value) {
         this.numericFields.addToField(fieldName, value);
         return this;

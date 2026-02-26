@@ -3,6 +3,7 @@ package com.mygdx.game.playState.world.level;
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.items.Quality;
+import com.mygdx.game.facades.enemyGeneration.EnemyRoster;
 import com.mygdx.game.facades.entities.WorldInteractableFacade;
 import com.mygdx.game.level.LevelExitDirection;
 import com.mygdx.game.playState.MapCoordinates;
@@ -21,19 +22,19 @@ public class ZoneLevel {
     public final ArrayList<Entity> roomContents = new ArrayList<>();
     private boolean visited;
 
-    public ZoneLevel(LevelType levelType, LevelTheme theme, ArrayList<Trait<Entity>> enemyRoster, MapCoordinates coordinates, WorldZone parentZone) {
+    public ZoneLevel(LevelType levelType, LevelTheme theme, EnemyRoster enemyRoster, MapCoordinates coordinates, WorldZone parentZone) {
         this.type = levelType;
         this.roomSize = type.roomSize;
         this.theme = theme;
         this.coordinates = coordinates;
         this.visited = false;
 
-        fillRoomContents(levelType, enemyRoster, parentZone);
+        fillRoomContents(enemyRoster, parentZone);
 
     }
 
-    private void fillRoomContents(LevelType levelType, ArrayList<Trait<Entity>> enemyRoster, WorldZone parentZone) {
-        spawnEnemies(levelType, enemyRoster);
+    private void fillRoomContents( EnemyRoster enemyRoster, WorldZone parentZone) {
+        spawnEnemies(enemyRoster);
 
         spawnWorldEntities(parentZone);
     }
@@ -60,21 +61,8 @@ public class ZoneLevel {
         }
     }
 
-    private void spawnEnemies(LevelType levelType, ArrayList<Trait<Entity>> enemyRoster) {
-        ArrayList<Integer> indexesToExclude = new ArrayList<>();
-        ArrayList<Trait<Entity>> roomEnemies = new ArrayList<>();
-        for (int i = Math.min(enemyRoster.size(), NumberUtils.randomInt(1, 3)); i > 0; i--) {
-            int pickedIndex;
-            do {
-                pickedIndex = NumberUtils.randomInt(0, enemyRoster.size() - 1);
-            } while (indexesToExclude.contains(pickedIndex));
-
-            indexesToExclude.add(pickedIndex);
-            roomEnemies.add(enemyRoster.get(pickedIndex));
-        }
-
-        // build queue
-        TraitPicker<Entity> enemyPicker = new TraitPicker<>(roomEnemies, NumberUtils.randomFloat(levelType.minEnemies, levelType.maxEnemies));
+    private void spawnEnemies(EnemyRoster enemyRoster) {
+        TraitPicker<Entity> enemyPicker = enemyRoster.createBudgetedPickerForRoom(NumberUtils.randomFloat(type.minEnemies, type.maxEnemies));
         while (enemyPicker.hasBudget()) {
             int enemyX;
             int enemyY;
@@ -101,6 +89,7 @@ public class ZoneLevel {
 
             }while (!isSpawnValid);
 
+
             roomContents.add(
                 enemyPicker
                     .pickValue()
@@ -109,6 +98,7 @@ public class ZoneLevel {
                     .setY(enemyY - 16f)
             );
         }
+
     }
 
     /** returns the size of the play area (inner world size)*/

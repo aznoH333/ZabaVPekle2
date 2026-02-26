@@ -3,6 +3,7 @@ package com.mygdx.game.playState.world;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.facades.enemyGeneration.EnemyGeneratorFacade;
+import com.mygdx.game.facades.enemyGeneration.EnemyRoster;
 import com.mygdx.game.playState.MapCoordinates;
 import com.mygdx.game.playState.world.level.LevelTheme;
 import com.mygdx.game.utils.Trait;
@@ -12,7 +13,6 @@ import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class WorldZone {
 
@@ -20,7 +20,7 @@ public class WorldZone {
 
     public final HashMap<MapCoordinates, ZoneLevel> rooms = new HashMap<>();
 
-    private final ArrayList<Trait<Entity>> enemyRoster;
+    private final EnemyRoster enemyRoster;
 
     public Color ambientLight;
 
@@ -29,7 +29,7 @@ public class WorldZone {
 
         this.ambientLight = type.ambientLight;
 
-        this.enemyRoster = EnemyGeneratorFacade.generateEnemyRoster(2, type.placeDifficulty);
+        this.enemyRoster = EnemyGeneratorFacade.generateEnemyRoster(5, type.placeDifficulty);
 
         generateWorld();
     }
@@ -125,13 +125,10 @@ public class WorldZone {
         int currentX = 0;
         int totalLength = NumberUtils.randomInt(10, 15);
 
-
-
         PathGenerator mainPath = new PathGenerator(0, totalLength, true);
         ArrayList<PathGenerator> activePaths = new ArrayList<>();
         ArrayList<PathGenerator> waitingRoom = new ArrayList<>();
         activePaths.add(mainPath);
-
 
         while (!activePaths.isEmpty()) {
             for (PathGenerator path : activePaths) {
