@@ -205,6 +205,7 @@ public class Gun extends EntityComponent {
         legs = (AnimatedLegsWithHat) owner.getComponentByName(ComponentName.LEGS);
     }
 
+    @Override
     public void onFirstAttached(Entity owner) {
         owner.initializeNumericField(FieldName.FireRate, 1f);
         owner.initializeNumericField(FieldName.ProjectilesPerShot, 1f);
@@ -213,6 +214,8 @@ public class Gun extends EntityComponent {
         owner.initializeField(FieldName.ProjectileColor, new Color(1f, 1f, 1f, 1f));
 
         owner.initializeField(FieldName.ProjectileSprite, "bullets_0005");
+
+        owner.setField(FieldName.Gun, this);
 
         owner.initializeField(FieldName.ProjectileComponents, new ArrayList<EntityComponent>());
         this.bulletComponents = owner.getField(FieldName.ProjectileComponents);

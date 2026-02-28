@@ -43,6 +43,15 @@ public enum FieldName {
     ProjectileSprite,
     ProjectileColor,
 
+
+    /**
+     * A flag set
+     */
+    SuspendMovement,
+    /**
+     * Instance of the entities gun.
+     */
+    Gun,
     /**
      * an arraylist containing a list of projectile origins
      */

@@ -7,6 +7,8 @@ import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gu
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.TripleHank;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.BoomerangShotAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.ShrapnelShotAugment;
+import com.mygdx.game.entities.components.behaviour.ememy.actionAi.ChaseAndShootBehaviour;
+import com.mygdx.game.entities.components.behaviour.ememy.actionAi.EnemyCombatBehaviour;
 import com.mygdx.game.entities.components.behaviour.ememy.movementAi.EnemyAimlessWanderMovement;
 import com.mygdx.game.entities.components.behaviour.ememy.movementAi.EnemyChaseMovement;
 import com.mygdx.game.entities.components.behaviour.ememy.movementAi.EnemyStepChaseMovement;
@@ -38,6 +40,9 @@ public class EnemyGenerationBase {
     public float size;
     public ArrayList<EntityRunnable> abilities = new ArrayList<>();
 
+    public ArrayList<EnemyCombatBehaviour> behaviours = new ArrayList<>();
+    public boolean pickBehaviourRandomly = true;
+
 
     public EnemyGenerationBase(
             float placeDifficulty,
@@ -53,12 +58,18 @@ public class EnemyGenerationBase {
 
         this.movementAi = pickAi();
 
+        // add base behaviour
+        this.behaviours.add(new ChaseAndShootBehaviour(120));
+
         generateSurvival();
         generateSpeed();
 
         if (isRanged) {
             generateRangedAbilities();
         }
+
+
+
     }
 
 

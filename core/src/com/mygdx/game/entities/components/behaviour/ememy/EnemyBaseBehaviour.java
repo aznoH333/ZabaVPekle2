@@ -4,19 +4,34 @@ import com.mygdx.game.Managers;
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.entities.components.behaviour.ememy.actionAi.EnemyCombatBehaviour;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.types.NumberUtils;
+
+import java.util.ArrayList;
 
 public class EnemyBaseBehaviour extends EntityComponent {
 
 
     private Entity target = null;
     private Gun gun = null;
-    private int initialCeaseFire = NumberUtils.randomInt(90, 180);
+    private final ArrayList<EnemyCombatBehaviour> combatBehaviours;
+    private final boolean pickBehaviourRandomly;
+    private int currentBehaviourIndex = 0;
+    private int currentBehaviourTimer = 0;
+    private EnemyCombatBehaviour currentBehaviour;
 
-    public EnemyBaseBehaviour() {
+    public EnemyBaseBehaviour(
+            ArrayList<EnemyCombatBehaviour> combatBehaviours,
+            boolean pickBehaviourRandomly
+            ) {
         super.name = ComponentName.ENEMY;
+        this.combatBehaviours = combatBehaviours;
+        this.pickBehaviourRandomly = pickBehaviourRandomly;
+
+        this.currentBehaviour = combatBehaviours.get(0);
+        this.currentBehaviourTimer = currentBehaviour.getDuration();
     }
 
     @Override
@@ -25,22 +40,25 @@ public class EnemyBaseBehaviour extends EntityComponent {
             target = Managers.entityManager.findClosestEntityWithComponent(owner, ComponentName.PLAYER);
         }
 
+        owner.setField(FieldName.Target, target);
+
+
         if (target != null) {
-            float direction = NumberUtils.directionToward(owner.x, owner.y, target.x, target.y);
-
-
-            if (gun != null) {
-                gun.direction = direction;
-                if (initialCeaseFire == 0) {
-                    gun.shoot(owner);
-                } else {
-                    initialCeaseFire--;
-                }
-            }
-
+            currentBehaviour.act(owner);
         }
 
-        owner.setField(FieldName.Target, target);
+    }
+
+    private void pickNextBehaviour() {
+        if (pickBehaviourRandomly) {
+            currentBehaviourIndex = NumberUtils.randomInt(0, combatBehaviours.size());
+        }else {
+            currentBehaviourIndex++;
+            currentBehaviourIndex %= combatBehaviours.size();
+        }
+
+        currentBehaviour = combatBehaviours.get(currentBehaviourIndex);
+        currentBehaviourTimer = currentBehaviour.getDuration();
     }
 
     @Override
@@ -78,6 +96,6 @@ public class EnemyBaseBehaviour extends EntityComponent {
 
     @Override
     public EntityComponent copy() {
-        return new EnemyBaseBehaviour();
+        return new EnemyBaseBehaviour(combatBehaviours, pickBehaviourRandomly);
     }
 }

@@ -74,7 +74,7 @@ public class EnemyGeneratorFacade {
                 .setTeam(EntityTeam.ENEMY)
                 .setNumericStat(FieldName.Health, base.health)
                 .setNumericStat(FieldName.Speed, base.movementSpeed)
-                .addComponent(new EnemyBaseBehaviour())
+                .addComponent(new EnemyBaseBehaviour(base.behaviours, base.pickBehaviourRandomly))
                 .addComponent(new AnimatedLegsWithHat(LegsWithHatType.ENEMY_MEDIUM, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.5f, 0.5f, 1f), "small_enemy_heads_" + NumberUtils.randomInt(1, 9)))
                 .addComponent(new GameEntityBleed())
                 .addComponent(base.getMovementAiInstance())
