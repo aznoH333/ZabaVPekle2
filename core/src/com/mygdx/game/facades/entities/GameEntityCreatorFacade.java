@@ -9,6 +9,7 @@ import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.EntityIdentifier;
 import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.behaviour.Bullet;
+import com.mygdx.game.entities.components.behaviour.Dash;
 import com.mygdx.game.entities.components.behaviour.PlayerBehaviour;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.gui.hudElements.HealthBar;
@@ -30,11 +31,14 @@ public class GameEntityCreatorFacade {
     public static Entity createNewPlayer(float x, float y) {
         return new Entity()
                 .setTeam(EntityTeam.PLAYER)
+
                 .addComponent(new PlayerBehaviour())
                 .setDrawingLayer(DrawingLayer.PLAYER)
                 .addComponent(new AnimatedLegsWithHat(LegsWithHatType.PLAYER, new Color(1f, 1f, 1f, 1f), new Color(1f, 0.8f, 0.8f, 1f), null))
                 .addComponent(new Gun("guns_0001"))
                 .addComponent(new EyeCursor(2f, 7f, 1.75f))
+                .addComponent(new Dash(4f, 20, 65))
+
                 .setX(x)
                 .setY(y)
                 .setIdentifier(EntityIdentifier.PLAYER)

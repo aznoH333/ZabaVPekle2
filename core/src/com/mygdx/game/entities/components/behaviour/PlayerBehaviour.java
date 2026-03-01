@@ -20,6 +20,7 @@ import com.mygdx.game.utils.types.NumberUtils;
 public class PlayerBehaviour extends EntityComponent {
 
     private Gun gun = null;
+    private float dashDirection = 0f;
 
 
     public PlayerBehaviour() {
@@ -73,9 +74,17 @@ public class PlayerBehaviour extends EntityComponent {
     }
     
     private void handlePlayerWorldActions() {
-        Vector2 movementInput = Managers.inputManager.getMovementInput();
 
-        owner.walk(movementInput.x, movementInput.y);
+        boolean suspendMovement = owner.getField(FieldName.SuspendMovement);
+
+        if (!suspendMovement) {
+            Vector2 movementInput = Managers.inputManager.getMovementInput();
+            dashDirection = NumberUtils.directionToward(0f, 0f, movementInput.x, movementInput.y);
+
+            owner.walk(movementInput.x, movementInput.y);
+        }
+
+
         
         if (gun != null) {
 
@@ -98,6 +107,12 @@ public class PlayerBehaviour extends EntityComponent {
             
             owner.flipX = shootDirection.x < 0;
         }
+
+        Dash dash = (Dash) owner.getComponentByName(ComponentName.DASH);
+
+        if (dash != null && Managers.inputManager.isDashButtonPressed()) {
+            dash.dashInDirection(dashDirection);
+        }
     }
     
     
@@ -105,6 +120,7 @@ public class PlayerBehaviour extends EntityComponent {
     @Override
     public void onFirstAttached(Entity owner) {
         owner.canBeDamaged = true;
+        owner.initializeField(FieldName.SuspendMovement, false);
     }
 
 

@@ -129,4 +129,8 @@ public class InputManager {
 
     }
 
+    public boolean isDashButtonPressed() {
+        return Gdx.input.isKeyPressed(Input.Keys.SPACE);
+    }
+
 }

@@ -42,6 +42,7 @@ public class Entity implements Copyable {
     public float yVelocity = 0f;
     public float lastFrameXVelocity = 0f;
     public float lastFrameYVelocity = 0f;
+    public float lastFrameVelocity = 0;
     public boolean collidedWithWorldOnX = false;
     public boolean collidedWithWorldOnY = false;
 
@@ -109,10 +110,13 @@ public class Entity implements Copyable {
 
     public void update() {
 
-
-        for (EntityComponent component : this.components) {
-            component.onUpdate(this);
+        for (EntityComponent components : this.components) {
+            components.onUpdate(this);
         }
+
+        handleCompenentLifecycle();
+
+
 
 
         // knock back movement
@@ -143,7 +147,7 @@ public class Entity implements Copyable {
             lastFrameYVelocity = 0f;
         }
 
-
+        lastFrameVelocity = NumberUtils.distance(0f, 0f, lastFrameXVelocity, lastFrameYVelocity);
         xVelocity = 0;
         yVelocity = 0;
 
@@ -175,6 +179,29 @@ public class Entity implements Copyable {
             
             return false;
         });
+    }
+
+    private void handleCompenentLifecycle() {
+        // add new components
+        for(EntityComponent component : componentWaitingRoom) {
+            if (component.componentCountLimit > 0 && countComponentsWithName(component.name) >= component.componentCountLimit) {
+                // dont add component if over limit
+                continue;
+            }
+            component.owner = this;
+            components.add(component);
+            component.onFirstAttached(this);
+            for (EntityComponent c : components) {
+                c.onComponentAttached(this);
+            }
+        }
+        componentWaitingRoom.clear();
+
+        // kill deleted components
+        for (int i = componentsToRemove.size() - 1; i >= 0; i--) {
+            components.remove(componentsToRemove.get(i).intValue());
+        }
+        componentsToRemove.clear();
     }
 
 
@@ -254,6 +281,17 @@ public class Entity implements Copyable {
         return this.components.stream().filter((a) -> Objects.equals(a.name, name)).findFirst().orElse(null);
     }
 
+    private ArrayList<Integer> componentsToRemove = new ArrayList<>();
+
+    public void removeComponentByName(ComponentName name) {
+        for (int i = 0; i < components.size(); i++) {
+            if (components.get(i).name == name) {
+                componentsToRemove.add(i);
+                break;
+            }
+        }
+    }
+
     public int countComponentsWithName(ComponentName name) {
         return (int) this.components.stream().filter((a) -> Objects.equals(a.name, name)).count();
     }
@@ -283,6 +321,16 @@ public class Entity implements Copyable {
 
     public Entity setY(float y) {
         this.y = y;
+        return this;
+    }
+
+    public Entity setFlipX(boolean value) {
+        this.flipX = value;
+        return this;
+    }
+
+    public Entity setFlipY(boolean value) {
+        this.flipY = value;
         return this;
     }
 
@@ -325,20 +373,12 @@ public class Entity implements Copyable {
         return this;
     }
 
+    private ArrayList<EntityComponent> componentWaitingRoom = new ArrayList<>();
+
 
     public Entity addComponent(EntityComponent component) {
-        if (component.componentCountLimit > 0 && countComponentsWithName(component.name) >= component.componentCountLimit) {
-            // dont add component if over limit
-            return this;
-        }
+        this.componentWaitingRoom.add(component);
         component.owner = this;
-        this.components.add(component);
-        component.onFirstAttached(this);
-
-        for (EntityComponent c : components) {
-            c.onComponentAttached(this);
-        }
-
         return this;
     }
 
@@ -388,6 +428,8 @@ public class Entity implements Copyable {
     }
 
     public void placedInWorld() {
+        handleCompenentLifecycle();
+
         for (EntityComponent c : components) {
             c.onPlacedInWorld(this);
         }

@@ -9,6 +9,8 @@ public enum ComponentName {
     BULLET,
     INTERACTABLE,
     INVENTORY_ITEM,
+    DASH,
+    FADE_TRAIL,
     GUN;
 
 }

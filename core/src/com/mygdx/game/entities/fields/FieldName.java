@@ -45,7 +45,7 @@ public enum FieldName {
 
 
     /**
-     * A flag set
+     * Used to prevent some entities from moving
      */
     SuspendMovement,
     /**

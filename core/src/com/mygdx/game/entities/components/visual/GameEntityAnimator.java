@@ -11,7 +11,7 @@ public class GameEntityAnimator extends EntityComponent {
     private final int hurtIndex;
     private final int idleIndex;
     private final int framesPerWalkFrame;
-    private int walkTimer = 0;
+    private float walkTimer = 0f;
 
 
     public GameEntityAnimator(String baseSprite, int idleIndex, int walkStartIndex, int walkEndIndex, int hurtIndex, int framesPerWalkFrame) {
@@ -38,9 +38,9 @@ public class GameEntityAnimator extends EntityComponent {
         if (Math.abs(owner.lastFrameXVelocity) + Math.abs(owner.lastFrameYVelocity) > 0.25f) {
 
             if (owner.flipX == owner.lastFrameXVelocity < 0) {
-                walkTimer++;
+                walkTimer+=owner.lastFrameVelocity * 0.45f;
             }else {
-                walkTimer--;
+                walkTimer-=owner.lastFrameVelocity * 0.45f;
                 if (walkTimer < 0) {
                     walkTimer = ((walkEndIndex - walkStartIndex) * framesPerWalkFrame) - 1;
                 }
