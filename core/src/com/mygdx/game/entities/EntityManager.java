@@ -37,6 +37,7 @@ public class EntityManager {
     }
 
     public Entity addEntity(Entity entity) {
+        entity.initializeEntity();
         this.waitingRoom.add(entity);
         return entity;
     }

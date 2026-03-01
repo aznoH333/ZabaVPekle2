@@ -80,8 +80,10 @@ public class EnemyGeneratorFacade {
                 .addComponent(base.getMovementAiInstance())
                 .setScaleX(base.size)
                 .setScaleY(base.size)
+                .setSprite("player_1")
                 .setNumericStat(FieldName.Damage, 1f)
                 .setDrawingLayer(DrawingLayer.ENEMIES);
+
 
 
 

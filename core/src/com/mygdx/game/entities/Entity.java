@@ -109,12 +109,12 @@ public class Entity implements Copyable {
     }
 
     public void update() {
+        handleCompenentLifecycle();
 
         for (EntityComponent components : this.components) {
             components.onUpdate(this);
         }
 
-        handleCompenentLifecycle();
 
 
 
@@ -189,19 +189,26 @@ public class Entity implements Copyable {
                 continue;
             }
             component.owner = this;
-            components.add(component);
             component.onFirstAttached(this);
+            components.add(component);
+
             for (EntityComponent c : components) {
                 c.onComponentAttached(this);
             }
         }
         componentWaitingRoom.clear();
 
+
         // kill deleted components
         for (int i = componentsToRemove.size() - 1; i >= 0; i--) {
             components.remove(componentsToRemove.get(i).intValue());
         }
         componentsToRemove.clear();
+
+    }
+
+    public void initializeEntity() {
+        handleCompenentLifecycle();
     }
 
 
@@ -287,9 +294,11 @@ public class Entity implements Copyable {
         for (int i = 0; i < components.size(); i++) {
             if (components.get(i).name == name) {
                 componentsToRemove.add(i);
+
                 break;
             }
         }
+
     }
 
     public int countComponentsWithName(ComponentName name) {
@@ -428,14 +437,14 @@ public class Entity implements Copyable {
     }
 
     public void placedInWorld() {
-        handleCompenentLifecycle();
-
         for (EntityComponent c : components) {
             c.onPlacedInWorld(this);
         }
     }
 
     public Entity copy() {
+        this.initializeEntity();
+
         Entity clone = new Entity()
             .setSprite(sprite)
             .setX(x)
