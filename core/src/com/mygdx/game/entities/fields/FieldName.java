@@ -52,6 +52,7 @@ public enum FieldName {
      * Instance of the entities gun.
      */
     Gun,
+    Dash,
     /**
      * an arraylist containing a list of projectile origins
      */

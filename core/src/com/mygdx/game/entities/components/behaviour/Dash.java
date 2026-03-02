@@ -25,7 +25,7 @@ public class Dash extends EntityComponent {
 
 
     public void dashInDirection(float direction) {
-        if (cooldown != 0) {
+        if (cooldown != 0 || owner.lastFrameVelocity < 0.05f) {
             return;
         }
         addFadeTrail();
@@ -56,6 +56,7 @@ public class Dash extends EntityComponent {
     @Override
     public void onFirstAttached(Entity owner) {
         owner.initializeField(FieldName.SuspendMovement, false);
+        owner.initializeField(FieldName.Dash, this);
     }
 
     private void addFadeTrail() {

@@ -2,6 +2,7 @@ package com.mygdx.game.facades.enemyGeneration;
 
 
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.entities.components.behaviour.Dash;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.MachineGunAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.ShotGunAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.TripleHank;
@@ -95,11 +96,13 @@ public class EnemyGenerationBase {
             size *= 1.25f;
         }
 
+        float dashPower = 0f;
+
         while (totalHealthBudget > 0) {
 
             if (totalHealthBudget > survivalAbilityCost && NumberUtils.randomChance(0.33f)) {
                 // generate ability
-                // TODO : this
+                dashPower += 1.25f;
                 totalHealthBudget -= survivalAbilityCost;
             } else {
                 health += healthPerPoint;
@@ -108,6 +111,15 @@ public class EnemyGenerationBase {
 
         }
 
+
+        if (dashPower > 0f) {
+            float finalDashPower = dashPower;
+            abilities.add(
+                    (entity)-> {
+                        entity.addComponent(new Dash(finalDashPower, 20, 260));
+                    }
+            );
+        }
     }
 
     private void generateSpeed() {

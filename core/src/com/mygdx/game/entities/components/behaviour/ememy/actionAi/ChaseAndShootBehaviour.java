@@ -2,6 +2,7 @@ package com.mygdx.game.entities.components.behaviour.ememy.actionAi;
 
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
+import com.mygdx.game.entities.components.behaviour.Dash;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.utils.types.NumberUtils;
@@ -20,7 +21,9 @@ public class ChaseAndShootBehaviour extends EnemyCombatBehaviour{
     public void act(Entity owner) {
 
         Entity target = owner.getField(FieldName.Target);
-        Gun gun = (Gun) owner.getComponentByName(ComponentName.GUN);
+        Gun gun = owner.getField(FieldName.Gun);
+        Dash dash = owner.getField(FieldName.Dash);
+
 
         float direction = NumberUtils.directionToward(owner.x, owner.y, target.x, target.y);
 
@@ -31,6 +34,11 @@ public class ChaseAndShootBehaviour extends EnemyCombatBehaviour{
             } else {
                 initialCeaseFire--;
             }
+        }
+
+
+        if (dash != null && initialCeaseFire == 0) {
+            dash.dashInDirection(direction);
         }
     }
 }

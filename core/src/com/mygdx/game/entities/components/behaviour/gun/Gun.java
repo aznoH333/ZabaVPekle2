@@ -215,8 +215,6 @@ public class Gun extends EntityComponent {
 
         owner.initializeField(FieldName.ProjectileSprite, "bullets_0005");
 
-        owner.setField(FieldName.Gun, this);
-
         owner.initializeField(FieldName.ProjectileComponents, new ArrayList<EntityComponent>());
         this.bulletComponents = owner.getField(FieldName.ProjectileComponents);
 
@@ -240,6 +238,11 @@ public class Gun extends EntityComponent {
         }
 
         return sprite;
+    }
+
+    @Override
+    public void onPlacedInWorld(Entity owner) {
+        owner.setField(FieldName.Gun, this);
     }
 
     @Override

@@ -75,6 +75,7 @@ public class EnemyBaseBehaviour extends EntityComponent {
     @Override
     public void onComponentAttached(Entity owner) {
         gun = (Gun) owner.getComponentByName(ComponentName.GUN);
+        // owner.setField(FieldName.Gun, gun);
     }
 
 
