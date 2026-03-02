@@ -7,6 +7,7 @@ import com.mygdx.game.drawing.DrawingLayer;
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
+import com.mygdx.game.entities.EntityTeam;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.SpawnFadeTrail;
 import com.mygdx.game.facades.entities.GameEntityCreatorFacade;
@@ -118,6 +119,10 @@ public class Gun extends EntityComponent {
         int projectilesPerShot = (int) owner.getNumericStat(FieldName.ProjectilesPerShot);
         float spreadValue = owner.getNumericStat(FieldName.ProjectileSpread) * owner.getNumericStat(FieldName.ProjectileSpread);
         fireCooldownResetTimer = getFireRate();
+
+        if (owner.team != EntityTeam.PLAYER && Managers.playStateManager.gameTime % 30 == 0) {
+            System.out.println("updating gun with id " + this + " frameTime " + Managers.playStateManager.gameTime + " gun count " + bulletOrigins.size());
+        }
         for (BulletOrigin origin : bulletOrigins) {
 
 

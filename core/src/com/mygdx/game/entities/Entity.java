@@ -115,10 +115,6 @@ public class Entity implements Copyable {
             components.onUpdate(this);
         }
 
-
-
-
-
         // knock back movement
         if (shouldApplyKnockBack()) {
             xVelocity = (float) (Math.cos(knockBackDirection) * knockBackSpeed);
@@ -443,7 +439,6 @@ public class Entity implements Copyable {
     }
 
     public Entity copy() {
-        this.initializeEntity();
 
         Entity clone = new Entity()
             .setSprite(sprite)
@@ -458,6 +453,10 @@ public class Entity implements Copyable {
         for (EntityComponent c : components) {
             clone.addComponent(c.copy());
         }
+        for (EntityComponent c : componentWaitingRoom) {
+            clone.addComponent(c.copy());
+        }
+
         // stats
         clone.genericFields.importValues(this.genericFields);
         clone.numericFields.importValues(this.numericFields);
