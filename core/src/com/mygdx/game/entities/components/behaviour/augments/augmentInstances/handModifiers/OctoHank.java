@@ -9,7 +9,7 @@ import com.mygdx.game.utils.types.NumberUtils;
 
 public class OctoHank extends SimpleOnApplyModifierAugmentInstance {
     public OctoHank() {
-        super("too many hands", (owner) -> {
+        super("too many guns", (owner) -> {
             Gun gun = (Gun) owner.getComponentByName(ComponentName.GUN);
 
 

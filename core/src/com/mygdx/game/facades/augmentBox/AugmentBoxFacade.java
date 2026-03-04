@@ -17,11 +17,6 @@ import com.mygdx.game.utils.types.NumberUtils;
 import java.util.ArrayList;
 
 public class AugmentBoxFacade {
-
-
-    
-    
-    
     public static void openNewBox(Entity player, Quality targetQuality) {
 
         Entity guiOwner = new Entity();

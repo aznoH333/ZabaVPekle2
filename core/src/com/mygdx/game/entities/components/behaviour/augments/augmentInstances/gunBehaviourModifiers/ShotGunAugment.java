@@ -13,7 +13,6 @@ public class ShotGunAugment extends StatModifierAugmentInstance {
         super.augmentMap.put(FieldName.DamageMultiplier, -0.25f);
         super.augmentMap.put(FieldName.Damage, -(0.75f - (0.075f * quality.numericValue)));
         super.augmentMap.put(FieldName.ProjectilesPerShot, 3f + quality.numericValue);
-        super.augmentMap.put(FieldName.ProjectileLifeTime, -60f);
         super.augmentMap.put(FieldName.ProjectileSpread, 0.24f);
         super.augmentMap.put(FieldName.ProjectileSpreadMultiplier, 0.05f);
     }

@@ -11,7 +11,7 @@ import java.util.Optional;
 public class DoubleHank extends SimpleOnApplyModifierAugmentInstance {
     public DoubleHank() {
         super(
-            "gives another hand",
+            "another gun",
             (owner) -> {
                 Gun gun = (Gun) owner.getComponentByName(ComponentName.GUN);
 

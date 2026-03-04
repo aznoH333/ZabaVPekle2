@@ -45,7 +45,7 @@ public class Augment extends EntityComponent {
         // convert to text
         for (Map.Entry<String, Integer> entry : effectPotencyMap.entrySet()) {
             EffectPotency potency = EffectPotency.getPotencyBasedOnValue(entry.getValue());
-            String text = "grants";
+            String text = "gives";
 
             if (potency != EffectPotency.NOT_QUALIFIED) {
                 text += " " + potency.textName;

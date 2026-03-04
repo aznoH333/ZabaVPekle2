@@ -83,4 +83,24 @@ public enum FieldName {
         this.minValue = minValue;
         this.maxValue = maxValue;
     }
+
+    public String getTextName() {
+        switch (this) {
+            case ProjectileDamage:
+                return "damage";
+            case FireRate:
+                return "fire rate";
+            case ProjectileSpread:
+                return "accurracy";
+        }
+
+        return "undefined";
+    }
+
+    public float getValueExponent() {
+        if (this == FireRate || this == ProjectileSpread) {
+            return -1f;
+        }
+        return 1f;
+    }
 }

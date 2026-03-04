@@ -3,11 +3,14 @@ package com.mygdx.game.facades.enemyGeneration;
 
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.entities.components.behaviour.Dash;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.CannonAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.MachineGunAugment;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.gunBehaviourModifiers.ShotGunAugment;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.DoubleHank;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.OctoHank;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.PentaHank;
 import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.handModifiers.TripleHank;
-import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.BoomerangShotAugment;
-import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.ShrapnelShotAugment;
+import com.mygdx.game.entities.components.behaviour.augments.augmentInstances.shotBehaviour.*;
 import com.mygdx.game.entities.components.behaviour.ememy.actionAi.ChaseAndShootBehaviour;
 import com.mygdx.game.entities.components.behaviour.ememy.actionAi.EnemyCombatBehaviour;
 import com.mygdx.game.entities.components.behaviour.ememy.movementAi.EnemyAimlessWanderMovement;
@@ -113,10 +116,10 @@ public class EnemyGenerationBase {
 
 
         if (dashPower > 0f) {
-            float finalDashPower = dashPower;
+            float finalDashPower = 2f + dashPower;
             abilities.add(
                     (entity)-> {
-                        entity.addComponent(new Dash(finalDashPower, 20, 260));
+                        entity.addComponent(new Dash(finalDashPower, 20, 120));
                     }
             );
         }
@@ -146,33 +149,35 @@ public class EnemyGenerationBase {
 
     private static ArrayList<Trait<EntityRunnable>> possibleAugments = new ArrayList<>();
 
+    private static void initAugment(float chance, float cost, EntityComponent component) {
+        possibleAugments.add(
+                new Trait<>(chance, cost, (entity)->entity.addComponent(component))
+        );
+    }
     static {
         possibleAugments.add(new Trait<>(1f, 1f, (entity)->{
             entity.addNumericStat(FieldName.FireRate, -0.25f);
         }));
-        possibleAugments.add(new Trait<>(0.15f, 4f, (entity)->{
-            entity.addComponent(new ShotGunAugment(Quality.COMMON));
-        }));
-        possibleAugments.add(new Trait<>(0.15f, 4f, (entity)->{
-            entity.addComponent(new MachineGunAugment(Quality.COMMON));
-        }));
-        possibleAugments.add(new Trait<>(0.15f, 2.5f, (entity)->{
-            entity.addComponent(new TripleHank());
-        }));
-        possibleAugments.add(new Trait<>(0.15f, 2.5f, (entity)->{
-            entity.addComponent(new BoomerangShotAugment());
-        }));
-        possibleAugments.add(new Trait<>(0.15f, 7.5f, (entity)->{
-            entity.addComponent(new ShrapnelShotAugment(Quality.REFINED));
-        }));
-        possibleAugments.add(new Trait<>(0.15f, 7.7f, (entity)->{
-            entity.addComponent(new MachineGunAugment(Quality.DIVINE));
-        }));
-        possibleAugments.add(new Trait<>(0.15f, 7.7f, (entity)->{
-            entity.addComponent(new ShrapnelShotAugment(Quality.DIVINE));
-        }));
+
+        initAugment(0.05f, 4f, new ShotGunAugment(Quality.COMMON));
+        initAugment(0.05f, 4f, new MachineGunAugment(Quality.REFINED));
+        initAugment(0.05f, 8f, new CannonAugment(Quality.COMMON));
+
+        initAugment(0.2f, 4f, new DoubleHank());
+        initAugment(0.2f, 6f, new TripleHank());
+        initAugment(0.2f, 8f, new PentaHank());
+        initAugment(0.05f, 20f, new OctoHank());
+
+        initAugment(0.1f, 4f, new BoomerangShotAugment());
+        initAugment(0.20f, 7.5f, new ShrapnelShotAugment(Quality.REFINED));
+
+        initAugment(0.1f, 3f, new SineTravelShotAugment());
+        initAugment(0.1f, 3f, new SpinShotAugment());
+        initAugment(0.1f, 3f, new WallBounceShotAugment());
 
     }
+
+
 
     private void generateRangedAbilities() {
         float totalRangedBudget = (rangePower * placeDifficulty * 0.25f);
