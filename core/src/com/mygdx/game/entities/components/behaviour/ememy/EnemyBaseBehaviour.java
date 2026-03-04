@@ -30,7 +30,7 @@ public class EnemyBaseBehaviour extends EntityComponent {
         this.combatBehaviours = combatBehaviours;
         this.pickBehaviourRandomly = pickBehaviourRandomly;
 
-        this.currentBehaviour = combatBehaviours.get(0);
+        this.currentBehaviour = combatBehaviours.get(0).copy(); // TODO : this is unfinished and sucks ass, but i lack the motivation to fix it
         this.currentBehaviourTimer = currentBehaviour.getDuration();
     }
 

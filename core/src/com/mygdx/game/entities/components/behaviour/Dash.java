@@ -82,4 +82,9 @@ public class Dash extends EntityComponent {
         return (SpawnFadeTrail) owner.getComponentByName(ComponentName.FADE_TRAIL);
     }
 
+
+    @Override
+    public EntityComponent copy() {
+        return new Dash(maxSpeed, maxDashDuration, maxCooldown);
+    }
 }

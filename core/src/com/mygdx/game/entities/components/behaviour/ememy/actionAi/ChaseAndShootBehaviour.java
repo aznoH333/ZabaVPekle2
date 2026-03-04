@@ -41,4 +41,9 @@ public class ChaseAndShootBehaviour extends EnemyCombatBehaviour{
             dash.dashInDirection(direction);
         }
     }
+
+    @Override
+    public EnemyCombatBehaviour copy() {
+        return new ChaseAndShootBehaviour(super.getDuration());
+    }
 }

@@ -16,4 +16,6 @@ public abstract class EnemyCombatBehaviour {
     }
 
     public abstract void act(Entity owner);
+
+    public abstract EnemyCombatBehaviour copy();
 }
