@@ -8,5 +8,6 @@ public enum EnemyArchetypeAbility {
     MORE_HEALTH,
     RETARDED,
     SMALL,
+    BOSS
 
 }

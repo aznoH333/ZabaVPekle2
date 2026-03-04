@@ -121,9 +121,16 @@ public class WorldZone {
 
     }
 
+
+    private int getZoneLength() {
+        int min = Math.min(type.zoneIndex - (type.zoneIndex % 2) + 5, 13);
+
+        return NumberUtils.randomInt(min, min + 3);
+    }
+
     private void generateWorld() {
         int currentX = 0;
-        int totalLength = NumberUtils.randomInt(10, 15);
+        int totalLength = getZoneLength();
 
         PathGenerator mainPath = new PathGenerator(0, totalLength, true);
         ArrayList<PathGenerator> activePaths = new ArrayList<>();

@@ -29,8 +29,14 @@ public class Shrapnel extends EntityComponent {
         float currentRotation = 0f;
         for (int i = 0; i < amountToSpawn; i++) {
             Entity newBullet = owner.copy();
+            newBullet.initializeEntity();
 
             Bullet bullet = (Bullet) newBullet.getComponentByName(ComponentName.BULLET);
+
+            if (bullet == null) {
+                continue;
+            }
+
             bullet.direction += currentRotation;
             currentRotation += rotationPercentage;
             newBullet.setNumericStat(FieldName.RemainingProjectileLifeTime, 30f);

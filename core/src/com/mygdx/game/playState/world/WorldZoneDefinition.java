@@ -12,6 +12,7 @@ public class WorldZoneDefinition {
     public final Quality bossRoomDropQuality;
     public final float placeDifficulty;
     public final Color ambientLight;
+    public final int zoneIndex;
 
     public WorldZoneDefinition(
             LevelTheme levelTheme,
@@ -19,7 +20,8 @@ public class WorldZoneDefinition {
             Quality combatRoomDropQuality,
             Quality bossRoomDropQuality,
             float placeDifficulty,
-            Color ambientLight
+            Color ambientLight,
+            int zoneIndex
     ) {
         this.levelTheme = levelTheme;
         this.lootRoomBoxQuality = lootRoomBoxQuality;
@@ -27,6 +29,7 @@ public class WorldZoneDefinition {
         this.bossRoomDropQuality = bossRoomDropQuality;
         this.placeDifficulty = placeDifficulty;
         this.ambientLight = ambientLight;
+        this.zoneIndex = zoneIndex;
     }
 
 }

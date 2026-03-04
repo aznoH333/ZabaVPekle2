@@ -3,6 +3,7 @@ package com.mygdx.game.playState.world.level;
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.items.Quality;
+import com.mygdx.game.facades.enemyGeneration.EnemyGeneratorFacade;
 import com.mygdx.game.facades.enemyGeneration.EnemyRoster;
 import com.mygdx.game.facades.entities.WorldInteractableFacade;
 import com.mygdx.game.level.LevelExitDirection;
@@ -21,6 +22,7 @@ public class ZoneLevel {
     public final MapCoordinates coordinates;
     public final ArrayList<Entity> roomContents = new ArrayList<>();
     private boolean visited;
+    private final WorldZone parentZone;
 
     public ZoneLevel(LevelType levelType, LevelTheme theme, EnemyRoster enemyRoster, MapCoordinates coordinates, WorldZone parentZone) {
         this.type = levelType;
@@ -28,6 +30,7 @@ public class ZoneLevel {
         this.theme = theme;
         this.coordinates = coordinates;
         this.visited = false;
+        this.parentZone = parentZone;
 
         fillRoomContents(enemyRoster, parentZone);
 
@@ -58,6 +61,15 @@ public class ZoneLevel {
 
         if (type == LevelType.SCRAP_ROOM) {
             roomContents.add(WorldInteractableFacade.createItemBox(-16f, -16f));
+        }
+
+        if (type == LevelType.MINI_BOSS_ROOM) {
+            roomContents.add(EnemyGeneratorFacade.generateBossEnemy(parentZone.type.placeDifficulty + 5f, 10));
+
+        }
+
+        if (type == LevelType.BOSS) {
+            roomContents.add(EnemyGeneratorFacade.generateBossEnemy(parentZone.type.placeDifficulty + 10f, 30));
         }
     }
 

@@ -17,6 +17,9 @@ import com.mygdx.game.utils.TraitPicker;
 import com.mygdx.game.utils.types.NumberUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class EnemyGeneratorFacade {
@@ -37,6 +40,40 @@ public class EnemyGeneratorFacade {
     }
 
 
+    public static Entity generateBossEnemy(float bossDifficulty, float healthMultiplier) {
+
+        List<EnemyArchetype> bossArchetypes = Arrays
+                .stream(EnemyArchetype.values())
+                .filter((it)->it.ability == EnemyArchetypeAbility.BOSS).collect(Collectors.toList());
+
+
+        EnemyArchetype pickedArchetype = bossArchetypes.get(NumberUtils.randomInt(0, bossArchetypes.size() - 1));
+
+        EnemyGenerationBase base = new EnemyGenerationBase(
+                bossDifficulty,
+                pickedArchetype
+            );
+
+        Entity enemy = generateEnemyFromBase(base);
+
+
+        float health = enemy.getNumericStat(FieldName.Health) * healthMultiplier;
+
+        enemy.setNumericStat(FieldName.Health, health);
+        enemy.setNumericStat(FieldName.MaxHealth, health);
+
+
+        float size = NumberUtils.randomFloat(1.5f, 3f);
+        enemy.setScaleX(size);
+        enemy.setScaleY(size);
+
+        // make slower
+        float speed = enemy.getNumericStat(FieldName.Speed) * 0.85f;
+        enemy.setNumericStat(FieldName.Speed, speed);
+
+        return enemy;
+    }
+
     private static ArrayList<EnemyArchetype> pickArchetypes(float placeDifficulty, int enemyCount) {
         ArrayList<EnemyArchetype> output = new ArrayList<>();
 
@@ -45,7 +82,7 @@ public class EnemyGeneratorFacade {
         ArrayList<Trait<EnemyArchetype>> pickableArchetypes = new ArrayList<>();
 
         for (EnemyArchetype type : EnemyArchetype.values()) {
-            if (type.minGenerationDifficulty <= placeDifficulty && (type.maxGenerationDifficulty >= placeDifficulty || type.maxGenerationDifficulty == -1)) {
+            if (type.minGenerationDifficulty <= placeDifficulty && (type.maxGenerationDifficulty >= placeDifficulty || type.maxGenerationDifficulty == -1) && type.ability != EnemyArchetypeAbility.BOSS) {
                 pickableArchetypes.add(new Trait<EnemyArchetype>(type.generationChance, 0f, type));
             }
         }

@@ -10,7 +10,14 @@ public enum EnemyArchetype {
     SNIPER(0.2f, 0f, 1f, 1f, 1.2f, EnemyArchetypeAbility.INCREASED_WEAPON_BUDGET, 10f, 0.5f),
     TANK(0.2f, 1f, 0.1f, 0.1f, 1.2f, EnemyArchetypeAbility.MORE_HEALTH, 10f, 0.5f),
     BERSERKER(1f, 0.5f, 0f, 0f, 1f, EnemyArchetypeAbility.INCREASED_MOVEMENT_ABILITY_BUDGET, 10f, 0.1f),
-    SHIT_FUCK(0.3f, 1f, 1f, 0.5f, 1.2f, EnemyArchetypeAbility.MORE_HEALTH, 30f, 0.1f);
+    SHIT_FUCK(0.3f, 1f, 1f, 0.5f, 1.2f, EnemyArchetypeAbility.MORE_HEALTH, 30f, 0.1f),
+
+
+    BOSS_MELEE(1.5f, 1f, 0f, 0f, 1f, EnemyArchetypeAbility.BOSS, 999f, 1f),
+    BOSS_RANGED(0.25f, 1f, 1f, 2f, 1f, EnemyArchetypeAbility.BOSS, 999f, 1f),
+    BOSS_MIXED(1f, 1f, 0.5f, 1f, 1f, EnemyArchetypeAbility.BOSS, 999f, 1f)
+
+    ;
 
 
 

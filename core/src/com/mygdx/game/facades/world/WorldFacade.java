@@ -69,7 +69,8 @@ public class WorldFacade {
                 combatRoomDropQuality,
                 bossRoomDropQuality,
                 difficulty,
-                new Color(0.25f, 0.25f, 0.25f, 1f)
+                new Color(0.25f, 0.25f, 0.25f, 1f),
+                zoneIndex
         );
     }
 
