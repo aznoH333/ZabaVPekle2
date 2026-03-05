@@ -34,7 +34,7 @@ public class WallBounce extends EntityComponent {
         }
 
         Entity newBullet = owner.copy();
-        newBullet.addNumericStat(FieldName.BounceCount, -1f);
+        newBullet.setNumericStat(FieldName.BounceCount, owner.getNumericStat(FieldName.BounceCount));
         newBullet.setColor(owner.r, owner.g, owner.b, owner.a);
 
         Managers.entityManager.addEntity(newBullet);

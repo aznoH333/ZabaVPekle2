@@ -71,6 +71,9 @@ public class EnemyGeneratorFacade {
         float speed = enemy.getNumericStat(FieldName.Speed) * 0.85f;
         enemy.setNumericStat(FieldName.Speed, speed);
 
+        // shoot faster
+        enemy.addNumericStat(FieldName.FireRateMultiplier, -1f);
+
         return enemy;
     }
 

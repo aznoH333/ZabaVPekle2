@@ -64,12 +64,12 @@ public class ZoneLevel {
         }
 
         if (type == LevelType.MINI_BOSS_ROOM) {
-            roomContents.add(EnemyGeneratorFacade.generateBossEnemy(parentZone.type.placeDifficulty + 5f, 10));
+            roomContents.add(EnemyGeneratorFacade.generateBossEnemy(parentZone.type.placeDifficulty + 10f, 3));
 
         }
 
         if (type == LevelType.BOSS) {
-            roomContents.add(EnemyGeneratorFacade.generateBossEnemy(parentZone.type.placeDifficulty + 10f, 30));
+            roomContents.add(EnemyGeneratorFacade.generateBossEnemy(parentZone.type.placeDifficulty + 30f, 10));
         }
     }
 
