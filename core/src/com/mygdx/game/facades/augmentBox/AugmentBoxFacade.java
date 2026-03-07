@@ -51,7 +51,7 @@ public class AugmentBoxFacade {
 
 
         int targetCount = targetQuality.averageAugmentCount;
-        if (NumberUtils.randomChance(0.23f)) {
+        if (NumberUtils.randomChance(0.16f)) {
             targetCount++;
         }
 

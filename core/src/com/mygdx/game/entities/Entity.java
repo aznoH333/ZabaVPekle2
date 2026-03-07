@@ -52,6 +52,7 @@ public class Entity implements Copyable {
     public float knockBackDirection = 0f;
     public float knockBackSpeed = 0f;
     public boolean canBeDamaged = false;
+    public boolean dealtDamageThisFrame = false;
 
     // appearance
     public float spriteRotation = 0f;
@@ -109,6 +110,8 @@ public class Entity implements Copyable {
     }
 
     public void update() {
+        dealtDamageThisFrame = false;
+
         handleCompenentLifecycle();
 
         for (EntityComponent components : this.components) {
@@ -216,6 +219,12 @@ public class Entity implements Copyable {
         if (this.invincibilityTimer == 0 && other.team.isAggressiveAgainst(this.team) && other.getNumericStat(FieldName.Damage) != 0f && canBeDamaged) {
 
             float damageToDeal = (other.getNumericStat(FieldName.Damage) * other.getNumericStat(FieldName.DamageMultiplier));
+
+
+            if (getNumericStat(FieldName.Health) > 0f) {
+                other.dealtDamageThisFrame = true;
+            }
+
             addNumericStat(FieldName.Health, -damageToDeal);
 
 

@@ -60,7 +60,7 @@ public class WorldFacade {
 
         Quality lootRoomQuality = getLootQuality(zoneIndex);
         Quality combatRoomDropQuality = Quality.getFromNumeric(lootRoomQuality.numericValue - 1);
-        Quality bossRoomDropQuality = Quality.getFromNumeric(lootRoomQuality.numericValue + 1);
+        Quality bossRoomDropQuality = Quality.getFromNumeric(lootRoomQuality.numericValue);
 
 
         return new WorldZoneDefinition(
@@ -79,9 +79,11 @@ public class WorldFacade {
             return Quality.POOR;
         } else if (zoneIndex < 6) {
             return Quality.COMMON;
+        }else if (zoneIndex < 10) {
+            return Quality.REFINED;
         }
 
-        return Quality.REFINED;
+        return Quality.ELITE;
     }
 
     private static float getDifficulty(int zoneIndex) {

@@ -50,7 +50,7 @@ public class Bullet extends EntityComponent {
         if (
                 other.team.isAggressiveAgainst(owner.team) &&
                 !other.hasComponent(ComponentName.BULLET) &&
-                other.getNumericStat(FieldName.Health) > 0f
+                owner.dealtDamageThisFrame
         ) {
             owner.commitSudoku();
         }
