@@ -21,7 +21,7 @@ public class ZoneLevel {
     public final LevelType type;
     public final MapCoordinates coordinates;
     public final ArrayList<Entity> roomContents = new ArrayList<>();
-    private boolean visited;
+    public boolean visited;
     private final WorldZone parentZone;
 
     public ZoneLevel(LevelType levelType, LevelTheme theme, EnemyRoster enemyRoster, MapCoordinates coordinates, WorldZone parentZone) {

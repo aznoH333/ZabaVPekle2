@@ -227,17 +227,20 @@ public class LevelManager {
         }
 
 
-        if ((currentLevel.type == LevelType.MAJOR_COMBAT && NumberUtils.randomChance(0.35f)) || currentLevel.type == LevelType.MINI_BOSS_ROOM) {
-            Managers.entityManager.addEntity(
-                    WorldInteractableFacade.createNewAugmentBox(-16f, -16f, Managers.playStateManager.currentZone.type.combatRoomDropQuality)
-            );
+        if (currentLevel.visited == false) {
+            if ((currentLevel.type == LevelType.MAJOR_COMBAT && NumberUtils.randomChance(0.35f)) || currentLevel.type == LevelType.MINI_BOSS_ROOM) {
+                Managers.entityManager.addEntity(
+                        WorldInteractableFacade.createNewAugmentBox(-16f, -16f, Managers.playStateManager.currentZone.type.combatRoomDropQuality)
+                );
+            }
+
+            if (currentLevel.type == LevelType.BOSS) {
+                Managers.entityManager.addEntity(
+                        WorldInteractableFacade.createNewAugmentBox(-16f, -16f, Managers.playStateManager.currentZone.type.bossRoomDropQuality)
+                );
+            }
         }
 
-        if (currentLevel.type == LevelType.BOSS) {
-            Managers.entityManager.addEntity(
-                    WorldInteractableFacade.createNewAugmentBox(-16f, -16f, Managers.playStateManager.currentZone.type.bossRoomDropQuality)
-            );
-        }
         
     }
 
