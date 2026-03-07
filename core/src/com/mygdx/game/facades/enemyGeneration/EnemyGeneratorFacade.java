@@ -12,6 +12,7 @@ import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
 import com.mygdx.game.entities.components.visual.GameEntityBleed;
 import com.mygdx.game.entities.components.visual.LegsWithHatType;
 import com.mygdx.game.entities.fields.FieldName;
+import com.mygdx.game.facades.entities.GameEntityCreatorFacade;
 import com.mygdx.game.utils.Trait;
 import com.mygdx.game.utils.TraitPicker;
 import com.mygdx.game.utils.types.NumberUtils;
@@ -73,6 +74,12 @@ public class EnemyGeneratorFacade {
 
         // shoot faster
         enemy.addNumericStat(FieldName.FireRateMultiplier, -1f);
+
+
+        // add healthbar
+        enemy.addChild(
+                GameEntityCreatorFacade.createEnemyHealthBarHudElement(enemy)
+        );
 
         return enemy;
     }

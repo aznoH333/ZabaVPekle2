@@ -12,6 +12,7 @@ import com.mygdx.game.entities.components.behaviour.Bullet;
 import com.mygdx.game.entities.components.behaviour.Dash;
 import com.mygdx.game.entities.components.behaviour.PlayerBehaviour;
 import com.mygdx.game.entities.components.behaviour.gun.Gun;
+import com.mygdx.game.entities.components.gui.hudElements.BossHealthBar;
 import com.mygdx.game.entities.components.gui.hudElements.HealthBar;
 import com.mygdx.game.entities.components.gui.hudElements.Minimap;
 import com.mygdx.game.entities.components.visual.AnimatedLegsWithHat;
@@ -69,6 +70,15 @@ public class GameEntityCreatorFacade {
                 .setY(-DrawingManager.SCREEN_HEIGHT / 2 + HEALTH_BAR_OFFSET_Y)
                 .setDrawingLayer(DrawingLayer.GUI)
                 .addComponent(new HealthBar())
+                .makeStatic();
+    }
+
+    private final static float BOSS_HEALTH_BAR_OFFSET_Y = 64;
+    public static Entity createEnemyHealthBarHudElement(Entity enemy) {
+        return new Entity()
+                .setX(0)
+                .setY(-DrawingManager.SCREEN_HEIGHT / 2 + BOSS_HEALTH_BAR_OFFSET_Y)
+                .addComponent(new BossHealthBar(enemy))
                 .makeStatic();
     }
 

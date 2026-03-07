@@ -202,7 +202,9 @@ public class Gun extends EntityComponent {
     }
 
     private int getFireRate() {
-        return (int) (owner.getNumericStat(FieldName.FireRate) * owner.getNumericStat(FieldName.FireRateMultiplier));
+        int calculatedDelay = (int) (owner.getNumericStat(FieldName.FireRate) * owner.getNumericStat(FieldName.FireRateMultiplier));
+
+        return Math.max(calculatedDelay, 3);
     }
 
     @Override

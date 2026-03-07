@@ -22,7 +22,7 @@ public class SineTravel extends EntityComponent {
         timer++;
 
         float direction = bullet.direction + NumberUtils.HALF_PI;
-        float strength = (float) (Math.sin(timer / 10f) * 4f);
+        float strength = (float) (Math.sin(timer / 5f) * 2.5f);
 
         owner.goInDirection(direction, strength);
     }
