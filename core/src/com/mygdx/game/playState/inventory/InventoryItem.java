@@ -10,12 +10,12 @@ public class InventoryItem {
     public boolean stackable;
     public InventoryItemType type;
     
-    public InventoryItem(String sprite, String name, Quality quality, int quantity, boolean stackable, InventoryItemType type) {
-        this.sprite = sprite;
-        this.name = name;
+    public InventoryItem(InventoryItemType type, Quality quality, int quantity) {
+        this.sprite = type.sprite;
+        this.name = type.name;
         this.quality = quality;
         this.quantity = quantity;
-        this.stackable = stackable;// TODO
+        this.stackable = type.stackable;// TODO
         this.type = type;
     }
     
@@ -27,12 +27,9 @@ public class InventoryItem {
     
     public InventoryItem copy() {
         return new InventoryItem(
-            sprite,
-            name,
+            type,
             quality,
-            quantity,
-            stackable,
-            type
+            quantity
         );
     }
 }

@@ -8,6 +8,7 @@ import com.mygdx.game.entities.components.gui.hudElements.InventoryGUI;
 import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.sceen.GUIFacade;
 import com.mygdx.game.facades.entities.WorldInteractableFacade;
+import com.mygdx.game.playState.PlayStateManager;
 import com.mygdx.game.playState.inventory.Inventory;
 import com.mygdx.game.playState.inventory.InventoryItem;
 import com.mygdx.game.playState.inventory.InventoryItemType;
@@ -50,11 +51,17 @@ public class InventoryFacade {
             .makeStatic()
             .addComponent(new InventoryGUI(type, originEntity));
         
-        if (type == InventoryMenuType.CRAFTING) {
+        if (type.canCraft) {
             entity.addChild(
                 GUIFacade.buildButton("craft", 0, -128, (button)->{
+                    // check that all requirements are met
+                    if (type.requirements.size() != Managers.playStateManager.inventory.inputSlots.size()) {
+                        return;
+                    }
+
                     Managers.playStateManager.inventory.clearInputs();
-                    InventoryFacade.giveOrDropItem(new InventoryItem("inventory_items_0006", "motor", Quality.COMMON, 1, true, InventoryItemType.MOTOR));
+                    type.craftAction.run(Managers.playStateManager.playerReference);
+                    closeInventory();
                 })
             );
         }

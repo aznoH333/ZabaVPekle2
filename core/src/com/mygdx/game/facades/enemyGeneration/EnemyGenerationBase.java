@@ -82,11 +82,12 @@ public class EnemyGenerationBase {
 
         health = 1f;
         float survivalAbilityCost = 10f;
-        size = 0.75f + (survival * 0.33f);
+        size = 1.0f;
 
         if (archetype.ability == EnemyArchetypeAbility.SMALL) {
-            size *= 0.75f;
+            size = 0.75f;
         }
+
 
         if (archetype.ability == EnemyArchetypeAbility.INCREASED_SURVIVAL_ABILITY_BUDGET) {
             survivalAbilityCost -= 5f;
@@ -94,9 +95,13 @@ public class EnemyGenerationBase {
 
         float healthPerPoint = 0.5f;
 
+        if (survival > 0.6f) {
+            size += 0.25f;
+        }
+
         if (archetype.ability == EnemyArchetypeAbility.MORE_HEALTH) {
             healthPerPoint = 1.5f;
-            size *= 1.25f;
+            size += 0.25f;
         }
 
         float dashPower = 0f;

@@ -10,10 +10,7 @@ import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
 import com.mygdx.game.facades.inventory.InventoryFacade;
-import com.mygdx.game.playState.inventory.Inventory;
-import com.mygdx.game.playState.inventory.InventoryItem;
-import com.mygdx.game.playState.inventory.InventoryMenuType;
-import com.mygdx.game.playState.inventory.InventorySlotType;
+import com.mygdx.game.playState.inventory.*;
 import com.mygdx.game.utils.types.NumberUtils;
 
 public class InventoryGUI extends EntityComponent {
@@ -40,7 +37,7 @@ public class InventoryGUI extends EntityComponent {
     private InventoryItem hoveredItem = null;
     private InventorySlotType hoveredSlotType;
     private int hoveredIndex = -1;
-    
+
     
     @Override
     public void onDraw(Entity owner) {
@@ -58,6 +55,30 @@ public class InventoryGUI extends EntityComponent {
         drawHintText();
     }
 
+    private InventoryItemType getNextItemHint() {
+        int currentCount = Managers.playStateManager.inventory.inputSlots.size();
+
+        if (currentCount >= type.requirements.size()) {
+            return null;
+        }
+
+        return type.requirements.get(currentCount);
+    }
+
+    private boolean canAddItemToInputs(InventoryItemType itemToAdd) {
+        if (type.requirements == null) {
+            return true;
+        }
+
+
+        InventoryItemType nextHint = getNextItemHint();
+
+        if (nextHint == null) {
+            return false;
+        }
+
+        return itemToAdd == nextHint;
+    }
 
     private static final float HINT_TEXT_OFFSET_X = 0f;
     private static final float HINT_TEXT_OFFSET_Y = -64f;
@@ -99,12 +120,19 @@ public class InventoryGUI extends EntityComponent {
 
 
         for (int i = 0; i < Inventory.ITEMS_PER_INVENTORY_ROW; i++) {
+            InventoryItemType hint = null;
+
+            if (i < type.requirements.size()) {
+                hint = type.requirements.get(i);
+            }
+
             handleInventorySlot(
                 i * (SLOT_SIZE + SPACE_BETWEEN_SLOTS),
                 owner.y + INPUT_ROW_OFFSET_Y,
                 inventory.getInputItem(i),
                 InventorySlotType.INPUT,
-                i
+                i,
+                hint
             );
         }
 
@@ -134,7 +162,8 @@ public class InventoryGUI extends EntityComponent {
                     y,
                     inventory.getItem(slotIndex),
                     InventorySlotType.NORMAL,
-                    slotIndex
+                    slotIndex,
+                    null
                     );
             }
         }
@@ -151,7 +180,10 @@ public class InventoryGUI extends EntityComponent {
         
         
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-            if (hoveredSlotType == InventorySlotType.NORMAL && inventory.canAddInput()) {
+            if (hoveredSlotType == InventorySlotType.NORMAL &&
+                    inventory.canAddInput() &&
+                    canAddItemToInputs(hoveredItem.type)
+            ) {
                 inventory.removeItem(hoveredIndex, 1);
                 
                 
@@ -187,7 +219,13 @@ public class InventoryGUI extends EntityComponent {
     }
     
     
-    private void handleInventorySlot(float x, float y, InventoryItem item, InventorySlotType slotType, int slotIndex) {
+    private void handleInventorySlot(
+            float x,
+            float y,
+            InventoryItem item,
+            InventorySlotType slotType,
+            int slotIndex,
+            InventoryItemType itemHint) {
         String slotSprite = "inventory_slot_0001";
         
         if (item == null) {
@@ -218,6 +256,22 @@ public class InventoryGUI extends EntityComponent {
         );
         
         if (item == null) {
+            if (itemHint != null) {
+                // draw hint
+
+                Managers.drawingManager.drawSpriteStatic(
+                        new DrawingCommand(
+                                itemHint.sprite,
+                                x + OFFSET_X,
+                                y + OFFSET_Y
+                        ).setA((float) (0.6f + (Math.sin(Managers.playStateManager.gameTime * 0.1) * 0.2))),
+                        DrawingLayer.GUI
+                );
+            }
+
+
+
+
             return;
         }
         

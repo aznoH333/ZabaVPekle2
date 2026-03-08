@@ -54,18 +54,49 @@ public class WorldInteractableFacade {
                     for (int i = 0; i < 6; i++) {
                         Managers.entityManager.addEntity(
                             WorldInteractableFacade.createItemDrop(
-                                new InventoryItem("inventory_items_0005", "gear", Quality.COMMON, 5, true, InventoryItemType.GEAR),
+                                new InventoryItem(InventoryItemType.GEAR, Quality.COMMON, 2),
                                 entity.x,
                                 entity.y
                             )
                         );
                         Managers.entityManager.addEntity(
-                            WorldInteractableFacade.createItemDrop(
-                                new InventoryItem("inventory_items_0001", "plate", Quality.COMMON, 5, true, InventoryItemType.PLATE),
-                                entity.x,
-                                entity.y
-                            )
+                                WorldInteractableFacade.createItemDrop(
+                                        new InventoryItem(InventoryItemType.PLATE, Quality.COMMON, 2),
+                                        entity.x,
+                                        entity.y
+                                )
                         );
+
+                        Managers.entityManager.addEntity(
+                                WorldInteractableFacade.createItemDrop(
+                                        new InventoryItem(InventoryItemType.WIRING, Quality.COMMON, 2),
+                                        entity.x,
+                                        entity.y
+                                )
+                        );
+                        Managers.entityManager.addEntity(
+                                WorldInteractableFacade.createItemDrop(
+                                        new InventoryItem(InventoryItemType.BATTERY, Quality.COMMON, 2),
+                                        entity.x,
+                                        entity.y
+                                )
+                        );
+                        Managers.entityManager.addEntity(
+                                WorldInteractableFacade.createItemDrop(
+                                        new InventoryItem(InventoryItemType.MOTOR, Quality.COMMON, 2),
+                                        entity.x,
+                                        entity.y
+                                )
+                        );
+                        Managers.entityManager.addEntity(
+                                WorldInteractableFacade.createItemDrop(
+                                        new InventoryItem(InventoryItemType.PROCESSOR, Quality.COMMON, 2),
+                                        entity.x,
+                                        entity.y
+                                )
+                        );
+
+
                     }
                     entity.commitSudoku();
                     
@@ -90,7 +121,7 @@ public class WorldInteractableFacade {
             .setDrawingLayer(DrawingLayer.ITEMS)
             .setTeam(EntityTeam.NEUTRAL_OBJECT)
             .addComponent(new Interactable((entity) -> {
-                InventoryFacade.openInventoryMenu(InventoryMenuType.CRAFTING, entity);
+                InventoryFacade.openInventoryMenu(InventoryMenuType.REPAIR_STATION, entity);
             }));
     }
 

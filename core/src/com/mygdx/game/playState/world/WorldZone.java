@@ -83,7 +83,7 @@ public class WorldZone {
                 return LevelType.SPAWN;
             }
 
-            if (isMain && endsIn == 2 && NumberUtils.randomChance(0.65f)) {
+            if (isMain && endsIn == 2) {
                 return LevelType.BOSS;
             }
 
@@ -123,7 +123,7 @@ public class WorldZone {
 
 
     private int getZoneLength() {
-        int min = Math.min(type.zoneIndex - (type.zoneIndex % 2) + 5, 13);
+        int min = Math.min(type.zoneIndex - (type.zoneIndex % 2) + 6, 13);
 
         return NumberUtils.randomInt(min, min + 3);
     }
