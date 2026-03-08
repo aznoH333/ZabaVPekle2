@@ -3,15 +3,12 @@ package com.mygdx.game.playState.inventory;
 import java.util.ArrayList;
 
 public class Inventory {
-    
-    
-    
     private ArrayList<InventoryItem> equippedItems;
     private ArrayList<InventoryItem> items;
     public ArrayList<InventoryItem> inputSlots;
     public final static int ITEMS_PER_INVENTORY_ROW = 5;
     public final static int MAX_EQUIPMENT = 5;
-    public final static int INVENTORY_ROWS = 4;
+    public final static int INVENTORY_ROWS = 3;
     public final static int MAX_INVENTORY_CAPACITY = INVENTORY_ROWS * ITEMS_PER_INVENTORY_ROW;
     
     public Inventory(){

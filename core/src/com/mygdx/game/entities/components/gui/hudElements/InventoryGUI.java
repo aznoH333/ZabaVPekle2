@@ -32,11 +32,11 @@ public class InventoryGUI extends EntityComponent {
     private static final int SPACE_BETWEEN_SLOTS = 5;
     private static final int SLOT_SIZE = 24;
     private static final float OFFSET_X = (-SLOT_SIZE * 2) + (-1.5f * SPACE_BETWEEN_SLOTS);
-    private static final float OFFSET_Y = (-SLOT_SIZE * 2) + (-1.5f * SPACE_BETWEEN_SLOTS) - 12f;
+    private static final float OFFSET_Y = (-SLOT_SIZE * 2) + (-1.5f * SPACE_BETWEEN_SLOTS) - 45f;
     private static final float QUANTITY_OFFSET_X = 6f;
     private static final float QUANTITY_OFFSET_Y = -2f;
     
-    private static final float INPUT_ROW_OFFSET_Y = 128f;
+    private static final float INPUT_ROW_OFFSET_Y = 157f;
     private InventoryItem hoveredItem = null;
     private InventorySlotType hoveredSlotType;
     private int hoveredIndex = -1;
@@ -50,33 +50,97 @@ public class InventoryGUI extends EntityComponent {
         hoveredItem = null;
         hoveredIndex = -1;
         hoveredSlotType = InventorySlotType.NONE;
-        
+
+        drawInventorySlots(inventory);
+
+        drawCraftingInputs(owner, inventory);
+
+        drawHintText();
+    }
+
+
+    private static final float HINT_TEXT_OFFSET_X = 0f;
+    private static final float HINT_TEXT_OFFSET_Y = -64f;
+
+    private void drawHintText() {
+        String text;
+
+        if (hoveredItem != null) {
+            text = hoveredItem.name + " x" + hoveredItem.quantity;
+        } else if (type.hintText != null) {
+            text = type.hintText;
+        } else {
+            return;
+        }
+
+        Managers.drawingManager.drawText(
+                new TextDrawingCommand(
+                        text,
+                        owner.x + HINT_TEXT_OFFSET_X,
+                        owner.y + HINT_TEXT_OFFSET_Y
+                )
+        );
+    }
+
+    private void drawCraftingInputs(Entity owner, Inventory inventory) {
+        if (!type.hasInput) {
+            return;
+        }
+
+        // draw crafting text
+        Managers.drawingManager.drawSpriteStatic(
+                new DrawingCommand(
+                        "inventory_0005",
+                        owner.x,
+                        owner.y
+                ),
+                DrawingLayer.GUI
+        );
+
+
+        for (int i = 0; i < Inventory.ITEMS_PER_INVENTORY_ROW; i++) {
+            handleInventorySlot(
+                i * (SLOT_SIZE + SPACE_BETWEEN_SLOTS),
+                owner.y + INPUT_ROW_OFFSET_Y,
+                inventory.getInputItem(i),
+                InventorySlotType.INPUT,
+                i
+            );
+        }
+
+    }
+
+    private void drawInventorySlots(Inventory inventory) {
+        // draw equipment text
+        Managers.drawingManager.drawSpriteStatic(
+                new DrawingCommand(
+                        "inventory_0002",
+                        owner.x,
+                        owner.y
+                ),
+                DrawingLayer.GUI
+        );
+
         for (int i = 0; i < Inventory.INVENTORY_ROWS; i++) {
             for (int j = 0; j < Inventory.ITEMS_PER_INVENTORY_ROW; j++) {
+
+                float x = j * (SLOT_SIZE + SPACE_BETWEEN_SLOTS);
+                float y = (Inventory.INVENTORY_ROWS + 2 - i - 1) * (SLOT_SIZE + SPACE_BETWEEN_SLOTS);
+
+                int slotIndex = ((i*Inventory.ITEMS_PER_INVENTORY_ROW))+j;
+
                 handleInventorySlot(
-                    j * (SLOT_SIZE + SPACE_BETWEEN_SLOTS),
-                    (Inventory.INVENTORY_ROWS - i - 1) * (SLOT_SIZE + SPACE_BETWEEN_SLOTS),
-                    inventory.getItem((i*Inventory.ITEMS_PER_INVENTORY_ROW)+j),
+                    x,
+                    y,
+                    inventory.getItem(slotIndex),
                     InventorySlotType.NORMAL,
-                    (i*Inventory.ITEMS_PER_INVENTORY_ROW)+j
+                    slotIndex
                     );
             }
         }
-        
-        if (type.hasInput) {
-            for (int i = 0; i < Inventory.ITEMS_PER_INVENTORY_ROW; i++) {
-                handleInventorySlot(
-                    i * (SLOT_SIZE + SPACE_BETWEEN_SLOTS),
-                    owner.y + INPUT_ROW_OFFSET_Y,
-                    inventory.getInputItem(i),
-                    InventorySlotType.INPUT,
-                    i
-                );
-            }
-        }
     }
-    
-    
+
+
     @Override
     public void onUpdate(Entity owner) {
         if (!type.hasInput || hoveredSlotType == InventorySlotType.NONE) {
