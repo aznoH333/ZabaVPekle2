@@ -160,7 +160,7 @@ public class EnemyGenerationBase {
         );
     }
     static {
-        possibleAugments.add(new Trait<>(1f, 1f, (entity)->{
+        possibleAugments.add(new Trait<>(0.2f, 1f, (entity)->{
             entity.addNumericStat(FieldName.FireRate, -0.25f);
         }));
 
