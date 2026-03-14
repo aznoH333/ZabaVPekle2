@@ -18,21 +18,7 @@ public class Game extends GameState {
     @Override
     public void initializeState() {
 
-        // Managers.entityManager.addEntity(PlayerFacade.createNewPlayer(0f, 0f));
 
-        
-        
-        Managers.entityManager.addEntity(
-            WorldInteractableFacade.createItemBox(32f, 32f)
-        );
-        
-        Managers.entityManager.addEntity(
-            WorldInteractableFacade.createCraftingStation(-32f, -32f)
-        );
-
-
-        
-        
     }
 
     @Override

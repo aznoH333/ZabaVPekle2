@@ -17,6 +17,7 @@ import com.mygdx.game.facades.world.WorldMovementFacade;
 import com.mygdx.game.playState.inventory.InventoryItem;
 import com.mygdx.game.playState.inventory.InventoryItemType;
 import com.mygdx.game.playState.inventory.InventoryMenuType;
+import com.mygdx.game.utils.types.NumberUtils;
 
 public class WorldInteractableFacade {
     public static Entity createItemDrop(InventoryItem item, float x, float y) {
@@ -51,53 +52,39 @@ public class WorldInteractableFacade {
             .setDrawingLayer(DrawingLayer.ITEMS)
             .addComponent(
                 new Interactable((entity)->{
-                    for (int i = 0; i < 6; i++) {
-                        Managers.entityManager.addEntity(
-                            WorldInteractableFacade.createItemDrop(
-                                new InventoryItem(InventoryItemType.GEAR, Quality.COMMON, 2),
-                                entity.x,
-                                entity.y
-                            )
-                        );
-                        Managers.entityManager.addEntity(
-                                WorldInteractableFacade.createItemDrop(
-                                        new InventoryItem(InventoryItemType.PLATE, Quality.COMMON, 2),
-                                        entity.x,
-                                        entity.y
-                                )
-                        );
 
-                        Managers.entityManager.addEntity(
-                                WorldInteractableFacade.createItemDrop(
-                                        new InventoryItem(InventoryItemType.WIRING, Quality.COMMON, 2),
-                                        entity.x,
-                                        entity.y
-                                )
-                        );
-                        Managers.entityManager.addEntity(
-                                WorldInteractableFacade.createItemDrop(
-                                        new InventoryItem(InventoryItemType.BATTERY, Quality.COMMON, 2),
-                                        entity.x,
-                                        entity.y
-                                )
-                        );
-                        Managers.entityManager.addEntity(
-                                WorldInteractableFacade.createItemDrop(
-                                        new InventoryItem(InventoryItemType.MOTOR, Quality.COMMON, 2),
-                                        entity.x,
-                                        entity.y
-                                )
-                        );
-                        Managers.entityManager.addEntity(
-                                WorldInteractableFacade.createItemDrop(
-                                        new InventoryItem(InventoryItemType.PROCESSOR, Quality.COMMON, 2),
-                                        entity.x,
-                                        entity.y
-                                )
-                        );
+                    int numberOfContents = NumberUtils.randomInt(2, 4);
 
+                    for (int i = 0; i < numberOfContents; i++) {
+                        float rng = NumberUtils.randomFloat(0f, 1f);
 
+                        if (rng < 0.44f) {
+                            Managers.entityManager.addEntity(
+                                    WorldInteractableFacade.createItemDrop(
+                                            new InventoryItem(InventoryItemType.PLATE, Quality.COMMON, NumberUtils.randomInt(1,2)),
+                                            entity.x,
+                                            entity.y
+                                    )
+                            );
+                        }else if (rng < 0.88f) {
+                            Managers.entityManager.addEntity(
+                                    WorldInteractableFacade.createItemDrop(
+                                            new InventoryItem(InventoryItemType.WIRING, Quality.COMMON, NumberUtils.randomInt(1,2)),
+                                            entity.x,
+                                            entity.y
+                                    )
+                            );
+                        }else {
+                            Managers.entityManager.addEntity(
+                                    WorldInteractableFacade.createItemDrop(
+                                            new InventoryItem(InventoryItemType.PROCESSOR, Quality.COMMON, 1),
+                                            entity.x,
+                                            entity.y
+                                    )
+                            );
+                        }
                     }
+
                     entity.commitSudoku();
                     
                     // spawn giblet
@@ -113,7 +100,7 @@ public class WorldInteractableFacade {
             );
     }
     
-    public static Entity createCraftingStation(float x, float y) {
+    public static Entity createRepairStation(float x, float y) {
         return new Entity()
             .setX(x)
             .setY(y)
@@ -124,6 +111,31 @@ public class WorldInteractableFacade {
                 InventoryFacade.openInventoryMenu(InventoryMenuType.REPAIR_STATION, entity);
             }));
     }
+
+    public static Entity createForgingStation(float x, float y) {
+        return new Entity()
+                .setX(x)
+                .setY(y)
+                .setSprite("machines_0001")
+                .setDrawingLayer(DrawingLayer.ITEMS)
+                .setTeam(EntityTeam.NEUTRAL_OBJECT)
+                .addComponent(new Interactable((entity) -> {
+                    InventoryFacade.openInventoryMenu(InventoryMenuType.FORGING_STATION, entity);
+                }));
+    }
+
+    public static Entity createProcessorAssembler(float x, float y) {
+        return new Entity()
+                .setX(x)
+                .setY(y)
+                .setSprite("machines_0001")
+                .setDrawingLayer(DrawingLayer.ITEMS)
+                .setTeam(EntityTeam.NEUTRAL_OBJECT)
+                .addComponent(new Interactable((entity) -> {
+                    InventoryFacade.openInventoryMenu(InventoryMenuType.PROCESSOR_MANUFACTURING, entity);
+                }));
+    }
+
 
     public static Entity createLevelExit(float x, float y) {
         return new Entity()

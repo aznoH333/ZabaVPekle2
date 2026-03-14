@@ -1,7 +1,11 @@
 package com.mygdx.game.playState.inventory;
 
+import com.mygdx.game.Managers;
 import com.mygdx.game.entities.components.gui.EntityRunnable;
 import com.mygdx.game.entities.fields.FieldName;
+import com.mygdx.game.entities.items.Quality;
+import com.mygdx.game.facades.augmentBox.AugmentBoxFacade;
+import com.mygdx.game.facades.inventory.InventoryFacade;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,26 +18,41 @@ public enum InventoryMenuType {
             null,
             null
     ),
-
-    TEMP(
+    FORGING_STATION(
             true,
             true,
-            "Placeholder",
-            null,
-            null
+            "weapon station",
+            Arrays.asList(InventoryItemType.PLATE, InventoryItemType.PLATE, InventoryItemType.PLATE, InventoryItemType.WIRING, InventoryItemType.PROCESSOR),
+            (entity)->{
+                AugmentBoxFacade.openNewBox(Managers.playStateManager.playerReference, Quality.REFINED);
+            }
     ),
 
+
+    PROCESSOR_MANUFACTURING(
+            true,
+            true,
+            "processor manufacturer",
+            Arrays.asList(InventoryItemType.PLATE, InventoryItemType.WIRING, InventoryItemType.WIRING, InventoryItemType.WIRING),
+            (entity)->{
+                InventoryFacade.giveOrDropItem(
+                        new InventoryItem(InventoryItemType.PROCESSOR, Quality.POOR, 1)
+                );
+            }
+    ),
 
 
     REPAIR_STATION(
             true,
             true,
             "repair station",
-            Arrays.asList(InventoryItemType.PLATE, InventoryItemType.PLATE, InventoryItemType.PLATE, InventoryItemType.GEAR, InventoryItemType.WIRING),
+            Arrays.asList(InventoryItemType.PLATE, InventoryItemType.PLATE, InventoryItemType.WIRING, InventoryItemType.PROCESSOR, InventoryItemType.PROCESSOR),
             (entity)->{
                 entity.setNumericStat(FieldName.Health, entity.getNumericStat(FieldName.MaxHealth));
             }
     );
+
+
     
     
     

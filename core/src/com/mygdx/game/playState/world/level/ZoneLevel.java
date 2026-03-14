@@ -2,14 +2,12 @@ package com.mygdx.game.playState.world.level;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.entities.Entity;
-import com.mygdx.game.entities.items.Quality;
 import com.mygdx.game.facades.enemyGeneration.EnemyGeneratorFacade;
 import com.mygdx.game.facades.enemyGeneration.EnemyRoster;
 import com.mygdx.game.facades.entities.WorldInteractableFacade;
 import com.mygdx.game.level.LevelExitDirection;
 import com.mygdx.game.playState.MapCoordinates;
 import com.mygdx.game.playState.world.WorldZone;
-import com.mygdx.game.utils.Trait;
 import com.mygdx.game.utils.TraitPicker;
 import com.mygdx.game.utils.types.NumberUtils;
 
@@ -56,7 +54,16 @@ public class ZoneLevel {
         }
 
         if (type == LevelType.MACHINE_ROOM) {
-            roomContents.add(WorldInteractableFacade.createCraftingStation(-16f, -16f));
+            float rng = NumberUtils.randomFloat(0f, 1f);
+
+            if (rng <= 0.33f) {
+                roomContents.add(WorldInteractableFacade.createRepairStation(-16f, -16f));
+            }else if (rng <= 0.66f) {
+                roomContents.add(WorldInteractableFacade.createProcessorAssembler(-16f, -16f));
+            }else {
+                roomContents.add(WorldInteractableFacade.createForgingStation(-16f, -16f));
+            }
+
         }
 
         if (type == LevelType.SCRAP_ROOM) {
