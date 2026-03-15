@@ -87,13 +87,17 @@ public class ZoneLevel {
             int enemyY;
             boolean isSpawnValid;
 
+
+            enemyX = NumberUtils.randomInt(-roomSize + 2, roomSize - 2) * 32;
+            enemyY = NumberUtils.randomInt(-roomSize + 2, roomSize - 2) * 32;
+
+            /*
             do {
-                enemyX = NumberUtils.randomInt(-roomSize + 1, roomSize - 1) * 32;
-                enemyY = NumberUtils.randomInt(-roomSize + 1, roomSize - 1) * 32;
+
 
                 isSpawnValid = true;
 
-                /* TODO: make this reflect the actual level exits */
+
                 for (LevelExitDirection direction : LevelExitDirection.values()) {
                     if (NumberUtils.distance(
                         direction.x * roomSize * 32f,
@@ -106,7 +110,7 @@ public class ZoneLevel {
                 }
 
 
-            }while (!isSpawnValid);
+            }while (!isSpawnValid);*/
 
 
             roomContents.add(
@@ -163,7 +167,6 @@ public class ZoneLevel {
 
         if (type == LevelType.BOSS ||
                 type == LevelType.MINI_BOSS_ROOM ||
-                type == LevelType.SCRAP_ROOM ||
                 type == LevelType.MACHINE_ROOM) {
             return "hud_map_tiles_0006";
         }

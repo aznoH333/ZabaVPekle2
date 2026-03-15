@@ -1,6 +1,7 @@
 package com.mygdx.game.entities.items;
 
 import com.mygdx.game.Managers;
+import com.mygdx.game.drawing.FontSize;
 import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
@@ -61,7 +62,9 @@ public class Augment extends EntityComponent {
     public void onUpdate(Entity owner) {
         float nextLineY = owner.y + Y_TEXT_OFFSET;
         for (String line : displayText) {
-            Managers.drawingManager.drawText(new TextDrawingCommand(line, owner.x, nextLineY));
+
+
+            Managers.drawingManager.drawText(new TextDrawingCommand(line, owner.x, nextLineY).setSize(FontSize.SMALL));
 
             nextLineY += Y_LINE_OFFSET;
         }

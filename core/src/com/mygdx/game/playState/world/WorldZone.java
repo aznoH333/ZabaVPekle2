@@ -98,7 +98,7 @@ public class WorldZone {
             }
 
             // special room
-            if (NumberUtils.randomChance(0.15f)) {
+            if (NumberUtils.randomChance(0.2f)) {
                 if (NumberUtils.randomChance(0.33f)) {
                     return LevelType.SCRAP_ROOM;
                 }

@@ -40,6 +40,15 @@ public class PlayerBehaviour extends EntityComponent {
     public void onDraw(Entity owner) {
         // set camera
         Managers.drawingManager.setCameraPosition(owner.x, owner.y);
+
+
+        // draw "hud" TEMP
+        Managers.drawingManager.drawText(
+                new TextDrawingCommand("Floor " + Managers.playStateManager.currentZoneIndex,
+                        0f,
+                        165f)
+        );
+
     }
     
     @Override

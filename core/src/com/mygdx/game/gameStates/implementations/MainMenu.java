@@ -46,9 +46,15 @@ public class MainMenu extends GameState {
             owner -> Gdx.app.exit()
         );
 
+
+        // hint text
         Managers.entityManager.addEntity(
-            new Entity()
-                .addComponent(new AttachedLight(1.0f, 1f))
+                GUIFacade.buildFloatingText(
+                        "Controls\nWASD: move\nE: interact\nTab: Inventory",
+                        0f,
+                        -96f,
+                        FontSize.MEDIUM
+                )
         );
 
     }

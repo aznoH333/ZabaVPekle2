@@ -6,8 +6,8 @@ public enum LevelType {
     FILLER(5, 3, 7, null),
     LOOT(4, 0, 0, LevelTheme.SPECIAL_PLACEHOLDER_THEME),
     BOSS(8, 0, 0, null),
-    SCRAP_ROOM(4, 0, 0, LevelTheme.SPECIAL_PLACEHOLDER_THEME),
-    MINI_BOSS_ROOM(7, 0, 0, LevelTheme.SPECIAL_PLACEHOLDER_THEME),
+    SCRAP_ROOM(4, 0, 0, null),
+    MINI_BOSS_ROOM(7, 0, 0, null),
     MACHINE_ROOM(4, 0, 0, LevelTheme.SPECIAL_PLACEHOLDER_THEME),
     ZONE_EXIT(5, 0, 0, LevelTheme.SPECIAL_PLACEHOLDER_THEME);
 

@@ -61,7 +61,7 @@ public class WorldFacade {
 
         Quality lootRoomQuality = getLootQuality(zoneIndex);
         Quality combatRoomDropQuality = Quality.getFromNumeric(lootRoomQuality.numericValue - 1);
-        Quality bossRoomDropQuality = Quality.getFromNumeric(lootRoomQuality.numericValue);
+        Quality bossRoomDropQuality = Quality.getFromNumeric(Math.max(lootRoomQuality.numericValue, 1));
 
 
         return new WorldZoneDefinition(
