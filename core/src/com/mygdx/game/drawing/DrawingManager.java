@@ -22,6 +22,7 @@ import com.mygdx.game.drawing.shaders.LightingShaderHandler;
 import com.mygdx.game.drawing.shaders.ScreenEdgeShaderHandler;
 import com.mygdx.game.drawing.shaders.ScreenEffectShaderHandler;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -64,7 +65,7 @@ public class DrawingManager {
     public final ScreenEffectShaderHandler screenEffectShaderHandler;
     public final ScreenEdgeShaderHandler screenEdgeShaderHandler;
 
-    BitmapFont font;
+    HashMap<FontSize, BitmapFont> fonts = new HashMap<>();
 
     ShaderProgram gameShader;
     ShaderProgram screenShader;
@@ -104,13 +105,17 @@ public class DrawingManager {
         screenEffectShaderHandler = new ScreenEffectShaderHandler(screenShader, gameShader);
         screenEdgeShaderHandler = new ScreenEdgeShaderHandler(gameShader, camera);
         
-        font = loadFont("fonts/3270/3270NerdFont-Regular.ttf");
+        // load fonts
+        for (FontSize font : FontSize.values()) {
+            fonts.put(font, loadFont("fonts/3270/3270NerdFont-Regular.ttf", font.pointSize));
+        }
     }
     
-    private BitmapFont loadFont(String fontPath) {
+    private BitmapFont loadFont(String fontPath, int size) {
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-        parameter.size = 12;
+        // parameter.size = 12;
+        parameter.size = size;
         BitmapFont font = generator.generateFont(parameter);
         
         generator.dispose();
@@ -232,6 +237,8 @@ public class DrawingManager {
 
     private void renderText(TextDrawingCommand command) {
 
+        BitmapFont font = fonts.get(command.fontSize);
+
         font.setColor(command.r, command.b, command.g, command.a);
 
 
@@ -322,7 +329,10 @@ public class DrawingManager {
             entry.getValue().dispose();
         }
 
-        font.dispose();
+
+        for (BitmapFont font : fonts.values()) {
+            font.dispose();
+        }
 
         spriteMap.clear();
         staticBatch.dispose();
@@ -376,9 +386,6 @@ public class DrawingManager {
         );
     }
 
-    public float getTextWidth(String text) {
-        return new GlyphLayout(font, text).width;
-    }
 
 
     

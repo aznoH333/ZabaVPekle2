@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.drawing.FontSize;
 import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
@@ -133,7 +134,8 @@ public class PlayerBehaviour extends EntityComponent {
                 GUIFacade.buildFloatingText(
                         "GAME OVER",
                         0f,
-                        64f
+                        96f,
+                        FontSize.DISPLAY
                 )
         );
 

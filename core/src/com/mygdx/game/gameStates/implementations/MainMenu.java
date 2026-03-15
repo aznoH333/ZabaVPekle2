@@ -2,6 +2,7 @@ package com.mygdx.game.gameStates.implementations;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Managers;
+import com.mygdx.game.drawing.FontSize;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.components.visual.AttachedLight;
 import com.mygdx.game.facades.sceen.GUIFacade;
@@ -21,9 +22,10 @@ public class MainMenu extends GameState {
 
         Managers.entityManager.addEntity(
                 GUIFacade.buildFloatingText(
-                        "VideoGame",
+                        "Robot rougelike game",
                         0f,
-                        64f
+                        96f,
+                        FontSize.DISPLAY
                 )
         );
 

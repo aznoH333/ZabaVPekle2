@@ -2,6 +2,7 @@ package com.mygdx.game.facades.sceen;
 
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.drawing.FontSize;
 import com.mygdx.game.entities.ComponentName;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.components.gui.Button;
@@ -17,13 +18,13 @@ public class GUIFacade {
         Managers.entityManager.addEntity(buildButton(text, x, y, action));
     }
 
-    public static Entity buildFloatingText(String text, float x, float y) {
+    public static Entity buildFloatingText(String text, float x, float y, FontSize size) {
         return new Entity()
                 .makeStatic()
                 .setX(x)
                 .setY(y)
                 .addComponent(
-                        new Text(text, 0f, 3f)
+                        new Text(text, 0f, 3f).setFontSize(size)
                 );
     }
 

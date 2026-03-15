@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.DrawingCommand;
 import com.mygdx.game.drawing.DrawingLayer;
+import com.mygdx.game.drawing.FontSize;
 import com.mygdx.game.drawing.TextDrawingCommand;
 import com.mygdx.game.entities.Entity;
 import com.mygdx.game.entities.EntityComponent;
@@ -99,7 +100,7 @@ public class InventoryGUI extends EntityComponent {
                         text,
                         owner.x + HINT_TEXT_OFFSET_X,
                         owner.y + HINT_TEXT_OFFSET_Y
-                )
+                ).setSize(FontSize.SMALL)
         );
     }
 
@@ -291,8 +292,8 @@ public class InventoryGUI extends EntityComponent {
                 new TextDrawingCommand(
                     item.quantity + "",
                     x + OFFSET_X + QUANTITY_OFFSET_X,
-                    y + OFFSET_Y + QUANTITY_OFFSET_Y // TODO : font sizes
-                )
+                    y + OFFSET_Y + QUANTITY_OFFSET_Y
+                ).setSize(FontSize.SMALL)
             );
         }
     }
