@@ -88,8 +88,8 @@ public class ZoneLevel {
             boolean isSpawnValid;
 
 
-            enemyX = NumberUtils.randomInt(-roomSize + 2, roomSize - 2) * 32;
-            enemyY = NumberUtils.randomInt(-roomSize + 2, roomSize - 2) * 32;
+            enemyX = NumberUtils.randomInt(-roomSize + 3, roomSize - 3) * 32;
+            enemyY = NumberUtils.randomInt(-roomSize + 3, roomSize - 3) * 32;
 
             /*
             do {

@@ -26,10 +26,8 @@ public class AugmentBoxFacade {
 
             int augmentQuality = targetQuality.numericValue;
 
-            if (NumberUtils.randomChance(0.10f)) {
+            if (NumberUtils.randomChance(0.05f)) {
                 augmentQuality++;
-            } else if (NumberUtils.randomChance(0.25f)) {
-                augmentQuality--;
             }
 
             Quality quality = Quality.getFromNumeric(augmentQuality);

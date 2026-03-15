@@ -76,11 +76,11 @@ public class WorldFacade {
     }
 
     private static Quality getLootQuality(int zoneIndex) {
-        if (zoneIndex < 3) {
+        if (zoneIndex <= 2) {
             return Quality.POOR;
-        } else if (zoneIndex < 6) {
+        }else if (zoneIndex <= 4) {
             return Quality.COMMON;
-        }else if (zoneIndex < 10) {
+        }else if (zoneIndex <= 7) {
             return Quality.REFINED;
         }
 

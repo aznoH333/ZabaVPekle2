@@ -78,7 +78,7 @@ public class EnemyGenerationBase {
 
 
     private void generateSurvival() {
-        float totalHealthBudget = placeDifficulty + (survival * 2f);
+        float totalHealthBudget = placeDifficulty * (survival * 2f);
 
         health = 1f;
         float survivalAbilityCost = 10f;
@@ -185,7 +185,7 @@ public class EnemyGenerationBase {
 
 
     private void generateRangedAbilities() {
-        float totalRangedBudget = (rangePower * placeDifficulty * 0.25f);
+        float totalRangedBudget = (placeDifficulty * 0.5f) + (rangePower * placeDifficulty * 0.5f);
 
         if (archetype.ability == EnemyArchetypeAbility.INCREASED_WEAPON_BUDGET) {
             totalRangedBudget += 10f;
