@@ -17,6 +17,16 @@ public class GUIFacade {
         Managers.entityManager.addEntity(buildButton(text, x, y, action));
     }
 
+    public static Entity buildFloatingText(String text, float x, float y) {
+        return new Entity()
+                .makeStatic()
+                .setX(x)
+                .setY(y)
+                .addComponent(
+                        new Text(text, 0f, 3f)
+                );
+    }
+
     public static Entity buildButton(String text, float x, float y, EntityRunnable action) {
         return new Entity()
             .makeStatic()

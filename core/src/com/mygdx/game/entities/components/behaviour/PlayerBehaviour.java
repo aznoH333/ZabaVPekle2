@@ -14,6 +14,8 @@ import com.mygdx.game.entities.components.behaviour.gun.Gun;
 import com.mygdx.game.entities.components.control.Interactable;
 import com.mygdx.game.entities.fields.FieldName;
 import com.mygdx.game.facades.inventory.InventoryFacade;
+import com.mygdx.game.facades.sceen.GUIFacade;
+import com.mygdx.game.facades.world.WorldFacade;
 import com.mygdx.game.input.InputManager;
 import com.mygdx.game.utils.types.NumberUtils;
 
@@ -123,5 +125,34 @@ public class PlayerBehaviour extends EntityComponent {
         owner.initializeField(FieldName.SuspendMovement, false);
     }
 
+
+    @Override
+    public void onSudoku(Entity owner) {
+
+        Managers.entityManager.addEntity(
+                GUIFacade.buildFloatingText(
+                        "GAME OVER",
+                        0f,
+                        64f
+                )
+        );
+
+        GUIFacade.createButton(
+                "Retry",
+                0f,
+                25f,
+                e -> {
+                    WorldFacade.initializeNewGame();
+                    // Managers.gameStateManager.switchState("game");
+                }
+        );
+
+        GUIFacade.createButton(
+                "Quit game",
+                0f,
+                -25f,
+                e -> Gdx.app.exit()
+        );
+    }
 
 }

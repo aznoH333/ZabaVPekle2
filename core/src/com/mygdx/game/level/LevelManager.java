@@ -213,7 +213,7 @@ public class LevelManager {
         checkIfDoorsShouldOpen();
     }
 
-    private void openDoors() {
+    public void openDoors() {
         doorsOpen = true;
         
         for (Map.Entry<LevelExitDirection, MapCoordinates> exit: currentLevelExits.entrySet()) {

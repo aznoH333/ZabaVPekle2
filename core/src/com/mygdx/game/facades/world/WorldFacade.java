@@ -27,6 +27,7 @@ public class WorldFacade {
         Managers.playStateManager.goToNextZone();
         Managers.playStateManager.playerReference = GameEntityCreatorFacade.createNewPlayer(0f, 0f);
         WorldMovementFacade.teleportPlayerToZone(new MapCoordinates(0,0), 0f, 0f);
+        Managers.levelManager.openDoors();
     }
     
     

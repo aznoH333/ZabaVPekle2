@@ -19,6 +19,14 @@ public class MainMenu extends GameState {
     public void initializeState() {
 
 
+        Managers.entityManager.addEntity(
+                GUIFacade.buildFloatingText(
+                        "VideoGame",
+                        0f,
+                        64f
+                )
+        );
+
         GUIFacade.createButton(
             "Play game",
             0f,
