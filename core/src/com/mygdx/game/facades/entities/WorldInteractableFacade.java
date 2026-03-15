@@ -116,7 +116,7 @@ public class WorldInteractableFacade {
         return new Entity()
                 .setX(x)
                 .setY(y)
-                .setSprite("machines_0001")
+                .setSprite("machines_0004")
                 .setDrawingLayer(DrawingLayer.ITEMS)
                 .setTeam(EntityTeam.NEUTRAL_OBJECT)
                 .addComponent(new Interactable((entity) -> {
@@ -128,7 +128,7 @@ public class WorldInteractableFacade {
         return new Entity()
                 .setX(x)
                 .setY(y)
-                .setSprite("machines_0001")
+                .setSprite("machines_0002")
                 .setDrawingLayer(DrawingLayer.ITEMS)
                 .setTeam(EntityTeam.NEUTRAL_OBJECT)
                 .addComponent(new Interactable((entity) -> {

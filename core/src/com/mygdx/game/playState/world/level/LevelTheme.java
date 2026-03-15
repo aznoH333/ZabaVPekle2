@@ -10,8 +10,8 @@ public class LevelTheme {
 
     public final static LevelTheme SPECIAL_PLACEHOLDER_THEME = new LevelTheme(
             new Color(0.2f, 0.2f, 0.2f, 1f),
-            new Color(0.666f, 0.555f, 0.0f, 1f),
-            new Color(0.666f, 0.555f, 0.0f, 1f),
+            new Color(0.35f, 0.35f, 0.35f, 1f),
+            new Color(0.25f, 0.25f, 0.25f, 1f),
             new Color(0.4f, 0.4f, 0.4f, 1f)
     );
     
