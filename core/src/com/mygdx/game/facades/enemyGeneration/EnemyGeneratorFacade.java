@@ -76,6 +76,8 @@ public class EnemyGeneratorFacade {
         enemy.addNumericStat(FieldName.FireRateMultiplier, -1f);
 
 
+        enemy.knockBackMultiplier = 0.25f;
+
         // add healthbar
         enemy.addChild(
                 GameEntityCreatorFacade.createEnemyHealthBarHudElement(enemy)
