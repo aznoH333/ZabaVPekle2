@@ -133,6 +133,11 @@ public class EnemyGenerationBase {
     private void generateSpeed() {
         float totalSpeedBudget = speed * 10;
         movementSpeed = 0.25f;
+
+        if (archetype.ability == EnemyArchetypeAbility.STATIC) {
+            movementSpeed = 0f;
+        }
+
         float movementAbilityCost = 10f;
 
         if (archetype.ability == EnemyArchetypeAbility.INCREASED_MOVEMENT_ABILITY_BUDGET) {
