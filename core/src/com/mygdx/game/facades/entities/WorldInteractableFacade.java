@@ -61,7 +61,7 @@ public class WorldInteractableFacade {
                         if (rng < 0.44f) {
                             Managers.entityManager.addEntity(
                                     WorldInteractableFacade.createItemDrop(
-                                            new InventoryItem(InventoryItemType.PLATE, Quality.COMMON, NumberUtils.randomInt(1,2)),
+                                            new InventoryItem(InventoryItemType.PLATE, Quality.POOR, NumberUtils.randomInt(1,2)),
                                             entity.x,
                                             entity.y
                                     )
@@ -69,7 +69,7 @@ public class WorldInteractableFacade {
                         }else if (rng < 0.88f) {
                             Managers.entityManager.addEntity(
                                     WorldInteractableFacade.createItemDrop(
-                                            new InventoryItem(InventoryItemType.WIRING, Quality.COMMON, NumberUtils.randomInt(1,2)),
+                                            new InventoryItem(InventoryItemType.WIRING, Quality.POOR, NumberUtils.randomInt(1,2)),
                                             entity.x,
                                             entity.y
                                     )
@@ -77,7 +77,7 @@ public class WorldInteractableFacade {
                         }else {
                             Managers.entityManager.addEntity(
                                     WorldInteractableFacade.createItemDrop(
-                                            new InventoryItem(InventoryItemType.PROCESSOR, Quality.COMMON, 1),
+                                            new InventoryItem(InventoryItemType.PROCESSOR, Quality.POOR, 1),
                                             entity.x,
                                             entity.y
                                     )
@@ -141,7 +141,7 @@ public class WorldInteractableFacade {
         return new Entity()
                 .setX(x)
                 .setY(y)
-                .setSprite("machines_0002")
+                .setSprite("level_exit")
                 .setDrawingLayer(DrawingLayer.ITEMS)
                 .setTeam(EntityTeam.NEUTRAL_OBJECT)
                 .addComponent(new Interactable((entity) -> {
