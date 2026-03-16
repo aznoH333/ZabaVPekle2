@@ -17,7 +17,8 @@ public class PlayStateManager {
     /// Number of ticks since game start
     public long gameTime = 0;
     public int currentZoneIndex = 0;
-    
+    public int enemiesKilled = 0;
+
     public static PlayStateManager getInstance() {
         if (instance == null) {
             instance = new PlayStateManager();
@@ -55,6 +56,7 @@ public class PlayStateManager {
         this.currentZone = null;
         this.playerMapCoordinates = null;
         this.currentZoneIndex = 0;
+        this.enemiesKilled = 0;
     }
 
 }

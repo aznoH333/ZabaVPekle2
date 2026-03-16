@@ -148,6 +148,26 @@ public class PlayerBehaviour extends EntityComponent {
                 )
         );
 
+        Managers.entityManager.addEntity(
+                GUIFacade.buildFloatingText(
+                        "floor " + Managers.playStateManager.currentZoneIndex,
+                        0f,
+                        -60f,
+                        FontSize.MEDIUM
+                )
+        );
+
+        Managers.entityManager.addEntity(
+                GUIFacade.buildFloatingText(
+                        "enemies killed " + Managers.playStateManager.enemiesKilled,
+                        0f,
+                        -75f,
+                        FontSize.MEDIUM
+                )
+        );
+
+
+
         GUIFacade.createButton(
                 "Retry",
                 0f,

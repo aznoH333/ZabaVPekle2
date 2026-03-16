@@ -3,8 +3,6 @@ package com.mygdx.game.gameStates.implementations;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.FontSize;
-import com.mygdx.game.entities.Entity;
-import com.mygdx.game.entities.components.visual.AttachedLight;
 import com.mygdx.game.facades.sceen.GUIFacade;
 import com.mygdx.game.facades.world.WorldFacade;
 import com.mygdx.game.gameStates.GameState;
@@ -50,7 +48,7 @@ public class MainMenu extends GameState {
         // hint text
         Managers.entityManager.addEntity(
                 GUIFacade.buildFloatingText(
-                        "Controls\nWASD: move\nE: interact\nTab: Inventory",
+                        "Controls\nWASD: move\nE: interact\nTab: Inventory\nSpace: Dash",
                         0f,
                         -96f,
                         FontSize.MEDIUM

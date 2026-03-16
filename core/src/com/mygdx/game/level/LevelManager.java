@@ -211,6 +211,7 @@ public class LevelManager {
 
     public void killedEnemy() {
         checkIfDoorsShouldOpen();
+        Managers.playStateManager.enemiesKilled++;
     }
 
     public void openDoors() {
