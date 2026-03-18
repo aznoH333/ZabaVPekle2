@@ -22,7 +22,6 @@ import com.mygdx.game.drawing.shaders.LightingShaderHandler;
 import com.mygdx.game.drawing.shaders.ScreenEdgeShaderHandler;
 import com.mygdx.game.drawing.shaders.ScreenEffectShaderHandler;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -150,7 +149,7 @@ public class DrawingManager {
 
         FileHandle handle = Gdx.files.internal(path);
         if (!handle.exists()) {
-            System.exit(1);
+            //System.exit(1);
         }
         for (FileHandle f : handle.list()) {
             if (!f.isDirectory()) {
@@ -177,7 +176,7 @@ public class DrawingManager {
 
         if (sprite == null) {
             System.out.println("Requested sprite with name " + spriteName + " but it was not found");
-            System.exit(-1); // c ah crash
+            // System.exit(-1); // c ah crash
         }
 
         float w = sprite.getWidth() / 2.0f;
