@@ -15,5 +15,9 @@ public class ShotGunAugment extends StatModifierAugmentInstance {
         super.augmentMap.put(FieldName.ProjectilesPerShot, 3f + quality.numericValue);
         super.augmentMap.put(FieldName.ProjectileSpread, 0.24f);
         super.augmentMap.put(FieldName.ProjectileSpreadMultiplier, 0.05f);
+
+        super.equipCall = (owner) -> {
+            owner.setField(FieldName.ProjectileSprite, "bullets_0005");
+        };
     }
 }

@@ -13,5 +13,9 @@ public class MachineGunAugment extends StatModifierAugmentInstance {
         super.augmentMap.put(FieldName.DamageMultiplier, -(0.20f - (0.04f * quality.numericValue)));
         super.augmentMap.put(FieldName.ProjectileSpread, 0.24f - (0.02f * quality.numericValue));
         super.augmentMap.put(FieldName.ProjectileSpreadMultiplier, 0.05f);
+
+        super.equipCall = (owner) -> {
+            owner.setField(FieldName.ProjectileSprite, "bullets_0005");
+        };
     }
 }

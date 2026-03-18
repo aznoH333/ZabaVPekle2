@@ -17,6 +17,7 @@ public class Shrapnel extends EntityComponent {
 
         super.effectDescription = "shrapnel";
         super.potency = EffectPotency.MODERATE;
+        super.componentCountLimit = 1;
     }
 
     @Override

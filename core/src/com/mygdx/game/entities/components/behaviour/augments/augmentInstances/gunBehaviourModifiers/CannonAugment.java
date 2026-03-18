@@ -15,6 +15,8 @@ public class CannonAugment extends StatModifierAugmentInstance {
         super.augmentMap.put(FieldName.FireRate, 2f + (6 - quality.numericValue));
         super.augmentMap.put(FieldName.ProjectileSpeed, 0.10f);
 
-
+        super.equipCall = (owner) -> {
+            owner.setField(FieldName.ProjectileSprite, "bullets_0007");
+        };
     }
 }

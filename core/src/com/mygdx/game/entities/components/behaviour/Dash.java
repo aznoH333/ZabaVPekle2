@@ -66,7 +66,7 @@ public class Dash extends EntityComponent {
             return;
         }
 
-        owner.addComponent(new SpawnFadeTrail(3, 10));
+        owner.addComponent(new SpawnFadeTrail(3, 2));
     }
 
     private void removeFadeTrail() {

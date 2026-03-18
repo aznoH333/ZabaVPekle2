@@ -33,16 +33,17 @@ public class AugmentGenerationTable {
         // poor
         addAugment(Quality.POOR, 0.10f, new SpinShotAugment());
 
+
         // common
         addAugment(Quality.COMMON, 0.05f, new SpinShotAugment());
         addAugment(Quality.COMMON, 0.05f, new DoubleHank());
         addAugment(Quality.COMMON, 0.05f, new TripleHank());
 
+
         // refined
         addAugment(Quality.REFINED, 0.1f, new DoubleHank());
         addAugment(Quality.REFINED, 0.1f, new TripleHank());
         addAugment(Quality.REFINED, 0.1f, new HomingShotAugment());
-        addAugment(Quality.REFINED, 0.1f, new WallBounceShotAugment());
 
         // eite
         addAugment(Quality.ELITE, 0.1f, new DoubleHank());
@@ -50,7 +51,6 @@ public class AugmentGenerationTable {
         addAugment(Quality.ELITE, 0.1f, new PentaHank());
         addAugment(Quality.ELITE, 0.1f, new OctoHank());
         addAugment(Quality.ELITE, 0.1f, new HomingShotAugment());
-        addAugment(Quality.ELITE, 0.1f, new WallBounceShotAugment());
 
         // divine
         addAugment(Quality.DIVINE, 0.1f, new DoubleHank());
@@ -58,7 +58,6 @@ public class AugmentGenerationTable {
         addAugment(Quality.DIVINE, 0.1f, new PentaHank());
         addAugment(Quality.DIVINE, 0.1f, new OctoHank());
         addAugment(Quality.DIVINE, 0.1f, new HomingShotAugment());
-        addAugment(Quality.DIVINE, 0.1f, new WallBounceShotAugment());
     }
 
 
@@ -78,8 +77,9 @@ public class AugmentGenerationTable {
         target.add(new AugmentGenerationSpecifier(0.1f, new CannonAugment(quality)));
 
         // universal modifiers
-        target.add(new AugmentGenerationSpecifier(0.05f, new ShrapnelShotAugment(quality)));
+        target.add(new AugmentGenerationSpecifier(0.01f * quality.rarityAdjustedNumericValue, new ShrapnelShotAugment(quality)));
         target.add(new AugmentGenerationSpecifier(0.07f, new SineTravelShotAugment()));
+        target.add(new AugmentGenerationSpecifier(0.01f * quality.rarityAdjustedNumericValue, new WallBounceShotAugment()));
     }
 
     private static void addAugment(Quality targetQuality, float chance, EntityComponent component) {

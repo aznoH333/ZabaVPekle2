@@ -232,7 +232,7 @@ public class Gun extends EntityComponent {
         // add default gun values
         addBulletOrigin(new BulletOrigin(0f, true).setOverrideSprite(null));
         
-        addBulletComponent(new SpawnFadeTrail(1, 10));
+        addBulletComponent(new SpawnFadeTrail(3, 1));
     }
 
     public void addBulletComponent(EntityComponent component) {
