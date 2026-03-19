@@ -1,3 +1,4 @@
+
 #ifdef GL_ES
     precision mediump float;
 #endif
@@ -62,11 +63,7 @@ float calculateLightStrength(Light light, vec2 position) {
 float getLightValueForPosition(vec2 position) {
     float heighestValue = 0.0;
 
-    for (int i = 0; i < MAX_LIGHTS; i++) {
-
-        if (i >= usedLights) {
-            break;
-        }
+    for (int i = 0; i < usedLights; i++) {
         Light light = Light(
         vec2(
         lights[i * LIGHT_COMPONENT_COUNT],

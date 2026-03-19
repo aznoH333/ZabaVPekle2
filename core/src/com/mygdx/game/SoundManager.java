@@ -23,7 +23,7 @@ public class SoundManager {
     private HashMap<String, Sound> soundMap = new HashMap<>();
 
     private SoundManager() {
-        // loadSoundFiles();
+        loadSoundFiles();
     }
 
 
