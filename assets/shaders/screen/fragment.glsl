@@ -1,4 +1,3 @@
-
 #ifdef GL_ES
     precision mediump float;
 #endif
@@ -6,7 +5,11 @@
 varying vec4 v_color;
 varying vec2 v_texCoords;
 uniform sampler2D u_texture;
-uniform mat4 u_projTrans;
+
+#ifndef GL_ES
+    // thanks gl_es very cool
+    uniform mat4 u_projTrans;
+#endif
 
 
 uniform float loopedTimeValue;

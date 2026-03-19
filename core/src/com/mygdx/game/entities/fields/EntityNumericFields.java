@@ -1,5 +1,6 @@
 package com.mygdx.game.entities.fields;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -9,10 +10,12 @@ public class EntityNumericFields {
     private final HashMap<FieldName, Float> fields = new HashMap<>();
 
     public EntityNumericFields() {
-        List<FieldName> fieldsToInitialize = Arrays
-            .stream(FieldName.values())
-            .filter((it) -> it.defaultValue != null)
-            .toList();
+        List<FieldName> fieldsToInitialize = new ArrayList<>();
+        for (FieldName it : FieldName.values()) {
+            if (it.defaultValue != null) {
+                fieldsToInitialize.add(it);
+            }
+        }
 
         for (FieldName fieldName : fieldsToInitialize) {
             setField(fieldName, fieldName.defaultValue);

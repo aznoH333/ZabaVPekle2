@@ -12,7 +12,7 @@ public class FileUtils {
 
         FileHandle handle = Gdx.files.internal(path);
         if (!handle.exists()) {
-            System.exit(1);
+            throw new RuntimeException("Could not get files in folder. Folder " + path + " not found");
         }
         for (FileHandle f : handle.list()) {
             if (!f.isDirectory()) {

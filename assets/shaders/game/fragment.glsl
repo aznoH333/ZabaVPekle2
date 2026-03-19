@@ -1,4 +1,3 @@
-
 #ifdef GL_ES
     precision mediump float;
 #endif
@@ -6,8 +5,11 @@
 varying vec4 v_color;
 varying vec2 v_texCoords;
 uniform sampler2D u_texture;
-uniform mat4 u_projTrans;
 
+#ifndef GL_ES
+    // thanks gl_es very cool
+    uniform mat4 u_projTrans;
+#endif
 
 uniform float loopedTimeValue;
 /** a value representing the screen width / height */
@@ -60,7 +62,11 @@ float calculateLightStrength(Light light, vec2 position) {
 float getLightValueForPosition(vec2 position) {
     float heighestValue = 0.0;
 
-    for (int i = 0; i < usedLights; i++) {
+    for (int i = 0; i < MAX_LIGHTS; i++) {
+
+        if (i >= usedLights) {
+            break;
+        }
         Light light = Light(
         vec2(
         lights[i * LIGHT_COMPONENT_COUNT],

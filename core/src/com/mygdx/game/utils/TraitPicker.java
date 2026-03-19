@@ -26,7 +26,13 @@ public class TraitPicker<T> {
     }
 
     private List<Trait<T>> getTraitsInBudget() {
-        return traits.stream().filter((it) -> it.cost <= this.budget && (it.budgetCeiling == 0f || it.budgetCeiling > this.budget)).toList();
+        List<Trait<T>> list = new ArrayList<>();
+        for (Trait<T> it : traits) {
+            if (it.cost <= this.budget && (it.budgetCeiling == 0f || it.budgetCeiling > this.budget)) {
+                list.add(it);
+            }
+        }
+        return list;
     }
 
     /**

@@ -1,8 +1,6 @@
 package com.mygdx.game.drawing;
 
 
-import java.awt.*;
-
 public class TextDrawingCommand {
     public String text;
     public float x;
