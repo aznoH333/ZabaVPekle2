@@ -49,8 +49,8 @@ public class GameEntityCreatorFacade {
                 .setNumericStat(FieldName.ProjectileSpeed, 0.75f)
                 .setNumericStat(FieldName.FireRate, 25f)
                 .setNumericStat(FieldName.ProjectileDamage, 2f)
-                .setNumericStat(FieldName.Health, 6f)
-                .setNumericStat(FieldName.MaxHealth, 6f)
+                .setNumericStat(FieldName.Health, 10f)
+                .setNumericStat(FieldName.MaxHealth, 10f)
                 .setField(FieldName.ProjectileColor, new Color(0.33333f, 0.66666f, 1f, 1f))
                 .setField(FieldName.ProjectileSprite, "bullets_0006")
 

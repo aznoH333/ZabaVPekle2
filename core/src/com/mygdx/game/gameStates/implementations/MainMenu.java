@@ -55,6 +55,16 @@ public class MainMenu extends GameState {
                 )
         );
 
+        // Credits
+        Managers.entityManager.addEntity(
+                GUIFacade.buildFloatingText(
+                        "Made by aznoH333",
+                        0f,
+                        150f,
+                        FontSize.SMALL
+                )
+        );
+
     }
 
     @Override
