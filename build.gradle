@@ -1,5 +1,5 @@
 buildscript {
-    
+
 
     repositories {
         mavenLocal()
@@ -9,9 +9,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'org.docstr:gwt-gradle-plugin:1.1.29'
-        classpath 'org.gretty:gretty:3.1.0'
-        
+
 
     }
 }
@@ -22,7 +20,7 @@ allprojects {
     version = '1.0'
     ext {
         appName = "ZabaVPekle2"
-        gdxVersion = '1.12.1'
+        gdxVersion = '1.14.0'
         roboVMVersion = '2.3.20'
         box2DLightsVersion = '1.5'
         ashleyVersion = '1.7.4'
@@ -49,28 +47,9 @@ project(":desktop") {
         implementation project(":core")
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+        api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx-controllers:gdx-controllers-desktop:$gdxControllersVersion"
-        
-    }
-}
 
-project(":html") {
-    apply plugin: "java-library"
-    apply plugin: "gwt"
-    apply plugin: "war"
-    apply plugin: "org.gretty"
-
-
-    dependencies {
-        implementation project(":core")
-        api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
-        api "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
-        api "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
-        api "com.google.jsinterop:jsinterop-annotations:2.0.2:sources"
-        api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion:sources"
-        api "com.badlogicgames.gdx-controllers:gdx-controllers-gwt:$gdxControllersVersion"
-        api "com.badlogicgames.gdx-controllers:gdx-controllers-gwt:$gdxControllersVersion:sources"
-        
     }
 }
 
@@ -80,7 +59,8 @@ project(":core") {
 
     dependencies {
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
+        api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
-        
+
     }
 }
