@@ -18,9 +18,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.Managers;
 import com.mygdx.game.drawing.shaders.LightingShaderHandler;
 import com.mygdx.game.drawing.shaders.ScreenEdgeShaderHandler;
 import com.mygdx.game.drawing.shaders.ScreenEffectShaderHandler;
+import com.mygdx.game.utils.types.FileUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -103,7 +105,10 @@ public class DrawingManager {
         lightingShaderHandler = new LightingShaderHandler(gameShader, camera);
         screenEffectShaderHandler = new ScreenEffectShaderHandler(screenShader, gameShader);
         screenEdgeShaderHandler = new ScreenEdgeShaderHandler(gameShader, camera);
-        
+
+        // loadSpritesInDirectory("assets/sprites");
+        loadBakedSprites();
+
         // load fonts
         for (FontSize font : FontSize.values()) {
             fonts.put(font, loadFont("fonts/3270/3270NerdFont-Regular.ttf", font.pointSize));
@@ -111,7 +116,7 @@ public class DrawingManager {
     }
     
     private BitmapFont loadFont(String fontPath, int size) {
-        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(fontPath));
+        FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.classpath(fontPath));
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
         parameter.size = 12;
         parameter.size = size;
@@ -146,12 +151,220 @@ public class DrawingManager {
     }
 
 
+
+    private final static String[] bakedSprites = {
+            "sprites/v1/floor_tile.png",
+            "sprites/v1/brick_wall.png",
+            "sprites/v1/entities/bullets/bullet.png",
+            "sprites/v1/entities/bullets/fire_ball.png",
+            "sprites/v1/entities/body_parts/hats/hats_11.png",
+            "sprites/v1/entities/body_parts/hats/hats_6.png",
+            "sprites/v1/entities/body_parts/hats/hats_7.png",
+            "sprites/v1/entities/body_parts/hats/hats_10.png",
+            "sprites/v1/entities/body_parts/hats/hats_5.png",
+            "sprites/v1/entities/body_parts/hats/hats_4.png",
+            "sprites/v1/entities/body_parts/hats/hats_1.png",
+            "sprites/v1/entities/body_parts/hats/hats_3.png",
+            "sprites/v1/entities/body_parts/hats/hats_2.png",
+            "sprites/v1/entities/body_parts/hats/hats_9.png",
+            "sprites/v1/entities/body_parts/hats/hats_8.png",
+            "sprites/v1/entities/body_parts/legs/legs_9.png",
+            "sprites/v1/entities/body_parts/legs/legs_8.png",
+            "sprites/v1/entities/body_parts/legs/legs_5.png",
+            "sprites/v1/entities/body_parts/legs/legs_4.png",
+            "sprites/v1/entities/body_parts/legs/legs_6.png",
+            "sprites/v1/entities/body_parts/legs/legs_7.png",
+            "sprites/v1/entities/body_parts/legs/legs_3.png",
+            "sprites/v1/entities/body_parts/legs/legs_2.png",
+            "sprites/v1/entities/body_parts/legs/legs_1.png",
+            "sprites/v1/entities/body_parts/hands/hands_0002.png",
+            "sprites/v1/entities/enemy/enemy_8.png",
+            "sprites/v1/entities/enemy/enemy_9.png",
+            "sprites/v1/entities/enemy/enemy_2.png",
+            "sprites/v1/entities/enemy/enemy_3.png",
+            "sprites/v1/entities/enemy/enemy_1.png",
+            "sprites/v1/entities/enemy/enemy_4.png",
+            "sprites/v1/entities/enemy/enemy_5.png",
+            "sprites/v1/entities/enemy/enemy_7.png",
+            "sprites/v1/entities/enemy/enemy_6.png",
+            "sprites/v1/visualEffects/blood/blood_3.png",
+            "sprites/v1/visualEffects/blood/blood_big_3.png",
+            "sprites/v1/visualEffects/blood/blood_big_2.png",
+            "sprites/v1/visualEffects/blood/blood_2.png",
+            "sprites/v1/visualEffects/blood/blood_big_1.png",
+            "sprites/v1/visualEffects/blood/blood_1.png",
+            "sprites/v1/visualEffects/blood/blood_5.png",
+            "sprites/v1/visualEffects/blood/blood_4.png",
+            "sprites/v1/visualEffects/blood/blood_6.png",
+            "sprites/v1/visualEffects/blood/blood_7.png",
+            "sprites/v1/visualEffects/blood/giblet_2.png",
+            "sprites/v1/visualEffects/blood/giblet_3.png",
+            "sprites/v1/visualEffects/blood/giblet_1.png",
+            "sprites/v1/visualEffects/blood/blood_8.png",
+            "sprites/v1/visualEffects/blood/giblet_4.png",
+            "sprites/v1/visualEffects/blood/giblet_5.png",
+            "sprites/v1/visualEffects/blood/giblet_6.png",
+            "sprites/v1/visualEffects/spawner/enemy_spawner_0001.png",
+            "sprites/v1/visualEffects/spawner/enemy_spawner_0002.png",
+            "sprites/v1/visualEffects/fire/fire_particle_0004.png",
+            "sprites/v1/visualEffects/fire/fire_particle_0001.png",
+            "sprites/v1/visualEffects/fire/fire_particle_0002.png",
+            "sprites/v1/visualEffects/fire/fire_particle_0003.png",
+            "sprites/v2/world/bricks/world_0005.png",
+            "sprites/v2/world/bricks/world_0011.png",
+            "sprites/v2/world/bricks/world_0010.png",
+            "sprites/v2/world/bricks/world_0004.png",
+            "sprites/v2/world/bricks/world_0012.png",
+            "sprites/v2/world/bricks/world_0006.png",
+            "sprites/v2/world/bricks/world_0007.png",
+            "sprites/v2/world/bricks/world_0013.png",
+            "sprites/v2/world/bricks/world_0017.png",
+            "sprites/v2/world/bricks/world_0003.png",
+            "sprites/v2/world/bricks/world_0002.png",
+            "sprites/v2/world/bricks/world_0016.png",
+            "sprites/v2/world/bricks/world_0014.png",
+            "sprites/v2/world/bricks/world_0015.png",
+            "sprites/v2/world/bricks/world_0001.png",
+            "sprites/v2/world/bricks/world_0018.png",
+            "sprites/v2/world/bricks/world_0024.png",
+            "sprites/v2/world/bricks/world_0025.png",
+            "sprites/v2/world/bricks/world_0019.png",
+            "sprites/v2/world/bricks/world_0026.png",
+            "sprites/v2/world/bricks/world_0022.png",
+            "sprites/v2/world/bricks/world_0023.png",
+            "sprites/v2/world/bricks/world_0021.png",
+            "sprites/v2/world/bricks/world_0009.png",
+            "sprites/v2/world/bricks/world_0008.png",
+            "sprites/v2/world/bricks/world_0020.png",
+            "sprites/v2/map/map_tiles_0001.png",
+            "sprites/v2/map/map_tiles_0002.png",
+            "sprites/v2/gui/health/hud_health_0001.png",
+            "sprites/v2/gui/health/hud_health_0002.png",
+            "sprites/v2/gui/health/pixel.png",
+            "sprites/v2/gui/map/hud_map_tiles_0001.png",
+            "sprites/v2/gui/map/hud_map_tiles_0002.png",
+            "sprites/v2/gui/map/hud_map_tiles_0003.png",
+            "sprites/v2/gui/map/hud_map_tiles_0006.png",
+            "sprites/v2/gui/map/hud_map_tiles_0004.png",
+            "sprites/v2/gui/map/hud_map_tiles_0005.png",
+            "sprites/v2/gui/map/hud_map_0002.png",
+            "sprites/v2/gui/map/hud_map_0001.png",
+            "sprites/v2/gui/inventory/inventory_0002.png",
+            "sprites/v2/gui/inventory/inventory_0003.png",
+            "sprites/v2/gui/inventory/inventory_0001.png",
+            "sprites/v2/gui/inventory/inventory_0004.png",
+            "sprites/v2/gui/inventory/inventory_0005.png",
+            "sprites/v2/gui/inventory/inventory_items_0003.png",
+            "sprites/v2/gui/inventory/inventory_slot_0004.png",
+            "sprites/v2/gui/inventory/inventory_items_0002.png",
+            "sprites/v2/gui/inventory/inventory_items_0001.png",
+            "sprites/v2/gui/inventory/inventory_items_0005.png",
+            "sprites/v2/gui/inventory/inventory_slot_0002.png",
+            "sprites/v2/gui/inventory/inventory_slot_0003.png",
+            "sprites/v2/gui/inventory/inventory_items_0004.png",
+            "sprites/v2/gui/inventory/inventory_items_0006.png",
+            "sprites/v2/gui/inventory/inventory_slot_0001.png",
+            "sprites/v2/gui/generic/button.png",
+            "sprites/v2/gui/healthbar/boss_healthbar_header.png",
+            "sprites/v2/gui/healthbar/boss_healthbar_segment_0001.png",
+            "sprites/v2/gui/healthbar/boss_healthbar_segment_0002.png",
+            "sprites/v2/entities/enemy/body_medium/enemy_body_4.png",
+            "sprites/v2/entities/enemy/body_medium/enemy_body_5.png",
+            "sprites/v2/entities/enemy/body_medium/enemy_body_7.png",
+            "sprites/v2/entities/enemy/body_medium/enemy_body_6.png",
+            "sprites/v2/entities/enemy/body_medium/enemy_body_2.png",
+            "sprites/v2/entities/enemy/body_medium/enemy_body_3.png",
+            "sprites/v2/entities/enemy/body_medium/enemy_body_1.png",
+            "sprites/v2/entities/enemy/heads_small/small_enemy_heads_8.png",
+            "sprites/v2/entities/enemy/heads_small/small_enemy_heads_9.png",
+            "sprites/v2/entities/enemy/heads_small/small_enemy_heads_4.png",
+            "sprites/v2/entities/enemy/heads_small/small_enemy_heads_5.png",
+            "sprites/v2/entities/enemy/heads_small/small_enemy_heads_7.png",
+            "sprites/v2/entities/enemy/heads_small/small_enemy_heads_6.png",
+            "sprites/v2/entities/enemy/heads_small/small_enemy_heads_2.png",
+            "sprites/v2/entities/enemy/heads_small/small_enemy_heads_3.png",
+            "sprites/v2/entities/enemy/heads_small/small_enemy_heads_1.png",
+            "sprites/v2/entities/neutral/augments/augments_0001.png",
+            "sprites/v2/entities/neutral/augments/augments_0015.png",
+            "sprites/v2/entities/neutral/augments/augments_0014.png",
+            "sprites/v2/entities/neutral/augments/augments_0016.png",
+            "sprites/v2/entities/neutral/augments/augments_0002.png",
+            "sprites/v2/entities/neutral/augments/augments_0003.png",
+            "sprites/v2/entities/neutral/augments/augments_0017.png",
+            "sprites/v2/entities/neutral/augments/augments_0013.png",
+            "sprites/v2/entities/neutral/augments/augments_0007.png",
+            "sprites/v2/entities/neutral/augments/augments_0006.png",
+            "sprites/v2/entities/neutral/augments/augments_0012.png",
+            "sprites/v2/entities/neutral/augments/augments_0004.png",
+            "sprites/v2/entities/neutral/augments/augments_0010.png",
+            "sprites/v2/entities/neutral/augments/augments_0011.png",
+            "sprites/v2/entities/neutral/augments/augments_0005.png",
+            "sprites/v2/entities/neutral/augments/augments_0008.png",
+            "sprites/v2/entities/neutral/augments/augments_0020.png",
+            "sprites/v2/entities/neutral/augments/augments_0009.png",
+            "sprites/v2/entities/neutral/augments/augments_0019.png",
+            "sprites/v2/entities/neutral/augments/augments_0018.png",
+            "sprites/v2/entities/neutral/item_boxes/item_boxes_0004.png",
+            "sprites/v2/entities/neutral/item_boxes/item_boxes_0002.png",
+            "sprites/v2/entities/neutral/item_boxes/item_boxes_0003.png",
+            "sprites/v2/entities/neutral/item_boxes/item_boxes_0001.png",
+            "sprites/v2/entities/neutral/crafting_machines/machines_0004.png",
+            "sprites/v2/entities/neutral/crafting_machines/machines_0001.png",
+            "sprites/v2/entities/neutral/crafting_machines/machines_0002.png",
+            "sprites/v2/entities/neutral/crafting_machines/machines_0003.png",
+            "sprites/v2/entities/neutral/level_exit.png",
+            "sprites/v2/entities/projectiles/bullets_0006.png",
+            "sprites/v2/entities/projectiles/bullets_0007.png",
+            "sprites/v2/entities/projectiles/bullets_0005.png",
+            "sprites/v2/entities/projectiles/bullets_0004.png",
+            "sprites/v2/entities/projectiles/bullets_0001.png",
+            "sprites/v2/entities/projectiles/bullets_0003.png",
+            "sprites/v2/entities/projectiles/bullets_0002.png",
+            "sprites/v2/entities/projectiles/bullets_0008.png",
+            "sprites/v2/entities/player/player_6.png",
+            "sprites/v2/entities/player/faces_0001.png",
+            "sprites/v2/entities/player/player_2_10.png",
+            "sprites/v2/entities/player/player_2_6.png",
+            "sprites/v2/entities/player/player_2_7.png",
+            "sprites/v2/entities/player/player_7.png",
+            "sprites/v2/entities/player/faces_0002.png",
+            "sprites/v2/entities/player/player_5.png",
+            "sprites/v2/entities/player/player_2_5.png",
+            "sprites/v2/entities/player/player_2_4.png",
+            "sprites/v2/entities/player/player_4.png",
+            "sprites/v2/entities/player/faces_0003.png",
+            "sprites/v2/entities/player/player_2_1.png",
+            "sprites/v2/entities/player/player_1.png",
+            "sprites/v2/entities/player/player_3.png",
+            "sprites/v2/entities/player/faces_0004.png",
+            "sprites/v2/entities/player/player_2_3.png",
+            "sprites/v2/entities/player/player_2_2.png",
+            "sprites/v2/entities/player/player_2.png",
+            "sprites/v2/entities/player/guns_0006.png",
+            "sprites/v2/entities/player/guns_0004.png",
+            "sprites/v2/entities/player/guns_0005.png",
+            "sprites/v2/entities/player/guns_0001.png",
+            "sprites/v2/entities/player/guns_0002.png",
+            "sprites/v2/entities/player/guns_0003.png",
+            "sprites/v2/entities/player/player_2_9.png",
+            "sprites/v2/entities/player/player_2_8.png"
+    };
+
+    public void loadBakedSprites() {
+        for (String bakedSprite : bakedSprites) {
+            FileHandle handle = Gdx.files.internal(bakedSprite);
+            loadSprite(handle.path(), handle.nameWithoutExtension());
+        }
+    }
+
     public void loadSpritesInDirectory(String path) {
+        /*
+        // This bs is here because of libgdx file loading restrictions
+        // can't dynamically load files from the jar for some reason
+        System.out.println(FileUtils.bakeFilePaths(path));
 
         FileHandle handle = Gdx.files.internal(path);
-        if (!handle.exists()) {
-            //System.exit(1);
-        }
+
         for (FileHandle f : handle.list()) {
             if (!f.isDirectory()) {
 
@@ -159,7 +372,7 @@ public class DrawingManager {
             } else {
                 loadSpritesInDirectory(f.path());
             }
-        }
+        }*/
     }
 
     private void loadSprite(String path, String name) {
@@ -167,7 +380,6 @@ public class DrawingManager {
             return;
         }
 
-        System.out.println("loading sprite " + name + " with path " + path);
         this.spriteMap.put(name, new Texture(path));
     }
 
