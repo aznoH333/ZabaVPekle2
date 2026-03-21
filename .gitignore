@@ -1,3 +1,9 @@
+
+## build
+gameBuild/out-linus
+gameBuild/out-win
+gameBuild/out-mac
+
 ## Java
 
 *.class
