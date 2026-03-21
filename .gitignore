@@ -1,8 +1,4 @@
 
-## build
-gameBuild/out-linus
-gameBuild/out-win
-gameBuild/out-mac
 
 ## Java
 
@@ -118,3 +114,7 @@ Thumbs.db
 /ios/xcode/native/
 /ios/IOSLauncher.app
 /ios/IOSLauncher.app.dSYM
+
+/gameBuild/out-linus/
+/gameBuild/out-mac/
+/gameBuild/out-win/
